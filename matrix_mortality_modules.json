@@ -455,7 +455,7 @@
     {
       "id": "foundations",
       "title": "Foundations",
-      "summary": "The common problem and representation language.",
+      "summary": "The mortality problem and the matrix language every construction is written in.",
       "nodes": [
         "mm/matrix-mortality",
         "mm/word-pair-representation",
@@ -466,7 +466,7 @@
     {
       "id": "source-recognition",
       "title": "Source Recognition",
-      "summary": "The fixed-boundary source and its reusable scalar realization.",
+      "summary": "The undecidable source problem and the four-dimensional scalar series that later constructions reuse.",
       "nodes": [
         "mm/fixed-boundary-correspondence",
         "mm/paired-scalar-series",
@@ -488,7 +488,7 @@
     {
       "id": "binary-and-return-constructions",
       "title": "Binary and Return Constructions",
-      "summary": "Dimension-saving realizations built on the two shared hubs.",
+      "summary": "Realizations that reach fewer generators or lower dimension, built on the source series and the interface reduction.",
       "nodes": [
         "mm/shared-partial-binary-compiler",
         "mm/prefix-transducer-packing",
@@ -500,7 +500,7 @@
     {
       "id": "arithmetic-incidence",
       "title": "Arithmetic Incidence",
-      "summary": "A proved arithmetic language inside generic two-generator projective incidence.",
+      "summary": "Where two-generator projective incidence meets arithmetic dynamics, including its shortcut-Collatz instance.",
       "nodes": [
         "mm/shortcut-collatz-incidence",
         "mm/projective-incidence-compiler"
@@ -509,7 +509,7 @@
     {
       "id": "established-obstructions",
       "title": "Established Obstructions",
-      "summary": "Formal limits on particular construction families, without claims about unresolved mortality cells.",
+      "summary": "Proved limits on specific construction methods: what each method cannot do, and the routes it leaves open.",
       "nodes": [
         "mm/tilted-geometric-rank-floor",
         "mm/valuation-barriers"
@@ -518,7 +518,7 @@
     {
       "id": "endpoint-theorems",
       "title": "Endpoint Theorems",
-      "summary": "Undecidability statements and their proved transports.",
+      "summary": "The undecidability results proved here, and the reductions that carry each to further cells.",
       "nodes": [
         "mm/m3-5",
         "mm/m4-4",

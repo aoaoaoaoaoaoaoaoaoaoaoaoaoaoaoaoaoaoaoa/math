@@ -377,16 +377,21 @@ def render_graph(graph: Graph, nodes: dict[str, Node]) -> str:
         "        <section>",
         '          <h2 id="modules">Modules<a class="fragment-link" '
         'href="#modules" aria-label="Link to this section">#</a></h2>',
-        "          <p>Each node owns one established mathematical object. "
-        "Dependency links point to the exact module required. The graph contains "
-        "established mathematics only.</p>",
+        "          <p>This is how the proved results depend on one another. Open "
+        "any box for its full statement and proof, and follow its Requires links "
+        "back to what it rests on. Open questions are in the decidability table "
+        "below.</p>",
         '          <dl class="module-legend">',
-        "            <div><dt>Kind</dt><dd>Definition, construction, lemma, "
-        "reduction, theorem, obstruction, or witness.</dd></div>",
-        "            <div><dt>Metadata</dt><dd>Prominence · assurance · "
-        "origin.</dd></div>",
-        "            <div><dt>Edges</dt><dd>Requires and Used by give the "
-        "acyclic proof order; named lateral relations do not.</dd></div>",
+        "            <div><dt>Kind</dt><dd>What the box states: a definition, a "
+        "construction, a lemma, a reduction (a correctness-preserving "
+        "translation), a theorem (a principal conclusion), an obstruction (a "
+        "proved limit), or a witness.</dd></div>",
+        "            <div><dt>Metadata</dt><dd>The tags under each box: how "
+        "central it is, how far its proof is verified (Lean-formalized or "
+        "hand-audited), and whether it is new here or prior work.</dd></div>",
+        "            <div><dt>Edges</dt><dd>Requires and Used by are the proof "
+        "dependencies; other named links, such as Instantiates, are "
+        "cross-references, not dependencies.</dd></div>",
         "          </dl>",
         '          <div class="module-map">',
     ]

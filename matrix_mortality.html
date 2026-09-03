@@ -59,16 +59,16 @@
 <!-- MODULE_GRAPH:BEGIN -->
         <section>
           <h2 id="modules">Modules<a class="fragment-link" href="#modules" aria-label="Link to this section">#</a></h2>
-          <p>Each node owns one established mathematical object. Dependency links point to the exact module required. The graph contains established mathematics only.</p>
+          <p>This is how the proved results depend on one another. Open any box for its full statement and proof, and follow its Requires links back to what it rests on. Open questions are in the decidability table below.</p>
           <dl class="module-legend">
-            <div><dt>Kind</dt><dd>Definition, construction, lemma, reduction, theorem, obstruction, or witness.</dd></div>
-            <div><dt>Metadata</dt><dd>Prominence · assurance · origin.</dd></div>
-            <div><dt>Edges</dt><dd>Requires and Used by give the acyclic proof order; named lateral relations do not.</dd></div>
+            <div><dt>Kind</dt><dd>What the box states: a definition, a construction, a lemma, a reduction (a correctness-preserving translation), a theorem (a principal conclusion), an obstruction (a proved limit), or a witness.</dd></div>
+            <div><dt>Metadata</dt><dd>The tags under each box: how central it is, how far its proof is verified (Lean-formalized or hand-audited), and whether it is new here or prior work.</dd></div>
+            <div><dt>Edges</dt><dd>Requires and Used by are the proof dependencies; other named links, such as Instantiates, are cross-references, not dependencies.</dd></div>
           </dl>
           <div class="module-map">
             <section class="module-layer">
               <h3 id="foundations">Foundations<a class="fragment-link" href="#foundations" aria-label="Link to this section">#</a></h3>
-              <p>The common problem and representation language.</p>
+              <p>The mortality problem and the matrix language every construction is written in.</p>
               <ol class="module-grid">
               <li class="module-node node-kind-definition" data-node-id="mm/matrix-mortality">
                 <p class="module-node-head">
@@ -130,7 +130,7 @@
             </section>
             <section class="module-layer">
               <h3 id="source-recognition">Source Recognition<a class="fragment-link" href="#source-recognition" aria-label="Link to this section">#</a></h3>
-              <p>The fixed-boundary source and its reusable scalar realization.</p>
+              <p>The undecidable source problem and the four-dimensional scalar series that later constructions reuse.</p>
               <ol class="module-grid">
               <li class="module-node node-kind-theorem" data-node-id="mm/fixed-boundary-correspondence">
                 <p class="module-node-head">
@@ -290,7 +290,7 @@
             </section>
             <section class="module-layer">
               <h3 id="binary-and-return-constructions">Binary and Return Constructions<a class="fragment-link" href="#binary-and-return-constructions" aria-label="Link to this section">#</a></h3>
-              <p>Dimension-saving realizations built on the two shared hubs.</p>
+              <p>Realizations that reach fewer generators or lower dimension, built on the source series and the interface reduction.</p>
               <ol class="module-grid">
               <li class="module-node node-kind-construction" data-node-id="mm/shared-partial-binary-compiler">
                 <p class="module-node-head">
@@ -386,7 +386,7 @@
             </section>
             <section class="module-layer">
               <h3 id="arithmetic-incidence">Arithmetic Incidence<a class="fragment-link" href="#arithmetic-incidence" aria-label="Link to this section">#</a></h3>
-              <p>A proved arithmetic language inside generic two-generator projective incidence.</p>
+              <p>Where two-generator projective incidence meets arithmetic dynamics, including its shortcut-Collatz instance.</p>
               <ol class="module-grid">
               <li class="module-node node-kind-reduction" data-node-id="mm/shortcut-collatz-incidence">
                 <p class="module-node-head">
@@ -424,7 +424,7 @@
             </section>
             <section class="module-layer">
               <h3 id="established-obstructions">Established Obstructions<a class="fragment-link" href="#established-obstructions" aria-label="Link to this section">#</a></h3>
-              <p>Formal limits on particular construction families, without claims about unresolved mortality cells.</p>
+              <p>Proved limits on specific construction methods: what each method cannot do, and the routes it leaves open.</p>
               <ol class="module-grid">
               <li class="module-node node-kind-obstruction" data-node-id="mm/tilted-geometric-rank-floor">
                 <p class="module-node-head">
@@ -458,7 +458,7 @@
             </section>
             <section class="module-layer">
               <h3 id="endpoint-theorems">Endpoint Theorems<a class="fragment-link" href="#endpoint-theorems" aria-label="Link to this section">#</a></h3>
-              <p>Undecidability statements and their proved transports.</p>
+              <p>The undecidability results proved here, and the reductions that carry each to further cells.</p>
               <ol class="module-grid">
               <li class="module-node node-kind-theorem" data-node-id="mm/m3-5">
                 <p class="module-node-head">
