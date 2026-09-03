@@ -169,6 +169,17 @@ abbrev MortalityProblem (d k : Nat) := Fin k → Fin d → Fin d → ℤ
 
 namespace MortalityProblem
 
+/-- Reading one fixed entry of an encoded mortality problem is primitive recursive. -/
+theorem entry_primrec {d k : Nat} (label : Fin k) (row column : Fin d) :
+    Primrec fun problem : MortalityProblem d k => problem label row column := by
+  have labelApply :
+      Primrec fun problem : MortalityProblem d k => problem label :=
+    (Primrec.fin_curry.mp Primrec.id).comp Primrec.id (Primrec.const label)
+  have rowApply :
+      Primrec fun problem : MortalityProblem d k => problem label row :=
+    (Primrec.fin_curry.mp labelApply).comp Primrec.id (Primrec.const row)
+  exact (Primrec.fin_curry.mp rowApply).comp Primrec.id (Primrec.const column)
+
 /-- Assemble a primitive-recursive finite matrix family from its entries. -/
 theorem primrec {α : Type*} [Primcodable α] {d k : Nat}
     (problem : α → MortalityProblem d k)
@@ -193,6 +204,12 @@ end MortalityProblem
 
 /-- Five labelled `3 × 3` integer matrices. -/
 abbrev Mortality35 := MortalityProblem 3 5
+
+/-- Three labelled `6 × 6` integer matrices. -/
+abbrev Mortality63 := MortalityProblem 6 3
+
+/-- Two labelled `12 × 12` integer matrices. -/
+abbrev Mortality122 := MortalityProblem 12 2
 
 /-- Four labelled `4 × 4` integer matrices. -/
 abbrev Mortality44 := MortalityProblem 4 4

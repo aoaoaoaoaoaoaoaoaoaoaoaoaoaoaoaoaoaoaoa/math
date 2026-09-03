@@ -5493,3 +5493,75 @@
 'MatrixMortality.ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_x211_even_b_count' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.CubicReturn.pairGenerator_isMortal_iff_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnConvert.physical_isMortal_iff_positiveBridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnFamily.pairGenerator_isMortal_iff_ambient_or_returnFamily' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnFamily.pairGenerator_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnFamily.pairGenerator_isMortal_iff_positiveBridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnFamily.rankOnePair_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ReturnGuard.physical_isMortal_iff_positiveBridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.physical_isMortal_iff_returnProduct' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.ReturnSquare.physical_isMortal_iff_positiveBridge' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.TwoPlaneEdges.isMortal_iff_exists_edgeProduct_eq_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.PrefixPacking.CompleteCode.machine_isMortal_iff_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.CHHNPrefixPacking.ternaryPack_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.CHHNPrefixPacking.binaryPack_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.prefixMachine_mortal_iff_normalized' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.restrictedPrefixGenerator_mortal_iff_normalized' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.mortality63Pack_primrec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.mortality122Pack_primrec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.mortality63Pack_mortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.mortality122Pack_mortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.mortality35To63' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.mortality35To122' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.codeHalts_reduces_mortality63' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality63_not_computable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.codeHalts_reduces_mortality122' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality122_not_computable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SkolemReduction.IntegerRecurrence.companion_isUnit' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SkolemReduction.IntegerRecurrence.observer_dot_companion_pow_initial' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SkolemReduction.IntegerRecurrence.exists_term_eq_zero_iff_isMortal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SkolemReduction.IntegerRecurrence.skolemDecision_of_mortalityDecision' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.RankCensus.finTwo_allUnit_immortal' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RankCensus.finTwo_rankOne_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RankCensus.finFour_rankTwo_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RankCensus.finFour_rankOne_isMortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]

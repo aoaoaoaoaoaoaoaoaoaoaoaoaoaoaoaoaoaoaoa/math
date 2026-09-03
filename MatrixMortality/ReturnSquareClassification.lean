@@ -45,7 +45,7 @@ theorem physical_isMortal_primePower_iff_of_finiteWalls
         ((p ^ r : Nat) : ℤ) c q_two_int c_nonnegative mortal
     obtain ⟨waits, bridge_zero⟩ :=
       (physical_isMortal_iff_positiveBridge
-        ((p ^ r : Nat) : ℤ) c (by positivity) c_add_one_ne).mp mortal
+        ((p ^ r : Nat) : ℤ) c (by positivity)).mp mortal
     let d := -c
     have d_positive : 0 < d := by dsimp [d]; linarith
     have d_ne_one : d ≠ 1 := by

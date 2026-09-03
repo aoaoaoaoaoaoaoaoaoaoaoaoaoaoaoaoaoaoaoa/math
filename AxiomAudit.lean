@@ -2316,3 +2316,41 @@ open MatrixMortality
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_cb_x211_ne_zero_of_even_b_count
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_x211_even_b_count
+
+#print axioms CubicReturn.pairGenerator_isMortal_iff_residue
+#print axioms EdgeCompression.isMortal_iff_exists_edgeProduct_eq_zero
+#print axioms ReturnConvert.physical_isMortal_iff_positiveBridge
+#print axioms ReturnFamily.pairGenerator_isMortal_iff_ambient_or_returnFamily
+#print axioms ReturnFamily.pairGenerator_isMortal_iff
+#print axioms ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
+#print axioms ReturnFamily.rankOnePair_isMortal_iff
+#print axioms ReturnGuard.physical_isMortal_iff_positiveBridge
+#print axioms ReturnSquare.physical_isMortal_iff_returnProduct
+#print axioms ReturnSquare.physical_isMortal_iff_positiveBridge
+#print axioms TwoPlaneEdges.isMortal_iff_exists_edgeProduct_eq_zero
+
+#print axioms PrefixPacking.CompleteCode.machine_isMortal_iff_source
+#print axioms CHHNPrefixPacking.ternaryPack_isMortal_iff
+#print axioms CHHNPrefixPacking.binaryPack_isMortal_iff
+#print axioms prefixMachine_mortal_iff_normalized
+#print axioms restrictedPrefixGenerator_mortal_iff_normalized
+#print axioms Undecidability.mortality63Pack_primrec
+#print axioms Undecidability.mortality122Pack_primrec
+#print axioms Undecidability.mortality63Pack_mortal_iff
+#print axioms Undecidability.mortality122Pack_mortal_iff
+#print axioms Undecidability.mortality35To63
+#print axioms Undecidability.mortality35To122
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality63
+#print axioms Undecidability.UniversalNeary.mortality63_not_computable
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality122
+#print axioms Undecidability.UniversalNeary.mortality122_not_computable
+
+#print axioms SkolemReduction.IntegerRecurrence.companion_isUnit
+#print axioms SkolemReduction.IntegerRecurrence.observer_dot_companion_pow_initial
+#print axioms SkolemReduction.IntegerRecurrence.exists_term_eq_zero_iff_isMortal
+#print axioms SkolemReduction.IntegerRecurrence.skolemDecision_of_mortalityDecision
+
+#print axioms RankCensus.finTwo_allUnit_immortal
+#print axioms RankCensus.finTwo_rankOne_isMortal_iff
+#print axioms RankCensus.finFour_rankTwo_isMortal_iff
+#print axioms RankCensus.finFour_rankOne_isMortal_iff

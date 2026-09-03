@@ -97,23 +97,18 @@ theorem exists_returnProduct_eq_zero_iff_residue
     rw [returnProduct_eq_smul_residues ambient input output scalar cubic, residues_eq,
       product_zero, smul_zero]
 
-/-- A split physical pair with pure-cubic ambient action is mortal exactly when the finite
-three-return family is mortal. -/
+/-- A physical pair with pure-cubic ambient action is mortal exactly when the finite three-return
+family is mortal. Factoring the cut suffices; no split interface is needed. -/
 theorem pairGenerator_isMortal_iff_residue
     [Nonempty Large]
     (ambient : Square Large K) (input : Matrix Large Small K)
     (output : Matrix Small Large K)
-    (inputLeftInverse : Matrix Small Large K)
-    (outputRightInverse : Matrix Large Small K)
     (ambient_unit : IsUnit ambient)
-    (left_inverse : inputLeftInverse * input = 1)
-    (right_inverse : output * outputRightInverse = 1)
     (scalar : K) (scalar_ne_zero : scalar ≠ 0)
     (cubic : ambient ^ 3 = scalar • 1) :
     IsMortal (ReturnFamily.pairGenerator ambient (input * output)) ↔
       ∃ word, wordProduct (residueReturn ambient input output) word = 0 := by
-  rw [ReturnFamily.pairGenerator_isMortal_iff ambient input output
-    inputLeftInverse outputRightInverse ambient_unit left_inverse right_inverse]
+  rw [ReturnFamily.pairGenerator_isMortal_iff ambient input output ambient_unit]
   exact exists_returnProduct_eq_zero_iff_residue ambient input output scalar
     scalar_ne_zero cubic
 
