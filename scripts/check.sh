@@ -344,20 +344,11 @@ check_publication() {
   local major_sections='//main[@id="article"]/article/details[contains(concat(" ", normalize-space(@class), " "), " major-section ")]'
   local article='//main[@id="article"]/article'
   local abstract='//div[contains(concat(" ", normalize-space(@class), " "), " shell ")]/section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]'
-  if [[ "$profile" == result ]]; then
-    assert_xpath_count 1 "$abstract[@aria-label='Abstract']"
-    assert_xpath_count 1 '(//div[contains(concat(" ", normalize-space(@class), " "), " shell ")]/*)[1][self::section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]]'
-    assert_xpath_count 1 "$abstract/strong[string-length(normalize-space(.)) > 0]"
-    assert_xpath_count 2 "$abstract/p[string-length(normalize-space(.)) > 0]"
-    assert_xpath_count 0 '//head/meta[@name="description" or @property="og:description"]'
-  else
-    assert_xpath_count 0 "$abstract"
-    assert_xpath_count 1 '//head/meta[@name="description"]'
-    assert_xpath_count 1 '//head/meta[@property="og:description"]'
-  fi
+  assert_xpath_count 1 "$abstract[@aria-label='Abstract' and string-length(normalize-space(.)) > 0]"
+  assert_xpath_count 1 '(//div[contains(concat(" ", normalize-space(@class), " "), " shell ")]/*)[1][self::section[contains(concat(" ", normalize-space(@class), " "), " abstract ")]]'
+  assert_xpath_count 0 '//head/meta[@name="description" or @property="og:description"]'
+  assert_xpath_count 0 '//p[contains(concat(" ", normalize-space(@class), " "), " module-meta ")]'
   if [[ "$profile" != collection ]]; then
-    assert_xpath_count 1 \
-      '//header[contains(concat(" ", normalize-space(@class), " "), " masthead ")]//p[contains(concat(" ", normalize-space(@class), " "), " module-meta ")]'
     assert_xpath_count 1 \
       "$article/nav[contains(concat(' ', normalize-space(@class), ' '), ' module-context ')][@aria-label='Module relations']"
   fi
@@ -394,7 +385,8 @@ check_publication() {
   local properties='//div[contains(concat(" ", normalize-space(@class), " "), " properties ")]'
   assert_xpath_count "$expected_properties" "$properties/div/math[@display='block']"
   assert_xpath_count 0 "$properties/div[count(math) != 1 or *[not(self::strong or self::math)]]"
-  assert_xpath_count 0 '//math[not(ancestor::div[contains(concat(" ", normalize-space(@class), " "), " formula ") or contains(concat(" ", normalize-space(@class), " "), " properties ")])]'
+  # Display formulas own a block wrapper; native inline MathML belongs in prose.
+  assert_xpath_count 0 '//math[@display="block"][not(ancestor::div[contains(concat(" ", normalize-space(@class), " "), " formula ") or contains(concat(" ", normalize-space(@class), " "), " properties ")])]'
   assert_xpath_count 0 '//div[contains(concat(" ", normalize-space(@class), " "), " matrix-equation ") or contains(concat(" ", normalize-space(@class), " "), " matrix ")]'
 
   check_toc_level 2 '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li'
@@ -423,11 +415,12 @@ check_collection() {
   assert_xpath_count 0 \
     "$article/details[contains(concat(' ', normalize-space(@class), ' '), ' major-section ')]"
   assert_xpath_count 1 \
-    "($article/*)[1][self::section/h2[@id='reference' and normalize-space(text()[1])='Reference']]"
+    "($article/*)[1][self::section/h2[@id='definition']]"
+  assert_xpath_count 1 "$article/section/h2[@id='reference']"
   assert_xpath_count "$collection_references" \
     "($article/section[h2[@id='reference']])[1]/ul[contains(concat(' ', normalize-space(@class), ' '), ' artifact-list ')]/li/a"
   assert_xpath_count 1 \
-    "($article/*)[2][self::section/h2[@id='modules' and normalize-space(text()[1])='Modules']]"
+    "$article/section/h2[@id='modules']"
   assert_xpath_count "$graph_nodes" \
     "$article/section[h2[@id='modules']]//li[contains(concat(' ', normalize-space(@class), ' '), ' module-node ')][@data-node-id]"
   assert_xpath_count "$graph_views" \
@@ -456,7 +449,7 @@ check_collection() {
   assert_xpath_count "$formula_count" "$formulas/math[@display='block']"
   assert_xpath_count 0 "$formulas[count(math) != 1 or *[not(self::math)]]"
   assert_xpath_count 0 \
-    '//math[not(ancestor::div[contains(concat(" ", normalize-space(@class), " "), " formula ")])]'
+    '//math[@display="block"][not(ancestor::div[contains(concat(" ", normalize-space(@class), " "), " formula ")])]'
 
   check_toc_level 2 \
     '//nav[contains(concat(" ", normalize-space(@class), " "), " contents ")]/ol/li'

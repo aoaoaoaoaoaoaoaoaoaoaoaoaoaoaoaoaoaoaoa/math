@@ -17,14 +17,13 @@
       <p><strong>Under review</strong></p>
       <p>Singular Return Compression</p>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
-      <p class="module-meta"><b>Theorem</b> · endpoint · formalized</p>
     </div>
   </header>
 
   <div class="shell">
     <section class="abstract" aria-label="Abstract">
       <strong>Matrix mortality for two 9 × 9 integer matrices is undecidable: M<sub>9</sub>(2).</strong>
-      <p>A primitive-recursive reduction maps each program to an integer pair whose nonempty zero products coincide with halting, using an injective tilted separator and a nine-dimensional return realization.</p>
+      <p>A <a class="glossary-term" href="/math/matrix_mortality/glossary/#primitive-recursive-reduction" title="An explicitly total computable instance map built by composition and primitive recursion.">primitive-recursive reduction</a> maps each program to an integer pair whose nonempty zero products coincide with halting, using an injective tilted separator and a nine-dimensional return realization.</p>
       <p>This improves the preceding construction in this series from dimension ten to nine. The prior published bound was fifteen; zero-block padding covers every dimension at least nine, while M<sub>8</sub>(2) remains unresolved.</p>
     </section>
 
@@ -108,12 +107,12 @@
               </mrow>
             </math>
           </div>
-          <p>The formal target is the noncomputability of this predicate at <var>d</var> = 9 and <var>k</var> = 2, with integer entries represented transparently as finite functions.</p>
+          <p>The reduction must work uniformly over all input programs and produce integer matrices. Neither a prescribed grammar of products nor a single vanishing matrix entry would settle this problem.</p>
 
           </section>
           <section class="fragment-section">
           <h3 id="paired-source">Paired scalar zero language<a class="fragment-link" href="#paired-source" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/paired_scalar_series/">paired scalar series</a> compiles a restricted binary tag system into three controls: a phase toggle <var>T</var> and data roles <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>. Let <var>β</var> be the deletion width and <var>B</var> the binary body. If <var>β</var> &gt; 2, <var>β</var> − 1 ≤ |<var>B</var>|, and <var>β</var> − 1 divides |<var>B</var>|, then a nonempty control word has zero coefficient exactly when the corresponding tag instance halts.</p>
+          <p>The <a href="/math/matrix_mortality/paired_scalar_series/#result">paired scalar interface</a> represents a restricted <a class="glossary-term" href="/math/matrix_mortality/glossary/#tag-system" title="A word-rewriting machine that deletes a fixed number of leading letters and appends a word selected by the first.">tag system</a> by three 4 × 4 controls. Here they are named <var>T</var>, <var>D</var><sub>b</sub>, <var>D</var><sub>c</sub>: a toggle and two data controls. These data controls are the <var>G</var><sub>b</sub>, <var>G</var><sub>c</sub> of the paired article, not the original deletion tiles. Let <var>β</var> be the deletion width and <var>B</var> the body in the rule <math><mrow><mi mathvariant="normal">c</mi><mo>↦</mo><mi>B</mi><mi mathvariant="normal">b</mi></mrow></math>. Under the source hypotheses <math><mrow><mi>β</mi><mo>&gt;</mo><mn>2</mn><mo>,</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo>≤</mo><mo>|</mo><mi>B</mi><mo>|</mo><mo>,</mo><mi>β</mi><mo>−</mo><mn>1</mn><mo>∣</mo><mo>|</mo><mi>B</mi><mo>|</mo></mrow></math>, write <math><mrow><msub><mi>c</mi><mrow><mi>β</mi><mo>,</mo><mi>B</mi></mrow></msub><mo>(</mo><mi>w</mi><mo>)</mo></mrow></math> for the observed scalar coefficient of a control word. Existence of a nonempty zero coefficient is equivalent to tag halting:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -125,8 +124,8 @@
               </mrow>
             </math>
           </div>
-          <p>The tag predicate uses output map <code>tagOutput B</code> and initial queue <code>B.drop (β − 1) ++ [b]</code>. The nine-dimensional realization below additionally requires <span class="word">b</span> ∈ <var>B</var>. The fixed universal reduction produces bodies beginning with <span class="word">b</span>, and its width, length, and divisibility invariants supply the other hypotheses. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/UniversalNeary.lean#L20-L33"><code>tagHaltsFrom_iff_codeHalts</code></a> identifies its tag instance with mathlib's universal partial-recursive program halting at input zero.</p>
-          <p>The three controls act on the <a href="/math/matrix_mortality/paired_scalar_series/#phase-quotient">four-dimensional paired phase space</a>. The <a href="/math/matrix_mortality/interface_compression/#rank-one">rank-one interface</a> adjoins the separator <var>u</var><var>x</var>. A product containing that separator is zero exactly when the intervening paired coefficient vanishes.</p>
+          <p>The initial queue is obtained by removing the first <math><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></math> letters of <var>B</var> and appending b; the other rule is <math><mrow><mi mathvariant="normal">b</mi><mo>↦</mo><mi mathvariant="normal">b</mi></mrow></math>. The nine-dimensional construction additionally requires that <var>B</var> contain b. The <a href="#universal-reduction">universal source reduction</a> produces bodies beginning with b and proves all these hypotheses for every input program.</p>
+          <p>The series reads the first coordinate after applying a control product to the paired boundary column. That column stores the fixed marker <math><mrow><mi>M</mi><mo>=</mo><mn>1</mn><msup><mn>0</mn><mi>β</mi></msup></mrow></math> as <math><mrow><msub><mi>c</mi><mn>0</mn></msub><mo>=</mo><msup><mrow><mo>(</mo><mi>μ</mi><mo>,</mo><mo>−</mo><mn>1</mn><mo>,</mo><mi>t</mi><mo>,</mo><mn>0</mn><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup><mo>,</mo><mi>μ</mi><mo>=</mo><mi>σ</mi><mo>(</mo><mi>M</mi><mo>)</mo><mo>,</mo><mi>t</mi><mo>=</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>M</mi><mo>|</mo></mrow></msup></mrow></math>, where σ is the <a class="glossary-term" href="/math/matrix_mortality/glossary/#ternary-value" title="The base-three value after recoding binary digits as 1 and 2.">ternary word value</a>. The <a href="/math/matrix_mortality/m4_4/#explicit-system">explicit four-dimensional matrices</a> fix the coordinate convention used below.</p>
 
           </section>
           <section class="fragment-section">
@@ -143,7 +142,7 @@
               </mrow>
             </math>
           </div>
-          <p>Return realizations let one binary matrix pair present a larger interface alphabet. The difficulty is the converse: arbitrary products may begin or end inside a transition run, and a pure power of <var>A</var> must not vanish.</p>
+          <p><a class="glossary-term" href="/math/matrix_mortality/glossary/#return-realization" title="Maps U into a transition space and O out of it, chosen to prescribe the sequence OAⁿU.">Return realizations</a> let one binary matrix pair present a larger interface alphabet. The difficulty is the converse: arbitrary products may begin or end inside a transition run, and a pure power of <var>A</var> must not vanish.</p>
 
           </section>
           <section class="fragment-section">
@@ -160,7 +159,7 @@
           <div class="theorem">
             <p><strong>Nine-dimensional mortality theorem.</strong> There is a primitive-recursive map from program codes to pairs of 9 × 9 integer matrices such that the emitted pair is mortal exactly when the program halts. Consequently M<sub>9</sub>(2) is undecidable.</p>
           </div>
-          <p>The reduction separates the inherited tag theorem from the four new equivalences:</p>
+          <p>The reduction separates the inherited tag theorem from four new equivalences. In the diagram, <math><mover><mi>G</mi><mo>~</mo></mover></math> is the four-matrix interface family consisting of the three paired controls and the new rank-one separator. The returns <var>M</var><sub>n</sub> realize that family using only two physical generators; hats denote their integer-scaled versions.</p>
           <div class="formula plain">
             <math display="block">
               <mtable columnalign="right center left left" columnspacing="0.8em">
@@ -227,7 +226,7 @@
           <section class="fragment-section">
           <h4 id="tilted-code">Injective tilted code<a class="fragment-link" href="#tilted-code" aria-label="Link to this section">#</a></h4>
           <p>The nine-dimensional moment construction below selects the tail row up to a nonzero scale; the ratio of each of its three equal tail coordinates to its affine coordinate is <var>q</var>. The obligation here is to prove that this selected row has exactly the old zero set.</p>
-          <p>For the lower <span class="word">c</span>-role word <var>w</var><sub><span class="word">c</span></sub>, let <var>V</var> be its base-three value and <var>K</var> = 3<sup>|<var>w</var><sub><span class="word">c</span></sub>|</sup>. The selected ratio and its affine code are</p>
+          <p>Let <var>w</var><sub>c</sub> be the lower word of the original c-rule tile, <math><mrow><mn>1</mn><mi>H</mi><mo>(</mo><mi>B</mi><mo>)</mo><mn>10</mn></mrow></math>, from the <a href="/math/matrix_mortality/m3_5/#four-tiles">source table</a>. Let <var>V</var> be its ternary value and <math><mrow><mi>K</mi><mo>=</mo><msup><mn>3</mn><mrow><mo>|</mo><msub><mi>w</mi><mi>c</mi></msub><mo>|</mo></mrow></msup></mrow></math>. The selected ratio and the new word code are</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -248,7 +247,7 @@
           </section>
           <section class="fragment-section">
           <h4 id="phase-evaluation">Both paired phases<a class="fragment-link" href="#phase-evaluation" aria-label="Link to this section">#</a></h4>
-          <p>The paired state places its affine head and two tail codes in coordinates (<var>h</var>,<var>ℓ</var>,<var>u</var>,0) or (<var>h</var>,0,<var>u</var>,<var>ℓ</var>) according to the phase. Write <var>v</var><sub>phase</sub>(<var>x</var>,<var>y</var>) for the state carrying upper word <var>x</var> and lower word <var>y</var>. The row (1,<var>q</var>,<var>q</var>,<var>q</var>) evaluates either phase as the difference of two tilted codes:</p>
+          <p>The two <a href="/math/matrix_mortality/paired_scalar_series/#phase-quotient">paired phases</a> differ only in where they store the lower-word coordinate. For upper word <var>x</var> and lower word <var>y</var>, put <math><mrow><mi>h</mi><mo>=</mo><mi>σ</mi><mo>(</mo><mi>x</mi><mo>)</mo><mo>−</mo><mi>σ</mi><mo>(</mo><mi>y</mi><mo>)</mo></mrow></math>. Their columns are <math><msup><mrow><mo>(</mo><mi>h</mi><mo>,</mo><mo>−</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>y</mi><mo>|</mo></mrow></msup><mo>,</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>x</mi><mo>|</mo></mrow></msup><mo>,</mo><mn>0</mn><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup></math> and <math><msup><mrow><mo>(</mo><mi>h</mi><mo>,</mo><mn>0</mn><mo>,</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>x</mi><mo>|</mo></mrow></msup><mo>,</mo><mo>−</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>y</mi><mo>|</mo></mrow></msup><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup></math>. Denote either column by <var>v</var><sub>phase</sub>(<var>x</var>,<var>y</var>). The row with three equal tail coefficients therefore gives</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -262,7 +261,7 @@
               </mrow>
             </math>
           </div>
-          <p>Its value is zero exactly when the upper and lower words agree. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorTail.lean#L382-L423"><code>nearyTiltedPairedCoefficient_eq_zero_iff</code></a> proves this for every control word and both phases. The separator column is the ordinary paired right boundary after one toggle, so its sandwiched coefficient on <var>w</var> is the tilted paired coefficient after appending that toggle. Zero-language equivalence therefore transfers every nonempty witness. With the existing boundary column <var>u</var>, the row defines the rank-one separator</p>
+          <p>Its value is zero exactly when the upper and lower words agree. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/ChangedSeparatorTail.lean#L382-L423"><code>nearyTiltedPairedCoefficient_eq_zero_iff</code></a> proves this for every control word and both phases. Put <math><mrow><mi>u</mi><mo>=</mo><mi>T</mi><msub><mi>c</mi><mn>0</mn></msub></mrow></math>. This separator column is the ordinary paired right boundary after one toggle, so its sandwiched coefficient on <var>w</var> is the tilted paired coefficient after appending that toggle. Zero-language equivalence therefore transfers every nonempty witness. With the existing boundary column <var>u</var>, the row defines the rank-one separator</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -280,7 +279,8 @@
 
           <section class="fragment-section">
           <h4 id="moment-sequence">Moment sequence<a class="fragment-link" href="#moment-sequence" aria-label="Link to this section">#</a></h4>
-          <p>Begin with the one-state geometric tail and extrapolate it backward to times zero, one, and two. Subtracting those values from <var>T</var>, <var>D</var><sub><span class="word">b</span></sub>, and <var>D</var><sub><span class="word">c</span></sub> leaves a time-two residual of rank two, which seeds two length-three nilpotent chains. After their forced time-one contribution is removed, the remaining time-one residual has rank one and seeds one length-two chain. The time-zero residual factors through the exposed chain endpoints. Restoring the geometric eigenline gives the block lengths <code>3+3+2+1</code>.</p>
+          <p>We want waiting times zero, one and two to select the three paired controls, and every longer wait to select a nonzero multiple of the new separator. Thus the infinite return family will have only four effective choices.</p>
+          <p>To obtain that sequence, start with a one-dimensional geometric tail and extrapolate it backward to the first three times. Subtract these extrapolated values from <var>T</var>, <var>D</var><sub>b</sub> and <var>D</var><sub>c</sub>. The remaining sequence vanishes from time three onward. Its time-two residual has rank two, requiring two length-three <a class="glossary-term" href="/math/matrix_mortality/glossary/#nilpotent-jordan-eigenline" title="A nilpotent chain carries a finite transient and vanishes after its length in transition steps.">nilpotent chains</a>. After their time-one contribution is removed, a rank-one residual requires one length-two chain. The time-zero residual factors through those chain endpoints. Restoring the geometric eigenline gives <math><mrow><mn>3</mn><mo>+</mo><mn>3</mn><mo>+</mo><mn>2</mn><mo>+</mo><mn>1</mn><mo>=</mo><mn>9</mn></mrow></math> dimensions.</p>
           <p>The exact symbolic checker constructs this residual factorization. Lean verifies the resulting rational 9 × 9 transition <var>A</var>, 9 × 4 input <var>U</var>, 4 × 9 output <var>O</var>, and every moment identity:</p>
           <div class="formula">
             <math display="block">
@@ -377,8 +377,8 @@
             </math>
           </div>
           <p>A physical zero without a cut would be a pure power of <var>A</var>, excluded by the eigenline. The displayed identity turns every zero product of returns into a physical zero with cuts. Thus arbitrary initial and terminal transition runs create no unproved exterior-cancellation case.</p>
-          <p>It remains to replace the infinite return alphabet by four roles. Lean proves each return has the form <var>ρ</var><sub><var>n</var></sub><var>G</var><sub><var>ℓ</var>(<var>n</var>)</sub>, where <var>ρ</var><sub><var>n</var></sub> ≠ 0 and <var>G</var> ranges over <var>T</var>, <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>, and the tilted separator. The relabelling <var>ℓ</var> has the explicit right inverse selecting return times 0, 1, 2, and 3. Hence every four-role word lifts to a return word, while any return word projects to a four-role word. The corresponding products differ by the product of their nonzero return scalars, so zero products are preserved in both directions.</p>
-          <p>The four-role family adjoins the rank-one tilted separator to the three paired controls. Its mortality is therefore zero reachability for the sandwiched tilted coefficient. A lone separator represents the empty intervening control word; Lean proves that coefficient nonzero. The zero-language theorem, together with the appended-toggle identity, identifies every remaining zero with a nonempty zero of the original paired series.</p>
+          <p>It remains to replace the infinite return alphabet by four interface generators. Lean proves each return has the form <var>ρ</var><sub><var>n</var></sub><var>G</var><sub><var>ℓ</var>(<var>n</var>)</sub>, where <var>ρ</var><sub><var>n</var></sub> ≠ 0 and <var>G</var> ranges over <var>T</var>, <var>D</var><sub><span class="word">b</span></sub>, <var>D</var><sub><span class="word">c</span></sub>, and the tilted separator. The relabelling <var>ℓ</var> has the explicit right inverse selecting return times 0, 1, 2, and 3. Hence every four-generator interface word lifts to a return word, while any return word projects to an interface word. The corresponding products differ by the product of their nonzero return scalars, so zero products are preserved in both directions.</p>
+          <p>The four-generator interface family adjoins the rank-one tilted separator to the three paired controls. Its mortality is therefore zero reachability for the sandwiched tilted coefficient. Adjacent separators test the empty intervening control word; Lean proves that coefficient nonzero. The zero-language theorem, together with the appended-toggle identity, identifies every remaining zero with a nonempty zero of the original paired series.</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -397,7 +397,7 @@
 
           <section class="fragment-section">
           <h4 id="unreduced-clearing">Unreduced denominator clearing<a class="fragment-link" href="#unreduced-clearing" aria-label="Link to this section">#</a></h4>
-          <p>The rational formulas are evaluated as unreduced numerator-denominator pairs. Addition, multiplication, division, negation, and fixed powers remain primitive recursive without normalization or greatest-common-divisor computation. For each of the two labels, the 81 entries are flattened and cleared by one recursively accumulated common denominator. Effective is meant recursion-theoretically: Lean proves the assembled matrix-valued map primitive recursive; no extracted runtime artifact is asserted.</p>
+          <p>The final step returns from rational matrices to the integer inputs of mortality. <a class="glossary-term" href="/math/matrix_mortality/glossary/#denominator-clearing" title="Scale each rational generator by a nonzero denominator; every word product changes by a nonzero scalar.">Denominator clearing</a> preserves all zero products. To make this an effective reduction, the rational formulas are evaluated as unreduced numerator-denominator pairs. Addition, multiplication, division, negation, and fixed powers remain primitive recursive without normalization or greatest-common-divisor computation. For each of the two labels, the 81 entries are flattened and cleared by one recursively accumulated common denominator. Effective is meant recursion-theoretically: Lean proves the assembled matrix-valued map primitive recursive; no extracted runtime artifact is asserted.</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -461,7 +461,7 @@
             </math>
           </div>
           <p>The generic theorem <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/MatrixSemigroup.lean#L739-L778"><code>isMortal_zeroPad_iff</code></a> proves that this preserves and reflects every nonempty zero product. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/ChangedSeparatorProblems.lean"><code>nearyMortality9Plus_primrec</code></a> proves the padded coordinate family primitive recursive for every fixed <var>n</var>, and <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/Undecidability/UniversalNeary.lean"><code>mortality9Plus_not_computable</code></a> composes the reduction. Hence M<sub>9+<var>n</var></sub>(2) is undecidable for every <var>n</var> ≥ 0.</p>
-          <p>M<sub>8</sub>(2) remains unresolved. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TiltedGeometricHankel.lean#L383-L412"><code>nine_le_card_of_tilted_geometric_transfer_moments</code></a> proves that the width-three <span class="word">bb</span> benchmark already has transfer rank nine for every rational retuning of its one-mode geometric tail and every tilted ratio <var>q</var> &lt; −3/2. This rules out direct parameter compression of the present chart, not a different zero-language compiler or an undecidability theorem in dimension eight.</p>
+          <p>M<sub>8</sub>(2) remains unresolved. <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/TiltedGeometricHankel.lean#L383-L412"><code>nine_le_card_of_tilted_geometric_transfer_moments</code></a> proves that the width-three <span class="word">bb</span> benchmark already has <a class="glossary-term" href="/math/matrix_mortality/glossary/#hankel-rank" title="A nonsingular finite moment matrix lower-bounds the dimension of any exact realization.">transfer rank nine</a> for every rational retuning of its one-mode geometric tail and every tilted ratio <var>q</var> &lt; −3/2. This rules out direct parameter compression of the present chart, not a different zero-language compiler or an undecidability theorem in dimension eight.</p>
           </section>
         </details>
 
@@ -529,7 +529,7 @@
           <section class="fragment-section">
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
-            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#source-lemma"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The restricted-tag source.</span></li>
+            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#four-tiles"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The restricted-tag source.</span></li>
             <li id="ref-paired-role"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/paired_scalar_series/"><cite>The Paired Scalar Series</cite></a>, 2026. The exact paired zero language and four-dimensional phase representation.</span></li>
             <li id="ref-binary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/binary_compilers/"><cite>Binary Compilers</cite></a>, 2026. The previous M<sub>10</sub>(2) bound and its public-literature audit.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag source.</span></li>

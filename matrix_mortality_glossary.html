@@ -99,6 +99,7 @@
               <li><a href="#physical-family">Physical family</a></li>
               <li><a href="#post-correspondence">Post correspondence problem</a></li>
               <li><a href="#prefix-code">Prefix code</a></li>
+              <li><a href="#primitive-pair-content">Primitive pair and content</a></li>
               <li><a href="#primitive-recursive-reduction">Primitive-recursive reduction</a></li>
               <li><a href="#projective-incidence">Projective incidence</a></li>
               <li><a href="#projective-line">Projective line and projective point</a></li>
@@ -114,6 +115,7 @@
               <li><a href="#return-realization">Return realization</a></li>
               <li><a href="#scalar-zero-reachability">Scalar zero reachability</a></li>
               <li><a href="#semidecidable">Semidecidable</a></li>
+              <li><a href="#semiring">Semiring</a></li>
               <li><a href="#shortcut-collatz">Shortcut-Collatz map and reachability</a></li>
               <li><a href="#singular-nonsingular">Singular and nonsingular matrices</a></li>
               <li><a href="#singular-return-compression">Singular-return compression</a></li>
@@ -122,6 +124,7 @@
               <li><a href="#symbolic-cross-check">Symbolic cross-check</a></li>
               <li><a href="#tag-execution">Tag execution and halting</a></li>
               <li><a href="#tag-system">Tag system</a></li>
+              <li><a href="#ternary-value">Ternary word value</a></li>
               <li><a href="#tile">Tile and tile word</a></li>
               <li><a href="#transition-matrix">Transition matrix</a></li>
               <li><a href="#transitive-axiom-set">Transitive axiom set</a></li>
@@ -205,7 +208,7 @@
             <div class="glossary-entry">
               <dt id="scalar-zero-reachability"><dfn>Scalar zero reachability Z<sub><var>d</var></sub>(<var>k</var>)</dfn><a class="fragment-link" href="#scalar-zero-reachability" aria-label="Link to this term">#</a></dt>
               <dd>
-                <p>Given a row λ, a column γ, and at most <var>k</var> dimension-<var>d</var> matrices, ask whether λA<sub><var>w</var></sub>γ is zero for some word <var>w</var>. The structured form Z̊ additionally requires every generator to have first column <var>e</var><sub>1</sub>. Only one coefficient must vanish; the whole product need not.</p>
+                <p>Given a row λ, a column γ, and at most <var>k</var> dimension-<var>d</var> matrices, ask whether λA<sub><var>w</var></sub>γ is zero for some nonempty word <var>w</var>. Only one coefficient must vanish; the whole product need not. The structured form Z̊ requires every generator to have first column <var>e</var><sub>1</sub>. Where the empty word is also allowed, the page says so and tests its coefficient λγ separately.</p>
                 <div class="formula plain">
                   <math display="block">
                     <mrow><mo>∃</mo><mi>w</mi><mo>:</mo><mspace width="0.5em"></mspace><mi>λ</mi><msub><mi>A</mi><mi>w</mi></msub><mi>γ</mi><mo>=</mo><mn>0</mn><mo>.</mo></mrow>
@@ -215,7 +218,7 @@
             </div>
             <div class="glossary-entry">
               <dt id="zero-in-the-corner"><dfn>Zero-in-the-corner problem R<sub><var>d</var></sub>(<var>k</var>)</dfn><a class="fragment-link" href="#zero-in-the-corner" aria-label="Link to this term">#</a></dt>
-              <dd><p>A scalar-reachability problem in which the observed row and column are fixed coordinate vectors, so the question is whether a designated entry of some product is zero. Conventions differ about which corner is used; a change of basis or transpose relates the common versions.</p></dd>
+              <dd><p>A scalar-reachability problem in which the observed row and column are fixed coordinate vectors, so the question is whether a designated entry of some nonempty product is zero. Which entry is designated matters: diagonal and off-diagonal conventions must not be identified without a reduction.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="parameter-monotonicity"><dfn>Parameter monotonicity and padding</dfn><a class="fragment-link" href="#parameter-monotonicity" aria-label="Link to this term">#</a></dt>
@@ -313,6 +316,10 @@
           <h2 id="linear-representations">Linear representations<a class="fragment-link" href="#linear-representations" aria-label="Link to this section">#</a></h2>
           <dl class="glossary">
             <div class="glossary-entry">
+              <dt id="semiring"><dfn>Semiring</dfn><a class="fragment-link" href="#semiring" aria-label="Link to this term">#</a></dt>
+              <dd><p>A system of scalars with associative addition and multiplication, additive zero, multiplicative identity, distributivity, and absorbing zero; addition is commutative. Subtraction and division need not exist. A commutative semiring also has commutative multiplication. The examples ℕ, ℤ and ℚ suffice for the <a href="/math/matrix_mortality/interface_compression/#result">interface theorem</a>, whose proof uses no division.</p></dd>
+            </div>
+            <div class="glossary-entry">
               <dt id="matrix-semigroup"><dfn>Matrix semigroup</dfn><a class="fragment-link" href="#matrix-semigroup" aria-label="Link to this term">#</a></dt>
               <dd><p>The set of all nonempty products generated by a family of matrices. If the identity, corresponding to the empty product, is included, the object is a matrix monoid. Mortality asks whether the zero matrix belongs to the generated semigroup.</p></dd>
             </div>
@@ -361,7 +368,7 @@
             </div>
             <div class="glossary-entry">
               <dt id="paired-scalar-series"><dfn>Paired scalar series</dfn><a class="fragment-link" href="#paired-scalar-series" aria-label="Link to this term">#</a></dt>
-              <dd><p>The project’s four-dimensional word series for fixed-boundary correspondence. Two data controls and one phase toggle carry the two encoded words; the boundary coefficient vanishes exactly when they agree. It is the source-recognition hub reused by several mortality compilers.</p></dd>
+              <dd><p>The project’s four-dimensional word series for fixed-boundary correspondence. Two data controls and one phase toggle carry the two encoded words; the boundary coefficient vanishes exactly when they agree. The <a href="/math/matrix_mortality/paired_scalar_series/#result">reusable scalar interface</a> states this contract; the <a href="/math/matrix_mortality/m4_4/#explicit-system">coordinate formula</a> supplies its matrices.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="zero-language"><dfn>Zero language</dfn><a class="fragment-link" href="#zero-language" aria-label="Link to this term">#</a></dt>
@@ -380,12 +387,18 @@
               <dd><p>The dimension of the vector space on which a linear representation acts. This corpus says “nine-dimensional realization,” not “nine-state realization,” because state is reserved for automata and dynamical systems. “Rank nine” is used only when an actual matrix or Hankel form has rank nine.</p></dd>
             </div>
             <div class="glossary-entry">
+              <dt id="ternary-value"><dfn>Ternary word value</dfn><a class="fragment-link" href="#ternary-value" aria-label="Link to this term">#</a></dt>
+              <dd><p>Recode the binary symbols 0 and 1 as the ternary digits 1 and 2. Read the resulting string as a base-three integer, denoted σ, with the empty string assigned zero. For example, the binary word 01 becomes the ternary numeral 12, of value five. No leading zero is allowed, so distinct words, including words of different lengths, have distinct values. Appending a word shifts the old digits left by its length:</p>
+                <div class="formula plain"><math display="block"><mrow><mi>σ</mi><mo>(</mo><mi>uv</mi><mo>)</mo><mo>=</mo><mi>σ</mi><mo>(</mo><mi>u</mi><mo>)</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>v</mi><mo>|</mo></mrow></msup><mo>+</mo><mi>σ</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>.</mo></mrow></math></div>
+              </dd>
+            </div>
+            <div class="glossary-entry">
               <dt id="word-pair-representation"><dfn>Word-pair representation</dfn><a class="fragment-link" href="#word-pair-representation" aria-label="Link to this term">#</a></dt>
-              <dd><p>A matrix morphism that encodes a pair of words so multiplication represents pairwise concatenation. The classical 3 × 3 ternary construction stores powers of three and base-three word values, turning equality of encoded words into vanishing of a selected coefficient.</p></dd>
+              <dd><p>A matrix morphism that encodes a pair of words so multiplication represents pairwise concatenation. The <a href="/math/matrix_mortality/m3_5/#word-pair-representation">three-dimensional construction</a> stores powers of three and <a href="#ternary-value">ternary word values</a>, turning equality of encoded words into vanishing of one matrix entry.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="agreement-subspace"><dfn>Agreement subspace</dfn><a class="fragment-link" href="#agreement-subspace" aria-label="Link to this term">#</a></dt>
-              <dd><p>A subspace on which two semantic roles act identically. It can be shared between decoder states or phases, reducing realization dimension. The agreement must be proved invariant under the relevant prefixes; agreement on complete semantic words alone does not control malformed physical words.</p></dd>
+              <dd><p>A subspace on which two linear actions agree. In <a href="/math/matrix_mortality/m4_4/#agreement-plane">paired-role compression</a>, equal upper words give an agreement plane for each rule/deletion pair. Identifying this plane across the two phase copies saves two dimensions. The induced control maps must be well-defined on the quotient and preserve the observed coefficient for every word.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="change-of-basis"><dfn>Change of basis and conjugation</dfn><a class="fragment-link" href="#change-of-basis" aria-label="Link to this term">#</a></dt>
@@ -423,7 +436,7 @@
             </div>
             <div class="glossary-entry">
               <dt id="input-output-maps"><dfn>Input and output maps</dfn><a class="fragment-link" href="#input-output-maps" aria-label="Link to this term">#</a></dt>
-              <dd><p>Linear maps U into a transition space and O back to a smaller interface space. They expose the return OA<sup><var>n</var></sup>U after <var>n</var> transition steps. Their ranks determine whether interface zeros can be hidden when lifted to physical matrix products.</p></dd>
+              <dd><p>Linear maps U into a transition space and O back to an interface space. They expose the return OA<sup><var>n</var></sup>U after <var>n</var> transition steps. Full-rank hypotheses allow cancellation in the split construction, but <a href="#singular-return-compression">singular-return compression</a> does not need them.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="interface-space"><dfn>Interface space</dfn><a class="fragment-link" href="#interface-space" aria-label="Link to this term">#</a></dt>
@@ -466,7 +479,7 @@
             </div>
             <div class="glossary-entry">
               <dt id="split-return-normal-form"><dfn>Split-return normal form</dfn><a class="fragment-link" href="#split-return-normal-form" aria-label="Link to this term">#</a></dt>
-              <dd><p>A return construction in which the cut factors through an interface with full-rank input and output maps, usually with invertible transition. These hypotheses make mortality of the physical pair equivalent to mortality of the return family by cancellation or injectivity. It is stronger than singular-return compression.</p></dd>
+              <dd><p>A return construction in which the cut factors through an interface with full-rank input and output maps and the transition is invertible. These hypotheses give the physical/return mortality equivalence by cancellation. They are stronger assumptions than those needed by <a href="#singular-return-compression">singular-return compression</a>, not a stronger conclusion. See the <a href="/math/matrix_mortality/m3_2_return_guard/#return-compression">rank-two example</a>.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="singular-return-compression"><dfn>Singular-return compression</dfn><a class="fragment-link" href="#singular-return-compression" aria-label="Link to this term">#</a></dt>
@@ -526,7 +539,7 @@
             </div>
             <div class="glossary-entry">
               <dt id="projective-incidence"><dfn>Projective incidence</dfn><a class="fragment-link" href="#projective-incidence" aria-label="Link to this term">#</a></dt>
-              <dd><p>Zero reachability for a boundary coefficient r<sup>T</sup>M<sub><var>w</var></sub>c under projective matrix generators. For two invertible rational 2 × 2 generators, generic projective incidence, abbreviated GPI₂ in this corpus, imposes two stated nondegeneracy normalizations. Multiplying generators by nonzero scalars preserves the zero language.</p></dd>
+              <dd><p>Ask whether a product of invertible rational 2 × 2 matrices sends a nonzero source column into the kernel of a nonzero target row. Equivalently, the scalar r<sup>T</sup>M<sub><var>w</var></sub>c must vanish. Multiplying generators by nonzero scalars preserves the answer. GPI₂ is the two-generator restriction with the <a href="/math/matrix_mortality/shortcut_collatz_incidence/#projective-incidence">two explicit generic-chart normalizations</a>, not a name for every incidence instance.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="shortcut-collatz"><dfn>Shortcut-Collatz map and reachability</dfn><a class="fragment-link" href="#shortcut-collatz" aria-label="Link to this term">#</a></dt>
@@ -550,7 +563,7 @@
             </div>
             <div class="glossary-entry">
               <dt id="live-region-trap"><dfn>Live region and trap</dfn><a class="fragment-link" href="#live-region-trap" aria-label="Link to this term">#</a></dt>
-              <dd><p>A live region is the set of states still capable of reaching the target under the intended grammar. A trap is a forward-invariant rejecting set: once an orbit enters, it cannot reach the target. A trap proves failure for those states; it does not by itself describe every live orbit.</p></dd>
+              <dd><p>A live region contains the nonterminal states not yet excluded by an invariant. Membership does not guarantee eventual success. A trap is a forward-invariant set excluding the target: once entered, it cannot be escaped to reach the target. The <a href="/math/matrix_mortality/m3_2_return_guard/#permanent-trap">valuation guard</a> uses these regions to reject incorrect waits.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="valuation-guard"><dfn>Valuation guard</dfn><a class="fragment-link" href="#valuation-guard" aria-label="Link to this term">#</a></dt>
@@ -558,7 +571,7 @@
             </div>
             <div class="glossary-entry">
               <dt id="ready-point-legal-wait"><dfn>Ready point and legal wait</dfn><a class="fragment-link" href="#ready-point-legal-wait" aria-label="Link to this term">#</a></dt>
-              <dd><p>A ready projective point satisfies the unit and positivity conditions under which the guard theorem applies. Its legal wait is the unique transition-run length selected by the valuation. All other waits fall into the permanent trap. Readiness may persist forever and therefore does not imply termination.</p></dd>
+              <dd><p>In the valuation guard, a live point has a unique candidate wait: its positive p-adic valuation. It is <em>ready</em> only if it also satisfies the <a href="/math/matrix_mortality/m3_2_return_guard/#carry-depth">exact carry-depth equation</a>. Readiness is necessary for that wait to avoid the trap, not sufficient for eventual success. A ready orbit may continue forever.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="reset-target-tail"><dfn>Reset, target, and tail coordinate</dfn><a class="fragment-link" href="#reset-target-tail" aria-label="Link to this term">#</a></dt>
@@ -571,6 +584,10 @@
             <div class="glossary-entry">
               <dt id="reset-defect-numerator"><dfn>Reset-defect numerator</dfn><a class="fragment-link" href="#reset-defect-numerator" aria-label="Link to this term">#</a></dt>
               <dd><p>For integral parameters with α = A/L and drift δ = D/L, the integer A + D − L = L(α + δ − 1). It measures the reset's affine displacement from the terminal target after denominators are cleared. Earlier prose and formal names called it the “reset resultant”; it is not a polynomial resultant.</p></dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="primitive-pair-content"><dfn>Primitive pair and content</dfn><a class="fragment-link" href="#primitive-pair-content" aria-label="Link to this term">#</a></dt>
+              <dd><p>A nonzero integer pair is primitive when its two coordinates are coprime. Dividing both coordinates by their greatest common divisor removes its <em>content</em> without changing the represented projective point. A signed content also records a simultaneous sign change. The <a href="/math/matrix_mortality/m3_2_return_guard/#endpoint-coordinates">terminal-centered coordinates</a> use such pairs to track divisibility that projectivization alone forgets.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="resultant"><dfn>Resultant and cross-resultant</dfn><a class="fragment-link" href="#resultant" aria-label="Link to this term">#</a></dt>

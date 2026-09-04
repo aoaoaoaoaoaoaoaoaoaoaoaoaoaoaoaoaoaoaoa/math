@@ -4,9 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
-  <meta name="description" content="A kernel-checked 0.38234553336670271 universal abundance bound for Frankl’s union-closed sets conjecture, an audited affine wall, and two structural theorems.">
   <meta property="og:title" content="Frankl’s Conjecture at 0.38234553336670271">
-  <meta property="og:description" content="A kernel-checked 0.38234553336670271 universal abundance bound for Frankl’s union-closed sets conjecture, an audited affine wall, and two structural theorems.">
   <meta property="og:type" content="website">
   <title>Frankl’s Conjecture at 0.38234553336670271 | Mathematics</title>
 </head>
@@ -21,6 +19,10 @@
   </header>
 
   <div class="shell">
+    <section class="abstract" aria-label="Abstract">
+      <p>Every nontrivial finite union-closed family has an element belonging to more than 0.38234553336670271 of its members. The proof is checked in Lean. Frankl’s conjecture asks for one half and remains open.</p>
+      <p>The proof compares the entropy of a random member with that of the union of two coupled members. A separate exact calculation bounds what this two-coupling method can prove. Two further written proofs settle a restricted Horn-function case and a nonuniformly weighted version; neither is used in the universal bound or formalized in Lean.</p>
+    </section>
     <nav class="contents" aria-label="Contents">
       <ol>
         <li>
@@ -60,7 +62,7 @@
               <ol>
                 <li><a href="#orbit-reduction">Orbit reduction</a></li>
                 <li><a href="#endpoint-closure">Endpoint closure</a></li>
-                <li><a href="#reflected-kernel">The reflected kernel</a></li>
+                <li><a href="#reflected-kernel">Certified low rectangle</a></li>
               </ol>
             </li>
             <li>
@@ -95,7 +97,7 @@
               <a href="#verification">Verification</a>
               <ol>
                 <li><a href="#lean-boundary">Lean boundary</a></li>
-                <li><a href="#independent-oracle">Independent oracle</a></li>
+                <li><a href="#independent-oracle">Interval cross-check</a></li>
               </ol>
             </li>
             <li><a href="#scope-priority">Scope and priority</a></li>
@@ -141,7 +143,10 @@
           </section>
           <section class="fragment-section">
           <h3 id="entropy-obstruction">The entropy obstruction<a class="fragment-link" href="#entropy-obstruction" aria-label="Link to this section">#</a></h3>
-          <p>Let <var>X</var> be uniform on 𝓕. Then its Shannon entropy is log |𝓕|. If <var>X</var> and <var>Y</var> are coupled copies, union closure keeps <var>X</var> ∪ <var>Y</var> inside 𝓕, so maximality of the uniform law gives</p>
+          <p>For a finite random variable <var>X</var>, <em>Shannon entropy</em> is</p>
+          <div class="formula"><math display="block"><mrow><mi>H</mi><mo>(</mo><mi>X</mi><mo>)</mo><mo>=</mo><mo>−</mo><munder><mo>∑</mo><mi>x</mi></munder><mi mathvariant="normal">Pr</mi><mo>(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>)</mo><mi mathvariant="normal">log</mi><mi mathvariant="normal">Pr</mi><mo>(</mo><mi>X</mi><mo>=</mo><mi>x</mi><mo>)</mo></mrow></math></div>
+          <p>Zero-probability terms are assigned zero. Logarithms are natural throughout. Among laws supported on a finite set, the uniform law maximizes entropy.</p>
+          <p>Let <var>X</var> be uniform on 𝓕. A <em>coupling</em> chooses a joint law of <var>X</var> and <var>Y</var> while keeping each individually uniform; they need not be independent. Union closure keeps their union in 𝓕, so</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -159,7 +164,7 @@
 
           <section class="fragment-section">
           <h4 id="local-objective">The local objective<a class="fragment-link" href="#local-objective" aria-label="Link to this section">#</a></h4>
-          <p>Write <var>h</var> for binary entropy, <var>p</var> ⊔ <var>q</var> for the success probability of an independent Boolean union, and <var>d</var> for Yu’s maximum-entropy dependent-union parameter:</p>
+          <p>The proof reduces the set-valued entropy comparison to a calculation for one coordinate. Write <var>h</var> for the entropy of a bit whose probability of one is <var>p</var>, and <var>p</var> ⊔ <var>q</var> for the probability that at least one of two independent bits is one. If their dependence can be chosen, the union probability ranges from <math><mrow><mi mathvariant="normal">max</mi><mo>{</mo><mi>p</mi><mo>,</mo><mi>q</mi><mo>}</mo></mrow></math> to <math><mrow><mi mathvariant="normal">min</mi><mo>{</mo><mi>p</mi><mo>+</mo><mi>q</mi><mo>,</mo><mn>1</mn><mo>}</mo></mrow></math>. Entropy is largest at the point of that interval closest to one half, giving Yu’s parameter <var>d</var>:</p>
           <div class="formula">
             <math display="block">
               <mtable columnalign="right left" rowspacing="0.45em">
@@ -178,7 +183,7 @@
               </mtable>
             </math>
           </div>
-          <p>Let π be a finite symmetric law of a pair (<var>P</var>,<var>Q</var>) with common marginal μ and mean at most <var>t</var>. Set</p>
+          <p>Now <var>P</var> and <var>Q</var> are random probabilities in [0,1], not bits. Let π be their finite joint law, unchanged by exchanging them, and let μ be the distribution of either component, their common <em>marginal law</em>. Assume its mean is at most a proposed abundance bound <var>t</var>. The integrals below are finite weighted sums: <var>A</var> samples the two probabilities independently, whereas <var>C</var> uses their coupling π.</p>
           <div class="formula">
             <math display="block">
               <mtable columnalign="right left" rowspacing="0.45em">
@@ -197,7 +202,9 @@
               </mtable>
             </math>
           </div>
-          <p>The finite coupling problem is to prove a positive affine gap uniformly over π. Its solution supplies the one-coordinate inequality that the chain rule can sum.</p>
+          <p>The scalar target is</p>
+          <div class="formula"><math display="block"><mrow><mo>(</mo><mn>1</mn><mo>−</mo><mi>α</mi><mo>)</mo><mi>A</mi><mo>(</mo><mi>μ</mi><mo>)</mo><mo>+</mo><mi>α</mi><mi>C</mi><mo>(</mo><mi>π</mi><mo>)</mo><mo>≥</mo><mo>(</mo><mn>1</mn><mo>+</mo><mi>ε</mi><mo>)</mo><mi>B</mi><mo>(</mo><mi>μ</mi><mo>)</mo></mrow></math></div>
+          <p>The inequality must hold uniformly over such laws, with a mixing weight <var>α</var> between zero and one and a positive margin <var>ε</var>. The left side averages two union-entropy comparisons. Summing the strict gain over coordinates will contradict union closure if every abundance is at most <var>t</var>.</p>
 
           </section>
           <section class="fragment-section">
@@ -220,12 +227,12 @@
 
           <section class="fragment-section">
           <h4 id="horn-question">Bidual Horn functions<a class="fragment-link" href="#horn-question" aria-label="Link to this section">#</a></h4>
-          <p>A Boolean function is Horn exactly when its false points are intersection-closed. It is bidual Horn when its true points are also union-closed. Lozin and Zamaraev proved several Horn subclasses and left the bidual case open, identifying the self-dual subclass as a difficult core <a href="#ref-lozin-zamaraev-2024">[8]</a>.</p>
+          <p>Identify a Boolean assignment with the set of its coordinates equal to one. In the cited paper’s convention, a function is <em>Horn</em> when its false assignments are intersection-closed, and <em>bidual Horn</em> when its true assignments are also union-closed. A <em>good coordinate</em> occurs in at most half of the false assignments, equivalently in at least half of their set complements. This is the Horn formulation of Frankl’s question. Lozin and Zamaraev left the bidual class open <a href="#ref-lozin-zamaraev-2024">[8]</a>. A self-dual function exchanges truth and falsity under complementation; for a Horn function this implies the bidual property.</p>
 
           </section>
           <section class="fragment-section">
           <h4 id="semigroup-question">The binary semigroup seam<a class="fragment-link" href="#semigroup-question" aria-label="Link to this section">#</a></h4>
-          <p>Zargar lifted intersection-closed families to multiplication-closed semigroup fibers and proved weighted half-frequency theorems for a range of fiber sizes. His argument isolates the binary case <var>k</var> = 2, <var>m</var> = 1, corresponding to weights 2<sup>−|<var>A</var>|</sup>, but its published concavity calculation degenerates at exactly that parameter <a href="#ref-zargar-2023">[9]</a>.</p>
+          <p>A different variant assigns each set a weight depending on its size instead of counting every set equally. Zargar’s semigroup construction translates a weighted half-frequency statement into positivity of an entropy functional. One parameter case, denoted <math><mrow><mi>k</mi><mo>=</mo><mn>2</mn><mo>,</mo><mi>m</mi><mo>=</mo><mn>1</mn></mrow></math>, corresponds to weights <math><msup><mn>2</mn><mrow><mo>−</mo><mo>|</mo><mi>A</mi><mo>|</mo></mrow></msup></math> on intersection-closed families. His concavity calculation degenerates there <a href="#ref-zargar-2023">[9]</a>. We prove that particular functional inequality and state its weighted consequence below.</p>
           </section>
           </section>
         </details>
@@ -283,7 +290,7 @@
               </mtable>
             </math>
           </div>
-          <p>Every finite symmetric orbit law of mean at most <var>t</var> satisfies</p>
+          <p>Every finite symmetric law π of mean at most <var>t</var> satisfies</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -319,13 +326,17 @@
 
           <section class="fragment-section">
           <h4 id="orbit-reduction">Orbit reduction<a class="fragment-link" href="#orbit-reduction" aria-label="Link to this section">#</a></h4>
-          <p>The proof begins with an arbitrary finite symmetric law π. If its mean is below <var>t</var>, adjoining an atom at (1,1) raises the mean to exactly <var>t</var> without increasing the normalized obstruction. On the exact-mean slice the affine gap is concave in π, so a one-moment extreme-point theorem reduces its minimum to at most two unoriented orbits.</p>
-          <p>A half-support inequality replaces every coordinate above one half by a mean-preserving mixture at one half and one. Exact spread contractions then leave three canonical possibilities: a single low diagonal orbit, two low diagonal orbits, or one low diagonal orbit paired with an endpoint orbit. The first two families are nonnegative by analytic Jensen-deficit estimates. The endpoint family carries the final parameters <var>a</var> and <var>q</var>.</p>
+          <p>A symmetric law is a mixture of <em>exchange orbits</em>: equal mass on (<var>p</var>,<var>q</var>) and (<var>q</var>,<var>p</var>), or one diagonal point when they agree. These are not dynamical orbits. Its marginal mean is the weighted average of the orbit means <math><mrow><mo>(</mo><mi>p</mi><mo>+</mo><mi>q</mi><mo>)</mo><mo>/</mo><mn>2</mn></mrow></math>.</p>
+          <p>If the mean is below <var>t</var>, mixing in a point mass at (1,1) raises it to <var>t</var> while preserving a sufficient lower bound for the original gap. On that exact-mean slice, the affine gap is concave in the orbit weights. There are two linear constraints, total mass and mean; an extreme weight vector therefore uses at most two orbits. It suffices to bound these laws.</p>
+          <p>A support-reduction inequality replaces every coordinate above one half by a mean-preserving mixture at one half and one. Exact spread contractions then leave three canonical possibilities: a single low diagonal orbit, two low diagonal orbits, or one low diagonal orbit paired with an endpoint orbit. The first two families are nonnegative by analytic bounds on concavity gaps. The remaining endpoint family has a low diagonal point (<var>a</var>,<var>a</var>) and the symmetric pair (<var>q</var>,1), (1,<var>q</var>).</p>
 
           </section>
           <section class="fragment-section">
           <h4 id="endpoint-closure">Endpoint closure<a class="fragment-link" href="#endpoint-closure" aria-label="Link to this section">#</a></h4>
-          <p>Half support forces the endpoint coordinate into the dichotomy <var>q</var> ≤ 1/2 or <var>q</var> = 1; the open strip between them is unrealizable. For 1/4 ≤ <var>a</var> ≤ <var>t</var> and 0 ≤ <var>q</var> ≤ 1/2, condition away the deterministic coordinate and set</p>
+          <p>Let δ denote a unit point mass. The remaining law and its weight fixed by the mean are</p>
+          <div class="formula plain"><math display="block"><mrow><msub><mi>π</mi><mrow><mi>a</mi><mo>,</mo><mi>q</mi></mrow></msub><mo>=</mo><mo>(</mo><mn>1</mn><mo>−</mo><mi>ω</mi><mo>)</mo><msub><mi>δ</mi><mrow><mo>(</mo><mi>a</mi><mo>,</mo><mi>a</mi><mo>)</mo></mrow></msub><mo>+</mo><mfrac><mi>ω</mi><mn>2</mn></mfrac><mo>(</mo><msub><mi>δ</mi><mrow><mo>(</mo><mi>q</mi><mo>,</mo><mn>1</mn><mo>)</mo></mrow></msub><mo>+</mo><msub><mi>δ</mi><mrow><mo>(</mo><mn>1</mn><mo>,</mo><mi>q</mi><mo>)</mo></mrow></msub><mo>)</mo><mo>,</mo><mspace width="1em"></mspace><mi>ω</mi><mo>=</mo><mfrac><mrow><mi>t</mi><mo>−</mo><mi>a</mi></mrow><mrow><mo>(</mo><mi>q</mi><mo>+</mo><mn>1</mn><mo>)</mo><mo>/</mo><mn>2</mn><mo>−</mo><mi>a</mi></mrow></mfrac><mo>.</mo></mrow></math></div>
+          <p>Write <var>J</var>(<var>a</var>,<var>q</var>) for the scalar gap from the <a href="#local-objective">local objective</a> evaluated at this law. The marginal is supported on <var>a</var>, <var>q</var> and 1.</p>
+          <p>The support reduction forces the endpoint coordinate into the dichotomy <var>q</var> ≤ 1/2 or <var>q</var> = 1; the open strip between them is unrealizable. For 1/4 ≤ <var>a</var> ≤ <var>t</var> and 0 ≤ <var>q</var> ≤ 1/2, remove the marginal atom at 1, renormalize the remaining mass and set</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -355,7 +366,7 @@
               </mrow>
             </math>
           </div>
-          <p>Monotonicity in <var>r</var> reduces the last inequality to one quadratic sign on <var>q</var> ≤ <var>a</var> and one cubic sign on <var>a</var> ≤ <var>q</var>. The remaining saturated centered objective becomes, in the complement coordinate <var>y</var> = 1−<var>r</var>,</p>
+          <p>Monotonicity in <var>r</var> reduces the last inequality to one quadratic sign on <var>q</var> ≤ <var>a</var> and one cubic sign on <var>a</var> ≤ <var>q</var>. The contraction replaces the remaining marginal values by their mean <var>r</var>. After clearing positive factors, its lower bound for the gap is the following one-variable expression, with <var>y</var> = 1−<var>r</var>:</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -404,7 +415,7 @@
 
           </section>
           <section class="fragment-section">
-          <h4 id="reflected-kernel">The reflected kernel<a class="fragment-link" href="#reflected-kernel" aria-label="Link to this section">#</a></h4>
+          <h4 id="reflected-kernel">Certified low rectangle<a class="fragment-link" href="#reflected-kernel" aria-label="Link to this section">#</a></h4>
           <p>Only the rectangle 0 ≤ <var>a</var> ≤ 1/4, 0 ≤ <var>q</var> ≤ 1/2 remains. A small expression language represents rational operations, binary entropy, capped entropy, and self-union. Its Lean theorem proves that a successful subdivision certificate implies nonnegativity throughout the represented rectangle.</p>
           <p>The committed trace contains rational boxes and closed proof data. Every leaf uses certified interval values, first-order slope bounds, or an analytic entropy-zero corner rule; every internal node proves exact coverage. The generated files reduce by definitional equality to a successful checker result. Python is neither invoked nor trusted by Lean.</p>
 
@@ -415,7 +426,7 @@
 
           <section class="fragment-section">
           <h4 id="wall-equation">The boundary equation<a class="fragment-link" href="#wall-equation" aria-label="Link to this section">#</a></h4>
-          <p>The final endpoint witness has a closed one-variable description:</p>
+          <p>To bound the entire affine method, find an admissible law at which neither coupling gives an entropy gain. Changing their mixing weight cannot help at that law. Eliminating its mean from the two equality conditions gives a one-variable equation:</p>
           <div class="formula">
             <math display="block">
               <mtable columnalign="right left" rowspacing="0.35em">
@@ -610,7 +621,8 @@
           </section>
           <section class="fragment-section">
           <h4 id="binary-extremizers">The extremizers<a class="fragment-link" href="#binary-extremizers" aria-label="Link to this section">#</a></h4>
-          <p>A concave functional reaches its minimum at an extreme one-moment law, hence at a law supported on at most two points. An interior two-point minimizer would have a first-variation potential <var>f</var> with matching endpoint derivatives and nonnegative endpoint second derivatives. But direct differentiation gives</p>
+          <p>Here the first-variation potential is <math><mrow><mi>f</mi><mo>(</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>2</mn><mo>∫</mo><msub><mi>g</mi><mrow><mn>2</mn><mo>,</mo><mn>1</mn></mrow></msub><mo>(</mo><mi>t</mi><mo>,</mo><mi>z</mi><mo>)</mo><mi mathvariant="normal">d</mi><mi>μ</mi><mo>(</mo><mi>z</mi><mo>)</mo><mo>−</mo><msub><mi>u</mi><mrow><mn>2</mn><mo>,</mo><mn>1</mn></mrow></msub><mo>(</mo><mi>t</mi><mo>)</mo></mrow></math>: it measures the first-order change when mass is moved to <var>t</var>. In the expectation below, <var>Z</var> has law μ.</p>
+          <p>A concave functional reaches its minimum at an extreme one-moment law, hence at a law supported on at most two points. An interior two-point minimizer would have the potential <var>f</var> with matching endpoint derivatives and nonnegative endpoint second derivatives. But direct differentiation gives</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -686,7 +698,7 @@
               </mrow>
             </math>
           </div>
-          <p>Strictness follows from the equality case of the lifted entropy comparison: stationarity in the three-element coordinate semigroup would force every base coordinate to be constant, impossible for a family with at least two members. This is a theorem for nonuniform weights, not the uniform distribution in Frankl’s conjecture.</p>
+          <p>Strictness follows from the equality case of the lifted entropy comparison: stationarity in the three-element coordinate semigroup would force every base coordinate to be constant, impossible for a family with at least two members. A singleton union-closed family containing a nonempty set satisfies the dual claim directly. This is a theorem for nonuniform weights, not the uniform distribution in Frankl’s conjecture.</p>
           </section>
           </section>
         </details>
@@ -759,9 +771,9 @@
 
           </section>
           <section class="fragment-section">
-          <h4 id="independent-oracle">Independent oracle<a class="fragment-link" href="#independent-oracle" aria-label="Link to this section">#</a></h4>
+          <h4 id="independent-oracle">Interval cross-check<a class="fragment-link" href="#independent-oracle" aria-label="Link to this section">#</a></h4>
           <p>A separate Python program evaluates the reduced objectives with 160-bit Arb interval arithmetic. At the present target it reports 110,760 assessed rational boxes and 55,413 certified leaves across the endpoint and two diagonal families. The same run certifies the narrow affine-wall enclosure; historical targets remain reproducible.</p>
-          <p>The oracle is a regression check and parameter-search instrument. No Lean declaration imports its output. Regenerating the committed low trace from the Lean generator is byte-for-byte reproducible.</p>
+          <p>The interval program is a regression check and parameter-search instrument. No Lean declaration imports its output. Regenerating the committed low trace from the Lean generator is byte-for-byte reproducible.</p>
 
           </section>
           </section>
@@ -813,7 +825,7 @@
             </li>
             <li>
               <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/tools/certify_frankl.py">
-                <b>Independent oracle</b>
+                <b>Interval cross-check</b>
                 Deterministic Arb interval certification at current and historical targets.
               </a>
             </li>

@@ -15,7 +15,6 @@
     <div class="masthead-inner">
       <h1>Interface Compression</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
-      <p class="module-meta"><b>Reduction</b> · load-bearing · formalized</p>
     </div>
   </header>
 
@@ -83,7 +82,8 @@
 
           <section class="fragment-section">
           <h3 id="factored-cuts">Factored cuts<a class="fragment-link" href="#factored-cuts" aria-label="Link to this section">#</a></h3>
-          <p>Let <var>L</var> be the physical state space and <var>S</var> a smaller <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-space" title="A smaller vector space through which a cut factors.">interface space</a>. A <a class="glossary-term" href="/math/matrix_mortality/glossary/#factored-cut" title="An actual cut generator presented as a product through a common interface space.">factored cut</a> has the form</p>
+          <p>For a first reading, use finite-dimensional rational vector spaces. A rank-one matrix factors through one coordinate; a rank-two matrix factors through two. This is the saving: between cuts, track only those coordinates instead of the whole ambient vector.</p>
+          <p>Let <var>L</var> be the physical state space and <var>S</var> an <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-space" title="A smaller vector space through which a cut factors.">interface space</a>. A <a class="glossary-term" href="/math/matrix_mortality/glossary/#factored-cut" title="An actual cut generator presented as a product through a common interface space.">factored cut</a> has the form</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -103,7 +103,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="physical-words">Physical words<a class="fragment-link" href="#physical-words" aria-label="Link to this section">#</a></h3>
-          <p>Every physical word is either transition-only or has a unique block form</p>
+          <p>A <a class="glossary-term" href="/math/matrix_mortality/glossary/#physical-family" title="A word in the actual generators of the mortality instance, without a grammar restriction.">physical word</a> is a word in the original generator labels. Write <var>A</var><sub><var>w</var></sub> for the ordered product of a transition word, with the empty word giving the identity. Every physical word is either transition-only or has a unique block form</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -135,7 +135,7 @@
               </mrow>
             </math>
           </div>
-          <p>The parenthesized matrix is the <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-bridge" title="The interface action between two cut generators across a transition word.">interface bridge</a> from cut <var>i</var> to cut <var>j</var>:</p>
+          <p>The parenthesized matrix is the <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-bridge" title="The interface action between two cut generators across a transition word.">interface bridge</a> between cut <var>i</var> on the left and cut <var>j</var> on the right:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -170,7 +170,7 @@
           <section class="fragment-section">
           <h3 id="result">General theorem<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
-            <p><strong>Interface compression.</strong> Over any commutative semiring, the family of transitions and factored cuts is mortal if and only if either the transitions alone are mortal or there are cuts <var>j</var><sub>0</sub>, …, <var>j</var><sub><var>r</var></sub> and transition words <var>w</var><sub>1</sub>, …, <var>w</var><sub><var>r</var></sub>, with <var>r</var> ≥ 1, such that</p>
+          <p><strong>Interface compression.</strong> Over any <a class="glossary-term" href="/math/matrix_mortality/glossary/#semiring" title="Scalars with addition, multiplication and distributivity; subtraction and division are not required.">commutative semiring</a>, with finite coordinate spaces <var>L</var> and <var>S</var>, the family of transitions and factored cuts is mortal if and only if either the transitions alone are mortal or there are cuts <var>j</var><sub>0</sub>, …, <var>j</var><sub><var>r</var></sub> and transition words <var>w</var><sub>1</sub>, …, <var>w</var><sub><var>r</var></sub>, with <var>r</var> ≥ 1, such that</p>
             <div class="formula plain">
               <math display="block">
                 <mrow>
@@ -192,7 +192,7 @@
           <div class="formula plain">
             <math display="block">
               <mrow>
-                <mtext>physical product</mtext>
+                <msub><mi>C</mi><msub><mi>j</mi><mn>0</mn></msub></msub><msub><mi>A</mi><msub><mi>w</mi><mn>1</mn></msub></msub><msub><mi>C</mi><msub><mi>j</mi><mn>1</mn></msub></msub><mo>⋯</mo><msub><mi>A</mi><msub><mi>w</mi><mi>r</mi></msub></msub><msub><mi>C</mi><msub><mi>j</mi><mi>r</mi></msub></msub>
                 <mo>=</mo>
                 <msub><mi>U</mi><msub><mi>j</mi><mn>0</mn></msub></msub>
                 <mo>(</mo><mtext>bridge-path product</mtext><mo>)</mo>
@@ -215,7 +215,7 @@
               </mrow>
             </math>
           </div>
-          <p>Over a field, a product of one-dimensional bridges vanishes exactly when one bridge vanishes. Thus mortality reduces to one row–word–column incidence. The repeated <a href="/math/matrix_mortality/m3_5/#five-matrices">rank-one separator</a> is the one-cut instance.</p>
+          <p>Over a field, a product of one-dimensional bridges vanishes exactly when one scalar factor vanishes. Apart from the transition-only branch, mortality therefore reduces to one row–word–column incidence. The <a href="/math/matrix_mortality/m3_5/#separator-construction">repeated rank-one separator</a> is the one-cut instance; its nonsingular transitions exclude the other branch.</p>
 
           </section>
           <section class="fragment-section">
@@ -224,7 +224,7 @@
           <div class="formula plain">
             <math display="block">
               <mrow>
-                <mo>{</mo><mi>O</mi><msub><mi>A</mi><mi>w</mi></msub><mi>U</mi><mo>:</mo><mi>w</mi><mo>∈</mo><msup><mi>Σ</mi><mo>*</mo></msup><mo>}</mo><mo>.</mo>
+                <mo>{</mo><mi>O</mi><msub><mi>A</mi><mi>w</mi></msub><mi>U</mi><mo>:</mo><mi>w</mi><mo>∈</mo><msup><mi>α</mi><mo>*</mo></msup><mo>}</mo><mo>.</mo>
               </mrow>
             </math>
           </div>
@@ -245,7 +245,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="many-cuts">Many cuts<a class="fragment-link" href="#many-cuts" aria-label="Link to this section">#</a></h3>
-          <p>Several cuts form a directed graph. Vertices are cut interfaces; a bridge from <var>i</var> to <var>j</var> is labelled by a transition word and carries the matrix <var>O</var><sub><var>i</var></sub><var>A</var><sub><var>w</var></sub><var>U</var><sub><var>j</var></sub>. Mortality is exactly zero-product reachability along a nonempty path, together with the separate transition-only branch.</p>
+          <p>Several cuts form a directed graph. Vertices are cut labels, and the edge from <var>i</var> to <var>j</var> carries <math><mrow><msub><mi>O</mi><mi>i</mi></msub><msub><mi>A</mi><mi>w</mi></msub><msub><mi>U</mi><mi>j</mi></msub></mrow></math>. Edge order follows the written matrix word; its action on column vectors runs in the opposite direction. Successive edges must share a cut label, because they come from adjacent blocks of one word. This is why the theorem asks for a zero <em>path</em>, not an arbitrary product of unrelated bridges. Transition-only zeros remain a separate branch.</p>
           </section>
         </details>
 
@@ -261,7 +261,7 @@
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/MatrixMortality/InterfaceCompression.lean">Rank-one specialization</a></b>
-              <p><code>InterfaceCompression.isMortal_rankOne_iff</code> reduces any finite collection of rank-one cuts to one scalar bridge incidence.</p>
+              <p><code>InterfaceCompression.isMortal_rankOne_iff</code> retains the transition-only alternative and reduces the cut-containing branch to one scalar bridge incidence.</p>
             </div>
             <div>
               <b><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/main/verification/axioms.txt">Transitive axioms</a></b>

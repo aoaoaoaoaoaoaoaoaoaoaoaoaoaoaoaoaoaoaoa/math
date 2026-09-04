@@ -15,7 +15,6 @@
     <div class="masthead-inner">
       <h1>Binary Compilers</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
-      <p class="module-meta"><b>Theorem</b> · endpoint · formalized</p>
     </div>
   </header>
 
@@ -24,6 +23,7 @@
       <strong>Scalar zero reachability for two 6 × 6 integer matrices and matrix mortality for two 10 × 10 integer matrices are undecidable: Z<sub>6</sub>(2) and M<sub>10</sub>(2).</strong>
       <p>The scalar result holds when the matrices share first column <var>e</var><sub>1</sub>, under both the free-monoid and nonempty free-semigroup conventions. Consequently R<sub>7</sub>(2) is undecidable.</p>
       <p>Zero-block padding extends the mortality result to M<sub><var>d</var></sub>(2) for every <var>d</var> ≥ 10.</p>
+      <p>The scalar theorem remains a frontier result. The mortality bound is now subsumed by <a href="/math/matrix_mortality/m9_2/#result">M₉(2)</a>; this article retains its different prefix-decoder construction.</p>
     </section>
 
     <nav class="contents" aria-label="Contents">
@@ -77,8 +77,8 @@
     <main id="article">
       <article>
         <nav class="module-context" aria-label="Module relations">
-          <p><b>Requires</b> <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence</a> and the <a href="/math/matrix_mortality/paired_scalar_series/">paired scalar series</a>.</p>
-          <p><b>Establishes</b> the <a href="#scalar-six">shared-partial compiler</a>, <a href="#prefix-machine">prefix-transducer packing</a>, and <a href="#common-image">common-image restriction</a>.</p>
+          <p><b>Requires</b> the <a href="/math/matrix_mortality/m3_5/#four-tiles">four-role source theorem</a> and its <a href="/math/matrix_mortality/m4_4/#agreement-plane">shared upper-word plane</a>.</p>
+          <p><b>Establishes</b> the <a href="#scalar-six">six-dimensional scalar compiler</a>, a <a href="#prefix-code">binary prefix decoder</a>, and its <a href="#common-image">common-image restriction</a>.</p>
         </nav>
 
         <details class="major-section">
@@ -86,7 +86,8 @@
 
           <section class="fragment-section">
           <h3 id="source-interface">Four-role fixed-boundary family<a class="fragment-link" href="#source-interface" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence theorem</a> supplies four roles R<sub><var>x</var></sub>, D<sub><var>x</var></sub>, with <var>x</var> ∈ {<span class="word">b</span>, <span class="word">c</span>}, and a terminal column <var>c</var>. A role word <var>w</var> satisfies the fixed-boundary equation exactly when</p>
+          <p>There are two tasks here. <a class="glossary-term" href="/math/matrix_mortality/glossary/#scalar-zero-reachability" title="Ask whether one specified row–product–column coefficient vanishes.">Scalar zero reachability</a> tests one coefficient; <a class="glossary-term" href="/math/matrix_mortality/glossary/#matrix-mortality" title="Ask whether the whole matrix product is zero.">mortality</a> tests the entire product. Each construction replaces a larger alphabet by two generators, paying for the unfinished codeword with additional coordinates.</p>
+          <p>The shared input is the <a href="/math/matrix_mortality/m3_5/#four-tiles">four-role fixed-boundary family</a>: rule and deletion word pairs <var>R</var><sub><var>x</var></sub>, <var>D</var><sub><var>x</var></sub> for each letter in {b, c}. Write <var>X</var><sub><var>w</var></sub> for the ordered product of their word-pair matrices. A fixed boundary column <var>c</var> makes the terminal word equation equivalent to</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -97,6 +98,7 @@
             </math>
           </div>
           <p>The fixed-boundary problem is undecidable. The four matrices are nonsingular; adjoining the rank-one separator gives the five-matrix family used for M<sub>3</sub>(5).</p>
+          <p>In the separated coordinates below, <math><mrow><mi>c</mi><mo>=</mo><msup><mrow><mo>(</mo><mi>μ</mi><mo>,</mo><mo>−</mo><mn>1</mn><mo>,</mo><mi>t</mi><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup><mo>,</mo><mi>μ</mi><mo>=</mo><mi>σ</mi><mo>(</mo><mi>M</mi><mo>)</mo><mo>,</mo><mi>t</mi><mo>=</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>M</mi><mo>|</mo></mrow></msup></mrow></math>. Here <var>M</var> is the fixed terminal marker and σ its <a class="glossary-term" href="/math/matrix_mortality/glossary/#ternary-value" title="The base-three value after recoding binary 0,1 as digits 1,2.">ternary word value</a>. The first coordinate column is <var>e</var><sub>1</sub>.</p>
 
           </section>
           <section class="fragment-section">
@@ -128,7 +130,7 @@
               </mrow>
             </math>
           </div>
-          <p>Paired-role compression identifies this plane between two phases. The compilers below instead share it between partial binary decoder states.</p>
+          <p><a href="/math/matrix_mortality/m4_4/#agreement-plane">Paired-role compression</a> shares this plane between rule and deletion phases. Here we share it between states remembering an incomplete binary codeword. Agreement is what makes fewer coordinates sufficient.</p>
 
           </section>
           <section class="fragment-section">
@@ -150,6 +152,7 @@
 
           <section class="fragment-section">
           <h4 id="two-bit-code">Two-bit code<a class="fragment-link" href="#two-bit-code" aria-label="Link to this section">#</a></h4>
+          <p>For each letter <var>x</var>, let <var>u</var><sub><var>x</var></sub> be the common upper word and <var>v</var><sub><var>x</var></sub><sup><var>p</var></sup> the lower word in phase <var>p</var>, either rule or deletion. Here <var>p</var> is a phase label, not a prime.</p>
           <p>Every binary pair denotes one role:</p>
           <div class="formula plain">
             <math display="block">
@@ -166,7 +169,7 @@
           </section>
           <section class="fragment-section">
           <h4 id="six-generators">Generators<a class="fragment-link" href="#six-generators" aria-label="Link to this section">#</a></h4>
-          <p>Use row coordinates (<var>a</var>, <var>λ</var>, <var>υ</var>, <var>λ</var><sub>R</sub>, <var>υ</var><sub>*</sub>, <var>λ</var><sub>D</sub>). The two integer matrices are</p>
+          <p>At a codeword boundary we need three coordinates: affine value <var>a</var>, lower component λ, and upper component υ. After the first bit, the rule/deletion lower components must be kept apart, but the unfinished upper component and affine value can be shared. This gives six row coordinates <math><mrow><mo>(</mo><mi>a</mi><mo>,</mo><mi>λ</mi><mo>,</mo><mi>υ</mi><mo>,</mo><msub><mi>λ</mi><mi>R</mi></msub><mo>,</mo><msub><mi>υ</mi><mo>*</mo></msub><mo>,</mo><msub><mi>λ</mi><mi>D</mi></msub><mo>)</mo></mrow></math>, with integer transition matrices</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -201,7 +204,7 @@
               </mrow>
             </math>
           </div>
-          <p>The first three coordinates form the root state. The remaining coordinates store the unfinished lower rule channel, one upper channel shared by both phases, and the unfinished lower deletion channel.</p>
+          <p>The transition identities below explain the sparse entries: one bit stores the phase; the next applies its selected word-pair matrix and returns to a codeword boundary.</p>
 
           </section>
           <section class="fragment-section">
@@ -286,6 +289,7 @@
             </math>
           </div>
           <p>Its proper-prefix states are ε, 1, 10, and 11.</p>
+          <p>These are the prefixes at which reading may pause before recognizing a complete codeword. Each must carry a three-dimensional payload vector, initially giving twelve dimensions.</p>
 
           </section>
           <section class="fragment-section">
@@ -321,6 +325,7 @@
           </section>
           <section class="fragment-section">
           <h4 id="synchronizer">Synchronizer<a class="fragment-link" href="#synchronizer" aria-label="Link to this section">#</a></h4>
+          <p>A zero decoded from the root state is not yet a zero of the whole block matrix: every other starting state must vanish too. A <em>synchronizing word</em> first brings all those states to the same codeword boundary.</p>
           <p>The word 00 sends every prefix state to ε. Its four emitted products are</p>
           <div class="formula plain">
             <math display="block">
@@ -412,7 +417,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="consequences">Consequences<a class="fragment-link" href="#consequences" aria-label="Link to this section">#</a></h3>
-          <p>The six-dimensional construction changes the two-generator scalar and corner bounds to Z<sub>6</sub>(2) and R<sub>7</sub>(2). The ten-dimensional construction changes the two-generator mortality bound to M<sub>10</sub>(2). For every <var>n</var> ≥ 0,</p>
+          <p>The six-dimensional construction proves the scalar and corner bounds Z<sub>6</sub>(2) and R<sub>7</sub>(2). The ten-dimensional construction proves M<sub>10</sub>(2), now subsumed by the later <a href="/math/matrix_mortality/m9_2/#result">nine-dimensional theorem</a>. For every <var>n</var> ≥ 0,</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -470,7 +475,7 @@
           <section class="fragment-section">
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
-            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#source-lemma"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The four-role fixed-boundary family.</span></li>
+            <li id="ref-fixed-boundary"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#four-tiles"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The four-role fixed-boundary family.</span></li>
             <li id="ref-paired-role"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/paired_scalar_series/"><cite>The Paired Scalar Series</cite></a>, 2026. The shared source-recognition representation.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag undecidability source.</span></li>
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Prior bounds and standard transports.</span></li>

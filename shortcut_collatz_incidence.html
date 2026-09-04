@@ -15,14 +15,13 @@
     <div class="masthead-inner">
       <h1>Shortcut-Collatz Incidence</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
-      <p class="module-meta"><b>Reduction</b> · load-bearing · formalized</p>
     </div>
   </header>
 
   <div class="shell">
     <section class="abstract" aria-label="Abstract">
       <strong>Verdict</strong>
-      <p>For every nonzero integer <var>n</var>, an explicit normalized two-generator projective-incidence instance has a zero word exactly when <var>n</var> reaches 1 under the shortcut-Collatz map. The underlying two Möbius transformations are fixed; only boundary data and nonzero central scalings depend on <var>n</var>.</p>
+      <p>For every nonzero integer <var>n</var>, an explicit scalar-zero question for two rational 2 × 2 matrices has a zero word exactly when <var>n</var> reaches 1 under the shortcut-Collatz map. The underlying two Möbius transformations are fixed; only boundary data and nonzero scalar rescalings depend on <var>n</var>.</p>
       <p>The theorem is an exact pointwise embedding into generic projective incidence. The separately formalized reverse-edge compiler places that incidence language inside two rank-two 3 × 3 matrices. Neither statement is an undecidability result, a proof of the Collatz conjecture, or a reduction from general projective incidence back to Collatz reachability.</p>
     </section>
 
@@ -90,6 +89,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="projective-incidence">Projective incidence<a class="fragment-link" href="#projective-incidence" aria-label="Link to this section">#</a></h3>
+          <p>A point of the <a class="glossary-term" href="/math/matrix_mortality/glossary/#projective-line" title="Nonzero pairs considered up to a common nonzero scalar.">projective line</a> is a nonzero column up to scale. An invertible matrix moves such points, and a nonzero row specifies a target: its one-dimensional kernel. Incidence asks whether the source column can be moved into that kernel.</p>
           <p>A two-generator <a class="glossary-term" href="/math/matrix_mortality/glossary/#projective-incidence" title="Zero reachability of one row–word–column coefficient under two projective matrices.">projective-incidence instance</a> consists of invertible rational 2 × 2 matrices <var>G</var>, <var>H</var>, a nonzero row <var>r</var><sup>T</sup>, and a nonzero column <var>c</var>. It asks whether</p>
           <div class="formula plain">
             <math display="block">
@@ -101,11 +101,14 @@
               </mrow>
             </math>
           </div>
-          <p>Multiplying either generator by a nonzero scalar changes each word coefficient by a nonzero scalar product and therefore preserves its zero language. Generic projective incidence, abbreviated GPI₂, fixes two nondegeneracy scalars to one by such rescaling.</p>
+          <p>The empty word is allowed here. Multiplying either generator by a nonzero scalar changes every word coefficient by a nonzero factor, so it preserves the <a class="glossary-term" href="/math/matrix_mortality/glossary/#zero-language" title="The set of words with zero coefficient.">zero language</a>. The mortality compiler below uses the two scalars</p>
+          <div class="formula plain"><math display="block"><mrow><mi>α</mi><mo>=</mo><msup><mi>r</mi><mi mathvariant="normal">T</mi></msup><msup><mi>H</mi><mo>−1</mo></msup><mi>c</mi><mo>,</mo><mspace width="1em"></mspace><mi>β</mi><mo>=</mo><msup><mi>r</mi><mi mathvariant="normal">T</mi></msup><msup><mi>H</mi><mo>−1</mo></msup><mi>G</mi><msup><mi>H</mi><mo>−1</mo></msup><mi>c</mi><mo>.</mo></mrow></math></div>
+          <p>An ordered instance is <em>generic</em> when both scalars are nonzero. Rescaling the generators can then make both equal one. GPI₂ denotes this normalized problem in the present corpus; the restriction is not being imposed silently on arbitrary incidence inputs.</p>
 
           </section>
           <section class="fragment-section">
           <h3 id="mortality-compiler">Rank-two mortality compiler<a class="fragment-link" href="#mortality-compiler" aria-label="Link to this section">#</a></h3>
+          <p>The link to mortality uses two two-dimensional interfaces. Three bridges carry <var>I</var>, <var>G</var> and <var>H</var>; the fourth is the rank-one test <math><mrow><msup><mi>β</mi><mo>−1</mo></msup><mo>(</mo><msup><mi>H</mi><mo>−1</mo></msup><mi>c</mi><mo>)</mo><msup><mi>r</mi><mi mathvariant="normal">T</mi></msup></mrow></math>. The nonzero normalization scalars make the bridges agree on a line shared by the interfaces. Thus they can be realized in three ambient dimensions rather than four. Completed paths between tests reproduce the original scalar coefficients; the arbitrary-path converse excludes extra zeros.</p>
           <p>For invertible <var>G</var> and <var>H</var> in the generic chart, the <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-compression" title="Reduction of factored-cut mortality to products on their smaller interfaces.">interface construction</a> adapts four two-dimensional edges into two rational 3 × 3 matrices <var>P</var><sub>0</sub>, <var>P</var><sub>1</sub>. Each matrix has rank exactly two, and the arbitrary-product converse gives</p>
           <div class="formula plain">
             <math display="block">
@@ -151,7 +154,7 @@
                     </mtd>
                   </mtr>
                   <mtr>
-                    <mtd><msub><mi>r</mi><mi>n</mi></msub></mtd>
+                    <mtd><msubsup><mi>r</mi><mi>n</mi><mi mathvariant="normal">T</mi></msubsup></mtd>
                     <mtd><mo>=</mo></mtd>
                     <mtd><mo>(</mo><mn>1</mn><mo>,</mo><mo>−</mo><mi>n</mi><mo>)</mo><mo>,</mo></mtd>
                   </mtr>
@@ -181,6 +184,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="inverse-branches">Inverse branches<a class="fragment-link" href="#inverse-branches" aria-label="Link to this section">#</a></h3>
+          <p>A forward Collatz step chooses its branch by parity, but a matrix word can choose either letter freely. Reverse the computation instead: start at 1, apply candidate inverse branches, and test whether the result is the supplied integer. The arithmetic argument below will reject every illegal branch automatically.</p>
           <p>The projective actions of <var>A</var> and <var>B</var> are the two inverse branches</p>
           <div class="formula plain">
             <math display="block">
@@ -218,13 +222,13 @@
           </section>
           <section class="fragment-section">
           <h3 id="malformed-words">Malformed words<a class="fragment-link" href="#malformed-words" aria-label="Link to this section">#</a></h3>
-          <p>The odd inverse branch is legal at an integer <var>z</var> only when 3 divides 2<var>z</var>−1. At the first illegal odd branch, the reduced result has 3-adic valuation −1. Doubling preserves negative 3-adic valuation, and another odd inverse branch makes it smaller. No later word can return that state to an integer.</p>
+          <p>The odd inverse branch is legal at an integer <var>z</var> only when 3 divides <math><mrow><mn>2</mn><mi>z</mi><mo>−</mo><mn>1</mn></mrow></math>. Otherwise its reduced denominator acquires a factor of 3. Doubling cannot cancel it; applying the odd branch again adds another factor of 3 because its numerator remains nonzero modulo 3. Hence no continuation can return to an integer. In <a class="glossary-term" href="/math/matrix_mortality/glossary/#padic-valuation" title="The exponent of 3 in a reduced rational number; denominator powers give negative values.">3-adic valuation</a> terms, the first illegal step has valuation −1, doubling preserves a negative valuation, and another odd step decreases it.</p>
           <p>Thus every word either traces a lawful integral inverse orbit or enters a permanent nonintegral trap. Incidence with the integral target <var>n</var> occurs exactly on the lawful branch, closing the arbitrary-word converse.</p>
 
           </section>
           <section class="fragment-section">
           <h3 id="normalization">Generic normalization<a class="fragment-link" href="#normalization" aria-label="Link to this section">#</a></h3>
-          <p>Put</p>
+          <p>The inverse-word argument already proves the desired incidence equivalence for the raw matrices. We normalize only to meet the hypotheses of the rank-two mortality compiler. For the raw ordering <math><mrow><mi>G</mi><mo>=</mo><mi>B</mi><mo>,</mo><mi>H</mi><mo>=</mo><mi>A</mi></mrow></math>, the two chart scalars computed above are</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -245,7 +249,7 @@
               </mrow>
             </math>
           </div>
-          <p>Their two projectivities remain <var>a</var> and <var>b</var>. Lean proves that the two exceptional incidence scalars are both one and that the complete zero language is unchanged.</p>
+          <p>Their two projectivities remain <var>a</var> and <var>b</var>. Lean proves that the two chart scalars α and β are both one and that the complete zero language is unchanged.</p>
 
           </section>
           <section class="fragment-section">

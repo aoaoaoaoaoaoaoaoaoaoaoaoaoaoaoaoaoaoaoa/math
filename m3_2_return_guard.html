@@ -15,7 +15,6 @@
     <div class="masthead-inner">
       <h1>The Valuation Guard</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
-      <p class="module-meta"><b>Construction</b> · load-bearing · formalized</p>
     </div>
   </header>
 
@@ -23,7 +22,7 @@
     <section class="abstract" aria-label="Abstract">
       <strong>For the unresolved two-generator 3 × 3 matrix-mortality cell M<sub>3</sub>(2), mortality in the three-mode family below is equivalent to one deterministic p-adic orbit reaching one.</strong>
       <p>The construction fits a rank-one separator, exact legal-wait verifier, permanent illegal-wait trap, and unbounded rational payload into two 3 × 3 matrices. Its return series has exact linear dimension three.</p>
-      <p>Parity excludes every odd reset-defect numerator, maximal Smith cancellation cannot terminate or repeat consecutively, and a prime-adic reset ball excludes every coefficient law below an explicit universal-boundary wall. A ready exact-order bridge proves that its first order-breaking step has no uniform local charge. These results do not decide M<sub>3</sub>(2); they concern the displayed family and stated parameter chambers.</p>
+          <p>The later results give sufficient conditions for this family to be immortal, using parity and prime divisibility. An explicit two-step orbit also refutes several proposed local measures of progress. These are statements about the displayed family, not a decision procedure or an undecidability proof for M₃(2).</p>
     </section>
 
     <nav class="contents" aria-label="Contents">
@@ -85,6 +84,7 @@
             <li>
               <a href="#parity-smith">Parity, Smith, and universal boundary</a>
               <ol>
+                <li><a href="#endpoint-coordinates">Terminal-centered coordinates</a></li>
                 <li><a href="#odd-reset-defect">Odd reset-defect numerator immortality</a></li>
                 <li><a href="#maximal-isolation">Maximal steps are isolated</a></li>
                 <li><a href="#universal-boundary">Universal-boundary wall</a></li>
@@ -118,7 +118,7 @@
           <section class="fragment-section">
           <h3 id="frontier-cell">Mortality setting<a class="fragment-link" href="#frontier-cell" aria-label="Link to this section">#</a></h3>
           <p>M<sub>3</sub>(2) asks whether some nonempty word in two supplied 3 × 3 integer matrices equals zero. The cell remains unresolved in the <a href="/math/matrix_mortality/#frontier">decidability table</a>.</p>
-          <p>If both matrices are invertible, every product is invertible. The first difficult <a class="glossary-term" href="/math/matrix_mortality/glossary/#rank-profile" title="The list of generator ranks used to stratify a mortality problem.">rank profile</a> therefore has one invertible generator and one generator of rank two. Write them as <var>A</var> and <var>B</var>.</p>
+          <p>If both matrices are invertible, every product is invertible. We study the <a class="glossary-term" href="/math/matrix_mortality/glossary/#rank-profile" title="The ranks of the generators, kept separate from their ambient dimension.">rank profile</a> (3,2): one invertible generator <var>A</var> and one rank-two generator <var>B</var>. This does not exhaust M₃(2), which also has a rank-(2,2) case.</p>
 
           </section>
           <section class="fragment-section">
@@ -168,7 +168,7 @@
               </mrow>
             </math>
           </div>
-          <p>Because <var>A</var> is invertible and <var>U</var>, <var>V</var> have full interface rank, exterior powers of <var>A</var> cannot create or hide a zero. Mortality of the physical pair is therefore exactly mortality of the infinite return family. This is the split-return normal form.</p>
+          <p>Because <var>A</var> is invertible and <var>U</var>, <var>V</var> have full interface rank, exterior powers of <var>A</var> cannot create or hide a zero. Mortality of the physical pair is therefore exactly mortality of the infinite return family. This is the <a class="glossary-term" href="/math/matrix_mortality/glossary/#split-return-normal-form" title="Full-rank interface factors and invertible transition permit cancellation around return products.">split-return normal form</a>, a specialization of <a href="/math/matrix_mortality/interface_compression/#single-cut">single-cut compression</a>.</p>
           <p>The problem is not an ordinary scalar recurrence. A word may choose a different unbounded index <var>n</var> at every return, producing a product of recurrence values. Linear recurrence automata provide nearby vocabulary for this controlled setting <a href="#ref-hkpy-2024">[Hirvensalo et al. 2024]</a>.</p>
 
           </section>
@@ -184,17 +184,17 @@
           </section>
           <section class="fragment-section">
           <h4 id="padic-valuation">The p-adic valuation<a class="fragment-link" href="#padic-valuation" aria-label="Link to this section">#</a></h4>
-          <p>Fix a prime <var>p</var>. For a nonzero rational number, <var>v</var><sub><var>p</var></sub> records the exponent of <var>p</var> in its reduced factorization. Thus</p>
+          <p>Fix a prime <var>p</var>. For a nonzero rational number, <var>v</var><sub><var>p</var></sub> records the exponent of <var>p</var> in its reduced factorization. For example, at <var>p</var> = 5,</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
-                <msub><mi>v</mi><mi>p</mi></msub>
-                <mo>(</mo><msup><mi>p</mi><mn>3</mn></msup><mo>·</mo><mfrac><mn>7</mn><mn>11</mn></mfrac><mo>)</mo>
+                <msub><mi>v</mi><mn>5</mn></msub>
+                <mo>(</mo><msup><mn>5</mn><mn>3</mn></msup><mo>·</mo><mfrac><mn>7</mn><mn>11</mn></mfrac><mo>)</mo>
                 <mo>=</mo><mn>3</mn><mo>.</mo>
               </mrow>
             </math>
           </div>
-          <p>A rational is a p-adic unit when its valuation is zero. The ultrametric law makes unequal valuations rigid:</p>
+          <p>A rational is a <a class="glossary-term" href="/math/matrix_mortality/glossary/#padic-unit" title="A nonzero rational whose reduced numerator and denominator contain no factor of p.">p-adic unit</a> when its valuation is zero. The ultrametric law makes unequal valuations rigid:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -220,7 +220,7 @@
           <section class="fragment-section">
           <h3 id="result">Result<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
           <div class="theorem">
-            <p><strong>Amalgamated valuation guard.</strong> Fix a prime <var>p</var>, a depth <var>s</var> ≥ 2, a center <var>α</var>, and a reset <var>ρ</var>. Assume <var>α</var> and <var>α</var>−1 are p-adic units and <var>ρ</var> has positive valuation. The two rational 3 × 3 matrices constructed below are mortal exactly when the deterministic guarded orbit starting at <var>ρ</var> reaches 1.</p>
+            <p><strong>Valuation guard.</strong> Fix a prime <var>p</var>, a depth <var>s</var> ≥ 2, a center <var>α</var>, and a reset <var>ρ</var>. Assume <var>α</var> and <var>α</var>−1 are p-adic units and <var>ρ</var> has positive valuation. The two rational 3 × 3 matrices constructed below are mortal exactly when the deterministic guarded orbit starting at <var>ρ</var> reaches 1.</p>
           </div>
           <p>The result does not decide that reachability problem. It removes the matrix-semigroup freedom surrounding it: separator placement, arbitrary words, incorrect waits, affine poles, and infinity are all covered by the equivalence.</p>
 
@@ -230,6 +230,7 @@
 
           <section class="fragment-section">
           <h4 id="ambient-and-cut">Transition matrix and cut<a class="fragment-link" href="#ambient-and-cut" aria-label="Link to this section">#</a></h4>
+          <p>The design has two requirements. A zero-length return must be a rank-one test-and-reset map; every positive return must be invertible and reject all but one wait at a live point. Three distinct powers in <var>A</var> provide the constant, contracting and expanding terms needed for those identities. The maps <var>U</var> and <var>V</var> combine them into a two-dimensional return.</p>
           <p>Put <var>δ</var> = <var>ρ</var>−<var>α</var>. The hypotheses imply that <var>δ</var> is also a p-adic unit. Take</p>
           <div class="formula">
             <math display="block">
@@ -382,14 +383,14 @@
             <math display="block">
               <mrow>
                 <mi>Live</mi><mo>=</mo>
-                <mo>{</mo><mi>z</mi><mo>∈</mo><mi>ℚ</mi><mo>:</mo><msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>&gt;</mo><mn>0</mn><mo>}</mo><mo>,</mo>
+                <mo>{</mo><mi>z</mi><mo>∈</mo><mi>ℚ</mi><mo>:</mo><mi>z</mi><mo>≠</mo><mn>0</mn><mo>,</mo><msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>&gt;</mo><mn>0</mn><mo>}</mo><mo>,</mo>
                 <mspace width="0.8em"></mspace>
                 <mi>Trap</mi><mo>=</mo><msup><mi>ℙ</mi><mn>1</mn></msup><mo>(</mo><mi>ℚ</mi><mo>)</mo>
                 <mo>∖</mo><mo>(</mo><mi>Live</mi><mo>∪</mo><mo>{</mo><mn>1</mn><mo>}</mo><mo>)</mo><mo>.</mo>
               </mrow>
             </math>
           </div>
-          <p>For every positive wait, the trap maps into itself. Negative-valuation points, zero, infinity, and nonterminal units all enter the unit residue ball around <var>α</var>. Since <var>α</var>−1 is a unit, that ball excludes the target 1. The same argument applies again at every later step.</p>
+          <p>For every positive wait, the trap maps into itself. Negative-valuation points, zero, infinity, and nonterminal units all enter the residue ball <math><mrow><msub><mi>v</mi><mi>p</mi></msub><mo>(</mo><mi>z</mi><mo>−</mo><mi>α</mi><mo>)</mo><mo>&gt;</mo><mn>0</mn></mrow></math> around <var>α</var>. Since <var>α</var>−1 is a unit, that ball excludes the target 1. The same argument applies again at every later step.</p>
 
           </section>
           </section>
@@ -471,7 +472,7 @@
               </mrow>
             </math>
           </div>
-          <p>The visible valuation <var>a</var> selects the only legal wait. The tail <var>X</var> carries the remaining unbounded information. Substitution into the legal return gives the deterministic update</p>
+          <p>The visible valuation <var>a</var> selects the only legal wait. The tail <var>X</var> measures the residual displacement after subtracting the leading prime power; it is still rational and need not be bounded. Substitution into the legal return gives the deterministic update</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -483,12 +484,12 @@
               </mrow>
             </math>
           </div>
-          <p>The next valuation and next tail are recovered from this rational output. Failure of the next ready condition enters the trap.</p>
+          <p>The next valuation and next tail are recovered from this rational output. If the output is neither the target nor ready, no further positive return can reach the target.</p>
 
           </section>
           <section class="fragment-section">
           <h4 id="inverse-grammar">Inverse grammar<a class="fragment-link" href="#inverse-grammar" aria-label="Link to this section">#</a></h4>
-          <p>The local transition graph is not impoverished. Given positive valuations <var>a</var>, <var>b</var> and any unit target tail <var>X</var>′, define</p>
+          <p>Given positive valuations <var>a</var>, <var>b</var> and any unit target tail <var>X</var>′, define</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -516,7 +517,7 @@
               </mrow>
             </math>
           </div>
-          <p>Every ready valuation cylinder can therefore reach every other. This is local symbolic completeness, not universality: one initial rational tail must satisfy the entire itinerary.</p>
+          <p>For every prescribed positive input and output valuation, this formula supplies a suitable ready predecessor. That is a local existence result: it does not show that the fixed reset has such a predecessor tail, or that one initial rational realizes a whole prescribed computation.</p>
 
           </section>
           </section>
@@ -542,7 +543,7 @@
               </mtable>
             </math>
           </div>
-          <p>The coefficient Hankel section of the return series has rank three. The construction cannot be reproduced exactly in two linear states.</p>
+          <p>The coefficient <a class="glossary-term" href="/math/matrix_mortality/glossary/#hankel-rank" title="A finite prefix/suffix matrix gives a lower bound for the dimension of an exact linear representation.">Hankel section</a> of the return series has rank three. The construction cannot be reproduced exactly in two linear states.</p>
 
           </section>
           <section class="fragment-section">
@@ -581,13 +582,20 @@
           </section>
           <section class="fragment-section">
           <h3 id="parity-smith">Parity, Smith, and universal boundary<a class="fragment-link" href="#parity-smith" aria-label="Link to this section">#</a></h3>
+          <p>The orbit equivalence lets arithmetic invariants prove that a parameter family is immortal. For divisibility arguments, shift the target from one to zero and retain coprime integer numerators and denominators. This is a change of coordinates on the same orbit, not a new dynamics.</p>
+          <section class="fragment-section">
+          <h4 id="endpoint-coordinates">Terminal-centered coordinates<a class="fragment-link" href="#endpoint-coordinates" aria-label="Link to this section">#</a></h4>
+          <p>Choose integers <var>A</var><sub>0</sub>, <var>D</var>, <var>L</var> with nonzero <var>L</var> such that <math><mrow><mi>α</mi><mo>=</mo><msub><mi>A</mi><mn>0</mn></msub><mo>/</mo><mi>L</mi><mo>,</mo><mi>δ</mi><mo>=</mo><mi>D</mi><mo>/</mo><mi>L</mi></mrow></math>. For an original orbit point <var>x</var>, the terminal-centered coordinate is</p>
+          <div class="formula plain"><math display="block"><mrow><mi>z</mi><mo>=</mo><mi>L</mi><mo>(</mo><mi>x</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>=</mo><mfrac><mi>r</mi><mi>t</mi></mfrac><mo>,</mo><mspace width="1em"></mspace><mi>x</mi><mo>=</mo><mn>1</mn><mo>+</mo><mfrac><mi>r</mi><mrow><mi>L</mi><mi>t</mi></mrow></mfrac><mo>.</mo></mrow></math></div>
+          <p>Take <math><mrow><mi mathvariant="normal">gcd</mi><mo>(</mo><mi>r</mi><mo>,</mo><mi>t</mi><mo>)</mo><mo>=</mo><mn>1</mn></mrow></math>. The reset becomes <math><mrow><mi>R</mi><mo>=</mo><mi>L</mi><mo>(</mo><mi>ρ</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>=</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mi>D</mi><mo>−</mo><mi>L</mi></mrow></math>, represented by (<var>R</var>,1), and the target becomes zero. A step produces a new <a class="glossary-term" href="/math/matrix_mortality/glossary/#primitive-pair-content" title="A coprime integer pair after removing a common, possibly signed, factor.">primitive pair</a> (<var>r</var>′,<var>t</var>′); <var>h</var> records the signed common factor removed. The next equations retain it, so no divisibility information is lost.</p>
+          </section>
 
           <section class="fragment-section">
           <h4 id="odd-reset-defect">Odd reset-defect numerator immortality<a class="fragment-link" href="#odd-reset-defect" aria-label="Link to this section">#</a></h4>
-          <p>Choose integral coefficients <var>A</var>, <var>D</var>, and <var>L</var> with <var>L</var> ≠ 0 so that <var>α</var> = <var>A</var>/<var>L</var> and the drift <var>δ</var> = <var>D</var>/<var>L</var>. Put</p>
+          <p>With the terminal-centered coordinates just defined, recall</p>
           <div class="formula plain">
             <math display="block">
-              <mrow><mi>R</mi><mo>=</mo><mi>A</mi><mo>+</mo><mi>D</mi><mo>−</mo><mi>L</mi><mo>.</mo></mrow>
+              <mrow><mi>R</mi><mo>=</mo><msub><mi>A</mi><mn>0</mn></msub><mo>+</mo><mi>D</mi><mo>−</mo><mi>L</mi><mo>.</mo></mrow>
             </math>
           </div>
           <p>The adjacent unit assumptions on <var>α</var> and <var>α</var>−1 force <var>p</var> to be odd. In primitive terminal-endpoint coordinates, one legal wait <var>a</var> and its removed content <var>h</var> obey</p>
@@ -602,7 +610,7 @@
                 <mtr>
                   <mtd><mi>h</mi><msup><mi>r</mi><mo>′</mo></msup></mtd>
                   <mtd><mo>=</mo></mtd>
-                  <mtd><mi>D</mi><mi>r</mi><mo>+</mo><mo>(</mo><mi>A</mi><mo>−</mo><mi>L</mi><mo>)</mo><mi>h</mi><msup><mi>t</mi><mo>′</mo></msup><mo>.</mo></mtd>
+                  <mtd><mi>D</mi><mi>r</mi><mo>+</mo><mo>(</mo><msub><mi>A</mi><mn>0</mn></msub><mo>−</mo><mi>L</mi><mo>)</mo><mi>h</mi><msup><mi>t</mi><mo>′</mo></msup><mo>.</mo></mtd>
                 </mtr>
               </mtable>
             </math>
@@ -612,7 +620,7 @@
           </section>
           <section class="fragment-section">
           <h4 id="maximal-isolation">Maximal steps are isolated<a class="fragment-link" href="#maximal-isolation" aria-label="Link to this section">#</a></h4>
-          <p>Only even <var>R</var> remains. At critical depth <var>s</var> = 2, write <var>q</var> = <var>p</var><sup><var>a</var></sup>. The forward and complementary contents have the signed Smith split</p>
+          <p>Only even <var>R</var> remains. At depth <var>s</var> = 2, put <math><mrow><mi>q</mi><mo>=</mo><msup><mi>p</mi><mi>a</mi></msup></mrow></math>. The signed forward content <var>h</var> has a complementary factor <var>k</var> with <math><mrow><mi>h</mi><mi>k</mi><mo>=</mo><mi>D</mi><mi>L</mi><mo>(</mo><mi>q</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow></math>. The <a class="glossary-term" href="/math/matrix_mortality/glossary/#smith-normal-form" title="A divisibility factorization separating fixed coefficient factors from factors of the varying wait.">Smith split</a> separates the fixed factors η, θ from the positive wait-dependent factors <var>u</var>, <var>v</var>:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -626,12 +634,12 @@
               </mrow>
             </math>
           </div>
-          <p>The unique noncontracting allocation is <var>v</var> = 1. Its apparent system collapses, after substitution and cancellation, to</p>
+          <p>In the associated integer decoder, every allocation with <var>v</var> ≥ 2 contracts a fixed weighted norm. The exceptional case <var>v</var> = 1 assigns all of the moving factor <math><mrow><mi>q</mi><mo>−</mo><mn>1</mn></mrow></math> to the forward content; this is what “maximal cancellation” means here. Substituting it into the step equations gives</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
                 <msup><mi>r</mi><mo>′</mo></msup><mo>=</mo><mi>θ</mi><mi>t</mi><mo>+</mo>
-                <mo>(</mo><mi>D</mi><msup><mi>q</mi><mn>2</mn></msup><mo>+</mo><mi>A</mi><mo>−</mo><mi>L</mi><mo>)</mo>
+                <mo>(</mo><mi>D</mi><msup><mi>q</mi><mn>2</mn></msup><mo>+</mo><msub><mi>A</mi><mn>0</mn></msub><mo>−</mo><mi>L</mi><mo>)</mo>
                 <msup><mi>t</mi><mo>′</mo></msup><mo>.</mo>
               </mrow>
             </math>
@@ -641,7 +649,7 @@
           </section>
           <section class="fragment-section">
           <h4 id="universal-boundary">Universal-boundary wall<a class="fragment-link" href="#universal-boundary" aria-label="Link to this section">#</a></h4>
-          <p>At depth two, put <var>q</var> = <var>p</var><sup><var>a</var></sup>. The endpoint map obeys the exact reset-defect factorization</p>
+          <p>At depth two, let <math><mrow><mi>q</mi><mo>=</mo><msup><mi>p</mi><mi>a</mi></msup></mrow></math>, and let <var>F</var><sub><var>q</var></sub> be the old guard map expressed in the terminal-centered coordinate: <math><mrow><msub><mi>F</mi><mi>q</mi></msub><mo>(</mo><mi>z</mi><mo>)</mo><mo>=</mo><mi>L</mi><mo>(</mo><msub><mi>Φ</mi><mi>a</mi></msub><mo>(</mo><mn>1</mn><mo>+</mo><mi>z</mi><mo>/</mo><mi>L</mi><mo>)</mo><mo>−</mo><mn>1</mn><mo>)</mo></mrow></math>. It obeys the exact reset-defect factorization</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -658,13 +666,13 @@
             <math display="block">
               <mtable columnalign="right center left">
                 <mtr>
-                  <mtd><msub><mi>λ</mi><mi>L</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>L</mi><mo>)</mo><mo>,</mo></mtd>
-                  <mtd><msub><mi>λ</mi><mi>R</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>R</mi><mo>)</mo><mo>,</mo></mtd>
-                  <mtd><msub><mi>λ</mi><mi>D</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>D</mi><mo>)</mo><mo>,</mo></mtd>
+                  <mtd><msub><mi>λ</mi><mi>L</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>v</mi><mi>ℓ</mi></msub><mo>(</mo><mi>L</mi><mo>)</mo><mo>,</mo></mtd>
+                  <mtd><msub><mi>λ</mi><mi>R</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>v</mi><mi>ℓ</mi></msub><mo>(</mo><mi>R</mi><mo>)</mo><mo>,</mo></mtd>
+                  <mtd><msub><mi>λ</mi><mi>D</mi></msub></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>v</mi><mi>ℓ</mi></msub><mo>(</mo><mi>D</mi><mo>)</mo><mo>,</mo></mtd>
                 </mtr>
                 <mtr>
-                  <mtd><mi>e</mi></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>,</mo></mtd>
-                  <mtd><mi>ε</mi></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo></mtd>
+                  <mtd><mi>e</mi></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>v</mi><mi>ℓ</mi></msub><mo>(</mo><mi>p</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>,</mo></mtd>
+                  <mtd><mi>ε</mi></mtd><mtd><mo>=</mo></mtd><mtd><msub><mi>v</mi><mi>ℓ</mi></msub><mo>(</mo><mn>2</mn><mo>)</mo><mo>.</mo></mtd>
                 </mtr>
               </mtable>
             </math>
@@ -693,11 +701,11 @@
                 <msub><mi>B</mi><mi>ℓ</mi></msub>
                 <mo>=</mo><mo>{</mo><mi>R</mi><mo>}</mo><mo>∪</mo>
                 <mo>{</mo><mi>z</mi><mo>:</mo><mi>z</mi><mo>≠</mo><mi>R</mi><mo>,</mo>
-                <msub><mi>λ</mi><mi>R</mi></msub><mo>&lt;</mo><msub><mi>ν</mi><mi>ℓ</mi></msub><mo>(</mo><mi>z</mi><mo>−</mo><mi>R</mi><mo>)</mo><mo>}</mo><mo>.</mo>
+                <msub><mi>λ</mi><mi>R</mi></msub><mo>&lt;</mo><msub><mi>v</mi><mi>ℓ</mi></msub><mo>(</mo><mi>z</mi><mo>−</mo><mi>R</mi><mo>)</mo><mo>}</mo><mo>.</mo>
               </mrow>
             </math>
           </div>
-          <p>Reset lies inside and terminal zero lies outside. If the final numerator blade in the factorization vanishes, the branch returns exactly to reset; the formal proof isolates this case before taking finite valuations. The arbitrary-word equivalence therefore makes the two inequalities a physical immortality certificate.</p>
+          <p>Reset lies inside and terminal zero lies outside. If the final numerator factor in the factorization vanishes, the branch returns exactly to reset; the formal proof isolates this case before taking finite valuations. The arbitrary-word equivalence therefore makes the two inequalities a physical immortality certificate.</p>
           <p>In particular, every prime dividing the universal boundary <var>p</var>−1 must divide the reset-defect numerator of a mortal law:</p>
           <div class="formula plain">
             <math display="block">
@@ -709,24 +717,24 @@
               </mrow>
             </math>
           </div>
-          <p>The full valuation wall is stronger than this squarefree sieve. It can still exclude a law after every boundary prime has entered <var>R</var>.</p>
+          <p>Here <math><mi>rad</mi><mo>(</mo><mi>m</mi><mo>)</mo></math> is the product of the distinct prime factors of <var>m</var>. The full valuation wall is stronger than this squarefree sieve: it can still exclude a law after every boundary prime has entered <var>R</var>.</p>
 
           </section>
           <section class="fragment-section">
           <h4 id="order-breaking-bridge">Order-breaking bridge obstruction<a class="fragment-link" href="#order-breaking-bridge" aria-label="Link to this section">#</a></h4>
-          <p>Reset incidence at an exact-order prime does not yield a local monotone law after the first wait outside that order. At depth two, take</p>
+          <p>The preceding theorem uses primes dividing <math><mrow><mi>p</mi><mo>−</mo><mn>1</mn></mrow></math>, which divide every positive-wait factor. A prime dividing only selected factors might seem to give a finer invariant. The next example shows why preservation can fail at the first wait outside its <a class="glossary-term" href="/math/matrix_mortality/glossary/#exact-order-prime" title="The least positive n with pⁿ congruent to 1 modulo the chosen prime.">multiplicative order</a>, even though the next orbit point is still ready. At depth two, take</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
                 <mi>p</mi><mo>=</mo><mn>3</mn><mo>,</mo>
                 <mspace width="0.8em"></mspace>
-                <mi>A</mi><mo>=</mo><mi>R</mi><mo>=</mo><mn>249398</mn><mo>,</mo>
+                <msub><mi>A</mi><mn>0</mn></msub><mo>=</mo><mi>R</mi><mo>=</mo><mn>249398</mn><mo>,</mo>
                 <mspace width="0.8em"></mspace>
                 <mi>D</mi><mo>=</mo><mi>L</mi><mo>=</mo><mn>1</mn><mo>.</mo>
               </mrow>
             </math>
           </div>
-          <p>The checked ready prefix is</p>
+          <p>In the original projective coordinate, the checked orbit prefix is (arrow labels are waits)</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -738,19 +746,19 @@
               </mrow>
             </math>
           </div>
-          <p>The final target is itself ready at wait one. The prime 5 is a primitive divisor of 3⁴−1, so the second step breaks exact order four. In endpoint coordinates, it ejects the strict reset ball:</p>
+          <p>The final point is itself ready at wait one. The prime 5 is a primitive divisor of 3⁴−1, so the second step breaks exact order four. In endpoint coordinates, it ejects the strict reset ball:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
-                <msub><mi>ν</mi><mn>5</mn></msub><mo>(</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>,</mo>
+                <msub><mi>v</mi><mn>5</mn></msub><mo>(</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>,</mo>
                 <mspace width="0.8em"></mspace>
-                <msub><mi>ν</mi><mn>5</mn></msub><mo>(</mo><msub><mi>z</mi><mn>1</mn></msub><mo>−</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>,</mo>
+                <msub><mi>v</mi><mn>5</mn></msub><mo>(</mo><msub><mi>z</mi><mn>1</mn></msub><mo>−</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>,</mo>
                 <mspace width="0.8em"></mspace>
-                <msub><mi>ν</mi><mn>5</mn></msub><mo>(</mo><msub><mi>z</mi><mn>2</mn></msub><mo>−</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>.</mo>
+                <msub><mi>v</mi><mn>5</mn></msub><mo>(</mo><msub><mi>z</mi><mn>2</mn></msub><mo>−</mo><mi>R</mi><mo>)</mo><mo>=</mo><mn>0</mn><mo>.</mo>
               </mrow>
             </math>
           </div>
-          <p>The bridge's raw endpoint pair has gcd 18, coprime to 5. No auxiliary-prime content is swallowed, and the primitive denominator grows from 19 to 270178. Thus ball invariance, auxiliary-content loss, repetition, and denominator descent all fail as uniform first-bridge charges under continued readiness. Exact-order factors can contribute only inside a global amortization theorem.</p>
+          <p>The raw endpoint pair after the two steps has gcd 18, coprime to 5, and its primitive denominator has grown from 19 to 270178. Thus this first order-breaking transition preserves neither the strict reset ball nor a decreasing denominator; it removes no factor of the auxiliary prime and does not repeat a state. None of these four local criteria can measure progress on every ready orbit.</p>
 
           </section>
           </section>

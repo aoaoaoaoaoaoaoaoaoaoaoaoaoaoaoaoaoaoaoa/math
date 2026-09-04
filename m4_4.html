@@ -15,7 +15,6 @@
     <div class="masthead-inner">
       <h1>Paired-Role Compression</h1>
       <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
-      <p class="module-meta"><b>Theorem</b> · endpoint · formalized</p>
     </div>
   </header>
 
@@ -80,7 +79,7 @@
     <main id="article">
       <article>
         <nav class="module-context" aria-label="Module relations">
-          <p><b>Requires</b> <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence</a> and the <a href="/math/matrix_mortality/paired_scalar_series/">paired scalar series</a>.</p>
+          <p><b>Requires</b> the <a href="/math/matrix_mortality/m3_5/#four-tiles">four-role source theorem</a> and <a href="/math/matrix_mortality/m3_5/#word-pair-representation">word-pair representation</a>. The <a href="/math/matrix_mortality/paired_scalar_series/#result">paired scalar module</a> summarizes the interface constructed here.</p>
           <p><b>Establishes</b> <a href="#paired-compression">paired-role compression</a> and M<sub>4</sub>(4).</p>
         </nav>
 
@@ -89,9 +88,10 @@
 
           <section class="fragment-section">
           <h3 id="part-one">The four-role fixed-boundary problem<a class="fragment-link" href="#part-one" aria-label="Link to this section">#</a></h3>
-          <p>The <a href="/math/matrix_mortality/m3_5/#source-lemma">fixed-boundary correspondence theorem</a> proves undecidability of a four-role fixed-boundary problem.</p>
+          <p>Here <a class="glossary-term" href="/math/matrix_mortality/glossary/#bounded-mortality" title="Nonempty-product mortality with dimension and generator count fixed.">M₄(4)</a> means mortality of at most four integer 4 × 4 matrices. The earlier construction needs five generators: four word-pair matrices and one separator. We save one generator by encoding each rule/deletion pair with one data control and a shared phase toggle, at the cost of one extra dimension.</p>
+          <p>The input is the <a href="/math/matrix_mortality/m3_5/#four-tiles">four-role fixed-boundary problem</a>: choose word pairs whose upper concatenation, followed by a fixed marker, equals their lower concatenation. This subsection states the source contract needed below; the linked proof explains its tag-machine origin.</p>
 
-          <p>Fix a deletion width <var>β</var> and write <var>H</var> for Neary’s binary word code, with <var>H</var>(<span class="word">b</span>) = 10<sup><var>β</var></sup>1 and <var>H</var>(<span class="word">c</span>) = 1. For the Neary body <var>B</var> of the <span class="word">c</span>-appendant, the four ordinary roles are</p>
+          <p>Fix a <a class="glossary-term" href="/math/matrix_mortality/glossary/#deletion-width" title="The number of queue symbols removed at each tag step.">deletion width</a> <var>β</var> and write <var>H</var> for Neary’s binary word code, with <var>H</var>(<span class="word">b</span>) = 10<sup><var>β</var></sup>1 and <var>H</var>(<span class="word">c</span>) = 1. For the <a class="glossary-term" href="/math/matrix_mortality/glossary/#neary-body" title="The variable word B in the appendant Bb.">Neary body</a> <var>B</var> of the <span class="word">c</span>-appendant, the four ordinary roles are</p>
           <div class="formula">
             <math display="block">
               <mtable columnalign="left left">
@@ -132,7 +132,7 @@
           </div>
           <p>The soundness proof analyzes every role word. Zero-run synchronization forces exact deletion-width blocks, and a global history equation reconstructs lawful tag steps. Neary’s restricted binary-tag undecidability theorem supplies the external tag family <a href="#ref-neary-2015">[Neary 2015]</a>.</p>
           <div class="theorem">
-            <p><strong>Neary padding corollary.</strong> Neary’s compiler has <var>β</var> = 10<var>p</var> and permits a computably chosen sufficiently large padding parameter <var>s</var>. Taking <var>s</var> = <var>x</var>(<var>β</var>−1)+1 makes the body length</p>
+            <p><strong>Neary padding corollary.</strong> If the cyclic program has <var>p</var> appendants, Neary’s compiler has <var>β</var> = 10<var>p</var> and permits a computably chosen sufficiently large padding parameter <var>s</var>. Taking <var>s</var> = <var>x</var>(<var>β</var>−1)+1 makes the body length</p>
             <div class="formula plain">
               <math display="block">
                 <mrow>
@@ -159,7 +159,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="word-pair-matrices">Word-pair matrices<a class="fragment-link" href="#word-pair-matrices" aria-label="Link to this section">#</a></h3>
-          <p>Recode binary symbols as nonzero base-three digits. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its base-three value. The standard <a class="glossary-term" href="/math/matrix_mortality/glossary/#word-pair-representation" title="A matrix morphism encoding two words so a boundary coefficient detects equality.">word-pair representation</a> is</p>
+          <p>Recode binary symbols as nonzero base-three digits. For a digit word <var>x</var>, let <var>σ</var>(<var>x</var>) be its <a class="glossary-term" href="/math/matrix_mortality/glossary/#ternary-value" title="The base-three value after replacing bits 0,1 with digits 1,2.">base-three value</a>. The standard <a class="glossary-term" href="/math/matrix_mortality/m3_5/#word-pair-representation" title="A matrix morphism encoding two words so a boundary coefficient detects equality.">word-pair representation</a> is</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -318,7 +318,7 @@
 
           <section class="fragment-section">
           <h4 id="quotient">The quotient<a class="fragment-link" href="#quotient" aria-label="Link to this section">#</a></h4>
-          <p>On two copies of the original space define</p>
+          <p>Keep a rule-phase vector in the first copy of <var>V</var> and a deletion-phase vector in the second. A data control applies the selected role and places its output in deletion phase; the toggle exchanges phases. In block form:</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -354,7 +354,7 @@
               </mrow>
             </math>
           </div>
-          <p>The row (<var>ℓ</var><sup>T</sup>, <var>ℓ</var><sup>T</sup>) annihilates <var>K</var>; the boundary column (<var>c</var>,0)<sup>T</sup> descends without restriction. Thus the quotient preserves the required scalar coefficients.</p>
+          <p>For the source boundary row ℓ<sup>T</sup> and column <var>c</var>, the row (<var>ℓ</var><sup>T</sup>, <var>ℓ</var><sup>T</sup>) annihilates <var>K</var>; the boundary column (<var>c</var>,0)<sup>T</sup> descends without restriction. Thus the quotient preserves the required scalar coefficients.</p>
 
           </section>
           <section class="fragment-section">
@@ -365,7 +365,7 @@
             <li>A toggle flips the phase.</li>
             <li>A data letter <var>x</var> emits <var>R</var><sub><var>x</var></sub> in rule phase or <var>D</var><sub><var>x</var></sub> in deletion phase, then sets the phase to deletion.</li>
           </ol>
-          <p>Let <var>τ</var>(<var>z</var>) be the emitted role word in the original left-to-right order. Induction on <var>z</var> gives the coefficient identity</p>
+          <p>Let <var>τ</var>(<var>z</var>) be the emitted role word in the original left-to-right order. Write <var>X</var><sub><var>w</var></sub> for the source role-matrix product and <var>G</var><sub><var>z</var></sub> for the control product, including toggles. Let <var>L</var> and <var>C</var> be the quotient row and column just constructed. Induction on <var>z</var> gives the coefficient identity</p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -382,6 +382,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="explicit-system">Explicit scalar system<a class="fragment-link" href="#explicit-system" aria-label="Link to this section">#</a></h3>
+          <p>The word <var>u</var><sub><var>x</var></sub> is the common upper image of the rule/deletion pair; <var>v</var><sub><var>x</var></sub><sup>R</sup> and <var>v</var><sub><var>x</var></sub><sup>D</sup> are its two lower images. The symbols below are their numeral values and length powers, not additional controls.</p>
           <p>For <var>x</var> ∈ {<span class="word">b</span>,<span class="word">c</span>}, write</p>
           <div class="formula">
             <math display="block">
@@ -445,7 +446,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="mortality">From a scalar zero to mortality<a class="fragment-link" href="#mortality" aria-label="Link to this section">#</a></h3>
-          <p>Adjoin the outer product</p>
+          <p>So far only a scalar coefficient is tested. To make that scalar zero annihilate an entire product, adjoin the <a class="glossary-term" href="/math/matrix_mortality/glossary/#outer-product-separator" title="A rank-one matrix formed from the boundary column and row.">outer product</a></p>
           <div class="formula">
             <math display="block">
               <mrow>
@@ -572,7 +573,7 @@
           <section class="fragment-section">
           <h3 id="sources">References<a class="fragment-link" href="#sources" aria-label="Link to this section">#</a></h3>
           <ol class="references">
-            <li id="ref-part-one"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#source-lemma"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The synchronized four-role fixed-boundary theorem.</span></li>
+            <li id="ref-part-one"><span>GPT-5.6 Sol, elicited by @eternalism_4eva, <a href="/math/matrix_mortality/m3_5/#four-tiles"><cite>Fixed-Boundary Correspondence</cite></a>, 2026. The synchronized four-role fixed-boundary theorem.</span></li>
             <li id="ref-neary-2015"><span>Turlough Neary, <a href="https://doi.org/10.4230/LIPIcs.STACS.2015.649"><cite>Undecidability in Binary Tag Systems and the Post Correspondence Problem for Five Pairs of Words</cite></a>, STACS 2015. The restricted binary-tag undecidability source.</span></li>
             <li id="ref-chhn-2014"><span>Julien Cassaigne, Vesa Halava, Tero Harju, and François Nicolas, <a href="https://arxiv.org/abs/1404.0644"><cite>Tighter Undecidability Bounds for Matrix Mortality, Zero-in-the-Corner Problems, and More</cite></a>, 2014. Definitions, prior bounds, and the scalar-to-corner reductions.</span></li>
           </ol>
