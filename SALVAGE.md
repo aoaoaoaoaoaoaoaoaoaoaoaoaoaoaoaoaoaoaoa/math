@@ -7897,7 +7897,6 @@ assembly in `letterErase_rawHead_multi_shell_impossible`.
 
 **Next:** the rule-bearing branch and this all-erasure branch graduate into
 [`MM-S67`](#mm-s67-complete-distinguished-first-entry-extinction).
-
 ### MM-S42: Swapped positive depth-one extinction
 
 **Kind:** structure theorem and obstruction

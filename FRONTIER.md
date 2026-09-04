@@ -1581,7 +1581,6 @@ rational depth-one equation, and an integral normalization specializes exactly t
 difference, and common-suffix ancestry from the global orbit. The repeated state is not claimed
 reachable from the distinguished entry and does not kill the actual first-transfer survivor;
 its separate direct ratio-cylinder extinction is `MM-S51`.
-
 The positive depth-one ternary question is now closed at its exact witness interface.
 [`MM-S42`](SALVAGE.md#mm-s42-swapped-positive-depth-one-extinction) reduces every regular
 valuation-one fringe after one positive distinguished-boundary transfer to four pairs. The two

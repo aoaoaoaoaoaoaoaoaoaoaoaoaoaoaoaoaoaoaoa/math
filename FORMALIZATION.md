@@ -2088,7 +2088,6 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 factorizations, upper grammar, and lower-language contradiction. The theorem deliberately does
 not identify the later two-transfer `D_c^(β+1)→singleton` carrier with the distinguished
 boundary. That state is outside its witness and is addressed algebraically by `MM-S50`.
-
 `MM-S42` closes the positive valuation-one one-transfer branch only after a
 `PositiveDepthOnePoleWitness` has been assembled. It does not construct that witness from a raw
 projective orbit; its suffix equality records physical provenance but is no longer needed after
