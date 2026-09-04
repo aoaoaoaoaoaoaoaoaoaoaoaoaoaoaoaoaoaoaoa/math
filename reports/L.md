@@ -1,0 +1,16 @@
+# L. Targeted literature scan, 2023–2026
+
+**1. Low-dimensional matrix problems.** No 2023–2026 source found changes mortality, zero-in-the-corner, scalar reachability, or vector reachability for two or three rational generators in dimension at most four. The closest new undecidability theorem is Breuillard–Kocharyan (arXiv:2403.14875), but its group zero-corner bounds require at least 17 generators and dimensions 6 (diagonal corner) or 9 (off-diagonal corner), so the audited cells retain their priors.
+
+**2. Rational Möbius and affine reachability.** No result found decides or proves hardness for the stated nondeterministic free-semigroup action of two rational Möbius or affine maps. Ghahremani–Kelmendi–Ouaknine (arXiv:2301.09752; DOI 10.1109/LICS56636.2023.10175723) decide deterministic point reachability for injective rational piecewise-affine maps with two intervals; Kurtz–Simon’s generalized-Collatz uniform problem is Π⁰₂-complete (DOI 10.1007/978-3-540-72504-6_49), but its modulus and residue branches are input, not a fixed few-generator semigroup. Stored Carelli26 (DOI 10.4230/LIPIcs.ICALP.2026.175) and DP26 (arXiv:2602.06066) do not strengthen this boundary.
+
+**3. Skolem.** General order five remains unconditionally open. Lipton–Luca–Nieuwveld–Ouaknine–Purser–Worrell (DOI 10.1145/3531130.3533328) decide order five assuming the Exponential Local-Global Principle and unconditionally decide reversible integer LRS through order seven; Bilu et al. (DOI 10.4230/LIPIcs.MFCS.2022.20) give an anytime-correct simple-LRS algorithm whose termination additionally assumes p-adic Schanuel. Thackeray proves only new quadratic and degenerate-cubic cases of that principle (arXiv:2501.19387); Bacik et al. conditionally compute p-adic zeros and simultaneous coprime zeros (DOI 10.4230/LIPIcs.STACS.2026.8). Luca–Ouaknine–Worrell conditionally decide unrestricted Skolem under strengthened Cramér and unconditionally obtain a density-one universal Skolem set (arXiv:2607.15510). Thus no unconditional *general* advance passes order four.
+
+**4. Integrality-guarded simulation.** Halava–Niskanen (DOI 10.1016/j.tcs.2024.114637) directly simulate Turing machines by `3×3` rational matrices and derive an undecidable special identity problem when every intermediate product is externally required to be integral. This is the requested valuation-style legality mechanism, but it is a global integer test, not an internal single-`p` condition, and therefore yields no ordinary matrix-semigroup mortality reduction.
+
+**5. Nonunimodular rational semigroups.** Diekert–Potapov–Semukhin (DOI 10.1137/22M1512612) decide Boolean emptiness for flat rational subsets of `GL₂(ℚ)` over `GL₂(ℤ)` and doubly-exponential membership for a specified singular extension; unrestricted alternation, intermediate `S`-arithmetic groups, scalar/vector reachability, and `3×3` analogues remain outside the theorem. No 2024–2026 Bruhat–Tits-tree or automatic-structure result closing those gaps was found.
+
+**Stored-reference corrections.**
+
+- `DPS24v6` is superseded bibliographically by the peer-reviewed *SIAM Journal on Computing* 53(6):1663–1708 (2024), DOI 10.1137/22M1512612; its mathematical scope is unchanged.
+- No other stored reference is superseded or corrected.
