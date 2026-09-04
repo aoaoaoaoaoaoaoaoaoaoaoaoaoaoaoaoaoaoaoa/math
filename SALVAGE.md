@@ -278,6 +278,7 @@ file owns the mathematical stock.
 | [`G3-S29`](#g3-s29-two-cut-collapse-and-exact-sandwich-carrier) | structure theorem and positive mechanism | five probes collapse every uniform double insertion to three kernel pairs; the sole central placement turns any genuine affine kernel pair into an exact raw-distinct address comparator | formalized | active |
 | [`G3-S30`](#g3-s30-explicit-sandwich-boundary-extinction) | uniform obstruction and complete family extinction | trigram filtering and a complete fourgram boundary catalogue kill the central sandwich in all 23 pump schemas and the odd family at every depth and in both orientations | audited exact independently replayable certificate | active |
 | [`G3-S31`](#g3-s31-explicit-common-wrapper-fivegram-extinction) | uniform obstruction and complete family extinction | conditional factor refinement through length five kills every arbitrary common-context fork in all 23 pump schemas and the odd family | audited exact independently replayable certificate | active |
+| [`G3-S32`](#g3-s32-contextual-factor-lattice-saturation) | exact-linear obstruction | each single base kernel relation contextually saturates the full augmentation lattice of factor counts at every width from two through six | audited exact independently replayable certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -11475,6 +11476,58 @@ or leave the local relation-window architecture.
 a bounded number of rewrite windows, or construct the first multi-window survivor. In the full
 kernel, search for a new boundary-compatible relation rather than another context around the
 known families.
+
+### G3-S32: Contextual factor-lattice saturation
+
+**Kind:** exact-linear obstruction
+
+**Evidence:** audited exact independently replayable certificate
+
+**Disposition:** active
+
+Fix one of the five base mixed-prime relations `U=V`. For `2≤r≤6`, let `Φᵣ(w)` count every
+overlapping length-`r` factor of `w`, and let
+
+```text
+Λᵣ(U,V)=span_Z { Φᵣ(P·U·Q)−Φᵣ(P·V·Q) : P,Q∈{D,T}* }.
+```
+
+Every move has coordinate sum zero. Conversely, exact Hermite-normal-form certificates give
+
+```text
+Λᵣ(U,V) = { z∈Z^(2^r) : Σz=0 }
+```
+
+for each base relation separately and every certified width. Deleting one coordinate identifies
+the right side with `Z^(2^r−1)`; the contextual move matrix has identity column HNF, hence index
+one, in all twenty-five cells. The ranks are `3,7,15,31,63`. Independent modular elimination
+over `F₂,F₃,F₅,F₇` reproduces every rank.
+
+Only the final `r−1` letters of `P` and first `r−1` letters of `Q` affect the move:
+internal context factors cancel. Enumerating all context words of lengths at most `r−1` is
+therefore exhaustive for arbitrary contexts, not a context-length cutoff.
+
+Equivalently, if an abelian-group-valued score assigns one weight to each length-`r` factor and
+is preserved by contextual applications of even one base relation, all weights are equal. The
+score is only a multiple of the total number of length-`r` factors. No nontrivial
+translation-invariant additive factor statistic at widths two through six descends to the
+five-rule quotient.
+
+**Scope:** one fixed factor width at a time, pure additive overlapping-factor scores, widths
+`2≤r≤6`, and invariance under arbitrary contextual uses. Mixed-width cancellation, nonlinear
+catalogue membership, positional or boundary state, factors of width at least seven, and
+nonlocal quotient structure remain outside the theorem.
+
+**Use:** retire additive short-factor linear invariants as a discriminator for the
+`G3-S31` multi-window survivor. Nonlinear fibre refinement succeeded in `G3-S31` precisely
+because it does not descend to a linear quotient statistic.
+
+**Artifact:**
+[`certify_mixed_prime_factor_lattice.py`](tools/certify_mixed_prime_factor_lattice.py) and
+[`m34-contextual-factor-lattice-saturation-2026-09-01.md`](audits/m34-contextual-factor-lattice-saturation-2026-09-01.md).
+
+**Next:** use stateful/nonlinear quotient invariants, a canonical normal-form transducer, or a
+new affine-kernel relation. Do not enlarge the factor radius without a structural reason.
 
 ### G3-O13: Rational serializer pumping
 

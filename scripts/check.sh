@@ -108,6 +108,7 @@ readonly PYTHON_CHECKERS=(
   tools/audit_prefix_algebra.py
   tools/audit_six_state_sandwich.py
   tools/certify_mixed_prime_completion.py
+  tools/certify_mixed_prime_factor_lattice.py
   tools/certify_mixed_prime_context_cuts.py
   tools/certify_mixed_prime_pumped_context.py
   tools/certify_mixed_prime_pump_families.py
@@ -130,6 +131,7 @@ uv run --script tools/audit_mixed_prime_fork.py self-check
 uv run --script tools/audit_mixed_prime_fork.py thin 3 100
 uv run --script tools/audit_six_state_sandwich.py
 uv run --script tools/certify_mixed_prime_completion.py
+uv run --script tools/certify_mixed_prime_factor_lattice.py
 uv run --script tools/certify_mixed_prime_context_cuts.py
 uv run --script tools/certify_mixed_prime_pumped_context.py
 uv run --script tools/certify_mixed_prime_pump_families.py

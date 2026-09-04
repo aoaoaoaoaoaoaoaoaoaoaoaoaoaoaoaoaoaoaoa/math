@@ -1369,6 +1369,15 @@ all `33,218` radius-five physical preimages and kills all `414` oriented wrapper
 one-context fork using any explicit infinite relation is now dead. The relation line must use a
 genuinely multi-window quotient derivation or a new affine-kernel relation.
 
+[`G3-S32`](SALVAGE.md#g3-s32-contextual-factor-lattice-saturation) blocks the naive invariant
+attack on that multi-window quotient. For each of the five base relations separately and every
+factor width `2≤r≤6`, arbitrary contextual rewrite moves generate the entire augmentation
+lattice of `Φᵣ`. All twenty-five projected move matrices have identity Hermite normal form.
+Thus any additive score using one fixed short factor width and preserved by the quotient is only
+a multiple of total factor count, hence only length data here. The remaining quotient attack must be nonlinear, stateful,
+position-sensitive, use structurally justified longer memory, or leave the known relation
+geometry.
+
 [`G3-M02`](SALVAGE.md#g3-m02-square-root-punctuation-fracture) supplied a complete direct-mortality
 grammar. The source-uniform rational rank-two matrix `S` satisfies
 
