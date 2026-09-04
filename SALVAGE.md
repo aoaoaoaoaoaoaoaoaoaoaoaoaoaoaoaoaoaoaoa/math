@@ -24461,6 +24461,7 @@ prove that it discards this ray while preserving every genuine transporter.
 [`TransverseDilationOrbit.lean`](MatrixMortality/TransverseDilationOrbit.lean)
 and
 [`m34-proper-false-inverse-ray-2026-08-31.md`](audits/m34-proper-false-inverse-ray-2026-08-31.md).
+
 ### D2-M01: Benchmark critical shell
 
 **Kind:** partial mechanism
