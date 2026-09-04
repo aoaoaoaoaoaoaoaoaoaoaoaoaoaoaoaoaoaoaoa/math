@@ -781,6 +781,13 @@
 'MatrixMortality.MixedBranchingPersistentGuard.data_b_rank_rat' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.RankTwoRecompile.toggle_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RankTwoRecompile.dataB_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RankTwoRecompile.dataC_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RankTwoRecompile.separator_rank' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.RankTwoRecompile.coefficient_eq_zero_iff_paired' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.GuardedTwoStateLift.wordProduct_mulVec_column' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]

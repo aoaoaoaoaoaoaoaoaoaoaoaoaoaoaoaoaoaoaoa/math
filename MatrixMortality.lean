@@ -192,6 +192,7 @@ import MatrixMortality.AffineRecognizer
 import MatrixMortality.BranchingRecognizer
 import MatrixMortality.MixedBranchingRecognizer
 import MatrixMortality.MixedBranchingPersistentGuard
+import MatrixMortality.RankTwoRecompile
 import MatrixMortality.GuardedTwoStateLift
 import MatrixMortality.GuardedMixedPrimeBridge
 import MatrixMortality.GuardedMixedPrimeFork
