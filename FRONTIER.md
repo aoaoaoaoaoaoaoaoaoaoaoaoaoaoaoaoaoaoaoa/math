@@ -1506,7 +1506,6 @@ depths equally. Equality with different later tails forces their difference into
 positive-depth cross-prime gap. The live cut is the intersection of this exact shell with pairs
 of suffix carriers reachable from the encoded entry, or an explicit branch-switch cascade
 realizing it.
-
 The swapped ternary first multi-transfer branch is no longer unrestricted.
 [`MM-S35`](SALVAGE.md#mm-s35-first-multi-transfer-trichotomy) proves that every expected-shell
 pole after the first transfer passes through one of three exact role shapes: `cc` into a
@@ -1561,7 +1560,6 @@ therefore begin at genuinely multi-transfer carriers, not at another refinement 
 one-transfer fringe candidates. The separate distinguished-boundary singleton `β`-shell is now
 formally closed by `MM-S08`; the later `D_c^(β+1)` singleton branch remains a different carrier
 and is handled algebraically in `MM-S50`.
-
 [`MM-S51`](SALVAGE.md#mm-s51-double-deletion-ratio-chamber-extinction) kills that final
 survivor without an integral fringe splice. The exact `D_c²` discrepancy and the full incoming
 upper cylinder force any following physical pole to have target ratio
@@ -1723,6 +1721,101 @@ first non-`D_c` block grammar does not finish the argument. The empty arm has
 erasure targets survive the exact local shell equations. The nonempty arm requires a
 higher-prefix ancestry invariant.
 
+[`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) makes the empty-arm obstruction
+uniform. Every length-`β` erasure target has an exact body-independent local backward ray
+through `D_b;D_c;D_c`; the scale depths are `β+1,1,0`, and the initial cylinder contains
+`3^(2β)`. If the target ends in `b c^t`, its intermediate gap has exact depth `β+t+2`; the
+all-`c` target has depth `2β+1`. These are local backward projective rays only: `MM-O29` proves
+neither encoded-entry reachability nor a pole. Width-six diagnostics further show that both the
+maximum-coordinate and Farey heights can contract after an earlier block exits the initial
+shell multicone. Every observed Farey contraction occurs after `(R_c,D_b)` and before `D_c`,
+while all tested two-step windows expand; this is computational evidence for a finite-memory
+Lyapunov certificate, not a theorem. [`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse)
+now refutes its unrestricted form with an exact abstract width-six local carrier; any surviving
+two-step statement must use physical `MM-O29` target-code or reachability hypotheses.
+
+[`MM-S104`](SALVAGE.md#mm-s104-exact-deletion-c-contraction-chamber) isolates that failure exactly.
+For `H=5·3^β−1=2h`, `r=3^β−2`, `μ=2·3^β−1`, and a primitive positive carrier `d<n` with
+`q=n−d`, inverse `D_c` has raw magnitudes `a=Hrq` and `b=2rq+6μd`. Its exceptional
+normalization is
+
+```text
+gcd(a,b)=3H ↔ h∣n ∧ gcd(r,d)=1 ∧ gcd(q,3μ)=3,
+```
+
+and within that channel Farey height contracts exactly when `rq<3n`. The denominator ratio is
+`2μ/H−2q/(3n)`, with limiting factor `4/5−6/(5H)`. This proves the contraction mechanism, not
+its ancestry.
+
+[`MM-S87`](SALVAGE.md#mm-s87-empty-front-backward-chamber-cut) proves the first ancestry cut.
+Every physical empty-front seed lies above `H`; from any carrier on that ray, no physical block
+whose first role letter is `b` can enter the slope interval `(1,r/(r−3))`. Thus every contraction
+candidate is `c`-leading. The literal `(R_c,D_b)` branch against body `b c^(β−2)` also satisfies
+the quantitative label `(x−1)/x<1/(80ρ)` whenever `x>1`. The interval alone does not exclude
+longer `c`-leading blocks with that prefix.
+
+[`MM-S105`](SALVAGE.md#mm-s105-conditional-post-rcdb-no-reentry) proves the complete next-block cut
+after the literal canonical `(R_c,D_b);D_c` history. Its exact intercept bounds and affine
+automaton classify every next physical block as negative, below one, or above the `MM-S104`
+chamber ceiling. This does not force the canonical history. That strengthening is false already
+at width six: target `c^6`, body `bcbcc`, and `(R_c,D_b,D_b)` survive the full `3H` channel;
+longer modular-return survivors also occur. The canonical theorem supplies both sides of the
+intercept window; its lower bound cannot be generalized without further arithmetic.
+
+[`MM-S106`](SALVAGE.md#mm-s106-primitive-physical-pullback-cancellation) isolates the exact
+normalization seam for that classification. For incoming natural coordinates `(n,d)`, raw
+half-head divisibility is equivalent to `h/gcd(h,n)∣P`; after writing the raw numerator as `h·s`,
+the whole `h` survives primitive reduction exactly when
+`gcd(h, rawDenominator/gcd(s,rawDenominator))=1`. The upper target code also has explicit affine
+append recurrences, with `b` fixing residue one modulo `h`. The live task is now to instantiate
+these criteria on the polynomial `MM-O29` seed and then combine them with physical spelling; the
+generic arithmetic theorem alone asserts no grammar, ancestry, or pole.
+
+[`MM-S92`](SALVAGE.md#mm-s92-primitive-empty-front-seed-adapter) performs that instantiation.
+For the natural physical target code `U`, the positive empty-front seed reduces from
+`(2HB+C,2B)` by `g₀=gcd(C,2B)`. Its entire half-head content is controlled by
+`d=gcd(h,2(U−4))`: Lean proves `gcd(h,g₀)=d` and `gcd(h,N)∣d`, hence every raw channel satisfies
+`h/d∣P`. The primitive numerator is not uniformly coprime to `h`, so the exact S89
+post-cancellation criterion remains essential. The live node is now physical `c`-leading
+spelling plus that residual-denominator criterion, not further algebraic reconstruction of the
+seed.
+
+[`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse) forbids replacing the remaining
+grammar by a universal two-step Farey weight. Its explicit width-six seed lies above `H`, pulls
+back through the canonical `(R_c,D_b)` block into the exact `3H` channel, and then contracts
+again under `D_c`; both individual steps and their composite lower Farey height. The witness is
+neither proved to be an `MM-O29` seed nor reachable nor a pole. Thus it kills only the abstract
+local monotonicity claim, while confirming that the physical target-code restriction in `MM-S92`
+is indispensable.
+
+[`MM-S93`](SALVAGE.md#mm-s93-universal-contraction-chamber-entry-gap) completes the physical
+Archimedean entry classification. For every compiler body of length at least `β−1` beginning in
+`b`, any nonempty physical block taking any carrier `X>H` into `(1,r/(r−3))` has equal physical
+spelling lengths and
+
+```text
+ε=(x−1)/x < 1/(80ρ).
+```
+
+After the following singleton `D_c`, its exact boundary intercept satisfies
+`0<Ξ<8·3^(β−6)/5`. This replaces the canonical upper-gap estimate by a uniform theorem, but
+does not by itself supply the two-sided window used by `MM-S105`.
+
+[`MM-S99`](SALVAGE.md#mm-s99-sharp-post-contraction-successor-frontier) extracts the exact common
+prefix code `45ρ−5`, improving the bound to `ε<1/(90ρ−10)`. The resulting intercept satisfies
+the full `MM-S105` affine upper ceiling: `Ξ<2−H/(9ρ−1)` at width six and
+`Ξ<14Q/9−H/(9ρ−1)` thereafter. Running one arbitrary next physical block now kills every
+`c`-leading branch and every `b`-leading branch except
+
+```text
+V < Q A,
+```
+
+plus the width-six critical rule-`b` chamber `14A≤9V`, `3V<5A`. A blanket lower intercept
+bound is false: the exact-channel family suggested by `body=b c b^(β−3)`, target `c^β`, and
+block `R_c D_b^(β−2)` has computational `Ξ/Q→0.9`. The live contraction node is therefore the
+short-lower spelling itself, to be intersected with `MM-S104` normalization and `MM-S92` target
+support; the second residual is a width-six arithmetic calculation.
 The remaining ternary obligation is now the **nonzero history-defect branch** of the global
 earliest-pole reduction. In the normalized coordinate `δ=D/y`, the complete physical recurrence
 is
@@ -1743,7 +1836,8 @@ erasure tile, not `β` of them. A complete proof must either force the long tail
 false pole or extend the carry/cylinder invariant to arbitrary physical target suffixes. Fixed
 residue and unit projections are empirically saturated, and the exact carry window grows with
 carrier height. None of `MM-S51`, `MM-S55`, `MM-S57`, `MM-S59`, `MM-S61`, `MM-S63`, `MM-S64`,
-`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, or `MM-S76` alone proves projective avoidance.
+`MM-S68`, `MM-S69`, `MM-S71`, `MM-O27`, `MM-S73`, `MM-S76`, `MM-O29`, `MM-O30`, `MM-S104`, `MM-S87`, `MM-S105`, `MM-S106`, `MM-S92`, `MM-S93`, or `MM-S99`
+alone proves projective avoidance.
 Exact bidirectional diagnostics for the ternary swap at `β=3`, body `bbcc`, exclude every
 false-pole word of at most six projective blocks when each regular block has
 role length at most three; this is computational evidence only.

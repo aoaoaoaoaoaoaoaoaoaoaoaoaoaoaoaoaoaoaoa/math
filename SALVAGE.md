@@ -200,6 +200,15 @@ file owns the mathematical stock.
 | [`MM-S101`](#mm-s101-long-r_c-peeled-head-support-gate) | structure theorem and obstruction | every long `R_c` pole forces gap support through `H−10μ`; the `cb` head is exactly saturated, while the `cc` head exposes the fringe residue `18F−35` | formalized | active |
 | [`MM-S102`](#mm-s102-long-double-c-relative-gap-resonance) | structure theorem and obstruction | every long `cc` pole forces `q_β∣Vq_s` for one `1≤s≤β−1`; every absent ambient prime is confined to a smaller-gap decimal-period resonance | formalized | active |
 | [`MM-S103`](#mm-s103-long-terminal-head-collapse-extinction) | obstruction | the support-saturated long `cb` three-block equation collapses exactly to the already-impossible two-block singleton equation, so the entire chamber is empty | formalized | active |
+| [`MM-O29`](#mm-o29-uniform-empty-front-local-rays) | obstruction | every empty-front erasure target admits an exact local `D_b;D_c;D_c` backward ray with the required shells and predecessor cylinder | formalized | active |
+| [`MM-S104`](#mm-s104-exact-deletion-c-contraction-chamber) | structure theorem and obstruction | singleton `D_c` contracts Farey height exactly in one primitive gcd channel with a sharp gap inequality | formalized | active |
+| [`MM-S87`](#mm-s87-empty-front-backward-chamber-cut) | structure theorem and obstruction | no `b`-leading physical block can pull an empty-front seed into the deletion-contraction chamber; the canonical `R_c;D_b` branch has a sharp near-diagonal gap | formalized | active |
+| [`MM-S105`](#mm-s105-conditional-post-rcdb-no-reentry) | structure theorem and obstruction | after the literal canonical `R_c;D_b;D_c` history, an exact two-state affine automaton sends every next physical block outside the deletion-contraction chamber | formalized | active |
+| [`MM-S106`](#mm-s106-primitive-physical-pullback-cancellation) | structure theorem and obstruction | exact gcd arithmetic decides when raw half-head divisibility survives primitive inverse-block normalization | formalized | active |
+| [`MM-S92`](#mm-s92-primitive-empty-front-seed-adapter) | structure theorem and obstruction | physical empty-front seeds have exact primitive positive coordinates whose half-head content is supported on one target-code gcd | formalized | active |
+| [`MM-O30`](#mm-o30-primitive-normalization-collapse) | obstruction | an abstract canonical width-six local carrier contracts Farey height on both adjacent inverse steps and across their complete window | formalized | active |
+| [`MM-S93`](#mm-s93-universal-contraction-chamber-entry-gap) | structure theorem and obstruction | every compiler-emitted physical block entering the deletion-contraction chamber from above the terminal ray has relative gap below `1/(80ρ)` and a uniformly bounded post-`D_c` intercept | formalized | active |
+| [`MM-S99`](#mm-s99-sharp-post-contraction-successor-frontier) | structure theorem and obstruction | the exact common-prefix gap and affine ceiling reduce every post-contraction successor to the short-lower spelling chamber or one width-six critical prefix | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -6153,6 +6162,647 @@ restriction remains independent.
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
+### MM-O29: Uniform empty-front local rays
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `β≥3`, let `letters` be any tag word of length `β`, and set
+
+```text
+U=signedSwappedCode(tagEncode β letters ++ [true]),
+P=3^β(U+1)−1,       V=3^β−1.
+```
+
+The exact projective target pair `(P,V)` has a body-independent backward pullback through
+`D_b;D_c;D_c`. Its displayed forward scales have three-adic depths `β+1`, `1`, and `0`;
+after those forced powers are removed, the displayed coordinates are three-adic units. Primitive
+reduction can therefore cancel only three-adic-unit common factors, preserving the depths. If
+`H=5·3^β−1`, `R=2−3^β`, `s=3^(β−1)`, and
+
+```text
+Q=45s³U−75s²U+36sU−4U−36s²+18s−2,
+```
+
+then the intermediate gap and the initial predecessor cylinder are
+
+```text
+d₀−n₀=−3^βHQ,
+C_b=3^(2β)(−2H²RQ).
+```
+
+The terminal run of `c` letters gives the complete valuation law. For `letters=c^β`,
+`v₃(d₀−n₀)=2β+1`; for `letters=stem·b·c^t`,
+`v₃(d₀−n₀)=β+t+2`. Hence all `2^β` empty-front targets survive the exact local shell and
+cylinder equations uniformly, not merely at width three.
+
+**Scope:** these are local backward projective rays only. The construction starts at the target
+ratio and does not prove that the encoded entry reaches any displayed carrier. It does not prove
+that any displayed carrier is a pole. It therefore proves neither a counterexample to the setter
+nor `M₅(3)`.
+
+Exact width-six diagnostics also reject the two natural global height extrapolations. Both
+`max(|n|,|d|)` and `max(|n|,|d|,|d−n|)` can contract after the initial shell multicone is exited.
+This is computational evidence only; no separate obstruction theorem is claimed.
+
+**Use:** remove the empty-front arm from every block-local extinction strategy. A closing
+argument must couple the ray to forward encoded-entry reachability, retain enough history for a
+multicone or multi-step weight, or use ancestry before the three-block window. The generic
+target-suffix seam remains independent.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterEmptyFrontRay.lean`](MatrixMortality/SwappedSetterEmptyFrontRay.lean),
+through `exists_emptyFrontLocalRay`, `emptyTarget_gapCore_padicValInt_cases`, and
+`emptyTarget_antecedentGap_padicValInt_cases`.
+
+**Artifact:**
+[`audits/m53-empty-front-local-rays-2026-09-01.md`](audits/m53-empty-front-local-rays-2026-09-01.md).
+
+**Next:** decide whether any ray meets the encoded-entry orbit before the `D_b` block, using
+history-sensitive geometry rather than a universal one-step norm. Attack the nonempty target
+front and arbitrary-target-suffix obligations independently.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S104: Exact deletion-C contraction chamber
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix `β≥2` and write
+
+```text
+H=5·3^β−1=2h,       r=3^β−2,       μ=2·3^β−1.
+```
+
+For a primitive carrier `0<d<n`, put `q=n−d`. The sign-normalized adjugate pullback through a
+singleton `D_c` has raw positive coordinates
+
+```text
+a=Hrq,       b=2(rn+Hd)=2rq+6μd.
+```
+
+Lean proves that this pair has the exceptional common factor observed in the width-six search
+exactly when
+
+```text
+gcd(a,b)=3H
+  ↔ h∣n ∧ gcd(r,d)=1 ∧ gcd(q,3μ)=3.                  (1)
+```
+
+The use of `3μ`, rather than `6μ`, is essential at odd widths: the single factor two in `H` then
+absorbs the even part of `q`. The module also proves that `(-a,-b)` is the exact adjugate
+preimage under the existing carrier recurrence; one forward `D_c` restores `(n,d)` multiplied
+by the determinant `−6HRμ`.
+
+In channel (1), primitive normalization divides both raw coordinates by `3H`. For the Farey
+height
+
+```text
+F(n,d)=max(n,d,|n−d|),
+```
+
+the inverse step contracts exactly when
+
+```text
+F(a/(3H),b/(3H)) < F(n,d)  ↔  rq < 3n.             (2)
+```
+
+The denominator coordinate has the exact normalized ratio
+
+```text
+b/(3Hn)=2μ/H−2q/(3n),
+```
+
+and the limiting factor satisfies
+
+```text
+2μ/H = 4/5−6/(5H) < 4/5.
+```
+
+**Scope:** `β≥2`, primitive nonnegative coordinates with `0<d<n`, and one inverse singleton
+`D_c`. The theorem classifies the exact `3H` normalization channel and its height behavior. It
+does not prove that a given backward ancestry enters the channel, that only `(R_c,D_b)` can
+enter it, or that any two-step weight is monotone.
+
+**Use:** replace the computational Farey-contraction observation in `MM-O29` by an exact target.
+A global proof need only prevent earlier blocks from producing (1) together with `rq<3n`, or
+pair every such entry with a compensating adjacent transition. Universal one-step Farey
+monotonicity is impossible on this chamber.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterDeletionCContraction.lean`](MatrixMortality/SwappedSetterDeletionCContraction.lean),
+through `deletionC_rawAdjugate_forward`, `deletionC_gcd_eq_three_mul_head_iff`,
+`deletionC_fareyHeight_contracts_iff_channel`, and `deletionC_denominator_ratio`.
+
+**Artifact:**
+[`audits/m53-deletion-c-contraction-2026-09-01.md`](audits/m53-deletion-c-contraction-2026-09-01.md).
+
+**Next:** classify which physical predecessor blocks can place an `MM-O29` carrier in (1), then
+prove a finite-memory two-step height inequality or exclude that entry channel by exact prefix
+ancestry.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S87: Empty-front backward chamber cut
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Write `ρ=3^β`, `H=5ρ−1`, and `r=ρ−2`. Every physical empty-front target of width `β≥2`
+supplies an `MM-O29` antecedent `X` satisfying the strict Archimedean bound
+
+```text
+H < X.
+```
+
+For an arbitrary physical block with punctuated upper code `P`, lower code `V`, and upper
+power `A`, its inverse action above this ray is
+
+```text
+f(X) = (P−cA)/V,
+c = Hμ/(H+rX),
+0 < c < 3.                                             (1)
+```
+
+At every width `β≥6`, a physical block whose first role letter is `b` cannot land in the
+singleton-`D_c` contraction interval:
+
+```text
+¬(1 < f(X) < r/(r−3)).                                (2)
+```
+
+The proof exhausts the exact lower-versus-upper spelling lengths. A shorter lower spelling and
+an equal-length `R_b` prefix place `f(X)` above `r/(r−3)`; a longer lower spelling and an
+equal-length erasure prefix place it below one. Hence any physical predecessor entering the
+`MM-S104` slope chamber must be `c`-leading.
+
+For the canonical body `b c^(β−2)` and literal block `(R_c,D_b)`, Lean also proves
+
+```text
+P = 45ρ²−4ρ−1,
+2V = 90ρ²−9ρ+7,
+A = 27ρ.
+```
+
+Whenever this pullback remains above one, its near-diagonal coordinate obeys
+
+```text
+(f(X)−1)/f(X) < 1/(80ρ).                              (3)
+```
+
+**Scope:** (2) excludes only first role letter `b`; it does not prove that a chamber-entering
+`c`-leading block is exactly `(R_c,D_b)`. Equation (3) is conditional on the literal block and
+canonical body. These results prove neither forward reachability from the encoded entry nor a
+target pole, and they do not establish a universal one- or two-step Lyapunov function.
+
+**Use:** combine (2) with the exact `MM-S104` gcd channel before analyzing any contraction.
+Equation (3) supplies a history-sensitive quantitative label for the observed exceptional
+`(R_c,D_b);D_c` transition without asserting that every chamber ancestor has that form.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterEmptyFrontChamber.lean`](MatrixMortality/SwappedSetterEmptyFrontChamber.lean),
+through `physicalEmptyFrontSeed_above_terminal`,
+`bLeading_physicalBackwardBlock_avoids_deletionCChamber`, the three canonical code formulas,
+`canonicalRcDbBackward_epsilon_lt`, and `deletionCSuccessorSlope_eq`.
+
+**Artifact:**
+[`audits/m53-empty-front-backward-chamber-2026-09-01.md`](audits/m53-empty-front-backward-chamber-2026-09-01.md).
+
+**Next:** pull the `MM-S104` divisibility channel backward through a `c`-leading physical block.
+The interval alone permits longer blocks with prefix `(R_c,D_b)`; exact-block classification
+must use the `3H` gcd channel rather than an Archimedean code bound.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S105: Conditional post-RcDb no-reentry
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix width `β≥6`, put `ρ=3^β`, `r=ρ−2`, `H=5ρ−1`, `μ=2ρ−1`, and
+`Q=3^(β−6)`. Every physical empty-front `MM-O29` seed `c` satisfies
+
+```text
+c > 8ρ².
+```
+
+Pull `c` backward through the literal canonical block `(R_c,D_b)`, then through singleton
+`D_c`. The resulting boundary intercept `Ξ` has an exact closed rational form. Lean proves
+
+```text
+6Q/5 < Ξ,
+β=6  →  Ξ < 2−H/(9ρ−1),
+β≥7  →  Ξ < 14Q/9−H/(9ρ−1).                 (1)
+```
+
+For every subsequent physical block, its backward numerator is generated exactly by the affine
+automaton
+
+```text
+b : X ↦ 9ρX+H,
+c : X ↦ 3X−r.                               (2)
+```
+
+A `c`-leading block enters the invariant cone `X<−1`, hence has negative backward slope. For a
+`b`-leading block, the lower spelling length relative to the upper length and the shift `β−6`
+gives three cases. Short lower words lie below `QA`; words at least two places longer lie above
+`3QA`; at the critical length, `D_b` begins with swapped digit `2`, while `R_b` begins with
+digits `112`. Combining these exact ternary cylinders with (1) yields
+
+```text
+β=6  →  slope<1 or 51/50<slope,
+β≥7  →  slope<1 or 6/5<slope.                (3)
+```
+
+Both positive gaps lie above the `MM-S104` chamber ceiling `r/(r−3)`. Thus no next physical
+block re-enters the singleton-`D_c` contraction chamber after this literal history.
+
+**Scope:** this is a conditional successor theorem, not an exact-block forcing theorem. Such
+forcing is false already at width six: target `c^6`, body `bcbcc`, and block
+`(R_c,D_b,D_b)` give a lawful local `MM-S104` contraction survivor in the full `3H` channel.
+Further equal-spelling and modular-return survivors occur beyond the canonical branch. The
+theorem proves neither encoded-entry reachability nor that any local carrier is a pole.
+
+**Use:** delete every continuation whose contraction ancestry is known independently to be the
+literal canonical `(R_c,D_b);D_c` branch. Reuse the affine automaton from any other branch only
+after proving the appropriate intercept bounds; no family-wide bound is inferred here.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterPostRcDbAutomaton.lean`](MatrixMortality/SwappedSetterPostRcDbAutomaton.lean)
+and
+[`MatrixMortality/SwappedSetterPostRcDbChamber.lean`](MatrixMortality/SwappedSetterPostRcDbChamber.lean),
+through `postRcDbIntercept_eq_closed_of_seed`, `postRcDbIntercept_upper`,
+`carriedUpper_eq_walkIntercept`, `bLeading_postRcDbPhysicalSlope_classification`, and
+`physicalEmptyTarget_postRcDb_avoids_deletionCChamber`.
+
+**Artifact:**
+[`audits/m53-post-rcdb-chamber-2026-09-01.md`](audits/m53-post-rcdb-chamber-2026-09-01.md).
+
+**Next:** classify the noncanonical full-`3H` contraction survivors by their exact intercept
+shift. The next global cut must cover the `(R_c,D_b^k)` equal-spelling families and the longer
+modular-return branch; canonical no-reentry alone cannot close the ancestry tree.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S106: Primitive physical pullback cancellation
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For positive natural incoming coordinates `(n,d)`, a physical inverse block with punctuated upper
+code `P`, lower code `V`, and upper power `A` has raw pair
+
+```text
+T=rn+Hd,
+Nraw=PT−HμAd,
+Draw=VT.
+```
+
+The formula is proved directly from the rational inverse action whenever the displayed natural
+subtraction is genuine. Modulo the half-head `h=H/2`,
+
+```text
+Nraw ≡ Prn  (mod h).
+```
+
+Since `gcd(h,r)=1`, this gives the exact incoming-numerator channel
+
+```text
+h∣Nraw ↔ h/gcd(h,n) ∣ P.                       (1)
+```
+
+Raw divisibility is not enough after primitive reduction. If `Nraw=h·s`, Lean factors
+
+```text
+gcd(hs,Draw)=gcd(s,Draw)·gcd(h,Draw/gcd(s,Draw))
+```
+
+and proves the sharp survival criterion
+
+```text
+h ∣ Nraw/gcd(Nraw,Draw)
+  ↔ gcd(h,Draw/gcd(s,Draw))=1.                  (2)
+```
+
+The module also exposes the target upper-code recurrence
+
+```text
+c : Z ↦ 3Z+1,
+b : Z ↦ 9·3^β Z + 6·3^β−2,
+```
+
+and proves that the `b` step fixes residue one modulo `h`.
+
+**Scope:** positive natural coordinates and a genuine raw subtraction. Equations (1) and (2)
+are arithmetic criteria for a supplied block; they do not prove that its codes are physical,
+classify `c`-leading words, instantiate an `MM-O29` seed, establish encoded-entry reachability,
+or prove a pole.
+
+**Use:** pull the `MM-S104` half-head condition backward without discarding the normalization gcd.
+Any proposed exact-block classification must satisfy both (1) and (2), not raw congruence alone.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterPrimitivePullback.lean`](MatrixMortality/SwappedSetterPrimitivePullback.lean),
+through `deletionCHalfHead_dvd_pullbackRawNumerator_iff`,
+`halfHead_dvd_primitiveNumerator_iff`, and
+`deletionCHalfHead_dvd_primitivePullback_iff`.
+
+**Artifact:**
+[`audits/m53-primitive-pullback-2026-09-01.md`](audits/m53-primitive-pullback-2026-09-01.md).
+
+**Next:** normalize the public empty-front seed cores to a primitive pair and express
+`gcd(h,n)` directly in the physical target code. Then combine (2) with the `c`-leading spelling
+grammar; do not replace post-cancellation survival by raw divisibility.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S92: Primitive empty-front seed adapter
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let `U` be the natural swapped ternary code of a physical empty target, let `s=3^(β−1)`, and
+write `B=B(s,U)` and `C=C(s,U)` for the two positive polynomial cores exposed by `MM-S87`.
+With `H=5·3^β−1=2h`, the signed `MM-O29` antecedent has the positive ratio
+
+```text
+X=(2HB+C)/(2B).
+```
+
+Its exact normalization data are
+
+```text
+g₀=gcd(C,2B)=gcd(2HB+C,2B),
+N=(2HB+C)/g₀,
+D=2B/g₀,
+gcd(N,D)=1,
+X=N/D.                                           (1)
+```
+
+The seed polynomials satisfy two independent integral identities. Eliminating their unit
+coefficients modulo `h` yields
+
+```text
+d = gcd(h,2(U−4)),
+gcd(h,B)=gcd(h,C)=gcd(h,g₀)=d,
+gcd(h,N) ∣ d.                                    (2)
+```
+
+Thus the exact raw criterion from `MM-S106` has the target-code consequence
+
+```text
+h ∣ Nraw  →  h/d ∣ P.                            (3)
+```
+
+Lean also instantiates both exact equivalences, without abbreviating away the target code:
+
+```text
+h∣Nraw ↔ h/gcd(h,N)∣P,
+h∣primitive(Nraw,Draw)
+  ↔ gcd(h,Draw/gcd(Nraw/h,Draw))=1.               (4)
+```
+
+The physical target lower bound supplies positivity of `B` and `C`; no sign assumption is hidden
+in (1). The second equivalence retains the explicit hypothesis `Nraw=h·residual`.
+
+**Scope:** physical empty-target codes and one supplied positive-natural inverse block with a
+genuine subtraction. Equations (2) and (3) are support and divisibility bounds, not an equality
+formula for `gcd(h,N)`. The record neither classifies `c`-leading spellings, proves a local ray
+reachable from the encoded entry, nor proves a pole.
+
+**Use:** replace the opaque incoming numerator in the `MM-S106` channel by the exact `MM-O29`
+target code. Any surviving block must pass the target modulus (3) and the residual-denominator
+test (4).
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterPrimitiveSeedAdapter.lean`](MatrixMortality/SwappedSetterPrimitiveSeedAdapter.lean),
+through `emptyFrontSeed_primitiveCoordinates`, `emptyFrontSeed_core_halfHead_gcds`,
+`emptyFrontSeed_pullbackRaw_targetModulus_dvd`, and
+`emptyFrontSeed_primitivePullback_halfHead_iff`.
+
+**Artifact:**
+[`audits/m53-primitive-seed-adapter-2026-09-01.md`](audits/m53-primitive-seed-adapter-2026-09-01.md).
+
+**Next:** combine the target modulus and residual-denominator criterion with the exact first
+`R_c` lower spelling. A proof that uses only raw divisibility still omits the decisive primitive
+cancellation seam.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-O30: Primitive normalization collapse
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+At width six, take the canonical body `b c⁴`, block `(R_c,D_b)`, and the explicit local seed
+
+```text
+(n₀,d₀)=(1915861521737,27626).
+```
+
+It lies above the terminal ray. The exact inverse canonical adjugate has content
+
+```text
+g=166177436936869872
+```
+
+and primitive sign-normalized carrier
+
+```text
+(n₁,d₁)=(200420,200417).
+```
+
+The existing forward recurrence restores `(n₀,d₀)` with nonzero scale `−10932`, so this is not
+a free-standing numerical ratio coincidence. The carrier `(n₁,d₁)` satisfies the complete
+`MM-S104` channel:
+
+```text
+h∣n₁,
+gcd(r,d₁)=1,
+gcd(n₁−d₁,3μ)=3,
+gcd(D_c^raw(n₁,d₁))=3H.
+```
+
+After division by `3H`, its singleton-`D_c` pullback is
+
+```text
+(n₂,d₂)=(727,160268).
+```
+
+Lean verifies all three strict inequalities
+
+```text
+F(n₁,d₁)<F(n₀,d₀),
+F(n₂,d₂)<F(n₁,d₁),
+F(n₂,d₂)<F(n₀,d₀).
+```
+
+**Scope:** this is an abstract local width-six carrier. It is not proved to arise from an
+`MM-O29` physical empty target, to be reachable from the encoded entry, or to be a pole. It
+refutes universal one- and two-step Farey monotonicity under only the canonical-block,
+above-terminal, and exact-channel hypotheses; it does not refute a theorem using the `MM-S92`
+target-code restriction or global ancestry.
+
+**Use:** reject any closure proof that assigns every `MM-S104` contraction to a preceding
+canonical Farey expansion without retaining normalization content or physical target data.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterNormalizationCollapse.lean`](MatrixMortality/SwappedSetterNormalizationCollapse.lean),
+through `exists_normalizationCollapseWitness`.
+
+**Artifact:**
+[`audits/m53-normalization-collapse-2026-09-01.md`](audits/m53-normalization-collapse-2026-09-01.md).
+
+**Next:** keep the `MM-S92` target modulus and post-cancellation gcd in any multistep weight.
+Determine whether those physical restrictions exclude this collapse mechanism or merely thin it.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S93: Universal contraction-chamber entry gap
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Fix `β≥6`, put `ρ=3^β`, `r=ρ−2`, `H=5ρ−1`, `μ=2ρ−1`, and
+`Q=3^(β−6)`. Let a nonempty compiler-emitted physical role block pull any carrier `X>H`
+backward to `x` in the `MM-S104` slope chamber
+
+```text
+1 < x < r/(r−3).
+```
+
+For every compiler body of length at least `β−1` beginning in `b`, Lean proves
+
+```text
+ε=(x−1)/x < 1/(80ρ).                              (1)
+```
+
+The proof first excludes unequal physical spelling lengths: a shorter lower word puts `x` above
+`7/5`, while a longer lower word puts it below one. `MM-S87` excludes a `b`-leading block. Equal
+length then excludes erasure-`c` and rule-`c` followed by `c`; the surviving rule-`c`, `b` prefix
+has swapped upper code above `40ρ`. The equal-length ternary spread bound gives (1).
+
+Define the boundary intercept after the subsequent singleton `D_c` by
+
+```text
+Ξ = μr²ε / [6μ+(r²+2r−6μ)ε].
+```
+
+Lean identifies this closed expression with the exact boundary coordinate of the
+post-`D_c` carrier and proves
+
+```text
+0 < Ξ < 8Q/5.                                      (2)
+```
+
+**Scope:** (1) and (2) classify a local physical chamber entry. They assume only `X>H`, the
+compiler body envelope, and the chamber inequalities; they do not assume an `MM-O29` seed or
+the `MM-S104` primitive `3H` gcd channel. They prove neither encoded-entry reachability,
+existence of a chamber entry, post-contraction no-reentry, nor a pole.
+
+**Use:** replace the literal `(R_c,D_b)` gap estimate in `MM-S87` by a uniform estimate for every
+physical chamber entrant. Equation (2) confines every resulting successor problem to one
+quotient-scaled intercept window. The missing lower intercept bound must use the exact `3H`
+normalization channel or the target-code restrictions from `MM-S92`; positivity alone does not
+reproduce the `MM-S105` no-reentry argument.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterUniversalEntryGap.lean`](MatrixMortality/SwappedSetterUniversalEntryGap.lean),
+through `postDeletionCIntercept_eq_carrierBoundary`,
+`postDeletionCIntercept_pos_lt_eight_fifths`,
+`physicalBackwardBlock_chamber_epsilon_lt`, and
+`physicalBackwardBlock_postDeletionCIntercept_bound`.
+
+**Artifact:**
+[`audits/m53-universal-entry-gap-2026-09-01.md`](audits/m53-universal-entry-gap-2026-09-01.md).
+
+**Next:** apply `MM-S99`, which sharpens the common-prefix constant and consumes the affine
+successor automaton. The remaining lower-spelling chambers require arithmetic rather than a
+blanket lower intercept estimate.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S99: Sharp post-contraction successor frontier
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The equal-length physical entrant isolated by `MM-S93` has rule `c` followed by a `b`-letter
+tile. Its exact common swapped prefix has code `45ρ−5`, so the ternary suffix-spread estimate
+sharpens the relative gap to
+
+```text
+ε=(x−1)/x < 1/(90ρ−10).                           (1)
+```
+
+The post-`D_c` intercept is strictly increasing in positive `ε`. Substitution of the endpoint
+in (1) yields precisely the affine ceilings required by the `MM-S105` next-block automaton:
+
+```text
+β=6:  Ξ < 2−H/(9ρ−1),
+β≥7:  Ξ < 14Q/9−H/(9ρ−1),     Q=3^(β−6).       (2)
+```
+
+Lean then classifies an arbitrary further physical block. Every `c`-leading successor has
+negative slope. For `β≥7`, every `b`-leading successor lies below one unless
+
+```text
+V < Q A,                                             (3)
+```
+
+where `V` is its lower code and `A` its upper spelling power. At `β=6`, the only additional
+survivor is the critical rule-`b` prefix chamber
+
+```text
+14A ≤ 9V  and  3V < 5A.                           (4)
+```
+
+The composed theorem begins with any physical `MM-S93` chamber entrant, passes through singleton
+`D_c`, and returns exactly the survivors (3) and (4); it has no canonical-block hypothesis.
+
+**Scope:** this is a local two-transition frontier. It assumes the first carrier lies above `H`
+and enters the slope chamber, but not the primitive `3H` normalization channel. It proves no
+encoded-entry reachability, existence of a chamber entry, pole, or global no-reentry theorem.
+
+**Use:** delete all post-contraction successor words except the short-lower spelling chamber and
+the width-six critical prefix. A universal `MM-S105`-strength lower bound for `Ξ` is false; the
+survivors must be cut by `MM-S104` normalization, `MM-S92` target support, or earlier-pole
+ancestry.
+
+**Formalization:**
+[`MatrixMortality/SwappedSetterUniversalEntryGap.lean`](MatrixMortality/SwappedSetterUniversalEntryGap.lean),
+through `physicalBackwardBlock_chamber_epsilon_lt_sharp`,
+`postDeletionCIntercept_upper_sharp`,
+`cLeading_postDeletionCPhysicalSlope_negative`,
+`bLeading_postDeletionCPhysicalSlope_frontier`, and
+`physicalBackwardBlock_postDeletionC_successor_frontier`.
+
+**Artifact:**
+[`audits/m53-sharp-successor-frontier-2026-09-01.md`](audits/m53-sharp-successor-frontier-2026-09-01.md).
+
+**Next:** intersect (3) and (4) with the exact primitive `3H` channel. The short-lower branch is
+the sole uniform-width successor node; (4) is a finite-width arithmetic residue problem.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 ### MM-S30: Separated residue-eight drainage
 
 **Kind:** halting theorem

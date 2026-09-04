@@ -1863,6 +1863,15 @@ The setter-projective audit now also exposes a kernel-friendly carry theorem:
 | [`MM-O27`](SALVAGE.md#mm-o27-reachable-predecessor-cylinder) | exact width-three ordinary-reset orbit, primitive normalizations, nonzero full-gap successor, and a reachable non-`D_c` predecessor-cylinder witness |
 | [`MM-S73`](SALVAGE.md#mm-s73-live-three-block-charge-frontier) | exact predecessor-cylinder preimage, derived three-block live-prefix certificate, literal matched-tail suffix carry, and nonzero charge transport through both singleton `D_c` resonances |
 | [`MM-S76`](SALVAGE.md#mm-s76-primitive-target-multiplier-braid) | unique primitive target multiplier, literal prefix-discrepancy braid, unit transfer, and the two-arm first-mismatch residue pullback to the initial cylinder |
+| [`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) | uniform local `D_b;D_c;D_c` backward rays for every empty-front erasure target, exact shell and cylinder formulas, and complete terminal-`c` gap valuation law |
+| [`MM-S104`](SALVAGE.md#mm-s104-exact-deletion-c-contraction-chamber) | exact singleton-`D_c` adjugate, primitive `3H` gcd channel, sharp Farey-contraction inequality, and limiting ratio |
+| [`MM-S87`](SALVAGE.md#mm-s87-empty-front-backward-chamber-cut) | empty-front seeds lie above `H`, no `b`-leading physical predecessor enters the contraction interval, and the canonical `(R_c,D_b)` pullback has gap below `1/(80ρ)` |
+| [`MM-S105`](SALVAGE.md#mm-s105-conditional-post-rcdb-no-reentry) | exact canonical post-`D_c` intercept bounds, affine next-block automaton, and total physical no-reentry after the literal `(R_c,D_b);D_c` history |
+| [`MM-S106`](SALVAGE.md#mm-s106-primitive-physical-pullback-cancellation) | exact raw inverse-block coordinates, half-head survival through primitive gcd cancellation, incoming-numerator modulus, and upper-code affine recurrence |
+| [`MM-S92`](SALVAGE.md#mm-s92-primitive-empty-front-seed-adapter) | exact positive primitive coordinates for every physical empty-front seed, target-code control of its half-head content, and instantiated raw and post-cancellation pullback criteria |
+| [`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse) | exact width-six local witness in which canonical `(R_c,D_b)` normalization and the following full-channel `D_c` step both contract Farey height |
+| [`MM-S93`](SALVAGE.md#mm-s93-universal-contraction-chamber-entry-gap) | equal-spelling chamber-entry classification, uniform relative-gap bound below `1/(80ρ)`, exact post-`D_c` boundary identity, and quotient-scaled intercept ceiling |
+| [`MM-S99`](SALVAGE.md#mm-s99-sharp-post-contraction-successor-frontier) | exact `45ρ−5` common prefix, sharp `1/(90ρ−10)` gap, affine successor ceiling, and reduction to the short-lower and width-six critical prefix chambers |
 
 `MM-S08` is now discharged in
 [`SwappedSetterSingletonShell.lean`](MatrixMortality/SwappedSetterSingletonShell.lean).
@@ -2183,7 +2192,6 @@ multi-to-multi case. `peeledMultiToSingleton_beta_add_three_le` kills the `(β+1
 multi-to-singleton case. `peeledSingletonToSingleton_impossible` kills the `D_b`-to-singleton
 case without its preceding two-`c` hypothesis. The theorem does not assert that the ternary
 trichotomy classifies decimal orbits; longer generalized decimal carriers remain open.
-
 Record [`MM-S35`](SALVAGE.md#mm-s35-first-multi-transfer-trichotomy) returns to the swapped
 ternary candidate and formalizes the first genuinely multi-transfer cut. `upperLength_eq` counts
 one symbol per role and one extra block of `β+1` symbols per `b` role. Together with the two pole
@@ -2251,7 +2259,6 @@ algebraic bridge under a nonzero normalization denominator, and
 `carrierPole_iff_positiveDepthOnePole` proves that an integral specialization is exactly the
 `MM-S42` pole equation. Raw factorization and suffix ancestry remain separate witness fields;
 the actual `D_c²` pole is attacked directly in `MM-S51`.
-
 Record [`MM-S55`](SALVAGE.md#mm-s55-physical-role-block-shell-completion) removes the remaining
 abstract arithmetic hypotheses from that interface. Every role block ends in an erasure, so its
 swapped lower code is a `3`-adic unit. For a multi-role block, both physical codes are eight
@@ -2726,6 +2733,89 @@ multi-to-multi case. `peeledMultiToSingleton_beta_add_three_le` kills the `(β+1
 multi-to-singleton case. `peeledSingletonToSingleton_impossible` kills the `D_b`-to-singleton
 case without its preceding two-`c` hypothesis. The theorem does not assert that the ternary
 trichotomy classifies decimal orbits; longer generalized decimal carriers remain open.
+
+Record [`MM-O29`](SALVAGE.md#mm-o29-uniform-empty-front-local-rays) proves that the finite
+empty-front survivor is not a width-three accident. For every `β≥3` and every length-`β` tag
+word, Lean constructs the exact body-independent projective pullback through `D_b;D_c;D_c`.
+The displayed scale depths are `β+1,1,0`; primitive reduction cancels only three-adic units. The
+initial predecessor cylinder is a multiple of
+`3^(2β)`, and the intermediate gap has depth `β+t+2` when the target ends in `b c^t`, or
+`2β+1` for the all-`c` target. This is a local backward-ray theorem only: it asserts neither
+forward reachability from the encoded entry nor a pole. Computational width-six diagnostics
+reject universal one-step maximum-coordinate and Farey-height monotonicity; a history-sensitive
+multicone or multi-step weight remains possible.
+
+Record [`MM-S104`](SALVAGE.md#mm-s104-exact-deletion-c-contraction-chamber) formalizes the observed
+Farey failure. For a primitive carrier `0<d<n`, the sign-normalized inverse-`D_c` adjugate is
+`(Hr(n−d), 2(rn+Hd))`. Lean proves that its gcd is `3H` exactly when
+`H/2∣n`, `gcd(r,d)=1`, and `gcd(n−d,3μ)=3`; in that channel, normalized Farey height contracts
+exactly when `r(n−d)<3n`. The normalized denominator ratio is
+`2μ/H−2(n−d)/(3n)`, whose limiting factor is strictly below `4/5`. The adapter theorem advances
+the signed raw pair through the existing singleton-`D_c` carrier recurrence with determinant
+`−6HRμ`. No theorem yet classifies which earlier physical blocks enter this chamber.
+
+Record [`MM-S87`](SALVAGE.md#mm-s87-empty-front-backward-chamber-cut) supplies the first global
+ancestry cut. Every physical `MM-O29` empty-front seed satisfies `X>H`. Above that ray, an inverse
+physical block has the exact form `(P−cA)/V` with `0<c<3`. Lean exhausts the relative upper and
+lower spelling lengths and proves that no block whose first role letter is `b` can land in
+`(1,r/(r−3))`; every `MM-S104` slope-chamber ancestor is therefore `c`-leading. For the literal
+`(R_c,D_b)` block against body `b c^(β−2)`, the exact codes imply
+`(x−1)/x<1/(80ρ)` whenever `x>1`. The theorem does not force an arbitrary chamber ancestor to
+equal that block; this remaining step must consume the `MM-S104` gcd channel.
+
+Record [`MM-S105`](SALVAGE.md#mm-s105-conditional-post-rcdb-no-reentry) closes the successor of
+that literal branch. Physical empty-front seeds satisfy `c>8ρ²`. After the canonical
+`(R_c,D_b);D_c` pullback, the boundary intercept `Ξ` lies above `6·3^(β−6)/5` and below one of
+two fixed-point margins. The exact next-block numerator automaton is
+`b:X↦9ρX+H`, `c:X↦3X−r`. Every `c`-leading block is negative; exact ternary length and prefix
+bounds put every `b`-leading block below one or above `51/50` at width six and `6/5` thereafter.
+Hence no next physical block re-enters `(1,r/(r−3))`. This is conditional on the literal
+canonical history. Exact-block forcing is false: the width-six target `c^6`, body `bcbcc`, and
+block `(R_c,D_b,D_b)` survive the full `3H` contraction channel, and longer modular-return
+survivors remain outside the theorem.
+
+Record [`MM-S106`](SALVAGE.md#mm-s106-primitive-physical-pullback-cancellation) restores the
+arithmetic erased by immediate primitive normalization. For a positive raw pullback, Lean splits
+the gcd of `h·s` with its denominator into the residual gcd and the remaining half-head gcd. It
+proves that the full factor `h` survives in the primitive numerator exactly when that remaining
+denominator is coprime to `h`. Before cancellation, the physical raw numerator is congruent to
+`Prn` modulo `h`; since `gcd(h,r)=1`, raw divisibility is exactly
+`h/gcd(h,n) ∣ P`. The theorem assumes natural coordinates and a genuine subtraction. It neither
+classifies physical blocks nor connects an `MM-O29` seed to the encoded entry or a pole.
+
+Record [`MM-S92`](SALVAGE.md#mm-s92-primitive-empty-front-seed-adapter) instantiates that seam on
+the public `MM-O29` seed cores. Writing `U` for the natural target code and `B,C>0` for the two
+polynomial cores, Lean proves that the seed is the primitive ratio obtained from
+`(2HB+C,2B)` after cancelling `g₀=gcd(C,2B)`. If `h=H/2` and
+`d=gcd(h,2(U−4))`, then `gcd(h,g₀)=d` and `gcd(h,N)∣d` for the primitive numerator `N`.
+Consequently any raw half-head pullback forces `h/d∣P`; the exact raw and post-cancellation
+equivalences remain available with all coordinates expanded in `U`. The bound is sharp as a
+support statement but does not imply `gcd(h,N)=1`, and no physical block classification follows.
+
+Record [`MM-O30`](SALVAGE.md#mm-o30-primitive-normalization-collapse) closes the tempting blanket
+two-step Farey argument. At width six, Lean checks an explicit seed above `H`, its exact canonical
+`(R_c,D_b)` primitive pullback, and the following singleton `D_c` pullback in the full `3H`
+channel. Farey height decreases on the first step, the second step, and the complete window. The
+seed is an abstract local carrier: the theorem proves neither that it belongs to the `MM-O29`
+family or encoded-entry orbit nor that it is a pole. A valid Lyapunov theorem must therefore use
+the target-code restrictions from `MM-S92` or stronger ancestry data.
+
+Record [`MM-S93`](SALVAGE.md#mm-s93-universal-contraction-chamber-entry-gap) removes the literal
+block restriction from the Archimedean side of the chamber ancestry. For every compiler body of
+length at least `β−1` beginning in `b`, every nonempty physical block pulling any carrier above
+`H` into `(1,r/(r−3))` has equal upper/lower spelling lengths and relative gap
+`(x−1)/x<1/(80ρ)`. Lean then identifies the exact post-`D_c` boundary intercept and bounds it by
+`0<Ξ<8·3^(β−6)/5`. This is a local entry theorem, not reachability, a primitive-channel
+classification, post-contraction no-reentry, or a pole. The remaining successor cut needs a
+quotient-scale lower bound from `MM-S104` normalization or `MM-S92` target ancestry.
+
+Record [`MM-S99`](SALVAGE.md#mm-s99-sharp-post-contraction-successor-frontier) replaces that
+lower-bound route. The common swapped prefix has exact code `45ρ−5`, strengthening the physical
+entry bound to `(x−1)/x<1/(90ρ−10)`. Its post-`D_c` intercept lies below the precise affine
+ceiling used by the `MM-S105` automaton. Lean composes one arbitrary further physical block: every
+`c`-leading successor is negative, and every `b`-leading successor is below one except when its
+lower spelling is shorter than `Q` times its upper scale. Width six retains one additional
+critical rule-`b` prefix. No primitive-channel, reachability, or pole conclusion is asserted.
 
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
@@ -3591,6 +3681,15 @@ fixed-rank decision problem.
 | `SwappedSetterCylinderCharge.lean` | exact locally earliest three-block charge chain coupling the predecessor cylinder through both deletion resonances to the target's matched-tail suffix carry |
 | `SwappedSetterTargetMultiplier.lean` | unique primitive target multiplier, unconditional target-prefix unit, and exact braid transport to the predecessor-cylinder unit |
 | `SwappedSetterTargetResidue.lean` | three-adic unit chain and first-mismatch residue pullback from the target prefix through both singleton deletions to the initial cylinder quotient |
+| `SwappedSetterEmptyFrontRay.lean` | exact local empty-front `D_b;D_c;D_c` backward family, shell and predecessor-cylinder formulas, and terminal-run gap valuation classification |
+| `SwappedSetterDeletionCContraction.lean` | exact inverse singleton-`D_c` gcd chamber, Farey-height contraction criterion, physical recurrence adapter, and limiting contraction ratio |
+| `SwappedSetterEmptyFrontChamber.lean` | terminal lower bound for empty-front seeds, physical `b`-leading exclusion from the deletion-contraction interval, and canonical `(R_c,D_b)` gap estimate |
+| `SwappedSetterPostRcDbAutomaton.lean` | exact canonical post-`D_c` intercept bounds and the reusable two-state affine next-block automaton |
+| `SwappedSetterPostRcDbChamber.lean` | physical ternary length partition, signed first-colour classification, and conditional total no-reentry theorem |
+| `SwappedSetterPrimitivePullback.lean` | exact raw inverse-block coordinates and preservation criterion for half-head divisibility through primitive cancellation |
+| `SwappedSetterPrimitiveSeedAdapter.lean` | positive primitive empty-front seed coordinates and target-code control of their half-head content |
+| `SwappedSetterNormalizationCollapse.lean` | exact abstract width-six witness refuting one- and two-step Farey expansion under local hypotheses alone |
+| `SwappedSetterUniversalEntryGap.lean` | uniform physical contraction-chamber gap, exact affine post-`D_c` ceiling, and short-lower successor frontier |
 | `PairedMortality.lean` | common-column mortality converse and exact integer `4 × 4` family |
 | `PhaseFracture.lean` | phase normalization and dimension-free projective-identification contradiction |
 | `PhaseRigidity.lean` | checked local role algebra, discrepancy commutators, and invariant-pencil rigidity |
