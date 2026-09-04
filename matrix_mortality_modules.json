@@ -456,7 +456,7 @@
       "assurance": "formalized",
       "status": "established",
       "title": "M₆(3) is undecidable",
-      "summary": "Prefix-transducer packing transports the five-generator dimension-three theorem to three generators in dimension six.",
+      "summary": "Applying generator packing to M₃(5) gives M₆(3). This is a frontier bound, not a separate construction.",
       "href": "/math/matrix_mortality/m3_5/#result",
       "requires": [
         "mm/m3-5",
@@ -472,7 +472,7 @@
       "assurance": "formalized",
       "status": "established",
       "title": "M₁₂(2) is undecidable",
-      "summary": "The binary form of prefix-transducer packing transports M₃(5) to two generators in dimension twelve.",
+      "summary": "Applying generator packing to M₃(5) gives M₁₂(2). The bound is now subsumed by M₉(2).",
       "href": "/math/matrix_mortality/m3_5/#result",
       "requires": [
         "mm/m3-5",
@@ -549,14 +549,12 @@
     {
       "id": "frontier-constructions",
       "title": "Frontier Constructions",
-      "summary": "Undecidability constructions not implied by another displayed point in the same problem family.",
+      "summary": "Constructions establishing current frontier bounds. Consequences obtained only by applying an existing transport are listed separately below.",
       "nodes": [
         "mm/m3-5",
         "mm/m4-4",
-        "mm/m6-3",
         "mm/m9-2",
-        "mm/z6-2",
-        "mm/r7-2"
+        "mm/z6-2"
       ]
     },
     {
@@ -564,7 +562,16 @@
       "title": "Subsumed Constructions",
       "summary": "Mortality constructions whose endpoint now follows from a sharper frontier theorem, retained for their distinct mechanisms.",
       "nodes": [
-        "mm/m10-2",
+        "mm/m10-2"
+      ]
+    },
+    {
+      "id": "transported-bounds",
+      "title": "Transported Bounds",
+      "summary": "Corollaries of existing packing or scalar-to-corner reductions, not separate constructions. A transported bound may still lie on the numerical frontier.",
+      "nodes": [
+        "mm/m6-3",
+        "mm/r7-2",
         "mm/m12-2"
       ]
     }

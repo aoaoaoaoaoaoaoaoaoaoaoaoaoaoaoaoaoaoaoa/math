@@ -37,6 +37,7 @@
             <li><a href="#established-obstructions">Established Obstructions</a></li>
             <li><a href="#frontier-constructions">Frontier Constructions</a></li>
             <li><a href="#subsumed-constructions">Subsumed Constructions</a></li>
+            <li><a href="#transported-bounds">Transported Bounds</a></li>
           </ol>
         </li>
 <!-- MODULE_GRAPH_TOC:END -->
@@ -584,7 +585,7 @@
             </section>
             <section class="module-layer">
               <h3 id="frontier-constructions">Frontier Constructions<a class="fragment-link" href="#frontier-constructions" aria-label="Link to this section">#</a></h3>
-              <p>Undecidability constructions not implied by another displayed point in the same problem family.</p>
+              <p>Constructions establishing current frontier bounds. Consequences obtained only by applying an existing transport are listed separately below.</p>
               <ol class="module-grid">
               <li class="module-node" data-node-id="mm/m3-5">
                 <p class="module-kind">
@@ -617,21 +618,6 @@
                   <div>
                     <dt>Requires</dt>
                     <dd><a href="/math/matrix_mortality/paired_scalar_series/#result">Paired scalar series</a>, <a href="/math/matrix_mortality/m3_5/#separator-construction">Rank-one separator</a></dd>
-                  </div>
-                </dl>
-              </li>
-              <li class="module-node" data-node-id="mm/m6-3">
-                <p class="module-kind">
-                  <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
-                </p>
-                <p class="module-node-head">
-                  <a href="/math/matrix_mortality/m3_5/#result"><b>M₆(3) is undecidable</b></a>
-                </p>
-                <p class="module-summary">Prefix-transducer packing transports the five-generator dimension-three theorem to three generators in dimension six.</p>
-                <dl class="module-relations">
-                  <div>
-                    <dt>Requires</dt>
-                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₃(5) is undecidable</a>, <a href="/math/matrix_mortality/m3_5/#generator-packing">Generator packing</a></dd>
                   </div>
                 </dl>
               </li>
@@ -673,21 +659,6 @@
                   </div>
                 </dl>
               </li>
-              <li class="module-node" data-node-id="mm/r7-2">
-                <p class="module-kind">
-                  <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
-                </p>
-                <p class="module-node-head">
-                  <a href="/math/matrix_mortality/binary_compilers/#consequences"><b>R₇(2) is undecidable</b></a>
-                </p>
-                <p class="module-summary">The scalar-to-corner transport converts the six-dimensional two-generator scalar theorem to a seven-dimensional corner theorem.</p>
-                <dl class="module-relations">
-                  <div>
-                    <dt>Requires</dt>
-                    <dd><a href="/math/matrix_mortality/binary_compilers/#result">Z₆(2) is undecidable</a></dd>
-                  </div>
-                </dl>
-              </li>
               </ol>
             </section>
             <section class="module-layer">
@@ -713,6 +684,42 @@
                   </div>
                 </dl>
               </li>
+              </ol>
+            </section>
+            <section class="module-layer">
+              <h3 id="transported-bounds">Transported Bounds<a class="fragment-link" href="#transported-bounds" aria-label="Link to this section">#</a></h3>
+              <p>Corollaries of existing packing or scalar-to-corner reductions, not separate constructions. A transported bound may still lie on the numerical frontier.</p>
+              <ol class="module-grid">
+              <li class="module-node" data-node-id="mm/m6-3">
+                <p class="module-kind">
+                  <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
+                </p>
+                <p class="module-node-head">
+                  <a href="/math/matrix_mortality/m3_5/#result"><b>M₆(3) is undecidable</b></a>
+                </p>
+                <p class="module-summary">Applying generator packing to M₃(5) gives M₆(3). This is a frontier bound, not a separate construction.</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/m3_5/#result">M₃(5) is undecidable</a>, <a href="/math/matrix_mortality/m3_5/#generator-packing">Generator packing</a></dd>
+                  </div>
+                </dl>
+              </li>
+              <li class="module-node" data-node-id="mm/r7-2">
+                <p class="module-kind">
+                  <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
+                </p>
+                <p class="module-node-head">
+                  <a href="/math/matrix_mortality/binary_compilers/#consequences"><b>R₇(2) is undecidable</b></a>
+                </p>
+                <p class="module-summary">The scalar-to-corner transport converts the six-dimensional two-generator scalar theorem to a seven-dimensional corner theorem.</p>
+                <dl class="module-relations">
+                  <div>
+                    <dt>Requires</dt>
+                    <dd><a href="/math/matrix_mortality/binary_compilers/#result">Z₆(2) is undecidable</a></dd>
+                  </div>
+                </dl>
+              </li>
               <li class="module-node" data-node-id="mm/m12-2">
                 <p class="module-kind">
                   <span class="module-kind-symbol" aria-hidden="true">∎</span>Theorem
@@ -720,7 +727,7 @@
                 <p class="module-node-head">
                   <a href="/math/matrix_mortality/m3_5/#result"><b>M₁₂(2) is undecidable</b></a>
                 </p>
-                <p class="module-summary">The binary form of prefix-transducer packing transports M₃(5) to two generators in dimension twelve.</p>
+                <p class="module-summary">Applying generator packing to M₃(5) gives M₁₂(2). The bound is now subsumed by M₉(2).</p>
                 <dl class="module-relations">
                   <div>
                     <dt>Requires</dt>
