@@ -132,6 +132,8 @@ open MatrixMortality
 #print axioms GeometricTailHankel.ten_le_card_of_tbc_geometric_transfer_moments
 #print axioms TiltedGeometricHankel.benchmark_return_eq_moment
 #print axioms TiltedGeometricHankel.nine_le_card_of_tilted_geometric_transfer_moments
+#print axioms PeriodicRankScreen.pairedComponent_three_le_rank
+#print axioms PeriodicRankScreen.nearyComponent_two_le_rank
 #print axioms ChangedSeparatorTail.tiltedTernaryCode_injective
 #print axioms ChangedSeparatorTail.nearyTailRatio_lt_neg_three_halves
 #print axioms ChangedSeparatorTail.transferDenominator_lt_zero
@@ -151,6 +153,7 @@ open MatrixMortality
 #print axioms ChangedSeparatorRealization.moment_add_three
 #print axioms ReturnFamily.pairGenerator_isMortal_iff_returnFamily
 #print axioms ReturnFamily.rankOnePair_isMortal_iff
+#print axioms PeriodicReturn.pairGenerator_isMortal_iff_residue
 #print axioms InterfaceCompression.isMortal_iff
 #print axioms InterfaceCompression.isMortal_rankOne_iff
 #print axioms FreeMonoidReturn.physical_isMortal_iff_returnFamily

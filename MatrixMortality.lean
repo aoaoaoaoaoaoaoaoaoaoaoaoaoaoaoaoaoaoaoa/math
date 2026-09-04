@@ -250,12 +250,14 @@ import MatrixMortality.ChangedSeparatorMomentThree
 import MatrixMortality.ChangedSeparatorTailMoments
 import MatrixMortality.ChangedSeparatorMortality
 import MatrixMortality.TiltedGeometricHankel
+import MatrixMortality.PeriodicRankScreen
 import MatrixMortality.ChangedSeparatorEffectivity
 import MatrixMortality.EffectiveRational
 import MatrixMortality.RationalClearing
 import MatrixMortality.SingularReturnFamily
 import MatrixMortality.SkolemReduction
 import MatrixMortality.RankCensus
+import MatrixMortality.PeriodicReturn
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank
