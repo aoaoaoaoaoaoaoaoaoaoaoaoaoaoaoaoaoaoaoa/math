@@ -126,6 +126,7 @@ private theorem produced_append (body : List TagLetter)
       produced (tagOutput body) left ++ produced (tagOutput body) right := by
   simp [produced]
 
+
 @[simp] private theorem produced_replicate_strokeBBB (body : List TagLetter) (count : Nat) :
     produced (tagOutput body) (List.replicate count strokeBBB) = bRun count := by
   induction count with

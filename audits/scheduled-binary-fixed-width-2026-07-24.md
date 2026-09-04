@@ -78,7 +78,6 @@ initial orbit either halts or enters the lower cycle, giving a constructive deci
 the adjacent-two-`c` subfamily. The next source boundary is two separated `c` letters or at
 least three `c` letters. See
 [`m53-width-three-adjacent-cycles-2026-08-31.md`](m53-width-three-adjacent-cycles-2026-08-31.md).
-
 ## Search
 
 The search covered exact phrases and notation variants for binary tag systems,
