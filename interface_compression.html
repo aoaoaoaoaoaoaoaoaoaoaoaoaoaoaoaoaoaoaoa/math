@@ -22,7 +22,7 @@
   <div class="shell">
     <section class="abstract" aria-label="Abstract">
       <strong>Verdict</strong>
-      <p>A matrix family consisting of arbitrary transitions and factored cuts is mortal exactly when the transition family is already mortal or one nonempty path of compressed interface bridges has zero product.</p>
+      <p>Partition an ordinary finite matrix family into transition generators and cut generators <var>C</var><sub><var>j</var></sub> = <var>U</var><sub><var>j</var></sub><var>O</var><sub><var>j</var></sub>. The family is mortal exactly when the transition subfamily is already mortal or one nonempty path of compressed interface bridges has zero product.</p>
       <p>The theorem requires no field, splitting, rank calculation, or invertibility assumption. Rank-one separators, singular-return compression, split-return normal forms, and multi-cut edge systems are instances of the same reduction.</p>
     </section>
 
@@ -30,6 +30,7 @@
       <ol>
         <li><a href="#known-stuff">Known Stuff</a>
           <ol>
+            <li><a href="#generator-roles">From generators to cuts</a></li>
             <li><a href="#factored-cuts">Factored cuts</a></li>
             <li><a href="#physical-words">Physical words</a></li>
           </ol>
@@ -64,8 +65,25 @@
           <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
 
           <section class="fragment-section">
+          <h3 id="generator-roles">From generators to cuts<a class="fragment-link" href="#generator-roles" aria-label="Link to this section">#</a></h3>
+          <p>Begin with an ordinary mortality instance: one finite labelled family of matrices. Partition its labels into transition labels <var>α</var> and cut labels <var>J</var>, and write</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mi>G</mi><mo>=</mo>
+                <mo>{</mo><msub><mi>A</mi><mi>a</mi></msub><mo>:</mo><mi>a</mi><mo>∈</mo><mi>α</mi><mo>}</mo>
+                <mo>⨿</mo>
+                <mo>{</mo><msub><mi>C</mi><mi>j</mi></msub><mo>:</mo><mi>j</mi><mo>∈</mo><mi>J</mi><mo>}</mo><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>No matrix is added and no word grammar is imposed: mortality still quantifies over every nonempty word in the original family. “Transition” and “cut” name roles in the analysis.</p>
+          <p>In a reduction, transitions carry the ambient computation. A cut is made to factor through a smaller state space, so every word containing it must pass through a controlled interface. The theorem separates transition-only words from cut-containing words and compresses the latter. The <a href="/math/matrix_mortality/m3_5/#five-matrices">rank-one separator in M₃(5)</a> and the generator <var>UO</var> in <a href="/math/matrix_mortality/m9_2/#singular-return">M₉(2)</a> are cuts in this sense.</p>
+          </section>
+
+          <section class="fragment-section">
           <h3 id="factored-cuts">Factored cuts<a class="fragment-link" href="#factored-cuts" aria-label="Link to this section">#</a></h3>
-          <p>Let <var>L</var> be the physical state space and <var>S</var> a smaller <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-space" title="A smaller vector space through which a singular cut factors.">interface space</a>. The generator family contains arbitrary transition matrices <var>A</var><sub><var>a</var></sub> on <var>L</var> and cuts</p>
+          <p>Let <var>L</var> be the physical state space and <var>S</var> a smaller <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-space" title="A smaller vector space through which a cut factors.">interface space</a>. A <a class="glossary-term" href="/math/matrix_mortality/glossary/#factored-cut" title="An actual cut generator presented as a product through a common interface space.">factored cut</a> has the form</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -80,13 +98,44 @@
               </mrow>
             </math>
           </div>
-          <p>No minimal factorization is required. In particular, <var>S</var> need not have dimension equal to the rank of the cut.</p>
+          <p>The map <var>O</var><sub><var>j</var></sub> sends the ambient state to the interface; <var>U</var><sub><var>j</var></sub> returns it to <var>L</var>. Thus an occurrence of <var>C</var><sub><var>j</var></sub> forces the product through <var>S</var> at that position. Every matrix has a trivial factorization through <var>L</var>; the construction becomes a compression when <var>S</var> is smaller. No minimal factorization is required.</p>
 
           </section>
           <section class="fragment-section">
           <h3 id="physical-words">Physical words<a class="fragment-link" href="#physical-words" aria-label="Link to this section">#</a></h3>
-          <p>A word with cuts alternates transition blocks and cuts, but it may also contain transitions before its first cut and after its last. A correct mortality reduction must retain both exterior blocks and must separately handle words containing no cut.</p>
-          <p>For a transition word <var>w</var>, define the bridge from cut <var>i</var> to cut <var>j</var> by</p>
+          <p>Every physical word is either transition-only or has a unique block form</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>A</mi><msub><mi>u</mi><mn>0</mn></msub></msub>
+                <msub><mi>C</mi><msub><mi>j</mi><mn>1</mn></msub></msub>
+                <msub><mi>A</mi><msub><mi>u</mi><mn>1</mn></msub></msub>
+                <mo>⋯</mo>
+                <msub><mi>C</mi><msub><mi>j</mi><mi>q</mi></msub></msub>
+                <msub><mi>A</mi><msub><mi>u</mi><mi>q</mi></msub></msub><mo>,</mo>
+                <mspace width="0.8em"></mspace><mi>q</mi><mo>≥</mo><mn>1</mn><mo>,</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>where each transition block <var>u</var><sub><var>t</var></sub> may be empty. Between two cuts, associativity exposes</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <msub><mi>C</mi><mi>i</mi></msub>
+                <msub><mi>A</mi><mi>w</mi></msub>
+                <msub><mi>C</mi><mi>j</mi></msub>
+                <mo>=</mo>
+                <msub><mi>U</mi><mi>i</mi></msub>
+                <mo>(</mo>
+                <msub><mi>O</mi><mi>i</mi></msub>
+                <msub><mi>A</mi><mi>w</mi></msub>
+                <msub><mi>U</mi><mi>j</mi></msub>
+                <mo>)</mo>
+                <msub><mi>O</mi><mi>j</mi></msub><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The parenthesized matrix is the <a class="glossary-term" href="/math/matrix_mortality/glossary/#interface-bridge" title="The interface action between two cut generators across a transition word.">interface bridge</a> from cut <var>i</var> to cut <var>j</var>:</p>
           <div class="formula plain">
             <math display="block">
               <mrow>
@@ -99,6 +148,19 @@
               </mrow>
             </math>
           </div>
+          <p>The exterior blocks <var>u</var><sub>0</sub> and <var>u</var><sub><var>q</var></sub> are not discarded. If the displayed physical word is zero, sandwiching it by <var>O</var><sub><var>j</var><sub>1</sub></sub> and <var>U</var><sub><var>j</var><sub><var>q</var></sub></sub> gives</p>
+          <div class="formula plain">
+            <math display="block">
+              <mrow>
+                <mo>(</mo><msub><mi>O</mi><msub><mi>j</mi><mn>1</mn></msub></msub><msub><mi>A</mi><msub><mi>u</mi><mn>0</mn></msub></msub><msub><mi>U</mi><msub><mi>j</mi><mn>1</mn></msub></msub><mo>)</mo>
+                <mo>(</mo><msub><mi>O</mi><msub><mi>j</mi><mn>1</mn></msub></msub><msub><mi>A</mi><msub><mi>u</mi><mn>1</mn></msub></msub><msub><mi>U</mi><msub><mi>j</mi><mn>2</mn></msub></msub><mo>)</mo>
+                <mo>⋯</mo>
+                <mo>(</mo><msub><mi>O</mi><msub><mi>j</mi><mi>q</mi></msub></msub><msub><mi>A</mi><msub><mi>u</mi><mi>q</mi></msub></msub><msub><mi>U</mi><msub><mi>j</mi><mi>q</mi></msub></msub><mo>)</mo>
+                <mo>=</mo><mn>0</mn><mo>.</mo>
+              </mrow>
+            </math>
+          </div>
+          <p>The first and last factors are endpoint loops carrying the leading and trailing transition blocks. This is the compressed path promised by the theorem.</p>
           </section>
         </details>
 
@@ -125,7 +187,7 @@
           </section>
           <section class="fragment-section">
           <h3 id="proof">Proof<a class="fragment-link" href="#proof" aria-label="Link to this section">#</a></h3>
-          <p>A cut-free zero word is already a zero transition word. Suppose instead that a physical zero contains a first and a last cut. Decompose it into its leading transition block and cut-headed blocks. Multiplying on the left by the first cut’s output map and on the right by the last cut’s input map turns the zero physical product into a zero product of interface bridges. The leading and trailing transition blocks become the closing bridge, so neither is discarded.</p>
+          <p>A cut-free zero word is already a zero transition word. For a cut-containing zero, the sandwich calculation above gives a nonempty zero path of interface bridges. Its endpoint loops retain the leading and trailing transition blocks.</p>
           <p>Conversely, spell a bridge path as a physical word beginning with its first cut. Associativity gives</p>
           <div class="formula plain">
             <math display="block">

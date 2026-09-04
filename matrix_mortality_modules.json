@@ -102,7 +102,7 @@
       "assurance": "formalized",
       "status": "established",
       "title": "Interface compression",
-      "summary": "Transitions and factored cuts are mortal exactly when the transitions are mortal or one nonempty interface-bridge path vanishes.",
+      "summary": "Partitioning an ordinary generator family into transitions and factored cuts reduces its cut-containing products exactly to paths of interface bridges; transition-only products remain a separate branch.",
       "href": "/math/matrix_mortality/interface_compression/#result",
       "requires": [
         "mm/matrix-mortality"
