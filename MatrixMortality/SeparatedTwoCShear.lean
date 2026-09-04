@@ -50,16 +50,19 @@ private def cycleFront (left middle right halfRunSum : Nat) : List TagLetter :=
 private def cycleExpansion (left middle right halfRunSum : Nat) : List TagLetter :=
   cycleFront left middle right halfRunSum ++ [.c] ++ bRun (right + 1)
 
-private def ConstantAtOffset (offset : Nat) (word : List TagLetter) : Prop :=
+/-- Every position congruent to `-offset` modulo three contains `b`. -/
+def ConstantAtOffset (offset : Nat) (word : List TagLetter) : Prop :=
   ∀ (index : Nat) (index_lt : index < word.length), 3 ∣ offset + index →
     word[index] = .b
 
-private theorem constantAtOffset_replicate (offset count : Nat) :
+/-- A unary `b` run is constant at every offset. -/
+theorem constantAtOffset_replicate (offset count : Nat) :
     ConstantAtOffset offset (bRun count) := by
   intro index index_lt _
   exact List.getElem_replicate index_lt
 
-private theorem ConstantAtOffset.append {offset : Nat} {left right : List TagLetter}
+/-- Offset cleanliness composes across concatenation. -/
+theorem ConstantAtOffset.append {offset : Nat} {left right : List TagLetter}
     (left_clean : ConstantAtOffset offset left)
     (right_clean : ConstantAtOffset (offset + left.length) right) :
     ConstantAtOffset offset (left ++ right) := by
@@ -76,7 +79,8 @@ private theorem ConstantAtOffset.append {offset : Nat} {left right : List TagLet
     convert index_aligned using 1
     omega
 
-private theorem constantAtOffset_cons_c {offset : Nat} {tail : List TagLetter}
+/-- An inert leading `c` preserves offset cleanliness of its tail. -/
+theorem constantAtOffset_cons_c {offset : Nat} {tail : List TagLetter}
     (inert : ¬3 ∣ offset) (tail_clean : ConstantAtOffset (offset + 1) tail) :
     ConstantAtOffset offset (.c :: tail) := by
   intro index index_lt index_aligned
@@ -89,14 +93,16 @@ private theorem constantAtOffset_cons_c {offset : Nat} {tail : List TagLetter}
       convert index_aligned using 1
       omega
 
-private theorem constantAtOffset_bRun_c {offset run : Nat} {tail : List TagLetter}
+/-- A unary run followed by an inert `c` preserves offset cleanliness. -/
+theorem constantAtOffset_bRun_c {offset run : Nat} {tail : List TagLetter}
     (inert : ¬3 ∣ offset + run)
     (tail_clean : ConstantAtOffset (offset + run + 1) tail) :
     ConstantAtOffset offset (bRun run ++ .c :: tail) := by
   apply ConstantAtOffset.append (constantAtOffset_replicate offset run)
   simpa [bRun, Nat.add_assoc] using constantAtOffset_cons_c inert tail_clean
 
-private theorem sampleHeads_eq_bRun (count : Nat) (word : List TagLetter)
+/-- Sampling a clean width-three prefix yields a unary `b` run. -/
+theorem sampleHeads_eq_bRun (count : Nat) (word : List TagLetter)
     (enough : count * 3 ≤ word.length)
     (clean : Undecidability.ConstantAtMultiples 3 TagLetter.b word) :
     Undecidability.sampleHeads 3 (by omega) count word enough = bRun count := by
@@ -110,7 +116,8 @@ private theorem sampleHeads_eq_bRun (count : Nat) (word : List TagLetter)
       List.getElem_replicate]
     exact clean (index * 3) source_lt ⟨index, by omega⟩
 
-private theorem spell_tagOutput_bRun (body : List TagLetter) (count : Nat) :
+/-- The sheared tag output fixes every unary `b` run. -/
+theorem spell_tagOutput_bRun (body : List TagLetter) (count : Nat) :
     spell (tagOutput body) (bRun count) = bRun count := by
   unfold bRun
   induction count with
@@ -122,7 +129,8 @@ private theorem spell_tagOutput_bRun (body : List TagLetter) (count : Nat) :
       rw [induction]
       rfl
 
-private theorem cleanPrefix_reachesIn (body front tail : List TagLetter) (count : Nat)
+/-- Executing a clean prefix moves its tail forward and emits one `b` per stroke. -/
+theorem cleanPrefix_reachesIn (body front tail : List TagLetter) (count : Nat)
     (front_length : front.length = count * 3)
     (front_clean : Undecidability.ConstantAtMultiples 3 TagLetter.b front) :
     TagReachesIn 3 (tagOutput body) count (front ++ tail) (tail ++ bRun count) := by
@@ -846,7 +854,8 @@ private def shearedComplementaryHistory (phase k u : Nat) : List (Stroke TagLett
             [shearedCrossStroke phase] ++ List.replicate (4 * k + 3 * u + 3) strokeBBB ++
               [strokeCBB] ++ List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB]
 
-private def shearedComplementaryFinal
+/-- The six-`c` residual queue left by the complementary mismatch history. -/
+def shearedComplementaryResidual
     (phase separation k u : Nat) : List TagLetter :=
   bRun (12 * k + 6 * u + 2 * phase + 5) ++ [.c] ++
     bRun (9 * k + 3 * phase + 2) ++ [.c] ++
@@ -861,13 +870,13 @@ private theorem shearedComplementaryHistory_equation
     (shear_eq : shear + phase = 3 * u + 1)
     (middle_eq : separation + shear = 9 * k + 3 * phase + 2) :
     consumed (shearedComplementaryHistory phase k u) ++
-        shearedComplementaryFinal phase separation k u =
+        shearedComplementaryResidual phase separation k u =
       shearedEntryQueue shear separation ++
         produced (tagOutput (shearedBody shear separation))
           (shearedComplementaryHistory phase k u) := by
   have phase_cases : phase = 0 ∨ phase = 1 := by omega
   rcases phase_cases with rfl | rfl
-  · simp [shearedComplementaryHistory, shearedComplementaryFinal, shearedCrossStroke,
+  · simp [shearedComplementaryHistory, shearedComplementaryResidual, shearedCrossStroke,
       shearedEntryQueue, shearedBody, twoCBody, strokeBBC, strokeCBB, stroke₃,
       Stroke.letters, tagOutput, nearyBody, bRun, List.append_assoc] at shear_eq middle_eq ⊢
     have middleRun : 3 * (3 * k) + 1 + 1 = 9 * k + 2 := by omega
@@ -886,7 +895,7 @@ private theorem shearedComplementaryHistory_equation
       omega
     rw [middle_eq, middleRun, sourceBridge, firstCrossBridge, secondCrossBridge, finalBridge,
       highFinalBridge]
-  · simp [shearedComplementaryHistory, shearedComplementaryFinal, shearedCrossStroke,
+  · simp [shearedComplementaryHistory, shearedComplementaryResidual, shearedCrossStroke,
       shearedEntryQueue, shearedBody, twoCBody, strokeBCB, strokeCBB, stroke₃,
       Stroke.letters, tagOutput, nearyBody, bRun, List.append_assoc] at shear_eq middle_eq ⊢
     have middleRun : 3 * (3 * k + 1) + 1 + 1 = 9 * k + 5 := by omega
@@ -907,13 +916,13 @@ private theorem shearedComplementaryHistory_equation
     rw [middle_eq, middleRun, middlePhase, sourceBridge, firstCrossBridge, secondCrossBridge,
       finalBridge, highFinalBridge]
 
-private theorem shearedComplementaryFinal_clean (phase separation k u : Nat)
+private theorem shearedComplementaryResidual_clean (phase separation k u : Nat)
     (phase_lt : phase < 2)
     (joint_phase : (k + u) % 3 = 2) :
     Undecidability.ConstantAtMultiples 3 TagLetter.b
-      (shearedComplementaryFinal phase separation k u) := by
-  have clean : ConstantAtOffset 0 (shearedComplementaryFinal phase separation k u) := by
-    unfold shearedComplementaryFinal
+      (shearedComplementaryResidual phase separation k u) := by
+  have clean : ConstantAtOffset 0 (shearedComplementaryResidual phase separation k u) := by
+    unfold shearedComplementaryResidual
     simp only [List.singleton_append, List.append_assoc]
     apply constantAtOffset_bRun_c
     · rw [Nat.dvd_iff_mod_eq_zero]
@@ -936,6 +945,27 @@ private theorem shearedComplementaryFinal_clean (phase separation k u : Nat)
               · exact constantAtOffset_replicate _ _
   simpa [ConstantAtOffset, Undecidability.ConstantAtMultiples] using clean
 
+/-- Mortality of the complementary residual transfers through its exact stroke history to the
+coupled sheared source. -/
+theorem shearedInitial_tagHaltsFrom_of_complementaryResidual
+    (phase shear separation k u : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear + phase = 3 * u + 1)
+    (middle_eq : separation + shear = 9 * k + 3 * phase + 2)
+    (residual_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedComplementaryResidual phase separation k u)) :
+    TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedInitial shear separation) := by
+  have entry_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation) :=
+    tagHaltsFrom_of_history_equation (tagOutput (shearedBody shear separation))
+      (shearedComplementaryHistory phase k u) (shearedEntryQueue shear separation)
+      (shearedComplementaryResidual phase separation k u) residual_halts
+      (shearedComplementaryHistory_equation phase shear separation k u phase_lt shear_eq
+        middle_eq)
+  exact Undecidability.tagHaltsFrom_of_reaches
+    (shearedInitial_reaches_entry shear separation).toReaches entry_halts
+
 /-- The six-active-`c` history drains the complementary middle/shear phase when the joint
 quotient is two modulo three. -/
 theorem shearedComplementary_tagHaltsFrom (phase shear separation k u : Nat)
@@ -947,17 +977,10 @@ theorem shearedComplementary_tagHaltsFrom (phase shear separation k u : Nat)
       (shearedInitial shear separation) := by
   have final_halts := Undecidability.tagHaltsFrom_of_constantAtMultiples 3 (by omega)
     (tagOutput (shearedBody shear separation)) TagLetter.b rfl
-    (shearedComplementaryFinal phase separation k u)
-    (shearedComplementaryFinal_clean phase separation k u phase_lt joint_phase)
-  have entry_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
-      (shearedEntryQueue shear separation) :=
-    tagHaltsFrom_of_history_equation (tagOutput (shearedBody shear separation))
-      (shearedComplementaryHistory phase k u) (shearedEntryQueue shear separation)
-      (shearedComplementaryFinal phase separation k u) final_halts
-      (shearedComplementaryHistory_equation phase shear separation k u phase_lt shear_eq
-        middle_eq)
-  exact Undecidability.tagHaltsFrom_of_reaches
-    (shearedInitial_reaches_entry shear separation).toReaches entry_halts
+    (shearedComplementaryResidual phase separation k u)
+    (shearedComplementaryResidual_clean phase separation k u phase_lt joint_phase)
+  exact shearedInitial_tagHaltsFrom_of_complementaryResidual phase shear separation k u
+    phase_lt shear_eq middle_eq final_halts
 
 private def shearedShearResidueTwoHistory
     (phase k u : Nat) : List (Stroke TagLetter 3) :=
@@ -974,7 +997,8 @@ private def shearedShearResidueTwoHistory
                       List.replicate (4 * k + 2 * u + phase + 3) strokeBBB ++
                         [strokeCBB] ++ List.replicate (3 * k + phase) strokeBBB ++ [strokeCBB]
 
-private def shearedShearResidueTwoFinal
+/-- The four-`c` residual queue left by the shear-residue-two mismatch history. -/
+def shearedShearResidueTwoResidual
     (phase separation k u : Nat) : List TagLetter :=
   bRun (27 * k + 13 * u + 9 * phase + 19) ++ [.c] ++
     bRun (9 * k + 3 * phase + 2) ++ [.c] ++
@@ -987,13 +1011,13 @@ private theorem shearedShearResidueTwoHistory_equation
     (shear_eq : shear = 3 * u + 2)
     (middle_eq : separation + shear = 9 * k + 3 * phase + 2) :
     consumed (shearedShearResidueTwoHistory phase k u) ++
-        shearedShearResidueTwoFinal phase separation k u =
+        shearedShearResidueTwoResidual phase separation k u =
       shearedEntryQueue shear separation ++
         produced (tagOutput (shearedBody shear separation))
           (shearedShearResidueTwoHistory phase k u) := by
   have phase_cases : phase = 0 ∨ phase = 1 := by omega
   rcases phase_cases with rfl | rfl
-  · simp [shearedShearResidueTwoHistory, shearedShearResidueTwoFinal,
+  · simp [shearedShearResidueTwoHistory, shearedShearResidueTwoResidual,
       shearedCrossStroke, shearedOppositeCrossStroke, shearedEntryQueue, shearedBody,
       twoCBody, strokeBBC, strokeBCB, strokeCBB, stroke₃, Stroke.letters, tagOutput,
       nearyBody, bRun, List.append_assoc] at shear_eq middle_eq ⊢
@@ -1017,7 +1041,7 @@ private theorem shearedShearResidueTwoHistory_equation
         separation + 1 + (3 * k + (3 * shear + 2)) := by omega
     rw [middle_eq, middleRun, sourceBridge, firstCrossBridge, secondCrossBridge, thirdCrossBridge,
       highFinalBridge, finalBridge]
-  · simp [shearedShearResidueTwoHistory, shearedShearResidueTwoFinal,
+  · simp [shearedShearResidueTwoHistory, shearedShearResidueTwoResidual,
       shearedCrossStroke, shearedOppositeCrossStroke, shearedEntryQueue, shearedBody,
       twoCBody, strokeBBC, strokeBCB, strokeCBB, stroke₃, Stroke.letters, tagOutput,
       nearyBody, bRun, List.append_assoc] at shear_eq middle_eq ⊢
@@ -1044,13 +1068,13 @@ private theorem shearedShearResidueTwoHistory_equation
     rw [middle_eq, middleRun, middlePhase, sourceBridge, firstCrossBridge, secondCrossBridge,
       thirdCrossBridge, highFinalBridge, finalBridge]
 
-private theorem shearedShearResidueTwoFinal_clean (phase separation k u : Nat)
+private theorem shearedShearResidueTwoResidual_clean (phase separation k u : Nat)
     (phase_lt : phase < 2)
     (quotient_phase : u % 3 = phase) :
     Undecidability.ConstantAtMultiples 3 TagLetter.b
-      (shearedShearResidueTwoFinal phase separation k u) := by
-  have clean : ConstantAtOffset 0 (shearedShearResidueTwoFinal phase separation k u) := by
-    unfold shearedShearResidueTwoFinal
+      (shearedShearResidueTwoResidual phase separation k u) := by
+  have clean : ConstantAtOffset 0 (shearedShearResidueTwoResidual phase separation k u) := by
+    unfold shearedShearResidueTwoResidual
     simp only [List.singleton_append, List.append_assoc]
     apply constantAtOffset_bRun_c
     · rw [Nat.dvd_iff_mod_eq_zero]
@@ -1067,6 +1091,27 @@ private theorem shearedShearResidueTwoFinal_clean (phase separation k u : Nat)
           · exact constantAtOffset_replicate _ _
   simpa [ConstantAtOffset, Undecidability.ConstantAtMultiples] using clean
 
+/-- Mortality of the shear-residue-two residual transfers through its exact stroke history to
+the coupled sheared source. -/
+theorem shearedInitial_tagHaltsFrom_of_shearResidueTwoResidual
+    (phase shear separation k u : Nat)
+    (phase_lt : phase < 2)
+    (shear_eq : shear = 3 * u + 2)
+    (middle_eq : separation + shear = 9 * k + 3 * phase + 2)
+    (residual_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedShearResidueTwoResidual phase separation k u)) :
+    TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedInitial shear separation) := by
+  have entry_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
+      (shearedEntryQueue shear separation) :=
+    tagHaltsFrom_of_history_equation (tagOutput (shearedBody shear separation))
+      (shearedShearResidueTwoHistory phase k u) (shearedEntryQueue shear separation)
+      (shearedShearResidueTwoResidual phase separation k u) residual_halts
+      (shearedShearResidueTwoHistory_equation phase shear separation k u phase_lt shear_eq
+        middle_eq)
+  exact Undecidability.tagHaltsFrom_of_reaches
+    (shearedInitial_reaches_entry shear separation).toReaches entry_halts
+
 /-- The six-active-`c` history drains the shear-residue-two mismatch when its shear quotient
 matches the middle quotient phase. -/
 theorem shearedShearResidueTwo_tagHaltsFrom (phase shear separation k u : Nat)
@@ -1078,16 +1123,9 @@ theorem shearedShearResidueTwo_tagHaltsFrom (phase shear separation k u : Nat)
       (shearedInitial shear separation) := by
   have final_halts := Undecidability.tagHaltsFrom_of_constantAtMultiples 3 (by omega)
     (tagOutput (shearedBody shear separation)) TagLetter.b rfl
-    (shearedShearResidueTwoFinal phase separation k u)
-    (shearedShearResidueTwoFinal_clean phase separation k u phase_lt quotient_phase)
-  have entry_halts : TagHaltsFrom 3 (tagOutput (shearedBody shear separation))
-      (shearedEntryQueue shear separation) :=
-    tagHaltsFrom_of_history_equation (tagOutput (shearedBody shear separation))
-      (shearedShearResidueTwoHistory phase k u) (shearedEntryQueue shear separation)
-      (shearedShearResidueTwoFinal phase separation k u) final_halts
-      (shearedShearResidueTwoHistory_equation phase shear separation k u phase_lt shear_eq
-        middle_eq)
-  exact Undecidability.tagHaltsFrom_of_reaches
-    (shearedInitial_reaches_entry shear separation).toReaches entry_halts
+    (shearedShearResidueTwoResidual phase separation k u)
+    (shearedShearResidueTwoResidual_clean phase separation k u phase_lt quotient_phase)
+  exact shearedInitial_tagHaltsFrom_of_shearResidueTwoResidual phase shear separation k u
+    phase_lt shear_eq middle_eq final_halts
 
 end MatrixMortality.SeparatedTwoCShear

@@ -79,6 +79,7 @@ file owns the mathematical stock.
 | [`MM-S72`](#mm-s72-sheared-residue-twenty-six-drainage) | halting theorem | a ten-active-`c` history drains the surviving-shear subwedge `r≡26 (mod 27)`, `r-s≡2,5 (mod 9)` | formalized | active |
 | [`MM-S75`](#mm-s75-matched-six-c-shear-drainage) | halting theorem | one six-active-`c` macro drains two thirds of the matched middle residues two and five modulo nine | formalized | active |
 | [`MM-S78`](#mm-s78-phase-mismatched-six-c-drainage) | halting theorems | two mixed-stroke six-active-`c` macros drain one joint subphase in each of four phase-mismatched sheared residue pairs | formalized | active |
+| [`MM-S80`](#mm-s80-phase-mismatched-finite-pair-nucleus) | structure and halting theorem | a centered `D/T` pair nucleus closes all four phase-mismatched sheared residue pairs over middle residues two and five modulo nine | formalized | active |
 | [`MM-O01`](#mm-o01-all-placement-packing-rank) | obstruction | literal CHHN packing has exact rank six for every separator placement | formalized | graduated |
 | [`MM-O02`](#mm-o02-one-sided-phase-overlap) | obstruction | standard common-line phase fusion becomes one-sided | reported | parked |
 | [`MM-O03`](#mm-o03-two-channel-boundary-tax) | obstruction | exact diagonal rank-two punctuation costs two states beyond Hankel rank | formalized | graduated |
@@ -7386,8 +7387,86 @@ source families.
 `SeparatedTwoCShear.shearedComplementary_tagHaltsFrom` and
 `SeparatedTwoCShear.shearedShearResidueTwo_tagHaltsFrom`.
 
-**Next:** derive the exact two-active successor on the eight listed subphases and either close
-its finite nucleus or exhibit the first countercycle.
+**Next:** `MM-S80` derives the exact two-active successor and closes all eight listed subphases
+inside a finite centered pair nucleus.
+
+### MM-S80: Phase-mismatched finite pair nucleus
+
+**Kind:** structure and halting theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Continue with `e<2`, middle run `r=n+t=9k+3e+2`, and `m=3k+e`. Define
+
+```text
+J=4m+2t+5,    H=7m+2t+9,
+D₀=2J−1,      T₀=2J+1.
+```
+
+The eight `MM-S78` survivors are centered pair queues with unary gap vectors
+
+```text
+D(z)=[D₀+z,r,J,r,n+1],
+T(z)=[J−2,r,T₀+z,r,J,r,n+1].
+```
+
+Exact head-clean prefix deletion and pair firing give the partial map
+
+```text
+D(3z)   → D(z),      D(3z+H) → T(z),
+T(3z)   → T(z),      T(3z−H) → D(z).
+```
+
+When no displayed branch applies, every `c` misses the deletion heads and the queue halts.
+The live chamber is finite:
+
+```text
+D(z): 0<3z<H,       T(z): −H<3z<0.
+```
+
+Each branch preserves it, and every successor has at most one predecessor. In the
+sign-compatible distance `q`, the map is `q↦q/3` on residue zero and
+`q↦(H−q)/3` on residue `H`; its image misses `H/9<q<2H/9`. A root in this interval is
+predecessor-free, so recursive deletion in the finite chamber proves accessibility to a
+terminal residue.
+
+Both initial residuals lie in this image gap. For the complementary family `t+e=3u+1`,
+
+```text
+residual=T(−d₁),    d₁=4k+u+e+2,
+H=21k+6u+5e+11,    H<9d₁<2H.
+```
+
+For the shear-residue-two family `t=3u+2`,
+
+```text
+residual=D(d₂),     d₂=3k+u+e+2,
+H=21k+6u+7e+13,    H<9d₂<2H.
+```
+
+Hence every source with `r=9k+3e+2` and `t mod 3≠e` halts. This closes all four
+phase-mismatched pairs and all eight subphases left by `MM-S78`.
+
+**Scope:** the theorem is confined to the sheared plane and middle residues two and five
+modulo nine. It does not close the matched joint class left by `MM-S75`, the residue-eight
+survivors left by `MM-S72`, or arbitrary unequal triples. It proves accessibility only for the
+two image-gap defect families, not termination of every abstract `D/T` state. Broader
+6–30-active computational sweeps are audit evidence only.
+
+**Use:** the phase-mismatched seam is now exact and closed. The next sheared attack can focus
+on the matched survivor and residue-eight continuation without carrying eight residual
+subphases.
+
+**Formalization:**
+[`MatrixMortality/SeparatedTwoCShearNucleus.lean`](MatrixMortality/SeparatedTwoCShearNucleus.lean),
+through `SeparatedTwoCShear.shearedCentered_double_accessible`,
+`SeparatedTwoCShear.shearedCentered_triple_accessible`, the two residual-normal-form and
+image-gap theorems, and `SeparatedTwoCShear.shearedPhaseMismatch_tagHaltsFrom`. The bounded
+computational audit is
+[`audits/m53-separated-two-c-sheared-nucleus-2026-09-01.md`](audits/m53-separated-two-c-sheared-nucleus-2026-09-01.md).
+
+**Next:** close the single matched joint phase left by `MM-S75`, then join the residue-eight
+survivors or leave the sheared plane.
 ### MM-S33: Leading-`D_b` support-saturator extinction
 
 **Kind:** obstruction

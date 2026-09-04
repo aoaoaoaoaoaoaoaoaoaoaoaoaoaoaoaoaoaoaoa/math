@@ -1908,6 +1908,31 @@
 'MatrixMortality.SeparatedTwoCShear.shearedShearResidueTwo_tagHaltsFrom' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedCentered_double_accessible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedCentered_triple_accessible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedComplementaryDefect_imageGap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedShearResidueTwoDefect_imageGap' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedComplementaryResidual_eq_centered' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedShearResidueTwoResidual_eq_centered' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedComplementaryMismatch_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedShearResidueTwoMismatch_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.SeparatedTwoCShear.shearedPhaseMismatch_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.SetterShear.sideBasis_det' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_cube' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.SetterShear.delimiter_square_distinguishedColumn' depends on axioms: [propext,
