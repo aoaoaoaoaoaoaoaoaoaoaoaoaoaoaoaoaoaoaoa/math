@@ -963,6 +963,42 @@
 'MatrixMortality.GuardedMixedPrimeFork.no_kernelOddFamily_offCentralizer_cutCertificate' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.PumpedKernelFamily.balancedPrefix_iff_admissible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.PumpedKernelFamily.alignedNext_of_balancedPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.PumpedKernelFamily.alignedPrevious_of_balancedPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.PumpedKernelFamily.no_twoPreviousAligned_balancedPrefix' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_thirdFamily_internalInternal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_fifthFamily_internalInternal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_seventhFamily_internalInternal' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_dynamicInternal_literalPumpedContextFork' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.sixthFamily_cutTwentyEight_no_rightConjugacy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.sixthFamily_weakCutTwentySeven_block_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.SixthFamilyCutTwentySevenResidue.power_le_eleven' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.GuardedMixedPrimeFork.no_sixthFamily_cutTwentySeven_residue' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.TwoSeedPumpPropagation.finTwo_cayleyHamilton' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
@@ -992,6 +1028,136 @@
  Quot.sound]
 'MatrixMortality.MixedPrimeMacroAddress.eq_replicate_of_addressOffset_eq' depends on axioms: [propext,
  Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroComparator.wordScale_expandAddress_eq_iff_length_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroComparator.five_not_dvd_addressCode' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroComparator.addressOffset_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroComparator.expandAddress_at_zero_injective' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroComparator.wordAction_addressCommutator_at_zero_eq_iff_of_length_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroComparator.wordAction_addressCommutator_eq_iff_of_length_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroComparator.wordAction_addressFork_at_zero_eq_iff_of_length_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeMacroComparator.wordAction_addressFork_eq_iff_of_length_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressForkNoGo.expandAddress_append' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeAddressForkNoGo.encodedWord_addressCode' depends on axioms: [propext]
+'MatrixMortality.MixedPrimeAddressForkNoGo.no_bcbc_endpoint_of_fork_address_words' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressForkNoGo.no_bcbc_endpoint_address_macro_code' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressForkNoGo.no_bcbc_endpoint_of_equalLength_address_data' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressWrapperNoGo.no_bcbc_endpoint_of_commonContext_address_words' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeKernelCloakedAddress.prefixCloakedAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeKernelCloakedAddress.suffixCloakedAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeKernelCloakedAddress.kernelOddFamily_prefixCloakedAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeKernelCloakedAddress.kernelOddFamily_suffixCloakedAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimePrefixCloakNoGo.forkWords_data_commute_of_commonSuffix_long' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.MixedPrimePrefixCloakNoGo.bcbc_data_macro_words_not_commute' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimePrefixCloakNoGo.prefixCloak_strict_size' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimePrefixCloakNoGo.bcbc_prefixCloak_strict_size' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimePrefixPumpSuffixNoGo.forkWords_exists_balanced_cloakSuffixes' depends on axioms: [propext,
+ Quot.sound]
+'MatrixMortality.MixedPrimePrefixPumpSuffixNoGo.bcbc_prefixCloak_exists_balanced_suffixes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeOddFamilyCloakNoGo.no_bcbc_endpoint_of_kernelOddFamily_prefixCloak_reverse' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.wordScale_eq_length_mul_dilateCount' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.padicValRat_two_wordScale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.padicValRat_five_wordScale' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.length_eq_and_dilateCount_eq_of_wordScale_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.wordScale_eq_of_wordActions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.piecewise_actions_eq_of_empty_false_true' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.interleavedAddress_piecewise_actions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.interleavedAddress_cuts_eq_boundary_of_prefixKernelFree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.kernelOddFamily_no_proper_prefix_actions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.kernelOddFamily_interleavedAddress_cuts_eq_boundary_reverse' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.interleavedAddress_exists_genuine_piece' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressInterleavingCollapse.bcbc_interleavedAddress_exists_genuine_piece' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.wordAction_doubleInterleave' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.doubleInterleaved_piecewise_actions_eq_of_fiveProbes' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.doubleInterleavedAddress_piecewise_actions_eq' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.sandwichAddress_actions_eq_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.sandwichAddress_genuineComparator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.doubleInterleavedAddress_cuts_eq_trichotomy_of_prefixKernelFree' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.bcbc_sandwich_address_length_lt' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.MixedPrimeAddressSandwich.bcbc_sandwich_toggle_length_lt_kernel' depends on axioms: [propext,
  Quot.sound]
 'MatrixMortality.SquareRootPunctuation.coefficient_append_square' depends on axioms: [propext,
  Classical.choice,

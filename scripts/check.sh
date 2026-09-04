@@ -147,6 +147,14 @@ readonly PYTHON_CHECKERS=(
   tools/certify_mixed_prime_completion.py
   tools/certify_mixed_prime_context_cuts.py
   tools/certify_mixed_prime_pump_families.py
+  tools/certify_mixed_prime_factor_lattice.py
+  tools/certify_mixed_prime_pumped_context.py
+  tools/certify_mixed_prime_prefix_cloaks.py
+  tools/certify_mixed_prime_prefix_pump_suffixes.py
+  tools/certify_mixed_prime_prefix_factor_boundaries.py
+  tools/certify_mixed_prime_suffix_factor_boundaries.py
+  tools/certify_mixed_prime_odd_cloaks.py
+  tools/certify_mixed_prime_pump_prefix_kernels.py
   tools/certify_frankl.py
   tools/explore_setter_projective.py
   tools/scour_source.py
@@ -168,6 +176,14 @@ uv run --script tools/audit_six_state_sandwich.py
 uv run --script tools/certify_mixed_prime_completion.py
 uv run --script tools/certify_mixed_prime_context_cuts.py
 uv run --script tools/certify_mixed_prime_pump_families.py
+uv run --script tools/certify_mixed_prime_factor_lattice.py
+uv run --script tools/certify_mixed_prime_pumped_context.py
+uv run --script tools/certify_mixed_prime_prefix_cloaks.py
+uv run --script tools/certify_mixed_prime_prefix_pump_suffixes.py
+uv run --script tools/certify_mixed_prime_prefix_factor_boundaries.py
+uv run --script tools/certify_mixed_prime_suffix_factor_boundaries.py
+uv run --script tools/certify_mixed_prime_odd_cloaks.py
+uv run --script tools/certify_mixed_prime_pump_prefix_kernels.py
 uv run --script tools/certify_frankl.py
 uv run --script tools/explore_setter_projective.py --audit --primes 3
 uv run --script tools/scour_source.py
@@ -176,6 +192,13 @@ rustfmt --edition 2021 --check tools/audit_mixed_prime_kernel.rs
 rustc --crate-name mixed_prime_kernel_audit --edition 2021 -D warnings -C opt-level=2 \
   tools/audit_mixed_prime_kernel.rs -o "$SCRATCH/audit_mixed_prime_kernel"
 "$SCRATCH/audit_mixed_prime_kernel" self-check
+
+uv run --script tools/certify_mixed_prime_pump_families.py --seed-manifest \
+  > "$SCRATCH/mixed-prime-pump-families.tsv"
+rustfmt --edition 2021 --check tools/certify_mixed_prime_sandwich.rs
+rustc --crate-name mixed_prime_sandwich_certificate --edition 2021 -D warnings -C opt-level=2 \
+  tools/certify_mixed_prime_sandwich.rs -o "$SCRATCH/certify_mixed_prime_sandwich"
+"$SCRATCH/certify_mixed_prime_sandwich" "$SCRATCH/mixed-prime-pump-families.tsv"
 
 assert_manifest_route() {
   local href="$1"

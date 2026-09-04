@@ -437,6 +437,22 @@ file owns the mathematical stock.
 | [`G3-S14`](#g3-s14-finite-convergent-mixed-prime-presentation) | structure theorem, decision procedure, and separation | adjoining the 45 first critical branch pairs gives a finite 50-rule convergent presentation of the five-rule congruence; the quotient contains the forbidden length-312 fork but excludes every positive-depth odd-family relation | exact independently replayable certificate; Lean fork witness | active |
 | [`G3-S15`](#g3-s15-uniform-mixed-prime-contextual-cut-collapse) | uniform obstruction and computational cut | Parikh-balanced contextual cuts kill the odd kernel family at every depth and contract the first two completed critical generations to a finite internal cell, where exact replay finds no fork | formalized parametric obstruction; audited extraction and exact exhaustive computation | active |
 | [`G3-S16`](#g3-s16-cayley-hamilton-pump-census-and-free-macro-address) | structure theorem, exact census, and separation | exhaustive length-32 census yields 23 infinite external pump schemas; the derived macros `DT,TD` form a free two-sided binary affine address stack, while every schema reads only one unary constant address | formalized mechanism; exact exhaustive and independently replayable certificates | active |
+| [`G3-S17`](#g3-s17-uniform-pumped-context-classification) | uniform obstruction and finite residue | exact all-depth cuts eliminate every moving internal cell in seven pump families; family six's sole static internal residue contracts to 156 rejected geometries | formalized uniform obstruction; exact independently replayable certificate | active |
+| [`G3-S18`](#g3-s18-exact-mixed-prime-address-comparators) | structure theorem and comparator | evaluation at zero globally decodes the free `DT/TD` stack; at equal length, both commutation and the literal five-factor fork compare arbitrary addresses exactly | formalized | active |
+| [`G3-S19`](#g3-s19-aligned-address-fork-obstruction) | obstruction | the complete forced fork cannot lie in the aligned `DT/TD` address submonoid; some control boundary must break address phase | formalized | active |
+| [`G3-S20`](#g3-s20-common-address-wrapper-obstruction) | obstruction | a common phase-breaking prefix and suffix cancel, so they cannot wrap the aligned address comparator into the forced fork | formalized | active |
+| [`G3-S21`](#g3-s21-kernel-cloaked-address-comparators) | enabling structure theorem | every genuine mixed-prime kernel pair asymmetrically cloaks an exact arbitrary-length address comparator while preserving raw-word distinctness | formalized; explicit infinite family | active |
+| [`G3-S22`](#g3-s22-prefix-cloak-size-obstruction) | obstruction and finite rejection | every physical prefix cloak obeys `2|u|<|x|+|y|<|L|`; all 23 base pump cloaks fail the remaining finite factorization census | formalized universal bound; exact independently replayable certificate | active |
+| [`G3-S23`](#g3-s23-pumped-prefix-cloak-suffix-collapse) | uniform obstruction and exact family cut | a balanced nonempty cloak suffix with `2(n+q)<|L|` is mandatory; this kills 12 of the 23 pump families globally | formalized universal gate; exact symbolic and finite certificates | active |
+| [`G3-S24`](#g3-s24-prefix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | bigram/trigram boundary signatures kill the remaining eleven pump families, so none of the 23 schemas can realize a prefix cloak | formalized head reduction; exact symbolic certificate | active |
+| [`G3-S25`](#g3-s25-suffix-cloak-factor-boundary-collapse) | uniform obstruction and complete family extinction | trigram boundary signatures kill all 23 pump schemas in suffix orientation at every depth | exact independently replayable symbolic certificate | active |
+| [`G3-S26`](#g3-s26-odd-family-one-sided-cloak-extinction) | uniform obstruction and complete family extinction | the explicit odd kernel family fails the prefix size gate and the suffix trigram catalogue in both orientations | formalized prefix no-go; exact independently replayable suffix certificate | active |
+| [`G3-S27`](#g3-s27-single-cut-address-interleaving-collapse) | structure theorem and uniform obstruction | three address probes split every uniform single-cut comparator into kernel pairs; the odd family is forced to an endpoint cut already killed by G3-S26 | formalized | active |
+| [`G3-S28`](#g3-s28-pump-family-prefix-kernel-extinction) | uniform obstruction and complete family extinction | exact count-walk and affine-defect recurrences prove all 23 pump families prefix-kernel-free, killing every single-cut placement | formalized composition; exact independently replayable symbolic certificate | active |
+| [`G3-S29`](#g3-s29-two-cut-collapse-and-exact-sandwich-carrier) | structure theorem and positive mechanism | five probes collapse every uniform double insertion to three kernel pairs; the sole central placement turns any genuine affine kernel pair into an exact raw-distinct address comparator | formalized | active |
+| [`G3-S30`](#g3-s30-explicit-sandwich-boundary-extinction) | uniform obstruction and complete family extinction | trigram filtering and a complete fourgram boundary catalogue kill the central sandwich in all 23 pump schemas and the odd family at every depth and in both orientations | audited exact independently replayable certificate | active |
+| [`G3-S31`](#g3-s31-explicit-common-wrapper-fivegram-extinction) | uniform obstruction and complete family extinction | conditional factor refinement through length five kills every arbitrary common-context fork in all 23 pump schemas and the odd family | audited exact independently replayable certificate | active |
+| [`G3-S32`](#g3-s32-contextual-factor-lattice-saturation) | exact-linear obstruction | each single base kernel relation contextually saturates the full augmentation lattice of factor counts at every width from two through six | audited exact independently replayable certificate | active |
 | [`G3-M02`](#g3-m02-square-root-punctuation-fracture) | partial mechanism | a rank-two square root gives an exact `SS`-free mortality grammar | formalized | closed |
 | [`G3-O10`](#g3-o10-square-root-boundary-saturation) | obstruction | every nondegenerate rank-one square root preserves boundary coefficient zeros | formalized | graduated |
 | [`G3-M01`](#g3-m01-free-group-discrepancy-engine) | partial mechanism | Carvalho's transducer gives an all-word marker-tail equation and a cyclic exponent-one equalizer | audited | active |
@@ -21141,6 +21157,847 @@ addresses; a no-go should prove that its forced two-state core cannot upgrade un
 **Next:** test whether two or more side-contextual readers can be composed into an arbitrary
 address comparator under the physical `D/T` grammar. In parallel, extend the uniform contextual
 cut to the six new length-`31` pump families and the sixteen length-`32` schemas.
+
+### G3-S17: Uniform pumped-context classification
+
+**Kind:** uniform obstruction and finite residue
+
+**Evidence:** formalized uniform obstruction; exact independently replayable certificate
+
+**Disposition:** active
+
+The seven length-`31` pump schemas of `G3-S16` have an exact balanced-prefix census at every pump
+power. Families three, five, and seven retain only the universal cut `3`. Families one, two, and
+four also have `30+2i` for `0≤i<k`; family six has those moving cuts and the static cuts `27,28`.
+Lean derives this infinite census from the base words and one two-letter shift recurrence.
+
+The adjacent-letter gates are equally rigid. Agreement immediately after a proper balanced cut
+forces family six at cut `27`; agreement immediately before it forces family six at cut `28`,
+where the preceding second letter necessarily disagrees. Families three, five, and seven have no
+internal/internal contextual placement. For every moving cut in the other four families, length
+balance forces the terminal moving cut and exactly one of
+
+```text
+(|X|,|Y|,|P|,|Q|)=(1,2,0,0),(2,1,0,0),(2,2,1,1).
+```
+
+The literal fork equations then identify incompatible one- or two-letter slices of `Z` with the
+fixed relation prefixes `DTTT` and `TTDD`. Thus every moving internal/internal cell is impossible
+at every pump depth.
+
+Family six's exceptional cut-`27` internal residue satisfies `k≤11`. The exact tail equations are
+
+```text
+|Q|=2k+1,  {|X|,|Y|}={2k+3,2k+2},  |Z|=|P|+22-4k>0.
+```
+
+An assignment-complete union-find certificate enumerates both orientations and every lawful
+prefix length: all `156` geometries force one variable-letter class to contain both `D` and `T`.
+Its canonical payload SHA-256 is
+`013124fe8b1a55fe29af90c1f18d86356d4506d2dde85bf9cb90ad8354cc1f30`.
+Lean separately rejects the cut-`28` one-letter right-conjugacy orientation and proves a fixed
+`25`-letter mismatch for the weak cut-`27` orientation at every depth.
+
+**Scope:** this is an exact classification of balanced cuts plus formal local extinction theorems.
+It does not yet package every comparable-prefix/suffix and same-shorter placement into one typed
+exhaustive extraction theorem. It covers one literal two-sided context around one pumped relation,
+not several relations, several contexts, or a multi-window quotient derivation. The certificate
+discharges the stated family-six residue; it is not imported into Lean as a proof term.
+
+**Use:** retire every moving internal/internal repair of the seven length-`31` schemas. `G3-S31`
+now closes the formerly untyped comparable/same-shorter cells and the complete one-context hull
+of all `23` pump schemas. A genuine successor must use several windows, a new relation, or the
+free binary address mechanism through a nonlocal interface.
+
+**Artifact:**
+[`GuardedMixedPrimePumpedCuts.lean`](MatrixMortality/GuardedMixedPrimePumpedCuts.lean),
+[`GuardedMixedPrimePumpedContext.lean`](MatrixMortality/GuardedMixedPrimePumpedContext.lean),
+[`certify_mixed_prime_pumped_context.py`](tools/certify_mixed_prime_pumped_context.py), and
+[`m34-pumped-context-classification-2026-08-31.md`](audits/m34-pumped-context-classification-2026-08-31.md).
+
+**Next:** use `G3-S31` instead of duplicating the old layout extraction. Attack multi-window
+quotient geometry or compose the free `{DT,TD}` address stack through a nonlocal terminal
+interface while retaining the all-word converse.
+
+### G3-S18: Exact mixed-prime address comparators
+
+**Kind:** structure theorem and comparator
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Evaluation at zero is a globally injective scalar code for the free `{DT,TD}` affine stack. For a
+nonempty address `w` of length `n`,
+
+```text
+offset(w)=code(w)/(3·5^(n-1)),       5∤code(w).
+```
+
+If two offsets agree, clearing denominators gives
+
+```text
+code(u)5^|v|=code(v)5^|u|.
+```
+
+Five-adic divisibility forces `|u|=|v|`; the fixed-length mixed-radix decoder then forces `u=v`.
+The empty address is isolated because its offset is zero and every nonempty offset is positive.
+Thus one scalar, not a length-plus-offset pair, recovers every finite address.
+
+At equal address length, the literal commutator is an exact scalar equality test:
+
+```text
+UV(0)=VU(0)  ↔  U=V.
+```
+
+The mandatory reduced `bcbc` fork has the same power. For arbitrary raw mixed-prime toggle word
+`Z`, including the empty word,
+
+```text
+VZUVU(0)=UZVUV(0)  ↔  U=V
+```
+
+whenever `U,V` are equal-length `{DT,TD}` addresses. Writing their common multiplier as
+`0<r<1`, their offsets as `u,v`, and the toggle multiplier as `c≤1`, the branch difference is
+
+```text
+(u-v)(c(r³-r²+r)-1).
+```
+
+Since `0<r³-r²+r<1`, the second factor is strictly negative. Lean proves both scalar theorems and
+the corresponding whole-action equalities.
+
+**Scope:** equal length is essential to the five-factor theorem. With `A=DT`, the nonempty triple
+`U=A,V=A²,Z=A³` makes both branches literally `A⁹`; it lies on the common-fixed centralizer
+diagonal already forbidden by `G3-S08`. The globally injective direct offset reader has no length
+restriction, but it requires an interface that exposes two scalar offsets or their difference.
+Neither result dynamically generates source-dependent addresses or rejects malformed physical
+words outside the address grammar.
+
+**Use:** stop searching for an abstract equality test inside the mixed-prime core; it now exists in
+the exact physical five-factor shape. The constructive seam is synchronized dynamic production of
+`U,V`, or direct routing of their scalar offsets, followed by the complete endpoint converse.
+
+**Artifact:**
+[`MixedPrimeMacroComparator.lean`](MatrixMortality/MixedPrimeMacroComparator.lean) and
+[`m34-macro-address-comparator-2026-08-31.md`](audits/m34-macro-address-comparator-2026-08-31.md).
+
+**Next:** compile the two source histories into synchronized `{DT,TD}` addresses inside the
+`G3-C08` two-state endpoint core, or expose their globally injective offsets to one terminal
+difference row. In either case prove rejection of every malformed raw control word.
+
+### G3-S19: Aligned-address fork obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+The `G3-S18` stack cannot carry the complete forced `bcbc` fork as one aligned object. Exact
+endpoint semantics forces the encoded flat and nested fork words to be distinct while inducing
+the same affine action. If both words were expansions of binary `{DT,TD}` addresses, equality at
+zero and global scalar injectivity would identify the addresses and hence the raw words, a
+contradiction. Their address lengths may differ; no synchronized-length premise is used.
+
+Address expansion preserves concatenation. Therefore a code assigning every fixed paired control
+one whole address sends every control word, including both fork branches, into the aligned address
+submonoid and is impossible. Empty control addresses and unequal control-address lengths do not
+evade the theorem. A second corollary allows an arbitrary unaligned toggle but rejects
+equal-length aligned data macros: both would have slope `(2/5)^n`, contradicting the forced
+unequal data slopes of `G3-S11`.
+
+**Scope:** the result does not reject an address occurring strictly inside a larger globally
+unaligned fork word. It does not reject a phase-breaking wrapper, source-dependent routing of two
+offsets, or a terminal functional outside the fixed-endpoint block-code interface. At least one
+fork branch must leave the aligned submonoid; the theorem does not classify how it leaves or
+whether it can return around an interior comparison.
+
+**Use:** reject every direct controlwise serializer into the free address stack. A positive
+construction must deliberately break the two-letter address phase around the global fork and read
+an interior address discrepancy, or expose two offsets through a separate endpoint channel.
+
+**Artifact:**
+[`MixedPrimeAddressForkNoGo.lean`](MatrixMortality/MixedPrimeAddressForkNoGo.lean) and
+[`m34-aligned-address-fork-no-go-2026-09-01.md`](audits/m34-aligned-address-fork-no-go-2026-09-01.md).
+
+**Next:** classify the smallest phase-breaking wrapper which can place an injective address
+segment inside the forced kernel pair without making the two complete fork words aligned. Test its
+arbitrary-word endpoint language before any larger search.
+
+### G3-S20: Common address-wrapper obstruction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+A shared phase-breaking wrapper does not evade `G3-S19`. Suppose the forced flat and nested fork
+words factor as
+
+```text
+P·expandAddress(u)·Q,       P·expandAddress(v)·Q.
+```
+
+The fixed literal contexts `P,Q` may be unaligned, source-dependent, nonempty, or empty, and the
+addresses may have unequal lengths. Every mixed-prime word action is bijective, so the common
+two-sided context cancels from the forced action equality. Global scalar address injectivity gives
+`u=v`; restoring the common raw contexts identifies the complete fork words, contradicting the
+mandatory genuine kernel pair.
+
+**Scope:** the theorem requires the same literal prefix and suffix on both branches. Distinct
+wrappers whose actions differ, interleaved address fragments, and a separate two-offset terminal
+channel remain outside it. It proves no claim about whether an asymmetric wrapper exists or can
+satisfy the arbitrary-word endpoint converse.
+
+**Use:** do not spend a wrapper merely to shift the address pair boundary. Any surviving interior
+comparator must interact asymmetrically with the two fork branches or reach a terminal channel
+before common-context cancellation applies.
+
+**Artifact:**
+[`MixedPrimeAddressWrapperNoGo.lean`](MatrixMortality/MixedPrimeAddressWrapperNoGo.lean) and
+[`m34-address-wrapper-no-go-2026-09-01.md`](audits/m34-address-wrapper-no-go-2026-09-01.md).
+
+**Next:** classify asymmetric prefix/suffix wrappers under the exact reduced fork equation. Search
+first for a wrapper whose residual action is a nonzero scalar multiple of the address-offset
+difference, then test its all-word endpoint language.
+
+### G3-S21: Kernel-cloaked address comparators
+
+**Kind:** enabling structure theorem
+
+**Evidence:** formalized; explicit infinite family
+
+**Disposition:** active
+
+Every genuine mixed-prime kernel pair is the asymmetric wrapper sought after `G3-S20`. If raw
+words `L≠R` induce the same affine action, then for arbitrary binary addresses `u,v`,
+
+```text
+wordAction(L·expandAddress(u)) = wordAction(R·expandAddress(v))  ↔  u=v,
+wordAction(expandAddress(u)·L) = wordAction(expandAddress(v)·R)  ↔  u=v.
+```
+
+The prefix form cancels the common cloak action by injectivity. The suffix form evaluates on a
+preimage supplied by surjectivity. In both cases `G3-S18` then recovers the complete addresses,
+including their lengths. Conversely, equal addresses and equal cloak actions give equal wrapped
+actions.
+
+The wrapped raw words remain distinct for every `u,v`. Any raw equality would imply action
+equality and hence `u=v`; free-list cancellation of the common matched address then forces
+`L=R`. Thus the kernel cloak preserves the raw discrepancy required by `G3-S10` while adding a
+lossless arbitrary address comparison.
+
+This is concrete. For every pump depth, Lean instantiates both orientations with the explicit odd
+mixed-prime kernel pair. The result therefore supplies an infinite family of raw-distinct address
+comparators without a synchronized-length premise.
+
+**Scope:** the theorem is an action-level carrier. It does not factor either cloaked branch as the
+physical reduced fork words `yzxyx` and `xzyxy` of three fixed control macros. It does not select
+source-dependent addresses or prove the fixed-endpoint language on arbitrary controls. Those are
+the remaining realization and converse obligations.
+
+**Use:** retain a genuine kernel relation as a one-sided cloak instead of trying to hide the
+address stack inside a common context. Search the physical fork equation for a factorization whose
+residual branches are one of the two displayed forms.
+
+**Artifact:**
+[`MixedPrimeKernelCloakedAddress.lean`](MatrixMortality/MixedPrimeKernelCloakedAddress.lean) and
+[`m34-kernel-cloaked-address-comparator-2026-09-01.md`](audits/m34-kernel-cloaked-address-comparator-2026-09-01.md).
+
+**Next:** solve the word-factor equations
+`yzxyx=L·expandAddress(u)` and `xzyxy=R·expandAddress(v)`, or the suffix analogues, with one
+explicit kernel cloak and source-computable address maps. Then test the complete endpoint converse.
+
+### G3-S22: Prefix-cloak size obstruction
+
+**Kind:** obstruction and finite rejection
+
+**Evidence:** formalized universal bound; exact independently replayable certificate
+
+**Disposition:** active
+
+The prefix orientation of `G3-S21` pays a strict terminal-size tax. Suppose one accepting equal
+address is physically realized as
+
+```text
+yzxyx=L·expandAddress(u),       xzyxy=R·expandAddress(u).
+```
+
+Lean proves
+
+```text
+2|u| < |x|+|y| < |L|.
+```
+
+If the common address suffix reached `|x|+|y|` letters, it would contain both final blocks `yx`
+and `xy`. Equal-length suffixes of one word coincide, so the data words would commute. Exact
+endpoint semantics forbids this: commutation makes the two nonempty contracting data actions
+share their unique rational fixed point, contradicting the already forced fixed-point separation.
+The exact reduced-word length equation and nonempty toggle then give the second strict inequality.
+
+Thus no fixed prefix cloak carries unbounded address depth. A prefix construction must make its
+cloak source-dependent and strictly longer than the data boundary, rather than attaching a fixed
+kernel relation to an arbitrarily long address.
+
+The formal bound makes each fixed cloak search finite. An exact parity-DSU certificate applies it
+to all `23` base pump relations from `G3-S16`, in both branch orientations. The complete census has
+`77,280` positive length geometries, reaches maximum address depth `14`, and has no survivor.
+
+**Scope:** the finite rejection covers the `23` base prefix cloaks only. It does not cover pumped
+descendants, the odd family, suffix cloaks, unequal or interleaved address interiors, or a separate
+two-offset channel. The universal size theorem applies to every prefix cloak but permits a family
+whose cloak grows with the source and address.
+
+**Use:** prune every fixed-cloak prefix compiler and all `23` base candidates. Any surviving
+prefix search must satisfy the strict size gate before literal or affine algebra is attempted.
+
+**Artifact:**
+[`MixedPrimePrefixCloakNoGo.lean`](MatrixMortality/MixedPrimePrefixCloakNoGo.lean),
+[`certify_mixed_prime_prefix_cloaks.py`](tools/certify_mixed_prime_prefix_cloaks.py), and
+[`m34-prefix-cloak-size-2026-09-01.md`](audits/m34-prefix-cloak-size-2026-09-01.md).
+
+**Next:** derive a uniform contradiction for pumped/source-varying prefix cloaks, or move to the
+suffix orientation where the address does not create the same terminal overlap. Any positive
+candidate must still satisfy the complete arbitrary-word endpoint converse.
+
+### G3-S23: Pumped prefix-cloak suffix collapse
+
+**Kind:** uniform obstruction and exact family cut
+
+**Evidence:** formalized universal gate; exact symbolic and finite certificates
+
+**Disposition:** active
+
+The proper terminal overlap from `G3-S22` exposes a stronger invariant. In every physical prefix
+factorization there are nonempty suffixes `L′,R′` of the two cloaks such that
+
+```text
+yx=L′·expandAddress(u),       xy=R′·expandAddress(u).
+```
+
+Lean proves `|L′|=|R′|=:q`, equality of their complete `D/T` Parikh vectors, and the strict
+gate
+
+```text
+2(|u|+q) < |L|.
+```
+
+The count condition follows by cancelling the common address contribution from the cyclic pair
+`yx,xy`. The size condition combines `|x|+|y|=q+2|u|` with the reduced-word length equation and
+the nonempty toggle. This condition is independent of the particular kernel presentation.
+
+Applied to the `23` Cayley–Hamilton pump schemas, the gate kills `11` families uniformly at every
+pump depth. After a finite preperiod every feasible suffix lies inside `Pᵏ·tail`, where
+`P∈{DT,TD}`. Its exact `D` count is a fixed tail count plus `⌊r/2⌋` and one parity bit, so the
+left-right discrepancy is two-periodic and nonzero in both parities. Exact replay checks the
+finite preperiod. The dead families are `l31-03`, `l31-05`, `l31-07`, `l32-01`, `l32-03`,
+`l32-04`, `l32-09`, `l32-10`, `l32-11`, `l32-14`, and `l32-16`.
+
+Family `l32-12` has one balanced preperiodic suffix `q=2k+5` for `0≤k≤10`. A complete
+parity-DSU replay rejects all `2,288` physical length geometries in both branch orientations. At
+`k≥11` the periodic suffix discrepancy is constantly `-1`, so this twelfth family also dies at
+every depth.
+
+**Scope:** exactly `11` pump families remain:
+`l31-01`, `l31-02`, `l31-04`, `l31-06`, `l32-02`, `l32-05`, `l32-06`, `l32-07`,
+`l32-08`, `l32-13`, and `l32-15`. Exploratory exact search finds no physical factorization through
+pump depth `20`, but that cutoff is not evidence of a theorem. Suffix cloaks, unequal/interleaved
+interiors, and separate two-offset routing remain outside the result.
+
+**Use:** delete the twelve dead families from every prefix-cloak search. On the remaining eleven,
+work only inside their genuine periodic balanced-suffix ladders and derive a stronger word-equation
+invariant; do not increase the depth cutoff as a substitute.
+
+**Artifact:**
+[`MixedPrimePrefixPumpSuffixNoGo.lean`](MatrixMortality/MixedPrimePrefixPumpSuffixNoGo.lean),
+[`certify_mixed_prime_prefix_pump_suffixes.py`](tools/certify_mixed_prime_prefix_pump_suffixes.py),
+and
+[`m34-prefix-pump-suffix-collapse-2026-09-01.md`](audits/m34-prefix-pump-suffix-collapse-2026-09-01.md).
+
+**Next:** classify the periodic literal word equations in the eleven surviving prefix families,
+or derive the corresponding head-overlap gate for suffix cloaks. The all-word endpoint converse
+remains a separate obligation after any physical carrier is found.
+
+### G3-S24: Prefix-cloak factor-boundary collapse
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** formalized head reduction; exact symbolic certificate
+
+**Disposition:** active
+
+The eleven `G3-S23` survivors all fail a local invariant on the complementary cloak heads. The
+formal factorization gives
+
+```text
+head(Lₖ)=yzx,       head(Rₖ)=xzy
+```
+
+for nonempty physical macros `x,y,z`. Internal contiguous factors of the three blocks cancel
+between the two permutations. For factors of length `r`, only the two block boundaries remain;
+each head has at most `2(r-1)` crossing occurrences. Hence the ℓ¹ norm of the complete
+factor-count discrepancy is at most `4(r-1)`.
+
+The exact all-depth pump-head catalogue violates this bound at `r=2` for six families:
+`l31-01`, `l31-02`, `l31-04`, `l32-06`, `l32-07`, and `l32-15`. Their bigram discrepancy norms
+range from `8` to `16`, above the boundary budget `4`. At `r=3`, four more families violate the
+budget `8`: `l31-06`, `l32-02`, `l32-08`, and `l32-13`, with norms from `10` to `22`.
+
+The last family, `l32-05`, saturates the trigram norm bound but misses the exact boundary set. Its
+bigram vector uniquely forces endpoint types `x:T…D`, `y:D…T`, `z:T…T`. Both boundaries of
+`yzx` then contain `TT`, so no crossing trigram can be `DDD`; the pumped head discrepancy requires
+one surplus crossing `DDD`. Equivalently, both of its trigram vectors lie outside the complete
+`1,203`-element boundary catalogue.
+
+The certificate is global, not a depth cutoff. It replays the finite preperiod from `G3-S23`, then
+classifies long suffixes by `t=2k-q`. Once the remaining alternating pump segment exceeds the
+factor radius, `t↦t+2` adds one common period and preserves the discrepancy. The finite residue
+cells and one stable cell per parity exhaust every pump depth. A depth-`50` replay only audits this
+symbolic decomposition.
+
+**Scope:** this closes all `23` `G3-S16` pump schemas in prefix orientation. It does not exclude
+the explicit odd kernel family used by `G3-S21`, a different or undiscovered kernel relation,
+suffix cloaks, interleaved address interiors, or a separate two-offset terminal channel.
+
+**Use:** stop searching the `23` Cayley–Hamilton pump families for a prefix realization. Reuse the
+factor-boundary invariant against any new periodic cloak before running a physical search.
+
+**Artifact:**
+[`certify_mixed_prime_prefix_factor_boundaries.py`](tools/certify_mixed_prime_prefix_factor_boundaries.py)
+and
+[`m34-prefix-factor-boundary-collapse-2026-09-01.md`](audits/m34-prefix-factor-boundary-collapse-2026-09-01.md).
+
+**Next:** attack the suffix orientation, where the address changes the head rather than the
+terminal boundary, or subject the odd kernel family to the same prefix size and local-factor
+sieves. Any surviving carrier still needs the complete arbitrary-word endpoint converse.
+
+### G3-S25: Suffix-cloak factor-boundary collapse
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** exact independently replayable symbolic certificate
+
+**Disposition:** active
+
+The suffix orientation of every `G3-S16` pump schema also fails. An accepting equal-address
+factorization would have
+
+```text
+yzxyx=W·Lₖ,       xzyxy=W·Rₖ
+```
+
+for an aligned address `W`. Internal trigram counts of `x,y,z` cancel between the physical words;
+only four block boundaries remain. There are exactly `1,243` possible binary discrepancy vectors
+for nonempty `x,y,z`.
+
+On the target side, internal factors of the common `W` cancel. A trigram crossing the cloak
+boundary sees only the last two letters of `W`. The complete contexts are `ε`, `DT`, and `TD`,
+because every nonempty aligned address ends in one full macro. For every pump schema, each of
+these three target discrepancies lies outside the physical boundary catalogue.
+
+This is uniform in pump depth. Depth zero is the finite preperiod. Once one two-letter pump block
+is present, adding another period contributes the same internal trigrams on both branches and
+preserves the two-letter junction contexts. The six cells per family—three contexts at `k=0` and
+three at `k≥1`—therefore cover all depths exactly.
+
+**Scope:** combined with `G3-S24`, this kills both one-sided cloak orientations for all `23` pump
+schemas. It does not cover the explicit odd relation from `G3-S21`, another kernel family,
+addresses interleaved through the cloak, or a separate endpoint channel.
+
+**Use:** retire the complete `G3-S16` pump census from one-sided cloak searches. The trigram
+boundary catalogue is reusable against any new suffix cloak with a local periodic presentation.
+
+**Artifact:**
+[`certify_mixed_prime_suffix_factor_boundaries.py`](tools/certify_mixed_prime_suffix_factor_boundaries.py)
+and
+[`m34-suffix-factor-boundary-collapse-2026-09-01.md`](audits/m34-suffix-factor-boundary-collapse-2026-09-01.md).
+
+**Next:** `G3-S26` applies the paired orientation sieve to the odd family. Continue with
+interleaved address placements or the separate two-offset gate. The arbitrary-word endpoint
+converse remains mandatory after any carrier survives.
+
+### G3-S26: Odd-family one-sided cloak extinction
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** formalized prefix no-go; exact independently replayable suffix certificate
+
+**Disposition:** active
+
+The explicit infinite odd kernel family from `G3-S21` fails both one-sided cloak orientations.
+For a prefix cloak, `G3-S23` forces a positive proper Parikh-balanced cloak suffix of length `q`
+with
+
+```text
+2(address_depth+q)<|Lₖ|.
+```
+
+The odd-family Parikh theorem identifies its only such suffix exactly:
+`q=|Lₖ|-3`. Since `|Lₖ|=29+2k`, the strict gate is impossible. Lean proves this for both
+assignments of `Lₖ,Rₖ` to the flat and nested physical fork words.
+
+For a suffix cloak, the relation factorization is
+
+```text
+Lₖ=oddFamilyLeftHead·(DT)ᵏ·DTDD,
+Rₖ=oddFamilyRightHead·(DT)ᵏ·DDTT.
+```
+
+The aligned address contributes only the trigram junction contexts `ε/DT/TD`. All three target
+discrepancies miss the complete `1,243`-vector physical `yzxyx/xzyxy` boundary catalogue; their
+negatives miss it after reversing the relation. Depth zero and the stable positive-depth cell
+coincide. Two-letter locality proves that inserting another `DT` period preserves the target
+vector, so the certificate covers every depth rather than a finite cutoff.
+
+**Scope:** combined with `G3-S24` and `G3-S25`, every currently explicit infinite mixed-prime
+kernel family is impossible as either a prefix or suffix cloak. This does not classify all kernel
+relations, addresses interleaved through a relation, asymmetric two-offset routing, or the
+source-indexed arbitrary-word endpoint converse.
+
+**Use:** retire the odd family from one-sided cloak searches. Any continuation of the address
+architecture must first produce a new kernel geometry, interleave address and relation letters,
+or route two offsets through a separate channel.
+
+**Artifact:**
+[`MixedPrimeOddFamilyCloakNoGo.lean`](MatrixMortality/MixedPrimeOddFamilyCloakNoGo.lean),
+[`certify_mixed_prime_odd_cloaks.py`](tools/certify_mixed_prime_odd_cloaks.py), and
+[`m34-odd-family-cloak-extinction-2026-09-01.md`](audits/m34-odd-family-cloak-extinction-2026-09-01.md).
+
+**Next:** classify the minimal interleaving or two-offset equation before searching another
+one-sided family. A new kernel relation is relevant only if its local factor data evade the
+reusable prefix and suffix catalogues.
+
+### G3-S27: Single-cut address-interleaving collapse
+
+**Kind:** structure theorem and uniform obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+A uniform insertion of the free `{DT,TD}` address at one fixed cut cannot create a new comparator
+geometry. If fixed pieces satisfy
+
+```text
+action(P·expandAddress(u)·Q)=action(R·expandAddress(u)·S)
+```
+
+for every address `u`, the empty address and the two one-digit probes already force
+
+```text
+action(P)=action(R),       action(Q)=action(S).
+```
+
+The two digits have common multiplier `2/5` and distinct offsets. Subtracting their equations
+first identifies the prefix slopes; subtracting the empty equation from one digit then identifies
+the suffix actions; surjectivity cancels that suffix and identifies the prefix actions. A
+raw-distinct comparator therefore contains a genuine kernel pair wholly before or wholly after
+the cut. Lean composes this with the reduced `bcbc` fork, whose two raw words are necessarily
+distinct under exact endpoint semantics.
+
+The formal slope valuation sharpens the result for side-specific cuts:
+
+```text
+scale(w)=(3/5)^|w|·(10/9)^{#D(w)},
+v₂(scale(w))=#D(w),
+v₅(scale(w))=#D(w)-|w|.
+```
+
+Equal actions therefore force equal slopes, lengths, and Parikh vectors. In the odd family, the
+two cut positions must coincide. Its only positive proper Parikh-balanced prefix cut is `3`, but
+the corresponding prefixes `DTT/TTD` have different affine offsets. Thus a uniform single-cut
+odd-family comparator can use only cut `0` or cut `29+2k`, in either relation orientation.
+`G3-S26` kills precisely these suffix- and prefix-cloak endpoints. The odd family is therefore
+dead at every single insertion position, including proposals with different initial cuts.
+
+**Scope:** the comparator must work uniformly for arbitrary address pairs, with one fixed cut on
+each relation side. The theorem does not cover two or more alternating address segments,
+address-dependent cut positions, a stateful reader that needs only a restricted address language,
+or a separate terminal channel. For another kernel family, a proper equal-action prefix pair may
+survive and must be classified rather than assumed absent.
+
+**Use:** remove all single-cut odd-family interleavings from the carrier tree. Before searching a
+single-cut placement in any new relation, classify its proper prefix kernel pairs; without one,
+the architecture reduces immediately to the already rejected one-sided endpoints.
+
+**Artifact:**
+[`MixedPrimeAddressInterleavingCollapse.lean`](MatrixMortality/MixedPrimeAddressInterleavingCollapse.lean)
+and
+[`m34-single-cut-interleaving-collapse-2026-09-01.md`](audits/m34-single-cut-interleaving-collapse-2026-09-01.md).
+
+**Next:** classify proper prefix kernel pairs in the `23` pump schemas, then either eliminate
+their internal cuts or isolate the first genuine two-kernel split. If none survives, move to a
+two-cut/stateful address word or the separate two-offset terminal gate.
+
+### G3-S28: Pump-family prefix-kernel extinction
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** formalized composition; exact independently replayable symbolic certificate
+
+**Disposition:** active
+
+All `23` `G3-S16` pump families are prefix-kernel-free at every depth. For the prefix dilation
+count difference `Δₖ(j)`, the synchronized increment word reaches an exact
+`H·C^(k−k₀)·T` lasso after at most two transient depths. Its zero-sum two-cell period inserts one
+constant cell at an affine position `p₀+2k` in the complete count walk. The transients are checked
+exactly. The base walks contain exactly `31` positive proper zeros. Twelve families insert no
+further zero. Eleven insert a cell with exactly one zero, adding one balanced cut per pump depth
+and no other candidate.
+
+Every fixed balanced cut has an exact stationary-prefix certificate and nonzero affine-offset
+defect. At a ladder cut, an exact pump-power prefix lasso conjugates the pump to opposite `DT/TD`
+right extensions with common slope `2/5`. The seed defect `δ₀` satisfies the exact affine
+fixed-point equation that gives
+
+```text
+δₙ₊₁=(2/5)δₙ,
+```
+
+so every ladder defect remains nonzero. The symbolic recurrence covers all depths; replay through
+`64` audits the count-walk splice and offset law but is not a cutoff.
+
+`G3-S27` supplies the formal composition. Equal-action prefix pieces must have equal raw length,
+so different proposed cut positions collapse to one common cut. Prefix-kernel freedom forces that
+cut to an endpoint. `G3-S24` and `G3-S25` kill the corresponding prefix and suffix cloaks. Hence
+none of the `23` families realizes a uniform single-cut comparator at any insertion position.
+
+**Scope:** the address comparator is uniform over arbitrary addresses and is inserted once at a
+fixed cut on each relation side. The result does not cover two or more address segments,
+address-dependent cuts, a restricted/stateful reader, a relation outside the `23`-family census,
+or a separate terminal difference channel.
+
+**Use:** retire every single-cut placement of the `23` pump schemas. Combined with `G3-S26` and
+`G3-S27`, no currently explicit infinite mixed-prime kernel family remains in the uniform one-cut
+carrier tree.
+
+**Artifact:**
+[`certify_mixed_prime_pump_prefix_kernels.py`](tools/certify_mixed_prime_pump_prefix_kernels.py)
+and
+[`m34-pump-prefix-kernel-extinction-2026-09-01.md`](audits/m34-pump-prefix-kernel-extinction-2026-09-01.md).
+
+**Next:** `G3-S29/S30` close uniform same-address double insertion for the explicit corpus. Move
+to a new relation, different or stateful address segments, a restricted producer, or a separate
+two-offset terminal gate.
+
+### G3-S29: Two-cut collapse and exact sandwich carrier
+
+**Kind:** structure theorem and positive mechanism
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For three fixed context pairs `P/P′`, `Q/Q′`, and `R/R′`, equality of
+
+```text
+P · Wₐ · Q · Wₐ · R
+P′ · Wₐ · Q′ · Wₐ · R′
+```
+
+on the five addresses `[]`, `[0]`, `[1]`, `[0,0]`, and `[1,1]` forces equality of the affine
+actions of all three context pairs. At depths one and two, subtracting the two constant-address
+equations isolates `p(1+μq)` at `μ=2/5` and `μ=4/25`; these two values recover the first two
+context slopes. The complete slope and the empty/depth-one/depth-two offsets recover the third
+slope and all three intercepts.
+
+For an equal-length prefix-kernel-free relation, the cuts therefore align on its two sides and
+reduce exactly to
+
+```text
+(0,0),  (0,N),  (N,N).
+```
+
+The endpoint placements are doubled one-sided cloaks. The central placement is different: every
+genuine raw affine kernel pair `L ≠ R`, `action(L)=action(R)` yields
+
+```text
+action(Wᵤ · L · Wᵤ)=action(Wᵥ · R · Wᵥ)  iff  u=v,
+```
+
+and the two raw words remain distinct for every `u,v`. The composite slope recovers address
+depth; at fixed depth the offset coefficient `1+μ·scale(L)` is positive, so the free address
+offset recovers the address.
+
+A literal reduced `bcbc` factorization
+
+```text
+yzxyx = W · L · W,
+xzyxy = W · R · W
+```
+
+with noncommuting data macros must satisfy `|W|<|x|+|y|` and `|z|<|L|`. The first inequality
+follows because a longer common suffix would force the terminal words `yx` and `xy` to agree; the
+second follows from the exact length equation.
+
+**Scope:** the two inserted addresses are the same variable, the cuts are fixed and ordered, and
+the contexts lie in the positive mixed-prime affine monoid. This result supplies comparator
+semantics but does not produce a physical `bcbc` factorization or the arbitrary-word terminal
+converse.
+
+**Use:** replace the diffuse multi-cut search by one exact target: a kernel relation between two
+copies of the same address. Any candidate must pass the strict address/kernel length sieve before
+its endpoint semantics is considered.
+
+**Artifact:**
+[`MixedPrimeAddressSandwich.lean`](MatrixMortality/MixedPrimeAddressSandwich.lean) and
+[`m34-two-cut-sandwich-2026-09-01.md`](audits/m34-two-cut-sandwich-2026-09-01.md).
+
+**Next:** `G3-S30` closes the central sandwich for every currently explicit infinite relation.
+Seek a new kernel geometry, different or stateful address segments, a restricted producer, or a
+separate two-offset terminal channel.
+
+### G3-S30: Explicit sandwich boundary extinction
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** audited exact independently replayable certificate
+
+**Disposition:** active
+
+For the overlapping length-`r` factor-count vector `Φᵣ`, every nonempty physical macro has one
+complete boundary representative: keep words shorter than `2(r−1)`, and otherwise retain only
+their length-`r−1` prefix and suffix. Internal factors cancel in
+`yzxyx−xzyxy`. This gives exact physical catalogues of `1,243` trigram discrepancies and
+`93,463` fourgram discrepancies.
+
+An aligned `{DT,TD}` address has only five radius-two boundary pairs and nineteen radius-three
+pairs. Every explicit relation has the form `A·Sᵏ·C/B·Sᵏ·E` with `|S|=2`. Once
+`2k≥r−1`, no length-`r` factor spans both pump seams, the seam factors are fixed, and the two
+internal periodic increments cancel. Thus the factor discrepancy is constant for every later
+pump depth.
+
+Across the `23` Cayley–Hamilton pump schemas and the odd family, `24·2·5=240` forward trigram
+cells leave exactly three survivors: `l32-02` at depth zero in one address boundary cell, and
+`l32-04` in one boundary cell in both depth classes. They refine to fourteen logical fourgram
+cells. Every target and its reverse misses the complete physical catalogue. The conditional
+physical fibres contain `144` fourgram discrepancies in each of the four oriented trigram
+classes and also miss.
+
+Combined with the `G3-S29` trichotomy and the endpoint extinctions `G3-S24`–`S26`, this closes
+every uniform same-address double insertion in all `24` currently explicit infinite kernel
+families.
+
+**Scope:** endpoint exactness supplies nonempty data and toggle macros. The same aligned address
+is inserted twice at fixed cuts. The result does not cover a new kernel relation, two different
+address segments, a reversed or state-dependent second address, address-dependent cuts, a
+restricted producer, or a separate two-offset terminal channel.
+
+**Use:** remove the entire explicit uniform double-insertion family tree. Further work on this
+carrier must change relation geometry or the address interface, not retune pump depth or boundary
+placement.
+
+**Artifact:**
+[`certify_mixed_prime_sandwich.rs`](tools/certify_mixed_prime_sandwich.rs) and
+[`m34-sandwich-boundary-extinction-2026-09-01.md`](audits/m34-sandwich-boundary-extinction-2026-09-01.md).
+
+**Next:** `G3-S31` closes arbitrary common wrappers around the explicit corpus. Attack genuinely
+multi-window quotient derivations, construct a new kernel relation, or use a nonlocal terminal
+route.
+
+### G3-S31: Explicit common-wrapper fivegram extinction
+
+**Kind:** uniform obstruction and complete family extinction
+
+**Evidence:** audited exact independently replayable certificate
+
+**Disposition:** active
+
+For every pump depth, relation orientation, and arbitrary common contexts `P,Q`, none of the
+`23` Cayley–Hamilton pump schemas or the explicit odd relation can satisfy
+
+```text
+yzxyx=P·Lₖ·Q,       xzyxy=P·Rₖ·Q.
+```
+
+At factor length `r`, only the length-`r−1` suffix of `P` and prefix of `Q` survive internal
+factor cancellation. Thus arbitrary contexts have exactly `49`, `225`, and `961` boundary cells
+at lengths three, four, and five. The two-letter pump has two trigram depth classes and three
+fourgram/fivegram classes.
+
+The `2,352` forward trigram cells leave `72`; explicit reversal gives `144` survivors among
+`4,704` oriented cells. Their `1,092` oriented fourgram refinements leave `62`: one forward
+`l32-02` cell, thirty forward `l32-04` cells, and their negatives. These occupy eighteen oriented
+fourgram targets.
+
+Every radius-five physical representative projects to one radius-four representative. The
+eighteen target fibres contain `698` exact radius-four physical triples. Lifting only their
+complete representative preimages checks `33,218` radius-five triples and yields `2,484`
+conditional discrepancies. The wrapper cells refine to `414` oriented candidates with `148`
+distinct parent/target pairs; none survives. This recursive refinement is exhaustive, not a
+bounded macro-length search.
+
+**Scope:** `P,Q` may be empty, arbitrarily long, and depend on the pump depth and proposed
+witness. The two physical words must expose one common contiguous relation window. The result
+does not cover several disjoint relation windows, an arbitrary multi-step quotient derivation, a
+new affine-kernel relation, or nonlocal terminal routing.
+
+**Use:** remove the complete one-context hull of all explicit infinite relations. Further work
+must exploit genuinely multi-window congruence geometry, find a new relation outside the corpus,
+or leave the local relation-window architecture.
+
+**Artifact:**
+[`certify_mixed_prime_sandwich.rs`](tools/certify_mixed_prime_sandwich.rs) and
+[`m34-common-wrapper-fivegram-extinction-2026-09-01.md`](audits/m34-common-wrapper-fivegram-extinction-2026-09-01.md).
+
+**Next:** classify whether every non-common-fixed fork in the finite convergent quotient admits
+a bounded number of rewrite windows, or construct the first multi-window survivor. In the full
+kernel, search for a new boundary-compatible relation rather than another context around the
+known families.
+
+### G3-S32: Contextual factor-lattice saturation
+
+**Kind:** exact-linear obstruction
+
+**Evidence:** audited exact independently replayable certificate
+
+**Disposition:** active
+
+Fix one of the five base mixed-prime relations `U=V`. For `2≤r≤6`, let `Φᵣ(w)` count every
+overlapping length-`r` factor of `w`, and let
+
+```text
+Λᵣ(U,V)=span_Z { Φᵣ(P·U·Q)−Φᵣ(P·V·Q) : P,Q∈{D,T}* }.
+```
+
+Every move has coordinate sum zero. Conversely, exact Hermite-normal-form certificates give
+
+```text
+Λᵣ(U,V) = { z∈Z^(2^r) : Σz=0 }
+```
+
+for each base relation separately and every certified width. Deleting one coordinate identifies
+the right side with `Z^(2^r−1)`; the contextual move matrix has identity column HNF, hence index
+one, in all twenty-five cells. The ranks are `3,7,15,31,63`. Independent modular elimination
+over `F₂,F₃,F₅,F₇` reproduces every rank.
+
+Only the final `r−1` letters of `P` and first `r−1` letters of `Q` affect the move:
+internal context factors cancel. Enumerating all context words of lengths at most `r−1` is
+therefore exhaustive for arbitrary contexts, not a context-length cutoff.
+
+Equivalently, if an abelian-group-valued score assigns one weight to each length-`r` factor and
+is preserved by contextual applications of even one base relation, all weights are equal. The
+score is only a multiple of the total number of length-`r` factors. No nontrivial
+translation-invariant additive factor statistic at widths two through six descends to the
+five-rule quotient.
+
+**Scope:** one fixed factor width at a time, pure additive overlapping-factor scores, widths
+`2≤r≤6`, and invariance under arbitrary contextual uses. Mixed-width cancellation, nonlinear
+catalogue membership, positional or boundary state, factors of width at least seven, and
+nonlocal quotient structure remain outside the theorem.
+
+**Use:** retire additive short-factor linear invariants as a discriminator for the
+`G3-S31` multi-window survivor. Nonlinear fibre refinement succeeded in `G3-S31` precisely
+because it does not descend to a linear quotient statistic.
+
+**Artifact:**
+[`certify_mixed_prime_factor_lattice.py`](tools/certify_mixed_prime_factor_lattice.py) and
+[`m34-contextual-factor-lattice-saturation-2026-09-01.md`](audits/m34-contextual-factor-lattice-saturation-2026-09-01.md).
+
+**Next:** use stateful/nonlinear quotient invariants, a canonical normal-form transducer, or a
+new affine-kernel relation. Do not enlarge the factor radius without a structural reason.
 
 ### G3-O13: Rational serializer pumping
 
