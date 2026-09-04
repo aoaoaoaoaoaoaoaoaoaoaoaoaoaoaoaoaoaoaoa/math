@@ -3021,7 +3021,6 @@ ceiling used by the `MM-S105` automaton. Lean composes one arbitrary further phy
 `c`-leading successor is negative, and every `b`-leading successor is below one except when its
 lower spelling is shorter than `Q` times its upper scale. Width six retains one additional
 critical rule-`b` prefix. No primitive-channel, reachability, or pole conclusion is asserted.
-
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
 the stationary carrier defect `10^hEx²−τx+μGV`, whose derivative is `−1` modulo ten.

@@ -73,6 +73,7 @@ private theorem fiveHundredFifty_hasDecimalShell : HasDecimalShell (550 : ℚ) 1
       eleven_hasDecimalShell)
   convert product_shell using 1 <;> norm_num
 
+
 private theorem code_append_false_false_mod_hundred (stem : List Bool) :
     (code (stem ++ [false, false]) : ℤ) ≡ 77 [ZMOD 100] := by
   rw [code_append]

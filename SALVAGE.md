@@ -4275,7 +4275,6 @@ distinguished suffix, then exclude or exhibit the remaining `m≥β+3` multi-to-
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
-
 ### MM-S21: Bounded decimal suffix cycles
 
 **Kind:** obstruction
@@ -4468,7 +4467,6 @@ through `gapFactor_not_dvd_twoCHead`, `carrierFactor_dvd_next_iff`,
 **Next:** classify prime support of compiler lower words at symbolic deletion width. The
 factorwise gates are not sufficient by themselves: the audit records a physical all-`D_c`
 word at `β=10` that passes both full-gap gates computationally.
-
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
@@ -9723,7 +9721,6 @@ middle separation `r>0` as genuine dynamics rather than an automatic halting con
 
 **Next:** decide the residue-two diagonal and then test whether unequal outer runs admit a
 finite arithmetic macro system or unbounded queue growth.
-
 ## Rank-Three Binary Frontier
 
 ### R32-S01: Split return normal form
