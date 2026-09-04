@@ -37,7 +37,6 @@ private theorem gapFactor_ne_zero (β : Nat) : gapFactor β ≠ 0 := by
   simp only [gapFactor]
   have ten_pos : (0 : ℤ) < 10 ^ β := pow_pos (by norm_num) β
   omega
-
 /-- The full primitive gap cannot already divide the distinguished two-`c` raw head. Its code
 lies strictly between the consecutive multiples `27q` and `28q`. -/
 theorem gapFactor_not_dvd_twoCHead {β : Nat} (β_large : 3 ≤ β) (fringe : List Bool)

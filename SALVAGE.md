@@ -182,6 +182,24 @@ file owns the mathematical stock.
 | [`MM-S76`](#mm-s76-primitive-target-multiplier-braid) | structure theorem and obstruction | primitivity identifies one unique unit target multiplier, turning the suffix charge into a literal prefix discrepancy and restricting its predecessor cylinder to two first-mismatch residue arms | formalized | active |
 | [`MM-S79`](#mm-s79-minimum-body-lawful-shallow-pole) | normalization boundary | every minimum-length body attains the shallow pole at its unique lawful terminal word, while compiler-emitted bodies lie strictly above this slice | formalized | active |
 | [`MM-S81`](#mm-s81-one-r_c-root-terminal-normalization) | structure theorem | every shallow pole over the one-`R_c` root is exactly a literal Neary terminal match, with no malformed survivor | formalized | active |
+| [`MM-S82`](#mm-s82-one-r_b-root-sign-extinction) | obstruction | the one-`R_b` root has negative exact-length complement and cannot hit any shallow pole | formalized | active |
+| [`MM-S83`](#mm-s83-leading-b-shallow-root-sign-extinction) | obstruction | every shallow root beginning with a `b`-role has negative exact-length complement and misses every target | formalized | active |
+| [`MM-S84`](#mm-s84-complete-shallow-root-terminal-normalization) | structure theorem | every parser-lawful non-singleton shallow pole has source exactly `R_c` and is exactly a literal Neary terminal match | formalized | active |
+| [`MM-S85`](#mm-s85-parser-ray-singleton-adapter) | structure theorem and obstruction | the physical bridge has an exact homogeneous parser ray; shallow singleton targets are impossible, and unit-peeled deep singleton poles require a non-singleton current block of upper length at least `β+3` | formalized | graduated |
+| [`MM-S86`](#mm-s86-two-block-singleton-source-classifier) | structure theorem and obstruction | a parser singleton pole over exactly two source blocks has canonical root `R_c` and a multi-role current block of upper length at least `β+3` | formalized | active |
+| [`MM-S88`](#mm-s88-r_c-root-singleton-d_c-extinction) | obstruction | no parser-lawful two-block source reaches the singleton `D_c` pole for `β≥3` | formalized | graduated |
+| [`MM-S89`](#mm-s89-complete-two-block-singleton-extinction) | obstruction | no parser-lawful two-block source reaches either singleton target for `β≥3` | formalized | active |
+| [`MM-S90`](#mm-s90-exact-singleton-tail-ancestry-equivalence) | structure theorem | at any lawful singleton pole, older unit peeled ancestry is equivalent to a multi-role current with at least `β+3` upper digits | formalized | active |
+| [`MM-S91`](#mm-s91-exact-parser-gap-clean-ancestry-gate) | structure theorem and obstruction | every `(1,1)` parser ray has integral gap-descended coordinates, but gap-clean coordinates exist exactly when the primitive gap divides its reduced normalized numerator | formalized | active |
+| [`MM-S94`](#mm-s94-three-block-singleton-chamber-classification) | structure theorem and obstruction | every lawful three-block singleton pole lies in an exact deep-root or `R_c` discrepancy grammar, and the entire `R_c` singleton-current quadrant is empty | formalized | active |
+| [`MM-S95`](#mm-s95-complete-three-block-singleton-current-extinction) | obstruction and classifier | every lawful three-block singleton pole has a multi-role current; with a multi-role intervening block it obeys the complete `MM-S94` classifier without an extra current-shape hypothesis | formalized | active |
+| [`MM-S96`](#mm-s96-contaminated-tail-factorwise-pole-gate) | structure theorem and obstruction | a singleton pole over the uniform contaminated tail forces the primitive gap into the product of current and inherited lower codes, with exact factorwise transfer outside inherited support | formalized | active |
+| [`MM-S97`](#mm-s97-short-all-c-three-block-shell-grammar) | structure theorem | every short all-`c` current through width `β+2` has an exact mixed-prime discrepancy grammar; only the width-`β+2`, target-`D_b` two-adic residual remains open | formalized | active |
+| [`MM-S98`](#mm-s98-long-r_c-gap-clean-ancestry-extinction) | obstruction | every hypothetical long `R_c` three-block singleton pole has normalized quotient `μ/H` and reduced numerator coprime to the primitive gap, so its entire gap-clean ancestry branch is empty | formalized | active |
+| [`MM-S100`](#mm-s100-complete-three-block-singleton-next-extinction) | obstruction and classifier | every lawful three-block singleton pole has both non-root blocks multi-role; the unconditional survivor grammar is exactly the established deep-root or `R_c` multi/multi chamber | formalized | active |
+| [`MM-S101`](#mm-s101-long-r_c-peeled-head-support-gate) | structure theorem and obstruction | every long `R_c` pole forces gap support through `H−10μ`; the `cb` head is exactly saturated, while the `cc` head exposes the fringe residue `18F−35` | formalized | active |
+| [`MM-S102`](#mm-s102-long-double-c-relative-gap-resonance) | structure theorem and obstruction | every long `cc` pole forces `q_β∣Vq_s` for one `1≤s≤β−1`; every absent ambient prime is confined to a smaller-gap decimal-period resonance | formalized | active |
+| [`MM-S103`](#mm-s103-long-terminal-head-collapse-extinction) | obstruction | the support-saturated long `cb` three-block equation collapses exactly to the already-impossible two-block singleton equation, so the entire chamber is empty | formalized | active |
 | [`R32-S01`](#r32-s01-split-return-normal-form) | structure theorem | rank-two cuts reduce one-unit binary mortality to a `2 × 2` return recurrence | formalized | graduated |
 | [`R32-S02`](#r32-s02-two-plane-edge-square) | structure theorem | two rank-two generators are a two-vertex square of `2 × 2` edges | formalized | graduated |
 | [`R32-O01`](#r32-o01-rank-one-profile-collapse) | obstruction | a rank-one generator reduces mortality to order-at-most-three scalar recurrence zeros | audited | stock |
@@ -4662,7 +4680,6 @@ through `rawHeadBoundary_factor_iff`, `rawHead_factor_iff_reciprocal`,
 
 **Next:** intersect the periodic initial-support classes with the lower-code support-entry
 semigroup and the surviving factorwise singleton quotient gates.
-
 ### MM-S28: Arbitrary-history gap-support saturation
 
 **Kind:** structure theorem and obstruction
@@ -4772,7 +4789,6 @@ through `carrierCoprimeQuotient_multiToSingleton_quotientGate` and
 
 **Next:** classify whether reachable lower-code ancestry can make `q∣N`; otherwise intersect
 the canonical quotient gates with the compiler suffix language.
-
 ### MM-S32: Entry support-saturator extinction
 
 **Kind:** obstruction
@@ -6683,7 +6699,6 @@ source families.
 
 **Next:** derive the exact two-active successor on the eight listed subphases and either close
 its finite nucleus or exhibit the first countercycle.
-
 ### MM-S33: Leading-`D_b` support-saturator extinction
 
 **Kind:** obstruction
@@ -6810,7 +6825,6 @@ through `emittedHiddenInverseBranches_pullbackWord_sub_hasDecimalShell` and
 **Next:** intersect the forced shell (2) with pairs of reachable suffix carriers from the encoded
 entry. Either prove that no lawful suffix pair has this first unequal cross-prime depth, or
 construct the first exact branch-switch cascade.
-
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
@@ -7247,7 +7261,6 @@ through `poleCongruence_four_fringe_pairs`, `positiveDepthOnePoleWitness_halts`,
 [`audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md`](audits/m53-swapped-positive-depth-one-extinction-2026-08-31.md).
 
 **Next:** assemble the analogous witness from the first surviving multi-transfer carriers.
-
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
@@ -7813,10 +7826,11 @@ No malformed shallow pole survives on this root branch. `MM-S79` is the minimum-
 where the unique terminal target is explicit; this theorem holds for arbitrary bodies and
 targets.
 
-**Scope:** the source history is exactly the singleton block `[R_c]`. Other singleton roots,
-longer rule-ended roots, singleton targets, and deep histories are not classified. The theorem
-identifies poles with terminal matches; converting those matches to tag halting still uses the
-usual Neary compiler-envelope hypotheses.
+**Scope:** the source history is exactly the singleton block `[R_c]`. The `[R_b]` root is
+classified separately by [`MM-S82`](#mm-s82-one-r_b-root-sign-extinction); longer rule-ended
+roots, singleton targets, and deep histories are not classified. The theorem identifies poles
+with terminal matches; converting those matches to tag halting still uses the usual Neary
+compiler-envelope hypotheses.
 
 **Use:** remove the entire one-`R_c` source constructor from the malformed shallow frontier.
 Future shallow attacks should classify the remaining rule-ended roots and must not re-prove or
@@ -7831,9 +7845,1136 @@ through `ruleCRoot_code_calibration`, `ruleCRoot_complement_calibration`,
 **Artifact:**
 [`audits/m53-rule-c-root-terminal-normalization-2026-08-31.md`](audits/m53-rule-c-root-terminal-normalization-2026-08-31.md).
 
-**Next:** classify shallow poles over every other parser-lawful `EndsInRule` root. Seek a
-rightmost-root reduction to `ruleCRoot` plus a provably nonzero discrepancy, using the emitted
-body's strict length surplus.
+**Next:** after the `[R_b]` extinction in `MM-S82`, classify shallow poles over rule-ended roots
+of length at least two. Seek a rightmost-root reduction to `ruleCRoot` plus a provably nonzero
+discrepancy, using the emitted body's strict length surplus.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S82: One-`R_b` root sign extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The other one-role parser root has the exact complement calibration
+
+```text
+9Δ_[R_b] = −lift(10^β).
+```
+
+For every positive deletion width, `gap(10^β)` and `lift(10^β)` are positive. Every punctuated
+upper code is positive, every lower code is nonnegative, and the displayed calibration makes
+the `[R_b]` complement strictly negative. In the generalized shallow equation, the left side is
+therefore strictly positive while the right side is nonpositive. No target or body can satisfy
+it.
+
+Combining this sign extinction with `MM-S81` gives the complete one-role classification:
+
+```text
+HitsSquarePole target [[R_letter]]
+↔ letter=c and target is a literal Neary terminal match.
+```
+
+**Scope:** this covers exactly one-role, rule-ended shallow sources. It assumes only `β>0` and
+places no length, phase, shell, or compiler-envelope restriction on the target. Rule-ended roots
+of length at least two, singleton targets, and deep histories remain outside.
+
+**Use:** delete `[R_b]` from the shallow source grammar and normalize `[R_c]` to the lawful
+terminal language. Every unresolved shallow false pole now begins with a genuinely multi-role
+root block.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterMinimumBody.lean`](MatrixMortality/DecimalSetterMinimumBody.lean),
+through `ruleBRoot_complement_calibration`, `ruleBRoot_hitsSquarePole_impossible`, and
+`singletonRuleRoot_hitsSquarePole_iff_terminalMatch`.
+
+**Artifact:**
+[`audits/m53-rule-b-root-sign-extinction-2026-08-31.md`](audits/m53-rule-b-root-sign-extinction-2026-08-31.md).
+
+**Next:** factor a multi-role rule-ended root at its first or last role and determine whether its
+complement retains a sign chamber or reduces to the one-`R_c` terminal normalization plus an
+explicit nonzero discrepancy.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S83: Leading-`b` shallow-root sign extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let a shallow root begin with any rule or erasure role carrying `b`, followed by an arbitrary
+role word `rest`. Lean computes its exact-length complement as
+
+```text
+Δ = −(5·10^(β+1+|upper(rest)|)
+      + code(upper(rest))·10^(β+1)
+      + μ).
+```
+
+Every term inside the parentheses is nonnegative and the marker is positive, so `Δ<0`
+unconditionally. The generic negative-complement gate combines this sign with positive
+`gap`, positive punctuated upper codes, positive source upper code, nonnegative target lower
+code, and positive `lift`. The shallow pole equation again has a strictly positive left side and
+a nonpositive right side.
+
+Therefore no shallow root beginning with a `b`-role can hit any target, regardless of its later
+roles, phases, target, or body. This strictly generalizes the one-role `MM-S82` extinction.
+
+**Scope:** the theorem assumes `β>0` only at the final pole gate; the exact complement identity
+and negativity hold for every `β`. It classifies roots by their first role's tag letter, not by
+their last parser phase. Roots beginning with `c`, singleton targets, and deep histories remain
+outside.
+
+**Use:** remove half of every shallow-root length stratum at once. Combined with `MM-S81`, every
+unresolved malformed shallow root now begins with `c` and has length at least two. At length two,
+only the letter words `cb` and `cc` survive, with either phase on the first role and a rule on the
+last.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterMinimumBody.lean`](MatrixMortality/DecimalSetterMinimumBody.lean),
+through `tagCodeB_code_eq`, `leadingBRoot_complement_eq`,
+`leadingBRoot_complement_neg`, `hitsSquarePole_single_impossible_of_complement_neg`, and
+`leadingBRoot_hitsSquarePole_impossible`.
+
+**Artifact:**
+[`audits/m53-leading-b-shallow-root-sign-extinction-2026-08-31.md`](audits/m53-leading-b-shallow-root-sign-extinction-2026-08-31.md).
+
+**Next:** graduated into
+[`MM-S84`](#mm-s84-complete-shallow-root-terminal-normalization).
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S84: Complete shallow-root terminal normalization
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Let an erasure-ended target block have at least two roles, and let one parser-lawful root block
+lie to the right of its square reset. For `β≥2`, the target's punctuated upper and complete lower
+words both end in `00`, hence their decimal codes satisfy
+
+```text
+P ≡ V ≡ 77 (mod 100).
+```
+
+The calibrated trace
+
+```text
+T = gap(10^β)·P + lift(10^β)·V
+```
+
+therefore has exact decimal shell `(1,1)`. Write `H` for the source's punctuated upper code,
+`m` for the length of its upper spelling, and `Δ=μ·10^m−H` for its exact-length complement.
+The shallow pole equation rearranges without division:
+
+```text
+gap·P·H = lift·V·Δ
+    ⟺ H·T = lift·μ·10^m·V.                              (1)
+```
+
+The factors `H`, `lift`, `μ`, and `V` are decimal units. Comparing either valuation in (1)
+against the shell `(1,1)` forces `m=1`. Every role contributes at least one upper digit, so the
+parser's rule-ended source is a singleton. `MM-S82` removes `R_b`; the source is exactly `R_c`.
+Finally `MM-S81` identifies its pole equation with literal terminal equality. Lean proves the
+canonical equivalence
+
+```text
+HitsSquarePole β body target [source]
+  ↔ source = [R_c] ∧ upper(target)·marker = lower(target).
+```
+
+**Scope:** this is unconditional in the body and assumes only `β≥2`, a non-singleton
+erasure-ended target, one source block, and the parser's rule-ended source law. It is exactly the
+shallow non-singleton branch of `MM-S74`. Singleton targets and deeper block histories remain
+outside.
+
+**Use:** delete every malformed shallow root, including all length-two `cb` and `cc` sources and
+all longer generalized roots. The outer mortality frontier now has only the singleton-target and
+deep-history branches beyond lawful terminal matches.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterShallow.lean`](MatrixMortality/DecimalSetterShallow.lean), through
+`multiRoleErasureEnded_boundaryTrace_hasDecimalShell`,
+`shallowSquarePole_sourceUpperLength_eq_one`,
+`shallowSquarePole_impossible_of_source_multi`, and
+`shallowSquarePole_iff_ruleCRoot_terminalMatch`, with the parser-facing corollary
+`coreSpelling_shallowSquarePole_iff_ruleCRoot_terminalMatch`.
+
+**Artifact:**
+[`audits/m53-complete-shallow-root-terminal-normalization-2026-09-01.md`](audits/m53-complete-shallow-root-terminal-normalization-2026-09-01.md).
+
+**Next:** compose this exact classifier into the `MM-S74` parsed frontier and concentrate the
+remaining arithmetic on singleton targets and deeper histories.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S85: Parser-ray singleton adapter
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+The physical three-coordinate bridge state has the exact homogeneous quotient
+
+```text
+ray(z) = (z₀, z₀+basisGap·z₂).
+```
+
+For a block with trace `T=gap·P+lift·V` and upper scale `A=10^m`, its square-reset action is
+
+```text
+(x,y) ↦ ((Tx−lift·Vy)/(gap·μ), Ax).                    (1)
+```
+
+Lean proves (1) directly from the conjugated role matrices and proves by induction that the
+right-to-left recursion `parsedRay` is exactly `ray(bridgeState)`. A singleton target with trace
+`S` therefore hits precisely when
+
+```text
+Sx = 7·lift·y.                                         (2)
+```
+
+If an older ray represents the peeled carrier `N/(10μD)`, meaning
+
+```text
+x·10μD = yN,
+```
+
+then a current block followed by a singleton pole satisfies exactly
+
+```text
+peeledNumerator(N,D,μ,lift,T,V)·S
+  = gap·μ·lift·10^m·N·7.                               (3)
+```
+
+The equivalence is bidirectional when `x` and `N` are nonzero. It is also stated directly on
+`bridgeState`, so no projective normalization is hidden in the adapter.
+
+Two outer consequences are unconditional or sharply conditional. First, a singleton target over
+one parser-lawful root block is impossible: the root upper code, lift, marker, and final digit
+are decimal units, while `S` has shell `(β+1,β)`. Second, define unit peeled ancestry to mean
+that the older parser ray admits nonzero coordinates `N,D` of shell `(0,0)` satisfying the
+displayed homogeneous identity. Under that exact hypothesis, a singleton target over a deeper
+parser history cannot follow a singleton current block; an erasure-ended current block must be
+non-singleton and have at least `β+3` upper digits.
+
+**Scope:** the theorem does not prove unit peeled ancestry for every parser tail. An arbitrary
+nonzero rational ray always has projective coordinates, but requiring both peeled coordinates to
+be decimal units is substantive and is exactly what the recursive depth theorems consume. Long
+multi-role current blocks satisfying that ancestry remain live. The theorem neither imports the
+swapped ternary recurrence nor identifies a deep parser ray with the distinguished two-`c` raw
+head.
+
+**Use:** replace the informal matrix-to-carrier splice in the singleton branch of `MM-S74`.
+The shallow singleton slice is now empty. In the deep slice, the only unit-ancestry survivor is
+a multi-role block with upper length at least `β+3`, in the literal equation required by
+`MM-S20`, `MM-S22`, and `MM-S24`.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterBridgeRay.lean`](MatrixMortality/DecimalSetterBridgeRay.lean),
+through `boundaryRay_roleProduct_squareReset`, `boundaryRay_bridgeState`,
+`hitsSquarePole_singleton_iff_rayEquation`, `singletonTarget_shallow_impossible`,
+`bridgeState_representsPeeledCarrier_iff`,
+`hitsSquarePole_singleton_cons_iff_peeledEquation`, and
+`singletonPole_of_unitPeeledCarrier_currentShape`.
+
+**Artifact:**
+[`audits/m53-parser-ray-singleton-adapter-2026-09-01.md`](audits/m53-parser-ray-singleton-adapter-2026-09-01.md).
+
+**Next:** the unit-coordinate question is classified exactly by `MM-S90`: it holds precisely on
+the long multi-role current branch. The remaining upgrade is integral denominator ancestry
+`D=gap·Nprev` and factor support for `MM-S22`/`MM-S24`; the complementary short-current grammar
+must be killed separately.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S86: Two-block singleton-source classifier
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The unit-ancestry premise of `MM-S85` has an exact intrinsic form. For a homogeneous ray
+`(x,y)` and positive width,
+
+```text
+AdmitsUnitPeeledCarrier(x,y)
+  ↔ x≠0 and shell(y/x)=(1,1).                          (1)
+```
+
+The forward direction divides `x·10μD=yN` by the unit coordinates `N,D`; the reverse direction
+takes `D=1` and `N=10μ/(y/x)`. A physical root with upper spelling length `m` has numerator shell
+`(0,0)`, denominator shell `(m,m)`, and quotient shell `(m,m)`. Hence it satisfies (1) exactly
+when `m=1`.
+
+The singleton equation can also be retained before any peeled normalization. If `T,V,A` belong
+to the current block, `S` is the singleton-target trace, and `(x,y)` is the older parser ray,
+then
+
+```text
+(Tx−lift·Vy)S = gap·μ·lift·A·x·7.                    (2)
+```
+
+Apply (2) when the older history is one physical root. For a multi-role erasure current block,
+`T` has shell `(1,1)`, while the two root terms have depths one and `m`. If `m≠1`, their
+difference retains shell `(1,1)` and multiplication by `S` produces unequal depths
+`(β+2,β+1)`, contradicting the equal-depth right side. Thus `m=1`; parser law identifies the
+root as exactly `R_c`, and `MM-S85` forces the current upper length to be at least `β+3`.
+
+If the current block is itself a singleton, its trace has shell `(β+1,β)`. Comparing the root
+depth `m` with `β` gives three exhaustive cases: `m<β`, `m=β`, and `β<m`. Unequal-valuation
+subtraction fixes both residual depths in the first case and one decisive depth in each boundary
+case. Each contradicts the equal-depth right side of (2) for either singleton letter when
+`β≥3`. No singleton-current branch survives.
+
+The canonical parser theorem therefore states
+
+```text
+BlocksLaw [current,root] and HitsSquarePole D_ℓ [current,root]
+  implies root=R_c,
+          length(current)≥2,
+          upperLength(current)≥β+3.
+```
+
+**Scope:** this is the complete singleton-target classification for exactly two source blocks.
+It does not exclude the displayed long multi-role current over `R_c`, and it says nothing about
+older histories of two or more blocks. The unit-ray equivalence is exact but does not make unit
+ancestry automatic beyond a root.
+
+**Use:** delete every noncanonical root and every singleton current from the first deep
+singleton slice of `MM-S74`. The sole survivor now has a fixed root carrier and one long physical
+multi-role block, so the next attack can use its exact `R_c` calibration rather than arbitrary
+projective ancestry.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterRootRay.lean`](MatrixMortality/DecimalSetterRootRay.lean), through
+`admitsUnitPeeledCarrier_iff_ratio_hasDecimalShell`, `rootRay_ratio_hasDecimalShell`,
+`rootRay_admitsUnitPeeledCarrier_iff_upperLength_eq_one`,
+`hitsSquarePole_singleton_cons_iff_rayRecurrence`,
+`singletonPole_over_singleton_root_impossible`, and
+`singletonPole_twoBlockSource_classifier`.
+
+**Artifact:**
+[`audits/m53-two-block-singleton-source-2026-09-01.md`](audits/m53-two-block-singleton-source-2026-09-01.md).
+
+**Next:** substitute the exact `R_c` calibrations `9H=lift` and `H−10μ=−gap/9` into the sole
+surviving long-block equation. For target `D_c`, it reduces to the literal code discrepancy
+`2·10^β(P−V)=7μ·10^m`; attack that suffix equation before generalizing to deeper histories.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S88: `R_c`-root singleton-`D_c` extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** graduated
+
+`MM-S86` reduces every parser-lawful two-block singleton pole to a multi-role current block over
+the canonical root `R_c`, with current upper length `m≥β+3`. For target `D_c`, the exact trace
+and root calibrations turn the physical pole equation into
+
+```text
+2·10^β(P−V)=7μ·10^m,                                  (1)
+```
+
+where `P` and `V` are the current upper and lower decimal codes and `μ` is the marker code. Set
+`w=m−β−1`; then `w>0`, and natural-number cancellation in (1) gives
+
+```text
+P−V=35μ·10^w.                                         (2)
+```
+
+The marker code `μ` is odd. Thus `10^w` divides `P−V`, while `2·10^w` does not. Exact decimal
+suffix exhaustion forces the lower word to equal the length-`w` suffix of the punctuated upper
+word. Removing that suffix from (2) makes the complementary prefix code exactly `35μ`. Its
+length is exactly `2β+2`, so every lawful encoded prefix has code at least
+`5·10^(2β+1)`. But `μ<10^(β+1)` and `β≥3` imply
+
+```text
+35μ < 5·10^(2β+1),
+```
+
+a contradiction. Therefore no lawful two-block source hits the singleton `D_c` pole.
+
+**Scope:** this theorem closes only the `D_c` target arm of the two-source-block singleton
+frontier. `MM-S89` separately closes `D_b`. Older histories remain outside both results.
+
+**Use:** supply the `D_c` case of the complete two-block extinction in `MM-S89`.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterRuleCRootSingleton.lean`](MatrixMortality/DecimalSetterRuleCRootSingleton.lean),
+through `singletonCTrace_eq`,
+`hitsSquarePole_singletonC_ruleCRoot_iff_codeDiscrepancy`, and
+`singletonC_twoBlockSource_impossible`.
+
+**Artifact:**
+[`audits/m53-rule-c-root-singleton-c-extinction-2026-09-01.md`](audits/m53-rule-c-root-singleton-c-extinction-2026-09-01.md).
+
+**Next:** completed by `MM-S89`, which combines the same suffix factorization with the exact
+`D_b` coefficient and closes the full two-block singleton slice.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S89: Complete two-block singleton extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The canonical `R_c` root admits one target-independent discrepancy identity. For either
+singleton letter `ℓ`,
+
+```text
+HitsSquarePole D_ℓ [current,R_c]
+  ↔ singletonTrace(ℓ)·(P−V)=7μ·lift·10^m.             (1)
+```
+
+For `D_b`, write `ρ=10^β` and
+
+```text
+B=5200ρ²−18398ρ+2443.
+```
+
+Its exact trace is `2ρB`, so (1) becomes
+
+```text
+2ρB(P−V)=7μ·lift·10^m.                               (2)
+```
+
+The two-block classifier `MM-S86` gives `m≥β+3`. Set `w=m−β−1>0`. Shell balance in (2) gives
+the discrepancy `P−V` exact depths `(w,w+1)` at `(2,5)`. Therefore `10^w` divides the
+discrepancy but `2·10^w` does not. Exact suffix exhaustion identifies the lower spelling with
+the final `w` upper digits and writes
+
+```text
+P−V=K·10^w,
+```
+
+where `K` is the complementary upper prefix code. Cancelling (2) gives
+
+```text
+B·K=35μ·lift.                                        (3)
+```
+
+The prefix has length exactly `2β+2`, hence `K≥50ρ²`. Throughout `β≥3`, the elementary bounds
+
+```text
+B>4000,    μ<10ρ,    0<lift<502ρ
+```
+
+make the left side of (3) exceed `200000ρ²`, while the right side is below `175700ρ²`. Thus
+`D_b` is impossible. `MM-S88` already excludes `D_c`, and Lean packages the two cases as
+
+```text
+BlocksLaw [current,root]
+  → ¬HitsSquarePole D_ℓ [current,root].
+```
+
+**Scope:** the target letter, compiler body, and lawful two-block source are arbitrary, with only
+`β≥3`. The theorem is exactly the two-source-block singleton slice. It does not classify older
+parser histories of two or more blocks to the right of the current block.
+
+**Use:** delete the entire first deep singleton layer of `MM-S74`. Any remaining singleton pole
+must have at least three source blocks; its older ray is no longer a physical root ray and is the
+next ancestry target.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterRootRay.lean`](MatrixMortality/DecimalSetterRootRay.lean), through
+`hitsSquarePole_singleton_ruleCRoot_iff_traceDiscrepancy`, and
+[`MatrixMortality/DecimalSetterTwoBlockSingleton.lean`](MatrixMortality/DecimalSetterTwoBlockSingleton.lean),
+through `singletonBTrace_eq`,
+`hitsSquarePole_singletonB_ruleCRoot_iff_codeDiscrepancy`,
+`singletonB_twoBlockSource_impossible`, and
+`singletonTarget_twoBlockSource_impossible`.
+
+**Artifact:**
+[`audits/m53-complete-two-block-singleton-extinction-2026-09-01.md`](audits/m53-complete-two-block-singleton-extinction-2026-09-01.md).
+
+**Next:** classify the ray obtained from one physical block over `R_c`, or prove that every
+minimal singleton history inherits a suffix factorization strong enough to repeat the prefix
+contradiction.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S90: Exact singleton-tail ancestry equivalence
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+Every parser-lawful block history has a nonzero homogeneous ray. At a recursive step, a nonzero
+older numerator makes the new denominator nonzero. If that numerator vanishes, parser law makes
+the current lower code and older denominator nonzero, so the new numerator is nonzero instead.
+
+Now suppose a singleton target is an actual pole above a current erasure-ended block and an older
+lawful tail. Write the older ray as `(x,y)`, the current upper length as `m`, its trace as `T`,
+and the singleton trace as `S`. The exact recurrence is
+
+```text
+(Tx−lift·Vy)S=gap·μ·lift·10^m·x·7.                   (1)
+```
+
+Nonvanishing of the tail ray and (1) force `x≠0`. Solving for its quotient gives
+
+```text
+y/x = (T−R)/(lift·V),
+R   = gap·μ·lift·10^m·7/S.                           (2)
+```
+
+For a multi-role current, `T` has shell `(1,1)`. The correction `R` has shell
+`(m−β−1,m−β)`. If `m≥β+3`, both correction depths are strictly greater than one, so
+unequal-valuation subtraction fixes `T−R` at shell `(1,1)`. The denominator in (2) is a decimal
+unit. Hence `y/x` has shell `(1,1)`, and the intrinsic criterion of `MM-S86` supplies unit peeled
+coordinates for the older ray.
+
+Combining this reverse implication with the forward length wall in `MM-S85`, Lean proves the
+exact parser-facing equivalence
+
+```text
+AdmitsUnitPeeledCarrier(older ray)
+  ↔ length(current)≥2 and upperLength(current)≥β+3.   (3)
+```
+
+Its negation has the complete complementary grammar
+
+```text
+not AdmitsUnitPeeledCarrier(older ray)
+  ↔ length(current)=1
+     or (length(current)≥2 and upperLength(current)≤β+2).  (4)
+```
+
+The physical upper-length identity
+
+```text
+upperLength(current)
+  = length(current) + count_b(current)·(β+1)
+```
+
+sharpens (4) without another pole argument. One `b` already costs at least `β+2` digits in a
+multi-role block, so the second arm is exactly an all-`c` block of width between `2` and `β+2`.
+Equivalently, every `b`-bearing multi-role current belongs automatically to the long unit
+branch.
+
+**Scope:** (3) and (4) assume `β≥3`, an actual singleton pole, an erasure-ended current block,
+and parser law on the nonempty older tail. They impose no distinguished raw head. They do not
+exclude either short branch in (4), and unit peeled coordinates do not yet supply the integral
+gap-coprimality or support factorization required by the strongest quotient gates.
+
+**Use:** remove unit ancestry as an independent conjecture on the long arbitrary-history
+singleton branch. The remaining frontier splits exactly into singleton currents, all-`c`
+multi-role currents of width `2..β+2`, and the long unit branch. [`MM-S91`](#mm-s91-exact-parser-gap-clean-ancestry-gate)
+supplies integral denominator descent there and isolates primitive-gap coprimality as an exact
+reduced-numerator divisibility condition.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterSingletonAncestry.lean`](MatrixMortality/DecimalSetterSingletonAncestry.lean),
+through `parsedRay_ne_zero_of_blocksLaw`,
+`singletonPole_longMultiTail_admitsUnitPeeledCarrier`,
+`singletonPole_tail_admitsUnitPeeledCarrier_iff_currentShape`, and
+`singletonPole_tail_not_admitsUnitPeeledCarrier_iff_singleton_or_shortAllC`.
+
+**Artifact:**
+[`audits/m53-singleton-tail-ancestry-equivalence-2026-09-01.md`](audits/m53-singleton-tail-ancestry-equivalence-2026-09-01.md).
+
+**Next:** kill the singleton/all-`c` short grammar, and on the long branch intersect the
+reduced-numerator gate from `MM-S91` with the exact pole equation and encoded-entry history.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S91: Exact parser gap-clean ancestry gate
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Let a parser ray be `(x,y)` with quotient shell `(1,1)`, and write its normalized quotient in
+lowest terms as
+
+```text
+s=(y/x)/10=a/b.
+```
+
+Both `a` and `b` are decimal units. With primitive gap `q=2·10^β−7`, full gap `E=9q`, and
+marker `μ`, the coordinates
+
+```text
+N=Eμb,       Nprev=a,       D=Ea
+```
+
+are integral decimal units, satisfy `D=E·Nprev`, and represent the parser ray. For an explicit
+parser step they are a common nonzero rational rescaling of the physical residual and inherited
+upper coordinate. Thus the denominator descent missing from the abstract unit-carrier interface
+is automatic on the shell supplied by [`MM-S90`](#mm-s90-exact-singleton-tail-ancestry-equivalence).
+
+Coprimality is rigid. Every integral descended representation obeys
+
+```text
+aN=bμE·Nprev.                                      (1)
+```
+
+The primitive gap is coprime to nine and to `μ`. Hence `gcd(q,N)=1` forces `q∣a`. Conversely,
+if `a=qc`, then `N=9μb`, `Nprev=c`, and `D=Ec` give gap-clean integral coordinates. Lean
+packages the exact criterion
+
+```text
+gap-clean integral descended coordinates exist
+  ↔ q divides numerator((y/x)/10).                 (2)
+```
+
+Parser law and shell data do not imply the right side. For every `β≥3` and every tag body, the
+lawful tail `[R_c,D_c] ; [R_c,R_c]` has
+
+```text
+(y/x)/10 = 90μP/(9P²−11GV),
+```
+
+where `P` is the common punctuated upper code and `V` is the first block's lower code. The raw
+numerator and denominator are respectively `610` and `990` modulo `1000`, so both have shell
+`(1,1)`. Yet `q` is coprime to the raw, and therefore reduced, numerator. By (2), no integral
+gap-clean representation exists anywhere in this uniform lawful family.
+
+**Scope:** the normalization and (2) hold for every `β>0` and every rational ray with quotient
+shell `(1,1)`. The obstruction family holds for every `β≥3` and every tag body. Its members are
+lawful parser tails, not singleton-pole witnesses; an actual pole may impose additional code or
+sign constraints that exclude them.
+
+**Use:** replace the vague long-branch “integral ancestry” premise by one exact dichotomy.
+Denominator descent is free. The clean branch is precisely the reduced-numerator divisibility
+language in (2), where [`MM-S22`](#mm-s22-gap-factor-quotient-gate) applies; the complementary
+branch must be handled by the factorwise support dynamics of
+[`MM-S24`](#mm-s24-factorwise-gap-ancestry) and encoded reachability. Projective rescaling alone
+cannot cross this boundary.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterGapCleanAncestry.lean`](MatrixMortality/DecimalSetterGapCleanAncestry.lean),
+through `admitsIntegralGapPeeledCarrier_of_ratio_shell`,
+`rayStep_admitsIntegralGapPeeledCarrier_of_ratio_shell`,
+`exists_gapCleanIntegralPeeledCarrier_iff_gapFactor_dvd_reducedNumerator`, and the
+`gapContaminatedTail` family through `gapContaminatedTail_no_gapCleanIntegralCarrier`.
+
+**Artifact:**
+[`audits/m53-parser-gap-clean-ancestry-gate-2026-09-01.md`](audits/m53-parser-gap-clean-ancestry-gate-2026-09-01.md).
+
+**Next:** intersect (2) with the exact singleton-pole equation and encoded-entry history; either
+force the divisibility and apply the quotient gate, or classify the contaminated factor support
+that survives every physical predecessor.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S94: Three-block singleton chamber classification
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+Consider an actual singleton pole over three parser-lawful source blocks
+`[current,next,root]`. The singleton recurrence first yields a history-independent sign cut:
+for every erasure-ended current, its coefficient
+
+```text
+T·S − 7·gap·μ·lift·A
+```
+
+is positive. Hence every lawful older ray at a singleton pole has positive projective quotient.
+
+When `current` and `next` are both multi-role, the root depth gives an exact dichotomy. If the
+root upper length is at least two, the ray above it has quotient shell `(k−1,k−1)`, where `k`
+is the upper length of `next`. Unit ancestry is therefore equivalent to `k=2`; the physical
+spelling then forces `next` to be exactly two `c` roles, while the current lies in the long
+`m≥β+3` corridor. If the root is shallow, parser law forces it to be the canonical `R_c`.
+Writing
+
+```text
+δ = upperBoundaryCode(next) − lowerBoundaryCode(next),
+```
+
+the long corridor is equivalent to `δ` having shell `(k−1,k−1)`. Its complement is an all-`c`
+current of width at most `β+2` whose discrepancy lacks that shell.
+
+The long `R_c` arm has a literal suffix law: the lower spelling exhausts the last `k−1` digits
+of the punctuated upper spelling, and the unmatched head is a decimal unit. The first two role
+letters are therefore `cb` or `cc`; a leading `b` is impossible.
+
+Singleton currents over `R_c` are completely extinct. For current `D_c`, the pole forces
+`δ` into shell `(k+β,k+β−1)` and the older quotient above `10^β/4`; the resulting upper bound
+on `δ` contradicts its forced decimal divisor. For current `D_b`, the corresponding data are
+shell `(k−1,k−2)` and quotient greater than `2·10^(2β)`; the same comparison, at its different
+scale, is again impossible. Thus neither singleton current reaches a singleton target through
+an arbitrary intervening block above `R_c`.
+
+**Scope:** all results assume `β≥3` where stated and quantify over every compiler body and
+singleton target letter. The main classifier assumes three lawful source blocks and multi-role
+current and intervening blocks. It does not eliminate the surviving deep-root and `R_c`
+multi/multi arms. The singleton-current extinction is complete over `R_c`, but a deep physical
+root and singleton intervening blocks remain separate cases.
+
+**Use:** replace unrestricted three-block singleton search by the displayed A/B grammar. The
+next attack should eliminate the remaining singleton-current quadrants using the physical root
+quotient chamber, then apply exact ancestry and suffix constraints to the multi/multi arms.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterSingletonChamber.lean`](MatrixMortality/DecimalSetterSingletonChamber.lean),
+[`MatrixMortality/DecimalSetterThreeBlockSingleton.lean`](MatrixMortality/DecimalSetterThreeBlockSingleton.lean),
+and
+[`MatrixMortality/DecimalSetterThreeBlockSingletonCurrent.lean`](MatrixMortality/DecimalSetterThreeBlockSingletonCurrent.lean),
+through `singletonPole_olderRatio_pos`,
+`singletonPole_threeBlock_multi_classifier`,
+`singletonPole_threeBlock_ruleCRoot_long_nextHead`, and
+`singletonPole_threeBlock_ruleCRoot_singletonCurrent_impossible`.
+
+**Artifact:**
+[`audits/m53-three-block-singleton-chamber-2026-09-01.md`](audits/m53-three-block-singleton-chamber-2026-09-01.md).
+
+**Next:** kill singleton-current histories over deep roots and singleton intervening blocks;
+then decide the two-c deep-root corridor and the `cb/cc` `R_c` suffix grammar without assuming
+that shell-compatible rays are reachable poles.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S95: Complete three-block singleton-current extinction
+
+**Kind:** obstruction and classifier
+**Evidence:** formalized
+**Disposition:** active
+
+Every physical root ray has projective quotient below two. The proof uses only the leading-digit
+lower bound for its punctuated upper code and the strict marker-code upper bound. A singleton
+erasure step above any physical root preserves this chamber for `β≥3`:
+
+```text
+quotient(singleton step over root) < 2.              (1)
+```
+
+Conversely, if a singleton current reaches a singleton pole above any lawful older history, the
+exact recurrence and the trace bounds force
+
+```text
+quotient(older history) > 2.                         (2)
+```
+
+The lower bound is uniform in both singleton letters and in the older history. Equations (1)
+and (2) immediately exclude two consecutive singleton source blocks.
+
+If the intervening block is multi-role and the root is deep, its parsed ray has first-coordinate
+shell `(1,1)` and second-coordinate shell `(k,k)`. For current `D_c`, the two-adic pole balance
+would require a residual valuation below the minimum of its two integral terms. For current
+`D_b`, the two-adic balance forces `k=2`, while the unequal five-adic term depths then force
+residual depth two instead of the required three. Both letters are impossible. If the root is
+shallow, parser law normalizes it to `R_c`, where `MM-S94` already kills both singleton currents.
+
+Lean therefore proves the canonical statement
+
+```text
+BlocksLaw [current,next,root] and singleton pole
+  ⇒ length(current)≥2.                               (3)
+```
+
+With a multi-role `next`, (3) discharges the last hypothesis of the `MM-S94` classifier. Every
+such pole lies in its exact deep-root or `R_c` A/B grammar.
+
+**Scope:** the extinction quantifies over every `β≥3`, body, singleton target, current letter,
+and lawful three-block source. It proves no three-block pole has singleton current. It does not
+exclude a multi-role current followed by a singleton intervening block, nor any surviving arm of
+the multi/multi classifier.
+
+**Use:** delete singleton currents from the entire three-source frontier. The next adjacent
+slice is current-multi/next-singleton; after it is classified, every three-block pole can be
+compared directly with the multi/multi A/B grammar.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockSingletonPrefix.lean`](MatrixMortality/DecimalSetterThreeBlockSingletonPrefix.lean),
+through `rootRay_ratio_lt_two`,
+`parsedRay_singleton_root_ratio_lt_two`,
+`singletonPole_singletonCurrent_olderRatio_gt_two`,
+`singletonPole_threeBlock_singletonCurrent_impossible`,
+`singletonPole_threeBlock_forces_current_multi`, and
+`singletonPole_threeBlock_nextMulti_classifier`.
+
+**Artifact:**
+[`audits/m53-complete-three-block-singleton-current-extinction-2026-09-01.md`](audits/m53-complete-three-block-singleton-current-extinction-2026-09-01.md).
+
+**Next:** classify or extinguish a multi-role current above a singleton intervening block and
+physical root; then attack the resulting unified three-source grammar.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S96: Contaminated-tail factorwise pole gate
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The lawful tail used by `MM-S91` has normalized quotient whose reduced numerator is coprime to
+the primitive gap `q=2·10^β−7`; it therefore admits no gap-clean descended carrier. At an actual
+singleton pole above this tail, clearing the exact rational recurrence nevertheless yields an
+unconditional support law. If `V_current` and `V_tail` are the current and inherited lower
+boundary codes, then
+
+```text
+q ∣ V_current·V_tail.                                (1)
+```
+
+The proof first relates the reduced discrepancy `den−10·num` to `V_tail` through coefficients
+that are units modulo every divisor of `q`. The physical pole equation forces the raw
+discrepancy into the current lower code. Cancellation of the common rational reduction factor,
+followed by the exact marker and lift congruences, gives (1).
+
+Equation (1) has the sharp factorwise form
+
+```text
+r∣q and gcd(r,V_tail)=1  ⇒  r∣V_current.             (2)
+```
+
+For a prime `p∣q`, absence from the inherited lower code therefore forces `p` into the current
+lower code. This is the precise contaminated analogue of the gap-clean gate: support already
+present in the inherited code is silent, while every absent factor must enter through the
+current spelling.
+
+The cancellation boundary cannot be removed. At `β=3`, the explicit body
+
+```text
+b b b b c b c c c c
+```
+
+makes the inherited lower code divisible by the whole gap `q=1993`. Lean checks this exact
+divisibility. It is a resonance of the gate, not a singleton-pole witness.
+
+**Scope:** the product law holds for every `β>0`, body, singleton target, and current block,
+conditional only on an actual pole over the fixed lawful `gapContaminatedTail`. The divisor and
+prime corollaries are stated for `β≥3`. No theorem asserts that this tail reaches a pole or that
+inherited support alone propagates to the current block.
+
+**Use:** replace failed global coprimality cancellation by a support ledger. For each gap factor,
+either prove absence from the inherited lower language and force it into the current code, or
+classify the exact body congruence that absorbs it. Do not infer full-gap divisibility of the
+current code without the coprimality premise in (2).
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterContaminatedPoleGate.lean`](MatrixMortality/DecimalSetterContaminatedPoleGate.lean),
+through `gapContaminatedTail_singletonPole_forces_lowerProduct`,
+`gapContaminatedTail_singletonPole_forces_gapDivisor_dvd_currentLower`,
+`gapContaminatedTail_singletonPole_forces_gapPrime_dvd_currentLower`, and
+`betaThree_gapContaminatedNext_lower_contains_gapFactor`.
+
+**Artifact:**
+[`audits/m53-contaminated-tail-factorwise-pole-gate-2026-09-01.md`](audits/m53-contaminated-tail-factorwise-pole-gate-2026-09-01.md).
+
+**Next:** intersect the forced support with the current lower-code grammar and lift the
+factorwise ledger from this uniform tail to the `cb/cc` peeled-head family isolated by `MM-S94`.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S97: Short all-`c` three-block shell grammar
+
+**Kind:** structure theorem
+**Evidence:** formalized
+**Disposition:** active
+
+For an all-`c` current of width `n`, with intervening upper length `k`, the exact singleton-pole
+equation gives the following necessary discrepancy depths:
+
+```text
+n≤β:       (v₂δ,v₅δ)=(k+β+1−n,k+β−n),
+n=β+1:     (v₂δ,v₅δ)=(k,k−1),
+n=β+2:     v₅δ=k−1,
+n=β+2 and target D_c: (v₂δ,v₅δ)=(k−2,k−1).
+```
+
+At `β+1`, a normalized residue `2 mod 5` kills the apparent equal-depth cancellation. At
+`β+2`, target `D_c` has normalized two-coefficient `2 mod 4`. For target `D_b`, Lean proves the
+remaining coefficient factors as `2^(β+4)·C`; the phase-sensitive depth and nonvanishing of
+`C` are the exact unresolved boundary.
+
+**Scope:** `β≥3`, arbitrary body and intervening block, all-`c` multi-role erasure-ended current,
+and an actual `R_c`-rooted three-block singleton pole. These are necessary shells, not witnesses.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockShortCurrent.lean`](MatrixMortality/DecimalSetterThreeBlockShortCurrent.lean),
+through `singletonPole_threeBlock_ruleCRoot_shortAllC_discrepancyGrammar`,
+`singletonC_coefficient_currentUpper_eq_beta_add_two_hasValue_two`, and
+`singletonB_coefficient_currentUpper_eq_beta_add_two_factor`.
+
+**Artifact:**
+[`audits/m53-short-all-c-three-block-shells-2026-09-01.md`](audits/m53-short-all-c-three-block-shells-2026-09-01.md).
+
+**Next:** determine the normalized two-adic residual `C` for lawful `D_b` phases, beginning with
+the pure all-erasure slice.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S98: Long `R_c` gap-clean ancestry extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The long `R_c` branch of `MM-S94` has intervening upper length `k` and discrepancy shell
+`(k−1,k−1)`. Its suffix theorem writes
+
+```text
+δ = H·10^(k−1),                                     (1)
+```
+
+where `H` is the unmatched `β+2`-digit peeled-head code. The exact `R_c` ray quotient is
+`10^k μ/δ`. Dividing out the built-in decimal factor and applying (1) gives the literal
+normalization
+
+```text
+(ray₂/ray₁)/10 = μ/H.                               (2)
+```
+
+The primitive gap `q=2·10^β−7` is coprime to the marker `μ`. Reducing the rational fraction in
+(2) can only divide its numerator: the canonical reduced numerator divides `μ`, and is therefore
+also coprime to `q`. But `MM-S91` proves that gap-clean integral descended coordinates exist
+exactly when `q` divides that reduced numerator. Since `q>1`, both conditions are incompatible.
+
+Thus every hypothetical long `R_c` three-block singleton pole lies necessarily in the
+gap-contaminated ancestry branch. This is stronger than exhibiting one contaminated tail: it
+removes the gap-clean branch from the entire `cb/cc` long-head family isolated by `MM-S94`.
+
+**Scope:** the theorem assumes `β≥3`, parser-lawful multi-role current and intervening blocks,
+the long-current inequality, and an actual singleton pole over `R_c`. It does not exclude the
+pole itself. It proves that one particular proof interface, full primitive-gap coprimality of a
+descended numerator, can never apply on this branch.
+
+**Use:** do not invoke the `MM-S22` full-gap clean quotient gate on a long `R_c` survivor. Track
+gap support factorwise through the peeled head and emitted lower codes, using the support laws of
+`MM-S24` and `MM-S96` or a generalization of them to the full `cb/cc` family.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockLongContamination.lean`](MatrixMortality/DecimalSetterThreeBlockLongContamination.lean),
+through `singletonPole_threeBlock_ruleCRoot_long_normalizedQuotient_eq`,
+`singletonPole_threeBlock_ruleCRoot_long_reducedNumerator_coprime_gapFactor`, and
+`singletonPole_threeBlock_ruleCRoot_long_no_gapCleanIntegralCarrier`.
+
+**Artifact:**
+[`audits/m53-long-rule-c-gap-clean-extinction-2026-09-01.md`](audits/m53-long-rule-c-gap-clean-extinction-2026-09-01.md).
+
+**Next:** generalize the factorwise pole product law from the uniform contaminated tail to an
+arbitrary peeled `cb/cc` head, then intersect forced gap support with the exact lower suffix
+language.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S100: Complete three-block singleton-next extinction
+
+**Kind:** obstruction and classifier
+**Evidence:** formalized
+**Disposition:** active
+
+The only source shape left by `MM-S95` had a multi-role current and singleton intervening block.
+Both singleton letters are impossible. A `D_b` intervener has older ray quotient below one,
+whereas every erasure-current singleton pole forces that quotient above one. For `D_c`, failure
+of unit peeled ancestry forces a short all-`c` current; the exact recurrence then has incompatible
+two- and five-depths for both shallow roots and roots of depth at least `β`.
+
+Therefore every lawful three-block singleton pole has both current and next multi-role.
+`singletonPole_threeBlock_classifier` is the canonical unconditional theorem: its only
+alternatives are the established multi/multi deep-root chamber or the exact `R_c` discrepancy
+grammar.
+
+**Scope:** the theorem consumes the parser-lawful root shell and erasure-ending physical blocks.
+It eliminates singleton interveners, not the surviving multi/multi chambers.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockSingletonNext.lean`](MatrixMortality/DecimalSetterThreeBlockSingletonNext.lean),
+through `singletonPole_threeBlock_singletonBNext_impossible`,
+`singletonPole_threeBlock_singletonCNext_multiCurrent_impossible`,
+`singletonPole_threeBlock_forces_next_multi`, and `singletonPole_threeBlock_classifier`.
+
+**Artifact:**
+[`audits/m53-complete-three-block-singleton-next-extinction-2026-09-01.md`](audits/m53-complete-three-block-singleton-next-extinction-2026-09-01.md).
+
+**Next:** use the unconditional classifier as the entry point for all further three-block work;
+do not reopen singleton-current or singleton-next cases.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S101: Long `R_c` peeled-head support gate
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For a hypothetical long `R_c` three-block singleton pole, let `H` be the peeled-head code, `μ`
+the marker, `q=2·10^β−7` the primitive gap, and `V_current` the current lower code. Cancelling the
+exact `10^(k−1)` suffix factor from the pole equation and reducing modulo `q` gives
+
+```text
+q ∣ V_current·(H−10μ).                               (1)
+```
+
+The singleton trace and calibrated lift are units modulo `q`, so no hidden target or lift factor
+remains in (1). This is the factorwise pole law for the entire long `cb/cc` family, rather than
+the one uniform contaminated tail of `MM-S96`.
+
+The two peeled-head chambers behave differently. For the terminal `cb` head, the marker relation
+gives the exact identity
+
+```text
+H−10μ = −q.                                          (2)
+```
+
+Thus (1) is tautological: the whole primitive gap is already present in the head coefficient.
+This chamber is support-saturated and cannot be cut by any factorwise cancellation based only on
+the first long pole.
+
+For a `cc` head, write its remaining `β` digits as fringe code `F`. Lean proves
+
+```text
+18(H−10μ)=18F−25q−35.                                (3)
+```
+
+Combining (1) and (3) yields the informative gate
+
+```text
+q ∣ V_current·(18F−35).                              (4)
+```
+
+Consequently every divisor `r∣q` coprime to `18F−35` must divide the current lower code. The
+only silent factors on the `cc` branch are those already absorbed by this explicit fringe
+residue.
+
+**Scope:** the pole product assumes `β≥3`, multi-role current and intervening blocks, the long
+current inequality, root `R_c`, and an actual singleton pole. Equations (2) and (3) are
+unconditional code identities. No theorem excludes the saturated `cb` branch or guarantees
+coprimality of every `cc` fringe residue.
+
+**Use:** split future long-head attacks immediately. The `cb` chamber requires information
+beyond first-pole gap support, such as a predecessor cylinder or exact coefficient size. On the
+`cc` chamber, classify `gcd(q,18F−35)` over the lawful fringe language and force every absent
+factor into the current lower spelling.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockLongSupport.lean`](MatrixMortality/DecimalSetterThreeBlockLongSupport.lean),
+through `singletonPole_threeBlock_ruleCRoot_long_forces_headSupportProduct`,
+`terminalHead_sub_ten_marker_eq_neg_gapFactor`,
+`doubleCHead_sub_ten_marker_residue`,
+`singletonPole_threeBlock_ruleCRoot_long_doubleC_forces_fringeSupportProduct`, and
+`singletonPole_threeBlock_ruleCRoot_long_doubleC_forces_gapDivisor_currentLower`.
+
+**Artifact:**
+[`audits/m53-long-rule-c-peeled-head-support-gate-2026-09-01.md`](audits/m53-long-rule-c-peeled-head-support-gate-2026-09-01.md).
+
+**Next:** classify the lawful `cc` fringe residues against the factors of `q`; attack the
+support-saturated `cb` chamber through a second predecessor or an exact archimedean coefficient
+bound.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S102: Long double-`c` relative-gap resonance
+
+**Kind:** structure theorem and obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+On the long `cc` chamber, decimal-unit peeling forces a nonempty terminal run of `s` sevens,
+with `1≤s≤β−1`. For `q_n=2·10^n−7`, the peeled-head coefficient satisfies
+
+```text
+9(H−10μ)=q_s−10q_β.                                 (1)
+```
+
+Combining (1) with the `MM-S101` product gives the exact support gate
+
+```text
+q_β ∣ V_current·q_s.                                (2)
+```
+
+The smaller gap is not an opaque exceptional coefficient. For every integer `r` and `s≤β`,
+Lean proves
+
+```text
+r∣q_β and r∣q_s  iff  r∣q_s and r∣(10^(β−s)−1).    (3)
+```
+
+Thus every prime factor of `q_β` absent from the current lower code must divide both one smaller
+gap and the exact decimal-period term. If `q_β` is coprime to all smaller `q_s`, the entire
+ambient gap enters the current lower code.
+
+**Scope:** `β≥3`, an `R_c`-rooted long-current chamber, multi-role current and intervening
+blocks, `cc` head, and an actual singleton pole. Smaller-gap resonances occur at some exponents;
+this is a finite grammar, not a universal coprimality or extinction theorem.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockLongDoubleC.lean`](MatrixMortality/DecimalSetterThreeBlockLongDoubleC.lean),
+through `peeledDoubleCHead_unit_gapRelation`,
+`singletonPole_threeBlock_ruleCRoot_long_doubleC_forces_gapResonance`,
+`gapFactor_commonDivisor_iff_relative_decimalPeriod`, and
+`singletonPole_threeBlock_ruleCRoot_long_doubleC_exceptionalPrime_period`.
+
+**Artifact:**
+[`audits/m53-long-double-c-gap-resonance-2026-09-01.md`](audits/m53-long-double-c-gap-resonance-2026-09-01.md).
+
+**Next:** intersect the finite relative-position resonance with the current lower spelling; the
+support-saturated `cb` branch still requires a second predecessor or coefficient-size attack.
+
+**Issue:** [#6, Formalize the five-state setter candidate and decide projective
+avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S103: Long terminal-head collapse extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+The support-saturated `cb` chamber left by `MM-S101` is nevertheless algebraically empty. Exact
+suffix exhaustion reduces a three-block pole to
+
+```text
+H((EP+GV)S−7EμGA)=10GVμS.                           (1)
+```
+
+The terminal peeled head is the calibrated `R_c` root code. It therefore obeys
+
+```text
+9H=G,          H−10μ=−q,          E=9q.             (2)
+```
+
+Substitution and cancellation of the nonzero product `Gq` turn (1) into
+
+```text
+S(P−V)=7μGA.                                        (3)
+```
+
+This is literally the two-block singleton-pole equation over `R_c` for the same current and
+target. The physical current and literal root satisfy `BlocksLaw`, so the complete two-block
+extinction in `MM-S89` contradicts (3) for both singleton letters.
+
+**Scope:** `β≥3`, an actual `R_c`-rooted singleton pole with multi-role erasure-ending current
+and intervening blocks, a long current, and intervening role letters beginning `cb`. The result
+is unconditional inside that chamber and uses no support-coprimality premise.
+
+**Formalization:**
+[`MatrixMortality/DecimalSetterThreeBlockLongTerminal.lean`](MatrixMortality/DecimalSetterThreeBlockLongTerminal.lean),
+through `singletonPole_threeBlock_ruleCRoot_long_cb_forces_twoBlockPole` and
+`singletonPole_threeBlock_ruleCRoot_long_cb_impossible`.
+
+**Artifact:**
+[`audits/m53-long-terminal-head-collapse-2026-09-01.md`](audits/m53-long-terminal-head-collapse-2026-09-01.md).
+
+**Next:** the long `R_c` head grammar now contains only `cc`; intersect its `MM-S102`
+relative-gap resonance with the current lower spelling.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).

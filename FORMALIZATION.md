@@ -2404,6 +2404,329 @@ witnesses, none a pole. For the finite empty-front target Lean additionally prov
 remaining local equations. A strict cut must therefore use global reachability or longer
 target-prefix ancestry.
 
+Record [`MM-S28`](SALVAGE.md#mm-s28-arbitrary-history-gap-support-saturation) removes the
+remaining support bookkeeping. `GapCarrierHistory.prime_dvd_final_iff` iterates the exact
+one-step law over arbitrary finite histories, and `GapCarrierHistory.gapSupportSaturated_iff`
+identifies final divisibility by `rad(q)` with initial-or-emitted support for every prime `p∣q`.
+The language-side obstruction then fails maximally: `gapFactor_dvd_allEraseLowerCode` applies
+Euler's theorem at width `φ(|q|)` and proves that the physical block `D_c^φ(|q|)` has lower code
+divisible by the full primitive gap. This does not prove that the block is reachable after the
+distinguished entry; it redirects the residual to encoded-entry reachability with upper-code
+and complete suffix information retained.
+
+Record [`MM-S32`](SALVAGE.md#mm-s32-entry-support-saturator-extinction) cuts the first such
+reachability test. `entrySaturationWidth` triples the Euler width, preserving full-gap
+divisibility while forcing length at least three. `entrySaturator_rawHead_shell_impossible`
+then instantiates `DecimalSetterDepth.allCDeletion_peeledDoubleCHead_shell_impossible` and
+excludes this universal all-`D_c` saturator as the first transition from a lawful two-`c` raw
+head to another multi-role pole. Rule-bearing and `D_b`-containing first saturators, singleton
+targets, and later generalized product-residual carriers remain open.
+
+Record [`MM-S33`](SALVAGE.md#mm-s33-leading-d_b-support-saturator-extinction) removes one
+`D_b`-containing family. `DecimalSetterDepth.allCDeletion_peeledDoubleCHead_not_fiveAboveWidth`
+proves the stronger fact that the all-`D_c` raw residual is not divisible by `5^(n+1)` for any
+`n≥1`.
+`DecimalSetterAncestry.leadingB_punctuatedUpper_code_perturbation` proves the exact marker
+shift `P_b=P_c+μ10^(n+β+1)`, while `leadingBEraseLowerCode_eq_allEraseLowerCode` preserves the
+literal lower word. At `n=entrySaturationWidth β`, the lower code contains the full gap and
+`entryLeadingBErase_rawHead_shell_impossible` excludes the required depth-`n+β` shell. This
+does not cover a nonleading `D_b`, a rule-bearing block, a singleton target, or a later
+generalized carrier.
+
+Record [`MM-S39`](SALVAGE.md#mm-s39-second-position-d_b-raw-head-extinction) first extends the
+cut to every all-erasure block `D_cD_bD_c^t`. Record
+[`MM-S40`](SALVAGE.md#mm-s40-first-beta-plus-one-position-d_b-extinction) subsumes that position.
+`allCDeletion_regularRawHead_not_fiveAboveWidth` and
+`allCDeletion_firstRawHead_not_fiveAboveWidth` separately prove that every all-`D_c` residual of
+width `n` fails divisibility by `5^(n+1)`; the latter retains the exceptional-head three-way
+exponent split. `aboveWidthUpperPerturbation_peeledDoubleCHead_shell_impossible` consumes this
+stronger baseline. `tenPower_dvd_positionedB_punctuatedUpper_code_sub` factors an arbitrary
+one-`D_b` change through its exact suffix of length `t+β+2`, while
+`positionedBEraseLowerCode_eq_allEraseLowerCode` preserves the lower word. The composed theorem
+`positionedBErase_rawHead_shell_impossible` excludes every prefix width `a≤β`, and
+`gapFactor_dvd_positionedBEraseLowerCode_of_width_eq_entry` preserves full-gap support at the
+entry width.
+
+Record [`MM-S45`](SALVAGE.md#mm-s45-exceptional-late-one-d_b-boundary) closes all positions at a
+regular raw head. `DecimalSetterDepth.allCDeletion_regularRawHead_not_fiveAtBeta` strengthens
+the baseline to `5^β∤R_c`, and `betaDeepUpperPerturbation_regularRawHead_shell_impossible`
+transfers that cut through any one-`D_b` upper perturbation.
+`DecimalSetterAncestry.positionedBErase_regularRawHead_shell_impossible` consumes the exact
+physical suffix factorization. Finally, `positionedBErase_shell_forces_exceptionalLate`
+combines it with `MM-S40` and proves that every surviving shell has `prefixWidth>β` and the
+exceptional terminal-run-`β−1` raw-head identity.
+
+Record [`MM-S47`](SALVAGE.md#mm-s47-global-one-d_b-raw-head-extinction) kills that final tail.
+`allCDeletion_firstRawHead_residueNormalForm` exposes the two exceptional-head coefficients
+`C≡2` and `B≡1 (mod 5)`. The exact positioned perturbation has coefficient `D≡2`, while the
+head and gap are also `2` modulo `5`. The theorem
+`exceptionalRawHead_lateUpperPerturbation_shell_impossible` compares all three exact depths,
+including both resonance arms and their corner. The physical specialization and
+`positionedBErase_rawHead_shell_impossible_allPositions` exclude a sole `D_b` in every
+all-erasure position.
+
+Record [`MM-S49`](SALVAGE.md#mm-s49-nonempty-marker-all-erasure-extinction) absorbs arbitrary
+marker superpositions into the unique rightmost `D_b`. For `w=u·b·c^t`,
+`rightmostB_punctuatedUpper_code_sub_eq` factors the entire upper difference at depth
+`t+β+2`, and `rightmostBUpperCoefficient_sub_two_dvd_five` proves its coefficient is always
+`2` modulo `5`, independent of earlier markers in `u`. The identity
+`|tagEncode_β(w)|=|w|+#_b(w)(β+1)` fixes the prospective pole at physical depth
+`|tagEncode_β(w)|-1`; its divisibility descends to the three obstruction thresholds. The
+theorem `letterErase_rawHead_shell_impossible_of_b_mem` combines the early, regular-head, and
+exceptional-head cuts and excludes every all-erasure word with nonempty `D_b` support.
+
+Record [`MM-S53`](SALVAGE.md#mm-s53-complete-all-erasure-first-entry-extinction) closes the
+entire non-singleton all-erasure first-entry grammar. The remaining two-role pure-`D_c` case
+has trace shell `(1,1)`, but `peeledNumerator_twoAdic_deepens` forces its raw residual strictly
+deeper at two. `letterErase_rawHead_multi_shell_impossible` combines this boundary with
+`MM-S19` for longer pure-`D_c` words and `MM-S49` for every word containing `D_b`. Hence every
+surviving distinguished raw-head-to-multi block contains a rule tile.
+
+Record [`MM-S54`](SALVAGE.md#mm-s54-rightmost-rule-phase-toggle-trichotomy) opens that remaining
+rule grammar at its unique rightmost rule. Erasing every phase preserves the upper spelling,
+while the lower-code difference factors as `10^s K`, where `s` is the erasure-tail width. The
+coefficient is `550`, `480`, or `780` modulo `1000` according as zero, one, or at least two
+roles precede the rule. Thus the outer cases have exact shells `(s+1,s+2)` and `(s+2,s+1)`;
+the middle case has exact five-depth `s+1` and at least `s+3` factors of two. The raw residual
+inherits these depths through `G(H−10μ)`. As a first extinction consequence,
+`leadingRuleC_rawHead_multi_shell_impossible` excludes every `R_cD_c^s`, `s≥1`, first block.
+
+Record [`MM-S56`](SALVAGE.md#mm-s56-exact-rule-resonance-grammar) assigns the all-`D_c`
+comparison residual its exact five-depth. A regular raw head with final-seven width `h` has
+depth `min(n,h+1)`; the exceptional head has depth `min(n,2β−1)`. Combining this frontier
+with the rightmost-rule phase depth and the exact rightmost-`b` upper depth
+`t_b+β+2` replaces every `b`-bearing spelling by a minimum-resonance equation. For pure
+`c` words, a surviving rightmost rule is either in position two or has erasure-tail width
+exactly `h` at a regular head and `2β−2` at the exceptional head. The arithmetic classifier
+also collapses every regular `b`-bearing resonance to the same `s=h` arm; only three explicit
+exceptional relative-position arms remain.
+
+Record [`MM-S60`](SALVAGE.md#mm-s60-complete-b-bearing-rule-entry-extinction) closes every one
+of those b-bearing arms by retaining normalized leading coefficients. At the exceptional head,
+scaling by `45` gives base coefficient `2`, or `4` at `n=2β−1`, and coefficient `2` on both
+the rightmost-`b` and phase perturbations; no minimum-depth subset cancels modulo five. At a
+regular head, scaling by `81` gives coefficient `2^h` on both tied arms, whose sum remains a
+unit, while the marker arm is deeper. The physical theorem
+`bBearingRightmostRule_rawHead_shell_impossible` consumes the complete `MM-S56` position
+grammar. The all-`c` position-two boundary and the exact later-frontier resonances remain.
+
+Record [`MM-S62`](SALVAGE.md#mm-s62-all-c-position-two-rule-extinction) closes the position-two
+boundary by combining its two-adic and five-adic profiles. With block width `n=t+2`, the phase
+perturbation is divisible by `2^n` and has exact five-depth `n−1`. Before either raw-head
+frontier, the all-erasure companion is also divisible by `2^n`; beyond it, the companion has
+strictly shallower exact five-depth. The physical equal-depth shell is impossible in both
+regimes. Composing this obstruction with `MM-S56` leaves only the later all-`c` tail widths `h`
+and `2β−2`.
+
+Record [`MM-S65`](SALVAGE.md#mm-s65-complete-all-c-rule-entry-extinction) closes both later
+frontiers. At a regular head, the `81`-scaled all-erasure and phase arms have equal normalized
+residue `2^h`; their sum remains a five-adic unit at depth `h+1`, below the physical target. At
+the exceptional head, the `45`-scaled base coefficient is `2` or `4` and the phase coefficient
+is `2`; their sum is `4` or `6` modulo five at depth `2β`, again below the target. Thus every
+all-`c` rightmost-rule first entry is impossible. Generalized carriers and singleton targets
+remain separate.
+
+Record [`MM-S66`](SALVAGE.md#mm-s66-complete-rule-bearing-first-entry-extinction) performs the
+exhaustive two-letter split. A rightmost-rule word containing `b` is impossible by `MM-S60`;
+one without `b` consists entirely of `c` and is impossible by `MM-S65`. Consequently no
+rule-bearing block carries the distinguished two-`c` raw head into a multi-role pole.
+
+Record [`MM-S67`](SALVAGE.md#mm-s67-complete-distinguished-first-entry-extinction) performs the
+exhaustive phase split on an arbitrary physical role block. A word with no rule is exactly the
+letterwise all-erasure block and dies by `MM-S53`. Otherwise it factors at its unique rightmost
+rule, with only erasures afterward, and dies by `MM-S66`. Thus no non-singleton first block
+carries the distinguished two-`c` raw head into another multi-role pole.
+
+Record [`MM-S74`](SALVAGE.md#mm-s74-triple-free-bridge-frontier) completes the outer algebraic
+mortality normal form. `bridgeScalar_append_delimiter_cube` factors a bridge coefficient at any
+`S³`; recursive descent extracts a contiguous cube-free zero chunk from every zero matrix word.
+`CoreSpelling` parses its boundary-trimmed core into `S²`-separated blocks and proves the exact
+three-coordinate execution. `CoreSpelling.zero_frontier` excludes a lone root block and leaves
+exactly a singleton erasure target, a non-singleton target over one root block, or a
+non-singleton target over a deeper history. `isMortal_iff_exists_parsedZeroFrontier` is the full
+converse equivalence, and `mortalityProblem_mortal_iff_exists_parsedZeroFrontier` transports it to
+the cleared integer family. The remaining theorem must identify or exclude the arbitrary
+square-reset source; `MM-S67` covers only its distinguished two-`c` raw-head specialization.
+
+Record [`MM-S77`](SALVAGE.md#mm-s77-shallow-generalized-raw-head-adapter) computes the exact
+one-root square reset. With `H` the full punctuated source upper code and
+`Δ=μ·10^|upper|−H`, a shallow pole is equivalent to
+`gap(10^β)·P·H=lift(10^β)·V·Δ`. A parser-lawful rule-ended source makes `H` a decimal-seven unit
+and `Δ` a decimal-three unit. This supplies the physical equation and both root shells without
+identifying the full root with `MM-S67`'s peeled two-`c` head.
+
+Record [`MM-S79`](SALVAGE.md#mm-s79-minimum-body-lawful-shallow-pole) shows that the generalized
+equation cannot be excluded indiscriminately. At `|body|=β−1`, the target
+`R_c::body.map D` has literally equal punctuated upper and lower words, while the source `[R_c]`
+has `9H=lift` and `9Δ=gap`. It therefore occupies the exact shallow `MM-S74` frontier. The tag
+source already halts and this target is its unique terminal spelling, so the pole is lawful.
+Compiler-emitted bodies have length `(safetyBound·β+1)(β−1)>β−1` and remain outside this slice.
+
+Record [`MM-S81`](SALVAGE.md#mm-s81-one-r_c-root-terminal-normalization) removes the minimum-body
+restriction from the root normalization. For every body and target,
+`HitsSquarePole target [[R_c]]` is equivalent first to equality of its boundary codes and then,
+by radix-ten code injectivity, to the literal Neary terminal equation. Hence the complete
+one-`R_c` shallow-root pole language is lawful; malformed shallow roots must have another
+rule-ended spelling.
+
+Record [`MM-S82`](SALVAGE.md#mm-s82-one-r_b-root-sign-extinction) closes the other one-role root.
+Its exact complement satisfies `9Δ=−lift`; the generalized pole's left side is strictly positive
+and its right side nonpositive for every target. Together S81 and S82 prove that a one-role
+source hits exactly when it is `R_c` and the target is a literal terminal match. Every unresolved
+shallow root now has length at least two.
+
+Record [`MM-S83`](SALVAGE.md#mm-s83-leading-b-shallow-root-sign-extinction) extends the sign wall
+to arbitrary source length. Any root beginning with a `b`-role has complement
+`−(5·10^(β+1+n)+code(tail)·10^(β+1)+μ)`, hence cannot satisfy the shallow pole equation. Every
+unresolved malformed shallow source now begins with `c` and has length at least two; the
+length-two residue consists only of `cb` and `cc`.
+
+Record [`MM-S84`](SALVAGE.md#mm-s84-complete-shallow-root-terminal-normalization) closes that
+entire residue and every longer parser-lawful shallow root at once. A non-singleton
+erasure-ended target has upper and lower codes `77 (mod 100)`, so its calibrated trace has shell
+`(1,1)`. Rewriting the pole as `H·trace=lift·μ·10^m·V` forces the source upper length `m=1`.
+Parser law then makes the source exactly `R_c`, and S81 makes the pole equivalent to literal
+terminal equality. No malformed shallow pole remains.
+
+Record [`MM-S85`](SALVAGE.md#mm-s85-parser-ray-singleton-adapter) constructs the exact
+homogeneous quotient of the physical `bridgeState` and proves its block action is the recursive
+peeled-carrier J-fraction step. `hitsSquarePole_singleton_iff_rayEquation` gives the
+arbitrary-history singleton criterion, while
+`hitsSquarePole_singleton_cons_iff_peeledEquation` transports it bidirectionally to the exact
+`peeledNumerator` equation under a nonzero projective representation. The shallow singleton
+branch is unconditionally empty. For a deeper parser history admitting decimal-unit peeled
+coordinates, `singletonPole_of_unitPeeledCarrier_currentShape` excludes a singleton current
+block and forces every erasure-ended current block to be non-singleton with at least `β+3` upper
+digits. Existence of those unit coordinates for every relevant minimal parser tail, followed by
+integral denominator ancestry, is the remaining adapter obligation.
+
+Record [`MM-S86`](SALVAGE.md#mm-s86-two-block-singleton-source-classifier) closes that ancestry
+obligation for a one-root older history. `admitsUnitPeeledCarrier_iff_ratio_hasDecimalShell`
+identifies unit peeled ancestry with quotient shell `(1,1)`, and
+`rootRay_admitsUnitPeeledCarrier_iff_upperLength_eq_one` computes a root quotient's shell as
+`(m,m)`. The uncancelled ray recurrence proves that a multi-role current block under a singleton
+target forces `m=1`; parser law makes the root exactly `R_c`, after which S85 gives the long
+bound `upperLength(current)≥β+3`. A separate three-case valuation proof excludes every singleton
+current over every root. `singletonPole_twoBlockSource_classifier` packages the complete
+parser-lawful result. The fixed-root long multi-role code equation is the sole survivor at two
+source blocks.
+
+Record [`MM-S88`](SALVAGE.md#mm-s88-r_c-root-singleton-d_c-extinction) closes the `D_c` half of
+that fixed-root survivor. `singletonCTrace_eq` and the exact `R_c` calibrations reduce the pole
+equation to `2·10^β(P−V)=7μ·10^m`. Since `m≥β+3`, decimal suffix exhaustion factors the
+difference at depth `m−β−1` and forces a lawful prefix of length `2β+2` to have code `35μ`.
+The universal leading-digit lower bound contradicts the marker upper bound when `β≥3`.
+`singletonC_twoBlockSource_impossible` packages the unconditional parser-lawful extinction. The
+two-block singleton frontier now consists only of target `D_b` over `R_c`.
+
+Record [`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) closes that final
+arm. `hitsSquarePole_singleton_ruleCRoot_iff_traceDiscrepancy` factors every singleton target
+over `R_c` through the same current code discrepancy. The `D_b` trace has coefficient
+`B=5200ρ²−18398ρ+2443`; shell balance and suffix exhaustion reduce its pole equation to
+`BK=35μ·lift`, where `K` is a lawful prefix of length `2β+2`. Uniform lower bounds on `B,K`
+and upper bounds on `μ,lift` contradict this equality. The combined
+`singletonTarget_twoBlockSource_impossible` theorem removes every target letter. Any remaining
+singleton pole has at least three source blocks.
+
+Record [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) settles the unit
+ancestry question on every actual singleton pole. `parsedRay_ne_zero_of_blocksLaw` supplies the
+nondegenerate older quotient. Solving the recurrence backward and comparing the `(1,1)` current
+trace with the deeper pole correction proves that a long multi-role current automatically gives
+an older quotient of shell `(1,1)`. The existing forward wall gives the converse. Lean packages
+the exact equivalence between unit peeled ancestry and the current shape
+`length≥2, upperLength≥β+3`. The physical upper-length identity then sharpens the complement
+to singleton currents or all-`c` multi-role currents of width `2..β+2`; every `b`-bearing
+multi-role current lies automatically in the unit branch. The integral and primitive-gap
+normalization of that long branch is resolved separately by `MM-S91`.
+
+Record [`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) settles the integral
+normalization and identifies the remaining coprimality seam exactly. Any parser quotient of
+shell `(1,1)` has integral decimal-unit coordinates with `D=E·Nprev`; on a concrete parser step
+they are a nonzero common scaling of the physical residual and inherited upper coordinate.
+Gap-clean coordinates exist if and only if the primitive gap divides the reduced numerator of
+the quotient after removing its built-in factor ten. The uniform lawful tail
+`[R_c,D_c] ; [R_c,R_c]` violates this condition for every `β≥3` and every tag body: its quotient
+has shell `(1,1)`, while the primitive gap is coprime to its reduced numerator. Shell and parser
+law alone therefore cannot feed the gap-clean quotient theorem.
+
+Record [`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) resolves the
+first complete three-source shell layer. Every lawful singleton pole has positive older
+quotient. With multi-role current and intervening blocks, a deep root forces the intervening
+block to be exactly two `c` roles and the current into the long corridor. A shallow root is
+exactly `R_c`; there the long corridor is equivalent to one exact discrepancy shell, while its
+complement is an all-`c` current of width at most `β+2`. Exact suffix exhaustion reduces the
+long intervening head to `cb` or `cc`. Both singleton currents are impossible over `R_c`, for
+every intervening block and either singleton target. Deep-root singleton-current histories and
+the surviving multi/multi grammar remain open.
+
+Record [`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) closes
+the remaining singleton-current quadrants. Every physical root quotient is below two, and one
+singleton step preserves that strict chamber; an actual singleton pole with singleton current
+requires the older quotient above two. This kills consecutive singletons. Exact coordinate
+shells kill a singleton current above a multi-role intervening block and deep root, while the
+shallow root reduces to the `R_c` extinction in `MM-S94`. Thus every lawful three-block
+singleton pole has a multi-role current. When the intervening block is also multi-role, the
+complete `MM-S94` classifier applies with no separate current-shape premise.
+
+Record [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) replaces the failed
+gap-clean cancellation on the uniform counterfamily by an exact support law. Any singleton pole
+over that tail forces the primitive gap to divide the product of the current and inherited lower
+codes. Consequently every divisor of the gap that is coprime to the inherited code divides the
+current code, with a primewise absence-to-entry corollary. The coprimality boundary is real:
+Lean checks an explicit `β=3` body whose inherited lower code contains the whole gap. This body
+is not a pole witness.
+
+Record [`MM-S97`](SALVAGE.md#mm-s97-short-all-c-three-block-shell-grammar) fixes the complete
+mixed-prime discrepancy grammar for all-`c` currents through width `β+2`. Widths at most `β`
+have shell `(k+β+1−n,k+β−n)`; width `β+1` has `(k,k−1)`. At width `β+2`, the five-depth is
+always `k−1`, and target `D_c` has the full reversed shell `(k−2,k−1)`. The unique unresolved
+short seam is target `D_b` at width `β+2`: its coefficient has a checked factor
+`2^(β+4)`, but the remaining phase-sensitive two-adic residual is not yet classified.
+
+Record [`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) removes the clean
+branch from every long `R_c` survivor, not merely the uniform counterfamily. Exact suffix
+exhaustion writes its discrepancy as `H·10^(k−1)`, so the normalized older quotient is exactly
+`μ/H`. Its reduced numerator divides the marker and is therefore coprime to the primitive gap.
+The exact criterion in `MM-S91` then forbids every gap-clean integral descended carrier. The
+pole itself remains hypothetical; all further attacks on this arm must retain factorwise gap
+support.
+
+Record [`MM-S100`](SALVAGE.md#mm-s100-complete-three-block-singleton-next-extinction) closes the
+last cardinality seam in the three-block source. A `D_b` intervening singleton contradicts the
+strict quotient-one wall. A `D_c` intervener forces a short all-`c` current whose exact
+two/five-depth balance fails for both shallow and deep roots. Hence every lawful three-block
+singleton pole has both non-root blocks multi-role. The canonical classifier is now
+unconditional and exposes only the known multi/multi deep-root or `R_c` chambers.
+
+Record [`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) supplies the required
+factorwise replacement on the full long-head family. Every hypothetical pole forces
+`q∣V_current(H−10μ)`. For the `cb` head, `H−10μ=−q` exactly, so the first-pole support gate is
+completely saturated. For a `cc` head with fringe code `F`, the same coefficient is congruent,
+up to the unit eighteen, to `18F−35`; hence `q∣V_current(18F−35)`, and every gap divisor absent
+from that fringe residue enters the current lower code.
+
+Record [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) resolves the lawful
+`cc` fringe coefficient into one smaller primitive gap. A decimal-unit head supplies
+`1≤s≤β−1` with `9(H−10μ)=q_s−10q_β`, so every hypothetical pole forces
+`q_β∣V_current q_s`. Common factors of `q_β` and `q_s` are exactly the factors of `q_s` that
+divide `10^(β−s)−1`. Every ambient prime absent from the current lower spelling is therefore an
+explicit relative-position decimal-period resonance, rather than an arbitrary fringe factor.
+
+Record [`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) kills the
+support-saturated `cb` chamber without coprimality. The terminal head satisfies both `9H=G` and
+`H−10μ=−q`; with `E=9q`, the exact three-block equation factors by nonzero `Gq` and becomes
+`S(P−V)=7μGA`. This is precisely the `R_c`-rooted two-block singleton equation excluded by
+`MM-S89`. Hence every long `cb` three-block pole is impossible, for either singleton target.
+
+Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
+ternary and decimal first-multi-transfer fronts. The single theorem
+`DecimalSetterDepth.firstMultiTransfer_threeShapeFrontier_impossible` consumes the three role
+shapes left by the swapped ternary gate. `peeledMultiPole_length_ne_two` kills the two-`c`
+multi-to-multi case. `peeledMultiToSingleton_beta_add_three_le` kills the `(β+1)`-`c`
+multi-to-singleton case. `peeledSingletonToSingleton_impossible` kills the `D_b`-to-singleton
+case without its preceding two-`c` hypothesis. The theorem does not assert that the ternary
+trichotomy classifies decimal orbits; longer generalized decimal carriers remain open.
+
 Record [`MM-S21`](SALVAGE.md#mm-s21-bounded-decimal-suffix-cycles) closes the fixed-precision
 suffix-descent lane. `DecimalSetterSuffix.cycleDefect_lift` gives an explicit one-digit lift for
 the stationary carrier defect `10^hEx²−τx+μGV`, whose derivative is `−1` modulo ten.
@@ -2489,7 +2812,7 @@ the periodic saturation theorem and its remaining arithmetic boundary are recons
 formalization and the shell attack are tracked in
 [#7](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/7).
 
-The `M₅(3)` delimiter attack has fourteen foundational records:
+The `M₅(3)` delimiter attack has the following foundational records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -2501,6 +2824,24 @@ The `M₅(3)` delimiter attack has fourteen foundational records:
 | [`MM-S77`](SALVAGE.md#mm-s77-shallow-generalized-raw-head-adapter) | exact shallow square-reset equation, decimal coefficient calibration, and full-root code/complement unit shells |
 | [`MM-S79`](SALVAGE.md#mm-s79-minimum-body-lawful-shallow-pole) | literal minimum-body target identity, exact shallow frontier witness, immediate source halting, unique terminal spelling, and compiler-length separation |
 | [`MM-S81`](SALVAGE.md#mm-s81-one-r_c-root-terminal-normalization) | exact equivalence between the one-`R_c` shallow pole language and literal Neary terminal matches |
+| [`MM-S82`](SALVAGE.md#mm-s82-one-r_b-root-sign-extinction) | exact negative complement of the one-`R_b` root and complete one-role shallow-source classification |
+| [`MM-S83`](SALVAGE.md#mm-s83-leading-b-shallow-root-sign-extinction) | exact arbitrary-tail complement formula and sign extinction for every shallow root beginning with `b` |
+| [`MM-S84`](SALVAGE.md#mm-s84-complete-shallow-root-terminal-normalization) | `(1,1)` target-trace shell, forced source upper length one, parser normalization to `R_c`, and exact terminal-match equivalence |
+| [`MM-S85`](SALVAGE.md#mm-s85-parser-ray-singleton-adapter) | exact homogeneous parser ray, physical block transport, arbitrary-history singleton equation, shallow singleton extinction, and conditional deep `m≥β+3` classifier |
+| [`MM-S86`](SALVAGE.md#mm-s86-two-block-singleton-source-classifier) | unit-ancestry quotient criterion, exact root shells, singleton-current extinction over every root, and canonical `R_c` long-current classifier |
+| [`MM-S88`](SALVAGE.md#mm-s88-r_c-root-singleton-d_c-extinction) | exact `R_c`-root `D_c` discrepancy equation, suffix factorization, prefix-length contradiction, and complete two-block `D_c` extinction |
+| [`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) | target-independent `R_c` discrepancy identity, exact `D_b` shell and suffix factorization, coefficient bounds, and complete two-block singleton extinction |
+| [`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) | nonzero lawful parser rays, automatic long-current unit ancestry, exact current-shape equivalence, and complementary singleton/all-`c` short grammar |
+| [`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) | automatic integral gap descent, exact reduced-numerator criterion for primitive-gap coprimality, and a lawful shell counterexample to automatic gap-clean ancestry |
+| [`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) | positive singleton chamber, exact deep-root/`R_c` multi-current classifier, suffix/head grammar, and complete `R_c` singleton-current extinction |
+| [`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) | universal root quotient chamber, consecutive-singleton and deep-root singleton-current extinction, canonical current-multi theorem, and classifier conditional only on a multi-role intervener |
+| [`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) | exact current/inherited lower-code product divisibility, arbitrary-divisor and primewise support transfer, and a formal inherited-support saturation boundary |
+| [`MM-S97`](SALVAGE.md#mm-s97-short-all-c-three-block-shell-grammar) | exact short all-`c` shells through width `β+1`, width-`β+2` five-depth, target-`D_c` reversed shell, and isolated target-`D_b` two-adic residual |
+| [`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) | exact normalized quotient `μ/H`, reduced-numerator coprimality, and complete gap-clean ancestry extinction for the long `R_c` three-block arm |
+| [`MM-S100`](SALVAGE.md#mm-s100-complete-three-block-singleton-next-extinction) | quotient-one and mixed-prime extinction of both singleton interveners, forced multi/multi source, and unconditional three-block classifier |
+| [`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) | full long-head support product, exact `cb` saturation identity, `cc` fringe-residue gate, and arbitrary-divisor transfer into the current lower code |
+| [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) | exact smaller-gap head identity, `q_β∣Vq_s` support law, common-divisor decimal-period equivalence, and exceptional-prime grammar |
+| [`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) | terminal-head calibrations, exact collapse to the two-block singleton equation, and complete long-`cb` chamber extinction |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -3215,6 +3556,11 @@ fixed-rank decision problem.
 | `DecimalSetterMatrix.lean` | explicit decimal `5 × 5` setter, delimiter ranks, regular decoder, internal separator, and forward rational compiler |
 | `DecimalSetterFracture.lean` | greedy delimiter-cube fracture and complete arbitrary-product scalar-bridge normal form |
 | `DecimalSetterBridge.lean` | recursive cube elimination, exhaustive triple-free block parser, mortality-equivalent pole frontier, and exact shallow generalized raw-head adapter |
+| `DecimalSetterBridgeRay.lean` | exact homogeneous quotient of the bridge recurrence, singleton-pole equation, shallow singleton extinction, and unit-peeled deep singleton classifier |
+| `DecimalSetterRootRay.lean` | intrinsic unit-ancestry shell criterion, root-ray shells, and complete two-block singleton-source classification |
+| `DecimalSetterRuleCRootSingleton.lean` | exact `R_c`-root `D_c` discrepancy equation and complete parser-lawful two-block `D_c` singleton extinction |
+| `DecimalSetterTwoBlockSingleton.lean` | exact `R_c`-root `D_b` discrepancy, shell-driven suffix contradiction, and complete parser-lawful two-block singleton extinction |
+| `DecimalSetterSingletonAncestry.lean` | nonzero lawful parser rays and exact equivalence between older unit peeled ancestry and the long multi-role current shape at a singleton pole |
 | `DecimalSetterMinimumBody.lean` | one-`R_c` terminal normalization, minimum-body lawful shallow pole, exact parsed frontier witness, and compiler-image length separation |
 | `DecimalSetterInteger.lean` | explicit three-label integer `M₅(3)` family and forward Neary compiler |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |

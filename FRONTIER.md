@@ -1135,7 +1135,6 @@ Once `r` occurs, both later gap widths and later reciprocal exponents occur exac
 terminal-run-one support occurs exactly at widths congruent to five modulo `21`. The initial
 gap-clean shortcut is therefore false; a closure must track this periodic support through the
 lower-code ancestry and singleton gates.
-
 [`MM-S28`](SALVAGE.md#mm-s28-arbitrary-history-gap-support-saturation) closes the support
 bookkeeping and kills static missing-prime invariants. Along any exact recursive carrier
 history, a prime `p∣q` divides the final numerator exactly when it divides the initial numerator
@@ -1300,8 +1299,172 @@ lawful normalization.
 shallow-root branch, not only its minimum-body instance. The root calibrations cancel S77's
 equation to `P=V`, and injectivity of the decimal word code turns that equality into the literal
 Neary terminal equation. Thus every such pole is lawful and no malformed survivor exists over
-`[R_c]`. The unresolved shallow roots are precisely the other parser-lawful rule-ended blocks;
-their extra roles must now supply the separating discrepancy.
+`[R_c]`.
+
+[`MM-S82`](SALVAGE.md#mm-s82-one-r_b-root-sign-extinction) kills the other one-role root by an
+exact sign wall: `9Δ_[R_b]=−lift`, so the generalized pole has a positive left side and a
+nonpositive right side. The combined classifier says a one-role source hits iff it is `R_c` and
+the target is a literal terminal match. The unresolved shallow roots are now precisely the
+parser-lawful rule-ended blocks of length at least two; their extra roles must supply the
+separating discrepancy.
+
+[`MM-S83`](SALVAGE.md#mm-s83-leading-b-shallow-root-sign-extinction) removes every longer root
+whose first role carries `b`. Its exact complement is a negative sum of three positive or
+nonnegative radix terms, so the same sign wall applies independently of the remaining roles and
+phases. Every unresolved malformed shallow root now begins with `c` and has length at least two.
+At length two, the sole letter words are `cb` and `cc`; the first role's phase is invisible to
+the one-block square-reset state.
+
+[`MM-S84`](SALVAGE.md#mm-s84-complete-shallow-root-terminal-normalization) closes the complete
+non-singleton shallow branch rather than enumerating `cb`, `cc`, and longer roots. Every
+erasure-ended multi-role target has upper and lower boundary codes `77 (mod 100)`, placing its
+calibrated trace in shell `(1,1)`. The shallow pole identity then forces the source upper
+spelling to have length one. Parser law leaves exactly `R_c`, and its pole is exactly the literal
+terminal equation by `MM-S81`. Thus shallow poles are lawful terminal witnesses; no malformed
+shallow root survives. The outer `MM-S74` frontier is reduced to singleton targets and deeper
+histories.
+
+[`MM-S85`](SALVAGE.md#mm-s85-parser-ray-singleton-adapter) now supplies the missing exact
+matrix-to-carrier splice for the singleton branch. The homogeneous quotient
+`(z₀,z₀+basisGap·z₂)` turns each physical square-reset block into the recursive J-fraction ray
+step and agrees with `bridgeState` on every parsed history. Singleton poles are therefore one
+explicit ray equation. A singleton over one rule-ended root is impossible outright. For deeper
+histories, any older ray with nonzero decimal-unit peeled coordinates gives literally the
+`MM-S20` carrier equation: a singleton current block is impossible, and an erasure-ended current
+block must be non-singleton with upper length at least `β+3`. The remaining seam is exact rather
+than rhetorical: prove this unit peeled representation for every relevant minimal parser tail,
+or classify its failure; then recover the integral denominator ancestry and gap-factor support
+used by `MM-S22` and `MM-S24`. Bounded meet-in-the-middle searches find no singleton hit through
+eleven blocks at role width at most two, or through seven blocks at role width at most three, for
+`β=3` and body `bbcc`; these bounds are computational evidence only.
+
+[`MM-S86`](SALVAGE.md#mm-s86-two-block-singleton-source-classifier) resolves the unit-ancestry
+question completely when the older history is one root block. A ray admits unit peeled
+coordinates iff its quotient has shell `(1,1)`; a root quotient has shell `(m,m)`, where `m` is
+its upper length. The uncancelled singleton recurrence then shows that a multi-role current block
+forces `m=1`, while a singleton current block is impossible for every root at `β≥3`. Parser law
+turns `m=1` into the literal root `R_c`, and S85 supplies the remaining bound
+`upperLength(current)≥β+3`. Thus the entire two-source-block singleton frontier has one exact
+survivor grammar: a long multi-role erasure block over `R_c`. The next cut is its fixed-root code
+equation; for target `D_c`, the calibrations collapse it to
+`2·10^β(P−V)=7μ·10^m`.
+
+[`MM-S88`](SALVAGE.md#mm-s88-r_c-root-singleton-d_c-extinction) kills that `D_c` arm. Writing
+`w=m−β−1>0`, the fixed-root equation gives `P−V=35μ·10^w` with odd `μ`. Exact suffix exhaustion
+therefore identifies the lower word with the final `w` digits of the punctuated upper word and
+forces the remaining prefix, of length `2β+2`, to have code `35μ`. Every lawful prefix of that
+length is at least `5·10^(2β+1)`, while the marker bound makes `35μ` strictly smaller for `β≥3`.
+The only two-source-block singleton arm still live is target `D_b` over `R_c` with a multi-role
+current block of upper length at least `β+3`; histories with more than two source blocks remain
+open.
+
+[`MM-S89`](SALVAGE.md#mm-s89-complete-two-block-singleton-extinction) removes that final arm and
+therefore the entire lawful two-source-block singleton layer. The target-independent `R_c`
+identity is `singletonTrace(ℓ)(P−V)=7μ·lift·10^m`. For `D_b`, its coefficient and exact shell
+again exhaust a suffix of width `w=m−β−1`, leaving a prefix `K` of length `2β+2` with
+`BK=35μ·lift`. The bounds `B>4000`, `K≥50ρ²`, `μ<10ρ`, and `lift<502ρ` make the two sides
+strictly incompatible. A remaining singleton pole must now have at least three source blocks.
+The live seam is the older ray after one intervening physical block: either classify its exact
+shell and suffix factorization, or prove a minimal-history ancestry invariant that transports the
+same prefix contradiction through arbitrary tails.
+
+[`MM-S90`](SALVAGE.md#mm-s90-exact-singleton-tail-ancestry-equivalence) removes unit peeled
+ancestry as an independent hypothesis on the arbitrary-history singleton branch. Every lawful
+tail ray is nonzero. Solving the pole recurrence backward shows that a current trace of shell
+`(1,1)` dominates the pole correction as soon as the current upper length is at least `β+3`;
+the older quotient is then automatically shell `(1,1)`. Together with the converse length wall,
+an actual singleton pole satisfies the exact equivalence
+
+```text
+unit peeled ancestry
+  ↔ multi-role current with upper length at least β+3.
+```
+
+The physical upper-length identity sharpens the non-unit branch further: it is exactly a
+singleton current or an all-`c` multi-role current of width `2..β+2`. In particular every
+`b`-bearing multi-role current has automatic unit ancestry. The singleton frontier now has two
+disjoint tasks. Kill this finite-width letter grammar by exact ray arithmetic, or upgrade the
+automatic unit coordinates on the long branch to the arithmetic interface required by
+`MM-S22`/`MM-S24`.
+
+[`MM-S91`](SALVAGE.md#mm-s91-exact-parser-gap-clean-ancestry-gate) performs that upgrade and
+finds a sharp boundary. Every quotient of shell `(1,1)` admits integral decimal-unit coordinates
+with denominator `D=E·Nprev`; for one parser step these coordinates are an exact common scaling
+of the physical residual and inherited upper coordinate. But a representation with
+`gcd(q,N)=1` exists exactly when `q` divides the reduced numerator of `(ray₂/ray₁)/10`. This is
+not a formal consequence of parser law and shell data: for every `β≥3` and tag body, the lawful
+tail `[R_c,D_c] ; [R_c,R_c]` has the required shell while its reduced numerator is coprime to
+`q`, so no gap-clean descended representation exists. Thus the long singleton branch now splits
+exactly into a reduced-numerator clean language, where `MM-S22` applies, and a genuinely
+contaminated support language governed by `MM-S24`; projective rescaling cannot erase the
+distinction.
+
+[`MM-S94`](SALVAGE.md#mm-s94-three-block-singleton-chamber-classification) now cuts the first
+three-source singleton layer exactly. Every actual singleton pole lies in the positive older-ray
+chamber. For multi-role current and intervening blocks, a deep root forces the intervening block
+to be literal two-`c` and the current long; a shallow root is `R_c`, where longness is equivalent
+to an exact discrepancy shell and the short complement is all-`c`. The long discrepancy also
+forces complete suffix exhaustion and a `cb` or `cc` head. Both singleton currents are dead over
+`R_c`, regardless of the intervening block. The live three-source frontier is therefore the
+deep-root singleton-current/singleton-intervening residue plus the explicit multi/multi A/B
+grammar at this record boundary. Shell-compatible tails are not thereby reachable poles.
+
+[`MM-S95`](SALVAGE.md#mm-s95-complete-three-block-singleton-current-extinction) closes the
+singleton-current residue left by that classifier. Physical root rays lie below quotient two,
+and a singleton step keeps them there; a singleton current at an actual singleton pole requires
+the older quotient above two. Deep-root valuation balance kills the remaining multi-intervening
+case, and a shallow root reduces to the `R_c` theorem. Every lawful three-block singleton pole
+therefore has multi-role current. The only adjacent source-shape slice not yet fed into the
+multi/multi classifier is a multi-role current followed by a singleton intervening block.
+
+[`MM-S100`](SALVAGE.md#mm-s100-complete-three-block-singleton-next-extinction) removes that last
+slice. `D_b` contradicts the strict quotient-one wall; `D_c` forces a short all-`c` current and
+then fails the exact mixed-prime recurrence in both root-depth chambers. Every lawful
+three-block singleton pole therefore has both non-root blocks multi-role. The unconditional
+classifier leaves only the known deep-root or `R_c` multi/multi grammar; no singleton source
+shape should be reopened.
+
+The contaminated counterfamily is no longer arithmetically opaque.
+[`MM-S96`](SALVAGE.md#mm-s96-contaminated-tail-factorwise-pole-gate) proves that any singleton
+pole over it forces `q∣V_current·V_tail`. Every gap divisor absent from the inherited lower code
+must therefore occur in the current lower code. The boundary is exact: one formal `β=3` body
+already puts the whole gap into the inherited code, so unconditional cancellation to
+`q∣V_current` is false at the gate level. The live task is a factor-support language, not a
+choice of projective normalization.
+
+[`MM-S97`](SALVAGE.md#mm-s97-short-all-c-three-block-shell-grammar) resolves the short all-`c`
+complement through width `β+2`. Widths `n≤β` and `n=β+1` have complete exact shells; at
+`n=β+2` the five-depth is fixed, and target `D_c` has reversed shell `(k−2,k−1)`. The sole short
+arithmetic seam is target `D_b` at width `β+2`, where the coefficient factors by
+`2^(β+4)` but its normalized phase residual is not yet classified.
+
+The long `R_c` arm is now known to be uniformly contaminated.
+[`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) combines its exact suffix
+factorization with the `R_c` quotient formula to obtain `(ray₂/ray₁)/10=μ/H`. Reduction can only
+remove factors from `μ`, which is coprime to the primitive gap. Therefore no hypothetical long
+`R_c` pole can satisfy the gap-clean ancestry interface. This kills a proof branch, not the
+pole: the `cb/cc` family must be attacked through factorwise support and exact lower spelling.
+
+[`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) performs that factorwise
+reduction. Every long `R_c` pole forces `q∣V_current(H−10μ)`. The `cb` coefficient is exactly
+`−q`, so this chamber is fully support-saturated at the first pole. The `cc` coefficient reduces
+to the explicit fringe residue `18F−35`, giving `q∣V_current(18F−35)` and divisorwise transfer
+whenever that residue is coprime. The frontier has therefore bifurcated cleanly: fringe-support
+classification for `cc`, and a genuinely different second-predecessor or size argument for `cb`.
+
+[`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) replaces the arbitrary
+`cc` fringe by an exact smaller-gap grammar. A lawful decimal-unit head has one
+`1≤s≤β−1` with `9(H−10μ)=q_s−10q_β`, hence every pole forces `q_β∣V_current q_s`. A prime factor
+absent from the current lower code must divide both `q_s` and
+`10^(β−s)−1`. The live `cc` task is now the intersection of this finite relative-position
+resonance with the lower spelling; the support-saturated `cb` task is unchanged at this record
+boundary.
+
+[`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) kills that apparently
+saturated `cb` task by retaining the full equation. The terminal head is exactly the calibrated
+`R_c` code, so `9H=G`, `H−10μ=−q`, and `E=9q` collapse the three-block pole to the already-empty
+two-block singleton equation. The long `R_c` head frontier is now only `cc`, under the finite
+relative-gap resonance of `MM-S102`.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
