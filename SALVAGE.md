@@ -373,6 +373,9 @@ file owns the mathematical stock.
 | [`M4-S38`](#m4-s38-phase-zero-right-c-x211-run-extinction) | obstruction and structure theorem | every trailing run of at least six `c`s in the inner-bounded `x=211` chamber is impossible | formalized | active |
 | [`M4-S39`](#m4-s39-phase-zero-right-c-x211-large-inner-extinction) | obstruction and structure theorem | a depth-three suffix certificate eliminates the large-inner exit and closes the complete `x=211` `cb` cylinder | formalized | active |
 | [`M4-S40`](#m4-s40-phase-zero-right-c-outer-wait-cap) | structure theorem | every physical `cb` bridge zero has outer wait at most `211` | formalized | active |
+| [`M4-S41`](#m4-s41-phase-zero-right-c-lower-range-classification) | structure theorem | every physical `cb` zero with outer wait at most `210` lies in one of five exact suffix chambers | formalized | active |
+| [`M4-S42`](#m4-s42-phase-zero-right-c-first-b-one-extinction) | obstruction | no even-`b` body beginning `cb` closes the phase-zero right-`c` bridge | formalized | active |
+| [`M4-S43`](#m4-s43-phase-zero-right-c-later-first-b-extinction) | obstruction | no even-`b` body whose first `b` is at position `3` through `11` closes the phase-zero right-`c` bridge | formalized | active |
 | [`M4-C03`](#m4-c03-zero-framed-binary-two-lag-compiler) | compiler | the principal scanner is literally binary context-2 Lag and compiles to `M₄(3)` | formalized | graduated |
 | [`M4-D01`](#m4-d01-zero-framed-binary-two-lag-decision) | decidable stratum | the entire zero-framed binary context-2 Lag kernel has an exact syntactic classification | formalized | graduated |
 | [`M4-D02`](#m4-d02-zero-framed-reset-scanner-decision) | decidable stratum | zero-run reduction contracts the reset scanner to a regular two-token quotient | audited | graduated |
@@ -18780,6 +18783,159 @@ until the uniform parameter reduction and each terminal obstruction are kernel c
 [`MatrixMortality/ParabolicWaitBounds.lean`](MatrixMortality/ParabolicWaitBounds.lean) and
 [`audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md`](audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md).
 
+### M4-S41: Phase-zero right-c lower-range classification
+
+**Kind:** structure theorem
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For a physical body beginning `cb`, normalize the tail scale and complement as `T,E` and put
+
+```text
+a = 729(72y−9)+(9−8y)/T,
+d = 39+E/T.
+```
+
+Every core zero satisfies one rational outer-root equation. The physical tail bounds give a
+closed rectangle in `a,d`; monotonicity in both parameters and in the inner wait traps `x`
+between two explicit rational graphs of `y`. Under `x≤210`, exact integer cross multiplication
+leaves 22 compressed ranges containing 113 `(x,y)` pairs.
+
+Writing the tail as `c^j b rest`, exact density rectangles for small `j` and stabilized
+rectangles for all later positions reduce those 113 pairs to five chambers:
+
+```text
+(x,j,y,z) = (206,0,162,7 or 8), (207,2,202,1),
+            (210,1,802,4), (210,0,812,9),
+            (210,1,801,z) with z≥380.
+```
+
+The last lower bound follows from exact positivity of the root numerator and of `N−379D`,
+together with `N=Dz`. A deterministic exact-rational generator emits the affine-corner proofs;
+Lean rechecks every corner and integral gap.
+
+**Scope:** every physical `cb` core zero with `x≤210` whose remaining tail contains `b`. No
+tail-length, trailing-run, or inner-wait cap is assumed. This is a complete classification of
+the lower outer-wait range, not a nonvanishing theorem for the five terminal chambers.
+
+**Use:** compose with M4-S40 and M4-S39: any `cb` zero must now occur in one of the five displayed
+chambers. The former 113-pair arithmetic surface has contracted to one finite list and one
+one-dimensional ray.
+
+**Next:** discharged by M4-S42, which supplies the theorem-level ray cut and complete exact
+suffix certificate.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBOneOuterCore.lean`](MatrixMortality/ParabolicFirstBOneOuterCore.lean),
+[`MatrixMortality/ParabolicFirstBOneOuterCertificate.lean`](MatrixMortality/ParabolicFirstBOneOuterCertificate.lean),
+[`MatrixMortality/ParabolicFirstBOneOuter.lean`](MatrixMortality/ParabolicFirstBOneOuter.lean),
+[`scripts/generate-parabolic-first-b-one-outer.py`](scripts/generate-parabolic-first-b-one-outer.py),
+and
+[`audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md`](audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md).
+
+### M4-S42: Phase-zero right-c first-b-one extinction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+For arbitrary outer wait, define the positive root pencil `Q`, complement coefficient `J`,
+scale coefficient `A`, and finite correction `B` so that a physical `cb` zero satisfies
+
+```text
+(39T+E)J = TA−B.
+```
+
+If the tail's first `b` follows `j` leading copies of `c`, removing that prefix gives the exact
+suffix equation
+
+```text
+GJ = RH−B,
+H = 243·3^j(A−39J)−39J.
+```
+
+Reading a suffix `c` sends `H↦3H`, while reading `b` sends `H↦243H−39J`. Nonpositive `H`, the
+global complement wall, a strict first-`b` position gap, or an incompatible empty suffix ends
+each branch.
+
+In the sole ray left by M4-S41, `(x,j,y)=(210,1,801)` and `z≥380`. At `z≥1448`, the exact
+position-zero gap has positive low-side margin and negative high-side margin, so the ray stops at
+`z=1447`. The bounded interval `380≤z≤1447` partitions into 11 exact sign intervals whose
+suffix trees contain 81 nodes. The other four M4-S41 chambers require 15 nodes. Thus a
+deterministic 96-node certificate of maximum depth five eliminates every lower-range chamber.
+
+Composing this certificate with the M4-S40 cap and M4-S39 endpoint theorem proves that no
+physical `cb` body whose tail contains `b` zeros the primitive core. Even body `b` parity forces
+such a tail `b`, yielding the determinant theorem for the complete `cb` cylinder.
+
+**Scope:** all natural waits and every physical body beginning `cb` with even `b` count. No
+body-length, suffix-depth, trailing-run, or wait bound remains. This closes first-`b` position
+one inside the phase-zero right-`c` parity rectangle; it does not close positions `0` or `3`
+through `11`, the whole phase-zero cell, or `M₄(3)`.
+
+**Use:** together with M4-S34 and M4-S28, only leading first-`b` positions `0` and `3` through
+`11` remain among mixed even/even bodies. The same root-window and interval suffix machinery is
+now available without the exceptional `x=211` valuation split.
+
+**Next:** discharged for positions `3` through `11` by M4-S43. The leading-`b` cylinder remains.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBOneOuterSuffixCore.lean`](MatrixMortality/ParabolicFirstBOneOuterSuffixCore.lean),
+[`MatrixMortality/ParabolicFirstBOneOuterSuffixCertificate.lean`](MatrixMortality/ParabolicFirstBOneOuterSuffixCertificate.lean),
+[`MatrixMortality/ParabolicFirstBOneOuterClosure.lean`](MatrixMortality/ParabolicFirstBOneOuterClosure.lean),
+[`scripts/generate-parabolic-first-b-one-outer-suffix.py`](scripts/generate-parabolic-first-b-one-outer-suffix.py),
+and
+[`audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md).
+
+### M4-S43: Phase-zero right-c later-first-b extinction
+
+**Kind:** obstruction
+
+**Evidence:** formalized
+
+**Disposition:** active
+
+Write a physical body as `c^k b tail`, where `3≤k≤11` and `tail` contains another `b`.
+Normalizing by the tail scale gives exact outer- and inner-root equations in the tail complement.
+For middle wait `y≥2`, the global root window leaves 44 integral `(k,x,y)` points: 38 at
+`k=3`, four at `k=4`, and one each at `k=5,6`; positions `7` through `11` have none. Exact
+first-`b` tail rectangles and stabilized envelope rectangles eliminate those points in 66
+kernel-rechecked leaves.
+
+The two boundary waits are separate proof layers. At `y=0`, positions `3,4` lie in the strict
+positive complement cone; the outer rectangle leaves only `(k,x)=(5,351)` and `(8,218)`.
+The latter has its inner root in `(0,1)`, while the former forces the exact endpoint word
+`cccccbcb`, which violates the suffix density gap. At `y=1`, the outer rectangle leaves only
+`(k,x)=(4,184)`; its inner root forces `ccccbb`, and the position-zero suffix gap kills it.
+
+**Scope:** all natural waits and every physical body whose first `b` follows between three and
+eleven leading copies of `c`, with even total `b` count. The primitive theorem assumes instead
+that the tail contains `b`; parity supplies that fact. No body-length, suffix-depth, or wait
+bound remains. This does not close the leading-`b` cylinder, the complete phase-zero cell, or
+`M₄(3)`.
+
+**Use:** M4-S22, M4-S24, M4-S28, M4-S34, M4-S42, and M4-S43 now remove every even/even body in
+the phase-zero right-`c` cell except the leading-`b` cylinder. Computational reconnaissance of
+that final cylinder is not part of this theorem.
+
+**Next:** derive a uniform analytic reduction for the leading-`b` cylinder. Current exact
+reconnaissance concentrates the surviving outer-root chambers at `x=203`, but no finite
+classifier or nonvanishing claim has yet been formalized there.
+
+**Artifact:**
+[`MatrixMortality/ParabolicFirstBLateCore.lean`](MatrixMortality/ParabolicFirstBLateCore.lean),
+[`MatrixMortality/ParabolicFirstBLateReduction.lean`](MatrixMortality/ParabolicFirstBLateReduction.lean),
+[`MatrixMortality/ParabolicFirstBLateTailCore.lean`](MatrixMortality/ParabolicFirstBLateTailCore.lean),
+[`MatrixMortality/ParabolicFirstBLateCertificate.lean`](MatrixMortality/ParabolicFirstBLateCertificate.lean),
+[`MatrixMortality/ParabolicFirstBLateBoundary.lean`](MatrixMortality/ParabolicFirstBLateBoundary.lean),
+[`MatrixMortality/ParabolicFirstBLateClosure.lean`](MatrixMortality/ParabolicFirstBLateClosure.lean),
+[`scripts/generate-parabolic-first-b-late-tail.py`](scripts/generate-parabolic-first-b-late-tail.py),
+and
+[`audits/m43-phase-zero-right-c-later-first-b-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-later-first-b-extinction-2026-09-01.md).
 ### M4-C03: Zero-framed binary two-Lag compiler
 
 **Kind:** compiler

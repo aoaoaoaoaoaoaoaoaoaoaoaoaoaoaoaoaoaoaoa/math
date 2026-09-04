@@ -11,83 +11,85 @@ The finite root classification leaves one endpoint on the longer prefix `ccbccb`
 
 namespace MatrixMortality.ParabolicBlade
 
-private def firstBTwoRootDenominator (a d z : ℚ) : ℚ :=
+/-- Positive denominator of the normalized phase-zero outer-root graph. -/
+def parabolicOuterRootDenominator (a d z : ℚ) : ℚ :=
   a * (119911680 * z + 11209824) +
     d * (631601581536 * z + 59048086536)
 
-private def firstBTwoRootNumerator (a d y z : ℚ) : ℚ :=
+/-- Numerator of the normalized phase-zero outer-root graph. -/
+def parabolicOuterRootNumerator (a d y z : ℚ) : ℚ :=
   a * (25766986436 * z + 2408152393) -
     d * ((620717828832 * y + 422435605080) * z +
       58005064872 * y + 37838186340)
 
-private theorem firstBTwoRootDenominator_pos
+theorem parabolicOuterRootDenominator_pos
     (a d z : ℚ) (a_positive : 0 < a) (d_positive : 0 < d)
     (z_nonnegative : 0 ≤ z) :
-    0 < firstBTwoRootDenominator a d z := by
-  unfold firstBTwoRootDenominator
+    0 < parabolicOuterRootDenominator a d z := by
+  unfold parabolicOuterRootDenominator
   positivity
 
-private theorem firstBTwoRoot_increases_a
+theorem parabolicOuterRoot_increases_a
     (a₁ a₂ d y z : ℚ) (a_order : a₁ ≤ a₂)
     (a₁_positive : 0 < a₁) (d_positive : 0 < d)
     (y_nonnegative : 0 ≤ y) (z_nonnegative : 0 ≤ z) :
-    firstBTwoRootNumerator a₁ d y z / firstBTwoRootDenominator a₁ d z ≤
-      firstBTwoRootNumerator a₂ d y z / firstBTwoRootDenominator a₂ d z := by
+    parabolicOuterRootNumerator a₁ d y z / parabolicOuterRootDenominator a₁ d z ≤
+      parabolicOuterRootNumerator a₂ d y z / parabolicOuterRootDenominator a₂ d z := by
   have a₂_positive : 0 < a₂ := lt_of_lt_of_le a₁_positive a_order
   have denominator₁_positive :=
-    firstBTwoRootDenominator_pos a₁ d z a₁_positive d_positive z_nonnegative
+    parabolicOuterRootDenominator_pos a₁ d z a₁_positive d_positive z_nonnegative
   have denominator₂_positive :=
-    firstBTwoRootDenominator_pos a₂ d z a₂_positive d_positive z_nonnegative
+    parabolicOuterRootDenominator_pos a₂ d z a₂_positive d_positive z_nonnegative
   rw [div_le_div_iff₀ denominator₁_positive denominator₂_positive]
   have cross_eq :
-      firstBTwoRootNumerator a₂ d y z * firstBTwoRootDenominator a₁ d z -
-          firstBTwoRootNumerator a₁ d y z * firstBTwoRootDenominator a₂ d z =
+      parabolicOuterRootNumerator a₂ d y z * parabolicOuterRootDenominator a₁ d z -
+          parabolicOuterRootNumerator a₁ d y z * parabolicOuterRootDenominator a₂ d z =
         (a₂ - a₁) * d *
           ((25766986436 * z + 2408152393) *
               (631601581536 * z + 59048086536) +
             (119911680 * z + 11209824) *
               ((620717828832 * y + 422435605080) * z +
                 58005064872 * y + 37838186340)) := by
-    unfold firstBTwoRootNumerator firstBTwoRootDenominator
+    unfold parabolicOuterRootNumerator parabolicOuterRootDenominator
     ring
   have cross_nonnegative :
-      0 ≤ firstBTwoRootNumerator a₂ d y z * firstBTwoRootDenominator a₁ d z -
-        firstBTwoRootNumerator a₁ d y z * firstBTwoRootDenominator a₂ d z := by
+      0 ≤ parabolicOuterRootNumerator a₂ d y z * parabolicOuterRootDenominator a₁ d z -
+        parabolicOuterRootNumerator a₁ d y z * parabolicOuterRootDenominator a₂ d z := by
     rw [cross_eq]
     positivity
   linarith
 
-private theorem firstBTwoRoot_decreases_d
+theorem parabolicOuterRoot_decreases_d
     (a d₁ d₂ y z : ℚ) (d_order : d₁ ≤ d₂)
     (a_positive : 0 < a) (d₁_positive : 0 < d₁)
     (y_nonnegative : 0 ≤ y) (z_nonnegative : 0 ≤ z) :
-    firstBTwoRootNumerator a d₂ y z / firstBTwoRootDenominator a d₂ z ≤
-      firstBTwoRootNumerator a d₁ y z / firstBTwoRootDenominator a d₁ z := by
+    parabolicOuterRootNumerator a d₂ y z / parabolicOuterRootDenominator a d₂ z ≤
+      parabolicOuterRootNumerator a d₁ y z / parabolicOuterRootDenominator a d₁ z := by
   have d₂_positive : 0 < d₂ := lt_of_lt_of_le d₁_positive d_order
   have denominator₁_positive :=
-    firstBTwoRootDenominator_pos a d₁ z a_positive d₁_positive z_nonnegative
+    parabolicOuterRootDenominator_pos a d₁ z a_positive d₁_positive z_nonnegative
   have denominator₂_positive :=
-    firstBTwoRootDenominator_pos a d₂ z a_positive d₂_positive z_nonnegative
+    parabolicOuterRootDenominator_pos a d₂ z a_positive d₂_positive z_nonnegative
   rw [div_le_div_iff₀ denominator₂_positive denominator₁_positive]
   have cross_eq :
-      firstBTwoRootNumerator a d₁ y z * firstBTwoRootDenominator a d₂ z -
-          firstBTwoRootNumerator a d₂ y z * firstBTwoRootDenominator a d₁ z =
+      parabolicOuterRootNumerator a d₁ y z * parabolicOuterRootDenominator a d₂ z -
+          parabolicOuterRootNumerator a d₂ y z * parabolicOuterRootDenominator a d₁ z =
         (d₂ - d₁) * a *
           ((25766986436 * z + 2408152393) *
               (631601581536 * z + 59048086536) +
             (119911680 * z + 11209824) *
               ((620717828832 * y + 422435605080) * z +
                 58005064872 * y + 37838186340)) := by
-    unfold firstBTwoRootNumerator firstBTwoRootDenominator
+    unfold parabolicOuterRootNumerator parabolicOuterRootDenominator
     ring
   have cross_nonnegative :
-      0 ≤ firstBTwoRootNumerator a d₁ y z * firstBTwoRootDenominator a d₂ z -
-        firstBTwoRootNumerator a d₂ y z * firstBTwoRootDenominator a d₁ z := by
+      0 ≤ parabolicOuterRootNumerator a d₁ y z * parabolicOuterRootDenominator a d₂ z -
+        parabolicOuterRootNumerator a d₂ y z * parabolicOuterRootDenominator a d₁ z := by
     rw [cross_eq]
     positivity
   linarith
 
-private theorem firstBTwoRoot_z_cross (a d y : ℚ) :
+theorem parabolicOuterRoot_z_cross (a d y : ℚ) :
     let numeratorSlope := a * 25766986436 - d * (620717828832 * y + 422435605080)
     let numeratorConstant := a * 2408152393 - d * (58005064872 * y + 37838186340)
     let denominatorSlope := a * 119911680 + d * 631601581536
@@ -98,17 +100,17 @@ private theorem firstBTwoRoot_z_cross (a d y : ℚ) :
   dsimp only
   ring
 
-private theorem firstBTwoRoot_increases_z
+theorem parabolicOuterRoot_increases_z
     (a d y z₁ z₂ : ℚ) (z_order : z₁ ≤ z₂)
     (a_positive : 0 < a) (d_positive : 0 < d)
     (z₁_nonnegative : 0 ≤ z₁) (margin : d * (1296 * y + 84099) < 38 * a) :
-    firstBTwoRootNumerator a d y z₁ / firstBTwoRootDenominator a d z₁ ≤
-      firstBTwoRootNumerator a d y z₂ / firstBTwoRootDenominator a d z₂ := by
+    parabolicOuterRootNumerator a d y z₁ / parabolicOuterRootDenominator a d z₁ ≤
+      parabolicOuterRootNumerator a d y z₂ / parabolicOuterRootDenominator a d z₂ := by
   have z₂_nonnegative : 0 ≤ z₂ := le_trans z₁_nonnegative z_order
   have denominator₁_positive :=
-    firstBTwoRootDenominator_pos a d z₁ a_positive d_positive z₁_nonnegative
+    parabolicOuterRootDenominator_pos a d z₁ a_positive d_positive z₁_nonnegative
   have denominator₂_positive :=
-    firstBTwoRootDenominator_pos a d z₂ a_positive d_positive z₂_nonnegative
+    parabolicOuterRootDenominator_pos a d z₂ a_positive d_positive z₂_nonnegative
   rw [div_le_div_iff₀ denominator₁_positive denominator₂_positive]
   have derivative_positive :
       0 < -139828032 * (14639 * a + 88895355 * d) *
@@ -119,14 +121,14 @@ private theorem firstBTwoRoot_increases_z
     exact mul_pos_of_neg_of_neg
       (mul_neg_of_neg_of_pos (by norm_num) first_positive) second_negative
   have cross_eq :
-      firstBTwoRootNumerator a d y z₂ * firstBTwoRootDenominator a d z₁ -
-          firstBTwoRootNumerator a d y z₁ * firstBTwoRootDenominator a d z₂ =
+      parabolicOuterRootNumerator a d y z₂ * parabolicOuterRootDenominator a d z₁ -
+          parabolicOuterRootNumerator a d y z₁ * parabolicOuterRootDenominator a d z₂ =
         (z₂ - z₁) *
           (-139828032 * (14639 * a + 88895355 * d) *
             (-38 * a + 1296 * d * y + 84099 * d)) := by
-    have derivative := firstBTwoRoot_z_cross a d y
+    have derivative := parabolicOuterRoot_z_cross a d y
     dsimp only at derivative
-    unfold firstBTwoRootNumerator firstBTwoRootDenominator
+    unfold parabolicOuterRootNumerator parabolicOuterRootDenominator
     calc
       _ = (z₂ - z₁) *
           ((a * 25766986436 - d * (620717828832 * y + 422435605080)) *
@@ -135,41 +137,43 @@ private theorem firstBTwoRoot_increases_z
               (a * 119911680 + d * 631601581536)) := by ring
       _ = _ := by rw [derivative]
   have cross_nonnegative :
-      0 ≤ firstBTwoRootNumerator a d y z₂ * firstBTwoRootDenominator a d z₁ -
-        firstBTwoRootNumerator a d y z₁ * firstBTwoRootDenominator a d z₂ := by
+      0 ≤ parabolicOuterRootNumerator a d y z₂ * parabolicOuterRootDenominator a d z₁ -
+        parabolicOuterRootNumerator a d y z₁ * parabolicOuterRootDenominator a d z₂ := by
     rw [cross_eq]
     positivity
   linarith
 
-private def firstBTwoAsymptoteDenominator (a d : ℚ) : ℚ :=
+/-- Positive denominator of the large-inner asymptote of the outer-root graph. -/
+def parabolicOuterAsymptoteDenominator (a d : ℚ) : ℚ :=
   a * 119911680 + d * 631601581536
 
-private def firstBTwoAsymptoteNumerator (a d y : ℚ) : ℚ :=
+/-- Numerator of the large-inner asymptote of the outer-root graph. -/
+def parabolicOuterAsymptoteNumerator (a d y : ℚ) : ℚ :=
   a * 25766986436 - d * (620717828832 * y + 422435605080)
 
-private theorem firstBTwoAsymptoteDenominator_pos
+theorem parabolicOuterAsymptoteDenominator_pos
     (a d : ℚ) (a_positive : 0 < a) (d_positive : 0 < d) :
-    0 < firstBTwoAsymptoteDenominator a d := by
-  unfold firstBTwoAsymptoteDenominator
+    0 < parabolicOuterAsymptoteDenominator a d := by
+  unfold parabolicOuterAsymptoteDenominator
   positivity
 
-private theorem firstBTwoRoot_lt_asymptote
+theorem parabolicOuterRoot_lt_asymptote
     (a d y z : ℚ) (a_positive : 0 < a) (d_positive : 0 < d)
     (z_nonnegative : 0 ≤ z) (margin : d * (1296 * y + 84099) < 38 * a) :
-    firstBTwoRootNumerator a d y z / firstBTwoRootDenominator a d z <
-      firstBTwoAsymptoteNumerator a d y / firstBTwoAsymptoteDenominator a d := by
+    parabolicOuterRootNumerator a d y z / parabolicOuterRootDenominator a d z <
+      parabolicOuterAsymptoteNumerator a d y / parabolicOuterAsymptoteDenominator a d := by
   have root_denominator_positive :=
-    firstBTwoRootDenominator_pos a d z a_positive d_positive z_nonnegative
+    parabolicOuterRootDenominator_pos a d z a_positive d_positive z_nonnegative
   have asymptote_denominator_positive :=
-    firstBTwoAsymptoteDenominator_pos a d a_positive d_positive
+    parabolicOuterAsymptoteDenominator_pos a d a_positive d_positive
   rw [div_lt_div_iff₀ root_denominator_positive asymptote_denominator_positive]
   have cross_eq :
-      firstBTwoAsymptoteNumerator a d y * firstBTwoRootDenominator a d z -
-          firstBTwoRootNumerator a d y z * firstBTwoAsymptoteDenominator a d =
+      parabolicOuterAsymptoteNumerator a d y * parabolicOuterRootDenominator a d z -
+          parabolicOuterRootNumerator a d y z * parabolicOuterAsymptoteDenominator a d =
         -139828032 * (14639 * a + 88895355 * d) *
           (-38 * a + 1296 * d * y + 84099 * d) := by
-    unfold firstBTwoAsymptoteNumerator firstBTwoAsymptoteDenominator
-      firstBTwoRootNumerator firstBTwoRootDenominator
+    unfold parabolicOuterAsymptoteNumerator parabolicOuterAsymptoteDenominator
+      parabolicOuterRootNumerator parabolicOuterRootDenominator
     ring
   have first_positive : 0 < 14639 * a + 88895355 * d := by positivity
   have second_negative : -38 * a + 1296 * d * y + 84099 * d < 0 := by
@@ -181,65 +185,65 @@ private theorem firstBTwoRoot_lt_asymptote
       (mul_neg_of_neg_of_pos (by norm_num) first_positive) second_negative
   linarith
 
-private theorem firstBTwoAsymptote_increases_a
+theorem parabolicOuterAsymptote_increases_a
     (a₁ a₂ d y : ℚ) (a_order : a₁ ≤ a₂)
     (a₁_positive : 0 < a₁) (d_positive : 0 < d) (y_nonnegative : 0 ≤ y) :
-    firstBTwoAsymptoteNumerator a₁ d y / firstBTwoAsymptoteDenominator a₁ d ≤
-      firstBTwoAsymptoteNumerator a₂ d y / firstBTwoAsymptoteDenominator a₂ d := by
+    parabolicOuterAsymptoteNumerator a₁ d y / parabolicOuterAsymptoteDenominator a₁ d ≤
+      parabolicOuterAsymptoteNumerator a₂ d y / parabolicOuterAsymptoteDenominator a₂ d := by
   have a₂_positive : 0 < a₂ := lt_of_lt_of_le a₁_positive a_order
   have denominator₁_positive :=
-    firstBTwoAsymptoteDenominator_pos a₁ d a₁_positive d_positive
+    parabolicOuterAsymptoteDenominator_pos a₁ d a₁_positive d_positive
   have denominator₂_positive :=
-    firstBTwoAsymptoteDenominator_pos a₂ d a₂_positive d_positive
+    parabolicOuterAsymptoteDenominator_pos a₂ d a₂_positive d_positive
   rw [div_le_div_iff₀ denominator₁_positive denominator₂_positive]
   have cross_eq :
-      firstBTwoAsymptoteNumerator a₂ d y * firstBTwoAsymptoteDenominator a₁ d -
-          firstBTwoAsymptoteNumerator a₁ d y * firstBTwoAsymptoteDenominator a₂ d =
+      parabolicOuterAsymptoteNumerator a₂ d y * parabolicOuterAsymptoteDenominator a₁ d -
+          parabolicOuterAsymptoteNumerator a₁ d y * parabolicOuterAsymptoteDenominator a₂ d =
         (a₂ - a₁) * d *
           (25766986436 * 631601581536 +
             119911680 * (620717828832 * y + 422435605080)) := by
-    unfold firstBTwoAsymptoteNumerator firstBTwoAsymptoteDenominator
+    unfold parabolicOuterAsymptoteNumerator parabolicOuterAsymptoteDenominator
     ring
   have cross_nonnegative :
-      0 ≤ firstBTwoAsymptoteNumerator a₂ d y * firstBTwoAsymptoteDenominator a₁ d -
-        firstBTwoAsymptoteNumerator a₁ d y * firstBTwoAsymptoteDenominator a₂ d := by
+      0 ≤ parabolicOuterAsymptoteNumerator a₂ d y * parabolicOuterAsymptoteDenominator a₁ d -
+        parabolicOuterAsymptoteNumerator a₁ d y * parabolicOuterAsymptoteDenominator a₂ d := by
     rw [cross_eq]
     positivity
   linarith
 
-private theorem firstBTwoAsymptote_decreases_d
+theorem parabolicOuterAsymptote_decreases_d
     (a d₁ d₂ y : ℚ) (d_order : d₁ ≤ d₂)
     (a_positive : 0 < a) (d₁_positive : 0 < d₁) (y_nonnegative : 0 ≤ y) :
-    firstBTwoAsymptoteNumerator a d₂ y / firstBTwoAsymptoteDenominator a d₂ ≤
-      firstBTwoAsymptoteNumerator a d₁ y / firstBTwoAsymptoteDenominator a d₁ := by
+    parabolicOuterAsymptoteNumerator a d₂ y / parabolicOuterAsymptoteDenominator a d₂ ≤
+      parabolicOuterAsymptoteNumerator a d₁ y / parabolicOuterAsymptoteDenominator a d₁ := by
   have d₂_positive : 0 < d₂ := lt_of_lt_of_le d₁_positive d_order
   have denominator₁_positive :=
-    firstBTwoAsymptoteDenominator_pos a d₁ a_positive d₁_positive
+    parabolicOuterAsymptoteDenominator_pos a d₁ a_positive d₁_positive
   have denominator₂_positive :=
-    firstBTwoAsymptoteDenominator_pos a d₂ a_positive d₂_positive
+    parabolicOuterAsymptoteDenominator_pos a d₂ a_positive d₂_positive
   rw [div_le_div_iff₀ denominator₂_positive denominator₁_positive]
   have cross_eq :
-      firstBTwoAsymptoteNumerator a d₁ y * firstBTwoAsymptoteDenominator a d₂ -
-          firstBTwoAsymptoteNumerator a d₂ y * firstBTwoAsymptoteDenominator a d₁ =
+      parabolicOuterAsymptoteNumerator a d₁ y * parabolicOuterAsymptoteDenominator a d₂ -
+          parabolicOuterAsymptoteNumerator a d₂ y * parabolicOuterAsymptoteDenominator a d₁ =
         (d₂ - d₁) * a *
           (25766986436 * 631601581536 +
             119911680 * (620717828832 * y + 422435605080)) := by
-    unfold firstBTwoAsymptoteNumerator firstBTwoAsymptoteDenominator
+    unfold parabolicOuterAsymptoteNumerator parabolicOuterAsymptoteDenominator
     ring
   have cross_nonnegative :
-      0 ≤ firstBTwoAsymptoteNumerator a d₁ y * firstBTwoAsymptoteDenominator a d₂ -
-        firstBTwoAsymptoteNumerator a d₂ y * firstBTwoAsymptoteDenominator a d₁ := by
+      0 ≤ parabolicOuterAsymptoteNumerator a d₁ y * parabolicOuterAsymptoteDenominator a d₂ -
+        parabolicOuterAsymptoteNumerator a d₂ y * parabolicOuterAsymptoteDenominator a d₁ := by
     rw [cross_eq]
     positivity
   linarith
 
-private theorem firstBTwoRoot_eq
+theorem parabolicOuterRoot_eq
     (a d y z : ℚ) (x : Nat) (a_positive : 0 < a) (d_positive : 0 < d)
     (z_nonnegative : 0 ≤ z)
-    (root_eq : firstBTwoRootDenominator a d z * x = firstBTwoRootNumerator a d y z) :
-    firstBTwoRootNumerator a d y z / firstBTwoRootDenominator a d z = x := by
+    (root_eq : parabolicOuterRootDenominator a d z * x = parabolicOuterRootNumerator a d y z) :
+    parabolicOuterRootNumerator a d y z / parabolicOuterRootDenominator a d z = x := by
   have denominator_positive :=
-    firstBTwoRootDenominator_pos a d z a_positive d_positive z_nonnegative
+    parabolicOuterRootDenominator_pos a d z a_positive d_positive z_nonnegative
   rw [div_eq_iff denominator_positive.ne']
   nlinarith
 
@@ -251,7 +255,7 @@ theorem firstBTwo_root_between_envelopes
       2187 * (72 * y - 9) + (9 - 8 * y) / 243 ≤ a)
     (a_upper : a ≤ 2187 * (72 * y - 9))
     (d_lower : 39 ≤ d) (d_upper : d ≤ 9477 / 242)
-    (root_eq : firstBTwoRootDenominator a d z * x = firstBTwoRootNumerator a d y z) :
+    (root_eq : parabolicOuterRootDenominator a d z * x = parabolicOuterRootNumerator a d y z) :
     (5541372938576372618 * (y : ℚ) - 718629336347817375) /
           (25950255067173888 * y + 30751845545334654) ≤ (x : ℚ) ∧
       (x : ℚ) < (112032354356496 * y - 14545738406053) /
@@ -284,56 +288,56 @@ theorem firstBTwo_root_between_envelopes
     nlinarith
   have z_nonnegative : (0 : ℚ) ≤ z := by positivity
   have root_value :
-      firstBTwoRootNumerator a d y z / firstBTwoRootDenominator a d z = x :=
-    firstBTwoRoot_eq a d y z x a_positive d_positive z_nonnegative root_eq
+      parabolicOuterRootNumerator a d y z / parabolicOuterRootDenominator a d z = x :=
+    parabolicOuterRoot_eq a d y z x a_positive d_positive z_nonnegative root_eq
   have lower_value :
       (5541372938576372618 * (y : ℚ) - 718629336347817375) /
           (25950255067173888 * y + 30751845545334654) =
-        firstBTwoRootNumerator a₀ d₁ y 0 / firstBTwoRootDenominator a₀ d₁ 0 := by
+        parabolicOuterRootNumerator a₀ d₁ y 0 / parabolicOuterRootDenominator a₀ d₁ 0 := by
     have left_denominator_positive :
         (0 : ℚ) < 25950255067173888 * y + 30751845545334654 := by positivity
     have right_denominator_positive :=
-      firstBTwoRootDenominator_pos a₀ d₁ 0 a₀_positive d₁_positive (by norm_num)
+      parabolicOuterRootDenominator_pos a₀ d₁ 0 a₀_positive d₁_positive (by norm_num)
     field_simp [left_denominator_positive.ne', right_denominator_positive.ne']
     dsimp [a₀, d₁]
-    norm_num [firstBTwoRootNumerator, firstBTwoRootDenominator]
+    norm_num [parabolicOuterRootNumerator, parabolicOuterRootDenominator]
     ring
   have upper_value :
-      firstBTwoAsymptoteNumerator a₁ d₀ y /
-          firstBTwoAsymptoteDenominator a₁ d₀ =
+      parabolicOuterAsymptoteNumerator a₁ d₀ y /
+          parabolicOuterAsymptoteDenominator a₁ d₀ =
         (112032354356496 * (y : ℚ) - 14545738406053) /
           (524493688320 * y + 618673335624) := by
     have left_denominator_positive :=
-      firstBTwoAsymptoteDenominator_pos a₁ d₀ a₁_positive d₀_positive
+      parabolicOuterAsymptoteDenominator_pos a₁ d₀ a₁_positive d₀_positive
     have right_denominator_positive :
         (0 : ℚ) < 524493688320 * y + 618673335624 := by positivity
     field_simp [left_denominator_positive.ne', right_denominator_positive.ne']
     dsimp [a₁, d₀]
-    norm_num [firstBTwoAsymptoteNumerator, firstBTwoAsymptoteDenominator]
+    norm_num [parabolicOuterAsymptoteNumerator, parabolicOuterAsymptoteDenominator]
     ring
   constructor
   · rw [lower_value]
     calc
-      _ ≤ firstBTwoRootNumerator a₀ d y 0 /
-          firstBTwoRootDenominator a₀ d 0 :=
-        firstBTwoRoot_decreases_d a₀ d d₁ y 0 d_upper a₀_positive d_positive
+      _ ≤ parabolicOuterRootNumerator a₀ d y 0 /
+          parabolicOuterRootDenominator a₀ d 0 :=
+        parabolicOuterRoot_decreases_d a₀ d d₁ y 0 d_upper a₀_positive d_positive
           y_nonnegative (by norm_num)
-      _ ≤ firstBTwoRootNumerator a d y 0 / firstBTwoRootDenominator a d 0 :=
-        firstBTwoRoot_increases_a a₀ a d y 0 a_lower a₀_positive d_positive
+      _ ≤ parabolicOuterRootNumerator a d y 0 / parabolicOuterRootDenominator a d 0 :=
+        parabolicOuterRoot_increases_a a₀ a d y 0 a_lower a₀_positive d_positive
           y_nonnegative (by norm_num)
-      _ ≤ firstBTwoRootNumerator a d y z / firstBTwoRootDenominator a d z :=
-        firstBTwoRoot_increases_z a d y 0 z (by positivity) a_positive d_positive
+      _ ≤ parabolicOuterRootNumerator a d y z / parabolicOuterRootDenominator a d z :=
+        parabolicOuterRoot_increases_z a d y 0 z (by positivity) a_positive d_positive
           (by norm_num) margin
       _ = x := root_value
   · rw [← upper_value, ← root_value]
     calc
-      _ < firstBTwoAsymptoteNumerator a d y / firstBTwoAsymptoteDenominator a d :=
-        firstBTwoRoot_lt_asymptote a d y z a_positive d_positive z_nonnegative margin
-      _ ≤ firstBTwoAsymptoteNumerator a₁ d y / firstBTwoAsymptoteDenominator a₁ d :=
-        firstBTwoAsymptote_increases_a a a₁ d y a_upper a_positive d_positive y_nonnegative
-      _ ≤ firstBTwoAsymptoteNumerator a₁ d₀ y /
-          firstBTwoAsymptoteDenominator a₁ d₀ :=
-        firstBTwoAsymptote_decreases_d a₁ d₀ d y d_lower a₁_positive d₀_positive
+      _ < parabolicOuterAsymptoteNumerator a d y / parabolicOuterAsymptoteDenominator a d :=
+        parabolicOuterRoot_lt_asymptote a d y z a_positive d_positive z_nonnegative margin
+      _ ≤ parabolicOuterAsymptoteNumerator a₁ d y / parabolicOuterAsymptoteDenominator a₁ d :=
+        parabolicOuterAsymptote_increases_a a a₁ d y a_upper a_positive d_positive y_nonnegative
+      _ ≤ parabolicOuterAsymptoteNumerator a₁ d₀ y /
+          parabolicOuterAsymptoteDenominator a₁ d₀ :=
+        parabolicOuterAsymptote_decreases_d a₁ d₀ d y d_lower a₁_positive d₀_positive
           y_nonnegative
 
 /-- No integral normalized root exists at middle wait one inside the physical scale and
@@ -342,7 +346,7 @@ theorem firstBTwo_no_root_at_y_one
     (a d : ℚ) (x z : Nat)
     (a_lower : 137781 ≤ a) (a_upper : a ≤ 137781 + 1 / 243)
     (d_lower : 39 ≤ d) (d_upper : d ≤ 9477 / 242)
-    (root_eq : firstBTwoRootDenominator a d z * x = firstBTwoRootNumerator a d 1 z) :
+    (root_eq : parabolicOuterRootDenominator a d z * x = parabolicOuterRootNumerator a d 1 z) :
     False := by
   let a₀ : ℚ := 137781
   let a₁ : ℚ := 137781 + 1 / 243
@@ -364,40 +368,42 @@ theorem firstBTwo_no_root_at_y_one
     exact margin
   have z_nonnegative : (0 : ℚ) ≤ z := by positivity
   have root_value :
-      firstBTwoRootNumerator a d 1 z / firstBTwoRootDenominator a d z = x :=
-    firstBTwoRoot_eq a d 1 z x a_positive d_positive z_nonnegative root_eq
+      parabolicOuterRootNumerator a d 1 z / parabolicOuterRootDenominator a d z = x :=
+    parabolicOuterRoot_eq a d 1 z x a_positive d_positive z_nonnegative root_eq
   have lower_value :
       (18149685314213 / 213390009180 : ℚ) =
-        firstBTwoRootNumerator a₀ d₁ 1 0 / firstBTwoRootDenominator a₀ d₁ 0 := by
-    norm_num [a₀, d₁, firstBTwoRootNumerator, firstBTwoRootDenominator]
+        parabolicOuterRootNumerator a₀ d₁ 1 0 / parabolicOuterRootDenominator a₀ d₁ 0 := by
+    norm_num [a₀, d₁, parabolicOuterRootNumerator, parabolicOuterRootDenominator]
   have upper_value :
-      firstBTwoAsymptoteNumerator a₁ d₀ 1 /
-          firstBTwoAsymptoteDenominator a₁ d₀ =
+      parabolicOuterAsymptoteNumerator a₁ d₀ 1 /
+          parabolicOuterAsymptoteDenominator a₁ d₀ =
         (106601617762682725 / 1250053155671724 : ℚ) := by
-    norm_num [a₁, d₀, firstBTwoAsymptoteNumerator, firstBTwoAsymptoteDenominator]
+    norm_num [a₁, d₀, parabolicOuterAsymptoteNumerator, parabolicOuterAsymptoteDenominator]
   have lower_bound : (18149685314213 / 213390009180 : ℚ) ≤ x := by
     rw [lower_value]
     calc
-      _ ≤ firstBTwoRootNumerator a₀ d 1 0 / firstBTwoRootDenominator a₀ d 0 :=
-        firstBTwoRoot_decreases_d a₀ d d₁ 1 0 d_upper a₀_positive d_positive
+      _ ≤ parabolicOuterRootNumerator a₀ d 1 0 / parabolicOuterRootDenominator a₀ d 0 :=
+        parabolicOuterRoot_decreases_d a₀ d d₁ 1 0 d_upper a₀_positive d_positive
           (by norm_num) (by norm_num)
-      _ ≤ firstBTwoRootNumerator a d 1 0 / firstBTwoRootDenominator a d 0 :=
-        firstBTwoRoot_increases_a a₀ a d 1 0 a_lower a₀_positive d_positive
+      _ ≤ parabolicOuterRootNumerator a d 1 0 / parabolicOuterRootDenominator a d 0 :=
+        parabolicOuterRoot_increases_a a₀ a d 1 0 a_lower a₀_positive d_positive
           (by norm_num) (by norm_num)
-      _ ≤ firstBTwoRootNumerator a d 1 z / firstBTwoRootDenominator a d z :=
-        firstBTwoRoot_increases_z a d 1 0 z (by positivity) a_positive d_positive
+      _ ≤ parabolicOuterRootNumerator a d 1 z / parabolicOuterRootDenominator a d z :=
+        parabolicOuterRoot_increases_z a d 1 0 z (by positivity) a_positive d_positive
           (by norm_num) normalized_margin
       _ = x := root_value
   have upper_bound : (x : ℚ) < 106601617762682725 / 1250053155671724 := by
     rw [← upper_value, ← root_value]
     calc
-      _ < firstBTwoAsymptoteNumerator a d 1 / firstBTwoAsymptoteDenominator a d :=
-        firstBTwoRoot_lt_asymptote a d 1 z a_positive d_positive z_nonnegative normalized_margin
-      _ ≤ firstBTwoAsymptoteNumerator a₁ d 1 / firstBTwoAsymptoteDenominator a₁ d :=
-        firstBTwoAsymptote_increases_a a a₁ d 1 a_upper a_positive d_positive (by norm_num)
-      _ ≤ firstBTwoAsymptoteNumerator a₁ d₀ 1 /
-          firstBTwoAsymptoteDenominator a₁ d₀ :=
-        firstBTwoAsymptote_decreases_d a₁ d₀ d 1 d_lower a₁_positive d₀_positive
+      _ < parabolicOuterAsymptoteNumerator a d 1 / parabolicOuterAsymptoteDenominator a d :=
+        parabolicOuterRoot_lt_asymptote a d 1 z a_positive d_positive z_nonnegative
+          normalized_margin
+      _ ≤ parabolicOuterAsymptoteNumerator a₁ d 1 / parabolicOuterAsymptoteDenominator a₁ d :=
+        parabolicOuterAsymptote_increases_a a a₁ d 1 a_upper a_positive d_positive
+          (by norm_num)
+      _ ≤ parabolicOuterAsymptoteNumerator a₁ d₀ 1 /
+          parabolicOuterAsymptoteDenominator a₁ d₀ :=
+        parabolicOuterAsymptote_decreases_d a₁ d₀ d 1 d_lower a₁_positive d₀_positive
           (by norm_num)
   have eighty_five_lt : (85 : ℚ) < x := lt_of_lt_of_le (by norm_num) lower_bound
   have lt_eighty_six : (x : ℚ) < 86 := lt_of_lt_of_le upper_bound (by norm_num)
@@ -418,7 +424,7 @@ private theorem ccb_complement (tail : List TagLetter) :
   have stem_complement : tagComplementCode [.c, .c, .b] = 39 := by decide
   rw [stem_complement]
 
-private theorem tagEncode_length_five_le_of_mem_b
+theorem tagEncode_length_five_le_of_mem_b
     (body : List TagLetter) (contains_b : .b ∈ body) :
     5 ≤ (tagEncode 3 body).length := by
   induction body with
@@ -442,13 +448,13 @@ private theorem firstBTwo_normalized_root_of_core_zero
         (2187 * T - 1 - (39 * T + E)) x y z = 0) :
     let a : ℚ := 2187 * (72 * y - 9) + (9 - 8 * y) / T
     let d : ℚ := 39 + E / T
-    firstBTwoRootDenominator a d z * x = firstBTwoRootNumerator a d y z := by
+    parabolicOuterRootDenominator a d z * x = parabolicOuterRootNumerator a d y z := by
   have scale_nonzero : (T : ℚ) ≠ 0 := by exact_mod_cast scale_positive.ne'
   rw [bZeroBDefectCOneCodeCore_thin_decomposition] at core_zero
   unfold bZeroBDefectCOneWaitFactor bZeroBDefectCOneRootPencil
     bZeroBDefectCOneComplementCore at core_zero
   dsimp only
-  unfold firstBTwoRootDenominator firstBTwoRootNumerator
+  unfold parabolicOuterRootDenominator parabolicOuterRootNumerator
   field_simp [scale_nonzero]
   linear_combination core_zero
 
@@ -585,7 +591,7 @@ theorem firstBTwo_root_between_envelopes_of_tail
   have complement_core_zero :=
     firstBTwo_core_zero_in_complement_coordinates tail x y z core_zero
   dsimp only at complement_core_zero
-  have root_eq : firstBTwoRootDenominator a d z * x = firstBTwoRootNumerator a d y z := by
+  have root_eq : parabolicOuterRootDenominator a d z * x = parabolicOuterRootNumerator a d y z := by
     simpa only [a, d] using
       firstBTwo_normalized_root_of_core_zero T E x y z scale_positive complement_core_zero
   exact firstBTwo_root_between_envelopes a d x y z two_le_y
@@ -618,11 +624,11 @@ theorem firstBTwo_z_equation_of_tail_zero
   have complement_core_zero :=
     firstBTwo_core_zero_in_complement_coordinates tail x y z core_zero
   dsimp only at complement_core_zero
-  have root_eq : firstBTwoRootDenominator a d z * x = firstBTwoRootNumerator a d y z := by
+  have root_eq : parabolicOuterRootDenominator a d z * x = parabolicOuterRootNumerator a d y z := by
     simpa only [a, d] using
       firstBTwo_normalized_root_of_core_zero T E x y z scale_positive complement_core_zero
   dsimp only
-  unfold firstBTwoRootDenominator firstBTwoRootNumerator at root_eq
+  unfold parabolicOuterRootDenominator parabolicOuterRootNumerator at root_eq
   linear_combination -root_eq
 
 /-- Middle wait one cannot close a second-first-`b` body whose suffix contains `b`. -/
@@ -642,7 +648,7 @@ theorem bZeroBDefectCOneCodeCore_ccb_ne_zero_of_y_one
   have complement_core_zero :=
     firstBTwo_core_zero_in_complement_coordinates tail x 1 z core_zero
   dsimp only at complement_core_zero
-  have root_eq : firstBTwoRootDenominator a d z * x = firstBTwoRootNumerator a d 1 z := by
+  have root_eq : parabolicOuterRootDenominator a d z * x = parabolicOuterRootNumerator a d 1 z := by
     simpa only [a, d, Nat.cast_one] using
       firstBTwo_normalized_root_of_core_zero T E x 1 z scale_positive complement_core_zero
   have a_bounds := parameters.2.2.2.2 rfl

@@ -3599,6 +3599,51 @@ and `bridge_bZero_bTwo_cOne_det_zero_implies_x_le_211_of_cb` exposes the determi
 implication. Its exact boundary is
 [`audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md`](audits/m43-phase-zero-right-c-outer-wait-cap-2026-08-31.md).
 
+The uniform lower-range classification
+[`M4-S41`](SALVAGE.md#m4-s41-phase-zero-right-c-lower-range-classification) is checked across
+`MatrixMortality/ParabolicFirstBOneOuterCore.lean`, the generated
+`MatrixMortality/ParabolicFirstBOneOuterCertificate*.lean` shards, and
+`MatrixMortality/ParabolicFirstBOneOuter.lean`.
+`ParabolicBlade.firstBOneOuterRootCandidate_of_core_zero` traps every physical zero with
+`x≤210` in 22 compressed root-window ranges containing 113 exact `(x,y)` pairs.
+`firstBOneOuterCandidate_of_root_candidate` rechecks the density rectangle for every pair and
+leaves five suffix chambers, while `firstBOneOuterCandidate_of_core_zero` supplies the physical
+first-`b` decomposition. The deterministic certificate is reproduced by
+`scripts/generate-parabolic-first-b-one-outer.py`. Its exact boundary is
+[`audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md`](audits/m43-phase-zero-right-c-lower-range-classification-2026-09-01.md).
+
+The complete first-`b`-after-one-`c` extinction
+[`M4-S42`](SALVAGE.md#m4-s42-phase-zero-right-c-first-b-one-extinction) is checked across
+`MatrixMortality/ParabolicFirstBOneOuterSuffixCore.lean`, the generated
+`MatrixMortality/ParabolicFirstBOneOuterSuffixCertificate*.lean` shards, and
+`MatrixMortality/ParabolicFirstBOneOuterClosure.lean`.
+`ParabolicBlade.firstBOneOuterSuffixCore_of_core_zero` extracts the uniform integer suffix
+balance; `firstBOneOuterRay_z_lt_1448` cuts the sole ray by the strict position-zero grammar
+gap; and the generated 96-node interval tree eliminates the remaining bounded chambers.
+`bZeroBDefectCOneCodeCore_cb_ne_zero_of_mem_b` composes M4-S40, M4-S39, M4-S41, and the terminal
+certificate, while `bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_even_b_count` exposes the complete
+determinant-level cylinder theorem. The generator is reproduced by
+`scripts/generate-parabolic-first-b-one-outer-suffix.py`. Its exact boundary is
+[`audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-first-b-one-extinction-2026-09-01.md).
+
+The later first-`b` extinction
+[`M4-S43`](SALVAGE.md#m4-s43-phase-zero-right-c-later-first-b-extinction) is checked across
+`MatrixMortality/ParabolicFirstBLateCore.lean`,
+`MatrixMortality/ParabolicFirstBLateReduction.lean`,
+`MatrixMortality/ParabolicFirstBLateTailCore.lean`, the four generated
+`MatrixMortality/ParabolicFirstBLateCertificate*.lean` shards,
+`MatrixMortality/ParabolicFirstBLateBoundary.lean`, and
+`MatrixMortality/ParabolicFirstBLateClosure.lean`.
+`ParabolicBlade.firstBLateRootCandidate_of_core_zero` contracts every `y≥2` zero at first-`b`
+positions `3` through `11` to 44 exact `(k,x,y)` points;
+`firstBLateTail_false_of_candidate` eliminates their complete tail cylinders through 66 exact
+or envelope rectangle leaves. The boundary module handles `y=0,1` separately and reduces its
+three outer survivors to an open inner-root gap or one of two exact suffix-density gaps.
+`bZeroBDefectCOneCodeCore_late_ne_zero_of_mem_b` composes the three middle-wait strata, while
+`bridge_bZero_bTwo_cOne_det_ne_zero_of_late_even_b_count` exposes the determinant theorem for
+every even-`b` body in these nine cylinders. The generator is reproduced by
+`scripts/generate-parabolic-first-b-late-tail.py`. Its exact boundary is
+[`audits/m43-phase-zero-right-c-later-first-b-extinction-2026-09-01.md`](audits/m43-phase-zero-right-c-later-first-b-extinction-2026-09-01.md).
 The residue-zero `c`-endpoint exclusion
 [`M4-S12`](SALVAGE.md#m4-s12-residue-zero-c-endpoint-exclusion) is checked in the same module.
 `ParabolicBlade.bridge_cZero_bTwo_bOne_det` and

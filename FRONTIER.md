@@ -748,6 +748,42 @@ so only `x≤210` remains. The next accepted ratchet must classify the exact suf
 uniformly over that full lower range and eliminate every surviving arithmetic chamber. A finite
 search through sampled suffix positions does not discharge the uniform reduction.
 
+The lower range is now classified uniformly
+[`M4-S41`](SALVAGE.md#m4-s41-phase-zero-right-c-lower-range-classification). Complement
+normalization traps every physical `x≤210` zero in 22 compressed outer-root ranges containing
+113 exact `(x,y)` pairs. Exact first-`b` density rectangles reduce all of them to five suffix
+chambers:
+
+```text
+(x,j,y,z) = (206,0,162,7 or 8), (207,2,202,1),
+            (210,1,802,4), (210,0,812,9),
+            (210,1,801,z) with z≥380.
+```
+
+The five chambers are now empty
+[`M4-S42`](SALVAGE.md#m4-s42-phase-zero-right-c-first-b-one-extinction). Removing the tail's
+first `b` gives the uniform integer suffix grammar `GJ=RH−B`. On the apparent ray, its strict
+position-zero gap forces `z<1448`; 11 exact inner-wait intervals then close in an 81-node tree.
+The other four chambers require 15 nodes, for a complete 96-node certificate of depth at most
+five. Together with the outer cap and the `x=211` theorem, this proves that no even-`b` body
+beginning `cb` closes the phase-zero right-`c` bridge at any waits.
+
+The later first-`b` cylinders are now dead
+[`M4-S43`](SALVAGE.md#m4-s43-phase-zero-right-c-later-first-b-extinction). For middle wait at
+least two, one normalized root window leaves 44 exact `(k,x,y)` points across positions `3`
+through `6`; a generated 66-leaf rational rectangle certificate kills every complete tail
+cylinder, while positions `7` through `11` have no root candidate. Separate positive-cone,
+outer-root, inner-root, and strict-density arguments close the zero- and one-wait faces. Thus
+positions `3` through `11` are empty with no body-length, suffix-depth, or wait bound.
+
+Inside the even-length/even-`b` rectangle, only first-`b` position `0` remains: position `1` is
+M4-S42, position `2` is M4-S34, positions `3` through `11` are M4-S43, positions at least `12`
+are M4-S28, and the unary rays are M4-S22/M4-S24. Exact computational reconnaissance of the
+leading-`b` cylinder leaves 3,244 outer pairs and 146 suffix survivors concentrated around
+`x=203`; its 132 survivors there span `6950≤y≤9880`, with sparse high blocks. These
+counts are provisional evidence, not a theorem. Extract their common algebraic parameter before
+generating another certificate.
+
 Two original-family nodes survive, and they must not be conflated.
 
 1. **Exterior collision avoidance.** Use `M4-S06`--`M4-S15` to classify the transported kernel

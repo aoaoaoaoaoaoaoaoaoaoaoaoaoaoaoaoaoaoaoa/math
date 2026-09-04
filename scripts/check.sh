@@ -137,6 +137,9 @@ fi
 
 readonly PYTHON_CHECKERS=(
   scripts/render_publication_graph.py
+  scripts/generate-parabolic-first-b-late-tail.py
+  scripts/generate-parabolic-first-b-one-outer-suffix.py
+  scripts/generate-parabolic-first-b-one-outer.py
   scripts/generate-parabolic-first-b-one-inner.py
   tools/audit_chhn_packing_rank.py
   tools/audit_m92_changed_separator_tail.py
@@ -165,6 +168,9 @@ uvx --from ty==0.0.58 ty check "${PYTHON_CHECKERS[@]}"
 uv run --script scripts/render_publication_graph.py --check
 uv run scripts/generate-parabolic-first-b-one-funnel.py --check
 uv run scripts/generate-parabolic-first-b-one-inner.py --check
+uv run scripts/generate-parabolic-first-b-late-tail.py --check
+uv run scripts/generate-parabolic-first-b-one-outer.py --check
+uv run scripts/generate-parabolic-first-b-one-outer-suffix.py --check
 uv run scripts/generate-parabolic-first-b-two-tail.py --check
 uv run --script tools/audit_prefix_algebra.py
 uv run --script tools/audit_chhn_packing_rank.py
