@@ -702,6 +702,14 @@ to whether `v₂(5a−9c)` is below, at, or above the canonical wall depth. Thus
 can never return; only wall-preserving upper steps and over-cancellation into an odd denominator
 remain.
 
+The same module now exposes the complementary `2`- and `3`-adic wall skeleton as checked
+`D2-S03`. For `T_m(u)=(1+3u(2/3)^m)/5`, a negative transported valuation is exactly
+`v₂(u)+m` or `v₃(u)+1−m`, while a positive transported valuation gives a unit output. A
+simultaneous `2`/`3`-unit output therefore confines `m` to
+`−v₂(u)≤m≤v₃(u)+1`. When both transported valuations are negative, their sum rises by exactly
+one independently of `m`. These are one-step restrictions, not a finite-state decision theorem:
+mixed-sign histories and equality-wall cancellation remain live.
+
 `MixedPrimeKernel` now owns the raw `D,T` affine kernel. It checks the published shortest
 length-27 relation, an infinite family of distinct equal-map pairs at every odd length
 `29+2k`, and three independent length-30 relations. The former isolated length-29 relation is
