@@ -4664,6 +4664,38 @@ forty accepted `(Δ,b)` residue pairs. The fully guarded length-two parameter la
 explicit finite union of affine congruence families. This is
 [`D2-S23`](SALVAGE.md#d2-s23-length-two-mixed-sign-classifier). The live carry-tree search
 therefore begins at length three, where three or more prefix terms can share the lowest height.
+In the closure of its first positive-positive-negative chamber, write the schedules as
+`[p+A,q+B,t]` and `[p,q,t+k]`, with `k<A+B`. Their collision source has one exact rational
+formula independent of the terminal gauge `t`. A uniform numerator/denominator comparison,
+together with exclusion of the zero-transfer wall, proves that real-trap membership forces
+`k∈{1,2}`. This is
+[`D2-S24`](SALVAGE.md#d2-s24-first-length-three-chamber-cut). The live residue is now the exact
+depth-two target carry for `k=1,2`. In source-carry coordinates `Z` and target-carry coordinates
+`E=Z+9r^q+15`, the
+source and target are `Z/(27r^(p+q))` and `[25+r^(t+k)E]/125`. Target acceptance forces
+`v₅(E)=2`; the global shell-prefix equivalence separately forces source acceptance. Target
+acceptance is exactly ten-periodic in the terminal gauge,
+while every positive odd shift rejects. The real trap also forces `p=q=0` at `k=2`; at
+`k=1` it leaves only `q=0,B≤5,p≤9`, `q=1,p≤4`, or `q=2,p≤1`. In the strict chamber,
+target acceptance forces `A` even.
+The three other strict length-three sign chambers are complete. The positive-negative-negative
+chamber lies above the real trap. Positivity and the real trap reduce the
+positive-negative-positive chamber to `k=1,q=0,B∈{6,7}`; exact carry shifts and finite residue
+tables give respectively `250×10` and `1250×10` semilinear classifiers. The
+negative-positive-negative chamber reduces to `k=1,q=1,A=2,p∈{1,2}` and one exact `250×10`
+classifier. Each accepted rectangle contains forty residue pairs, and target acceptance forces
+all source and intermediate guards. This is
+[`D2-S25`](SALVAGE.md#d2-s25-remaining-strict-length-three-chamber-classifier). Thus the only
+strict length-three seam is the `D2-S24` carry itself.
+That carry has two positive-valuation denominator branches. After multiplying by a five-adic
+unit, each is a fixed residual divided by `1−r^(2h)`, minus one coefficient. Target acceptance
+forces that coefficient to have value one and the residual valuation to equal `κ(2h)+1`; all
+other wall depths reject before the final tied digit. Equivalently, depth two of the carry is
+exactly numerator depth `κ(2h)+2`, while moving
+the split by `s` changes that numerator at exact depth `κ(2s)`. This is
+[`D2-S26`](SALVAGE.md#d2-s26-centered-length-three-residual-depth-match). The
+remaining work is now the exact Hensel lift at the matched depth plus the two denominator-unit
+parity tables, not an undifferentiated depth-two carry.
 The deepest of those three branches is itself a full depth reset. In normalized band coordinates
 `U(d,μ)=1/5+(3/10)(2/3)^dμ`, every target band `d≥2` contains a point whose `d−2` predecessor has
 any prescribed band `n≥7` and mantissa in `(2/3,1]`. An explicit guarded subfamily fixes target
@@ -5023,8 +5055,24 @@ universal computation.
    `D2-S23` completely classifies length-two mixed-sign crossings: `k≤2`, the gap lies in one of
    two explicit residue families, the target lies in a `10×50` or `10×250` residue rectangle,
    each rectangle has an exact forty-pair table, and the real gauge is classified exactly.
-   Begin the remaining higher-depth
-   tied-minimum search at length three through the weighted source balance.
+   `D2-S24` starts length three in the closed positive-positive-negative chamber: the collision
+   source is independent of its terminal gauge and the real trap leaves exactly `k∈{1,2}`.
+   Its target guard forces the source guard by the global prefix equivalence; the target has
+   one depth-two carry, and acceptance is
+   ten-periodic in the terminal gauge, and the real trap leaves a finite outer parameter box;
+   target acceptance also forces the first displacement even. `D2-S25` closes every other
+   strict sign chamber: the positive-negative-negative chamber is Archimedeanly impossible,
+   while both alternating chambers are exact finite unions of congruence classes with forty
+   accepted residue pairs in each surviving fibre. Classify only the residual `D2-S24` carry,
+   beginning with the `D2-S26` fixed-residual/moving-wall depth match and its one remaining tied
+   digit, then begin
+   every remaining higher-depth tied-minimum search through the weighted source balance. Abandon
+   finite literal return censuses and local forbidden-factor grammars; attack those
+   endpoint-coupled fibres. Treat chamber
+   exit and reentry as separate pre-exit seams. Do not reopen
+   unlabeled residue-only finite nuclei, valuation-only reverse bounds, one-sided endpoint bounds,
+   or global real drift. Attack the pole branch through exact mantissa arithmetic, guarded
+   concatenation, or endpoint-coupled height.
    Keep the non-elementary lanes independent: adelic cone types, parabolic rational subsets,
    trace/height descent, finite-obstruction saturation, and valuation universality.
 6. Synthesize the returned attacks by the discriminating signals above; do not average

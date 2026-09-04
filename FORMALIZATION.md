@@ -556,7 +556,6 @@ simultaneous `2`/`3`-unit output therefore confines `m` to
 `−v₂(u)≤m≤v₃(u)+1`. When both transported valuations are negative, their sum rises by exactly
 one independently of `m`. These are one-step restrictions, not a finite-state decision theorem:
 mixed-sign histories and equality-wall cancellation remain live.
-
 `MixedPrimeDebt` resolves the valuation topology of genuinely varying schedules inside the
 negative `3`-adic chamber. For a rational carrier `c` with `v₃(c)=0`, write `u=c/3^d`. Every
 step which remains at positive depth has the exact recurrence
@@ -3054,7 +3053,7 @@ outer word by injectivity and proves that any cross-tail collision requires shel
 `(ℓ−2β+1,ℓ−2β+2)` between the later tails. This classifies the synchronization debt but does
 not yet exclude it from the encoded-entry orbit.
 
-The dimension-two affine ledger has thirty-two independently checked records:
+The dimension-two affine ledger has the following checked records:
 
 | Record | Formalization obligation |
 | --- | --- |
@@ -3080,6 +3079,9 @@ The dimension-two affine ledger has thirty-two independently checked records:
 | [`D2-S21`](SALVAGE.md#d2-s21-affine-determinant-carry-stripping) | the exact cleared affine determinant identity, corrected positive acceptance exponent, paired initial and terminal recurrences, and common-end endpoint stripping |
 | [`D2-S22`](SALVAGE.md#d2-s22-prefix-carry-minimum-classifier) | the exact weighted suffix balance and real-trap corridor, complementary prefix-determinant expansion, termwise parity/LTE values, unique-minimum obstruction, bounded cancellation partner, generic even-gap successor, and sharp accepted/rejected witnesses |
 | [`D2-S23`](SALVAGE.md#d2-s23-length-two-mixed-sign-classifier) | the complete positive-source length-two normal form up to swap, exact source and target coordinates, full tail- and gap-shift valuation laws, `k≤2` real bound, two exact gap-residue families, exhaustive forty-pair target tables, exact real-gauge classification, and the final semilinear acceptance iff |
+| [`D2-S24`](SALVAGE.md#d2-s24-first-length-three-chamber-cut) | the exact source and target throughout the closed positive-positive-negative length-three chamber, terminal-gauge independence of the source, the uniform real-trap reduction to `k∈{1,2}`, global prefix-guard implication of source acceptance, the universal depth-two terminal carry, exact ten-periodic terminal acceptance, the finite outer parameter cut, and forced even first displacement |
+| [`D2-S25`](SALVAGE.md#d2-s25-remaining-strict-length-three-chamber-classifier) | the exhaustive four-chamber arithmetic partition, real exclusion of the positive-negative-negative chamber, exact Archimedean and five-adic reductions of both alternating chambers, exact carry periods, three forty-pair target tables, backward propagation of all prefix guards, and the final semilinear acceptance iff statements |
+| [`D2-S26`](SALVAGE.md#d2-s26-centered-length-three-residual-depth-match) | exact centered quotient and cleared-numerator identities in both nonunit-denominator parity branches, depth-two carry iff numerator-depth classifiers, exact fixed-wall difference laws, coefficient depth forced from target acceptance, and the fixed-residual/moving-wall depth match |
 | [`D2-D05`](SALVAGE.md#d2-d05-prescribed-translation-count) | primitive linear-polynomial divisibility, bounded carries in both scan directions, ordered-marker automaton, regular control, and `a=±1` cases |
 | [`D2-D06`](SALVAGE.md#d2-d06-private-prime-peeling) | unique-minimum valuation calculation, zero endpoints, fixed-count reduction, reversed language, and positive private valuation |
 | [`D2-D07`](SALVAGE.md#d2-d07-bounded-valuation-orthants) | localization support, denominator bounds in both orthants, invariant-interval recognition, finite graph, and regular-control product |
