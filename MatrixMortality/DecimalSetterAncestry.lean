@@ -32,11 +32,11 @@ theorem gapFactor_pos {β : Nat} (β_positive : 0 < β) : 0 < gapFactor β := by
   have power_pos : (0 : ℤ) < 10 ^ k := pow_pos (by norm_num) k
   simp only [gapFactor, pow_succ]
   nlinarith
-
 private theorem gapFactor_ne_zero (β : Nat) : gapFactor β ≠ 0 := by
   simp only [gapFactor]
   have ten_pos : (0 : ℤ) < 10 ^ β := pow_pos (by norm_num) β
   omega
+
 /-- The full primitive gap cannot already divide the distinguished two-`c` raw head. Its code
 lies strictly between the consecutive multiples `27q` and `28q`. -/
 theorem gapFactor_not_dvd_twoCHead {β : Nat} (β_large : 3 ≤ β) (fringe : List Bool)
@@ -110,7 +110,6 @@ theorem gapFactor_coprime_ten {β : Nat} (β_positive : 0 < β) :
     IsCoprime (gapFactor β) (10 : ℤ) := by
   simpa using (gapFactor_coprime_two β).mul_right
     (gapFactor_coprime_five β_positive)
-
 private theorem gapFactor_coprime_1750 {β : Nat} (β_positive : 0 < β) :
     IsCoprime (gapFactor β) (1750 : ℤ) := by
   have two := gapFactor_coprime_two β
@@ -908,7 +907,6 @@ theorem entryLeadingBErase_rawHead_shell_impossible
   · rfl
   · rfl
   · simpa only [n, H, PB, V, RB, Nat.cast_add] using shell
-
 private theorem gapFactor_dvd_carrierProduct
     {q E G μ N D Nprev P₂ P₃ V₂ V₃ T₂ T₃ : ℤ} {m : Nat}
     (E_multiple : q ∣ E)

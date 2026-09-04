@@ -4213,7 +4213,6 @@ constructing the generalized-carrier transition language.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
-
 ### MM-S20: Singleton carrier classification
 
 **Kind:** structure theorem and obstruction
@@ -4654,7 +4653,6 @@ middle separation `r>0` as genuine dynamics rather than an automatic halting con
 
 **Next:** test whether unequal outer runs admit a finite arithmetic macro system or unbounded
 queue growth.
-
 ### MM-S27: Reciprocal raw-head support
 
 **Kind:** structure theorem and obstruction
