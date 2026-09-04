@@ -27,6 +27,13 @@ rational subset in logarithmic space. Proposition 3.6 proves effective Boolean c
 PE-regular sets and closure under product and inverse; rational subsets themselves are not closed
 under intersection.
 
+The proof of Theorem 3.1 first replaces every run by a bounded-thickness run plus bounded-thickness
+returning-left cycles. The linear order on the cursor makes those cycles integer-valued after they
+are moved to a least visited position. Their additive closures are therefore eventually gcd-periodic
+submonoids of `ℤ`; a fixed finite number of signed base-`q` expansions can then be added by a finite
+carry automaton. Both the least-position step and this fixed-arity digit addition are specific proof
+obligations, not consequences of the abstract semidirect-product presentation.
+
 The theorem applies to a single fixed base and a group language allowing inverses. It does not
 decide arbitrary rational-affine semigroups with multiplicatively independent slopes or a
 higher-dimensional projective action that has not been reduced to `BS(1,q)`.
@@ -39,4 +46,6 @@ arXiv:2006.11898v1, contains expanded proofs. No correction or retraction was fo
 ## Project Use
 
 The `M₄(3)` audit uses this as a decidable retirement test for any proposed one-coordinate bridge
-dynamics that truly closes inside a single-base affine group.
+dynamics that truly closes inside a single-base affine group. Report K uses the proof architecture,
+especially bounded-thickness decomposition and fixed-arity base addition, to test the proposed
+two-dilation extension rather than importing Theorem 3.1 outside its hypotheses.
