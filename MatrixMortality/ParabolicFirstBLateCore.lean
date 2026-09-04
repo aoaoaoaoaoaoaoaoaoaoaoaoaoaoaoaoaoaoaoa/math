@@ -254,11 +254,16 @@ theorem firstBLate_z_equation_of_core_zero
   unfold firstBTwoTailZDenominator firstBTwoTailZNumerator
   linear_combination -root_eq
 
-/-- A physical zero at first-`b` position `k ∈ [3,11]` and middle wait at least two lies
-inside the exact cleared outer-root window. -/
-theorem firstBLateRootWindow_of_core_zero
+private theorem firstBLateRootWindow_of_core_zero_of_margin
     (k : Nat) (tail : List TagLetter) (contains_b : .b ∈ tail)
-    (x y z : Nat) (three_le_k : 3 ≤ k) (k_le : k ≤ 11) (two_le_y : 2 ≤ y)
+    (x y z : Nat) (two_le_y : 2 ≤ y)
+    (a_lower_positive :
+      (0 : ℚ) < firstBLatePrefixScale k * (72 * y - 9) + (9 - 8 * y) / 243)
+    (envelope_margin :
+      (9477 / 242 : ℚ) * (1296 * y + 84099) <
+        38 * (firstBLatePrefixScale k * (72 * y - 9) + (9 - 8 * y) / 243))
+    (lower_denominator_positive : 0 < firstBLateRootLowerDenominator k y)
+    (upper_denominator_positive : 0 < firstBLateRootUpperDenominator k y)
     (core_zero :
       bZeroBDefectCOneCodeCore
         ((3 : ℚ) ^
@@ -283,9 +288,7 @@ theorem firstBLateRootWindow_of_core_zero
   have a_upper : a ≤ a₁ := by
     simpa only [a₁, a, r] using a_bounds.2
   have a₀_positive : 0 < a₀ := by
-    dsimp [a₀, r]
-    have y_large : (2 : ℚ) ≤ y := by exact_mod_cast two_le_y
-    interval_cases k <;> norm_num [firstBLatePrefixScale] <;> nlinarith
+    simpa only [a₀, r] using a_lower_positive
   have a_positive : 0 < a := lt_of_lt_of_le a₀_positive a_lower
   have a₁_positive : 0 < a₁ := by
     have factor_positive : (0 : ℚ) < 72 * y - 9 := by
@@ -300,9 +303,7 @@ theorem firstBLateRootWindow_of_core_zero
   have d_positive : 0 < d := lt_of_lt_of_le d₀_positive parameters.2.1
   have d₁_positive : 0 < d₁ := by norm_num [d₁]
   have worst_margin : d₁ * (1296 * (y : ℚ) + 84099) < 38 * a₀ := by
-    dsimp [a₀, d₁, r]
-    have y_large : (2 : ℚ) ≤ y := by exact_mod_cast two_le_y
-    interval_cases k <;> norm_num [firstBLatePrefixScale] <;> nlinarith
+    simpa only [a₀, d₁, r] using envelope_margin
   have factor_nonnegative : (0 : ℚ) ≤ 1296 * y + 84099 := by positivity
   have scaled_d : d * (1296 * (y : ℚ) + 84099) ≤
       d₁ * (1296 * y + 84099) :=
@@ -400,10 +401,6 @@ theorem firstBLateRootWindow_of_core_zero
       push_cast
       ring
     rw [numerator_identity, denominator_identity]
-  have lower_denominator_positive :=
-    firstBLate_lower_denominator_positive k y three_le_k k_le two_le_y
-  have upper_denominator_positive :=
-    firstBLate_upper_denominator_positive k y three_le_k k_le two_le_y
   unfold FirstBLateRootWindow
   constructor
   · rw [← lower_identity] at lower_bound
@@ -416,5 +413,50 @@ theorem firstBLateRootWindow_of_core_zero
       exact_mod_cast upper_denominator_positive
     have crossed := (lt_div_iff₀ denominator_rat).mp upper_bound
     exact_mod_cast crossed
+
+/-- A physical zero at first-`b` position `k ∈ [3,11]` and middle wait at least two lies
+inside the exact cleared outer-root window. -/
+theorem firstBLateRootWindow_of_core_zero
+    (k : Nat) (tail : List TagLetter) (contains_b : .b ∈ tail)
+    (x y z : Nat) (three_le_k : 3 ≤ k) (k_le : k ≤ 11) (two_le_y : 2 ≤ y)
+    (core_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^
+          (tagEncode 3 (List.replicate k .c ++ .b :: tail)).length)
+        (ternaryCode (tagEncode 3 (List.replicate k .c ++ .b :: tail))) x y z = 0) :
+    FirstBLateRootWindow k x y := by
+  apply firstBLateRootWindow_of_core_zero_of_margin
+    k tail contains_b x y z two_le_y
+  · have y_large : (2 : ℚ) ≤ y := by exact_mod_cast two_le_y
+    interval_cases k <;> norm_num [firstBLatePrefixScale] <;> nlinarith
+  · have y_large : (2 : ℚ) ≤ y := by exact_mod_cast two_le_y
+    interval_cases k <;> norm_num [firstBLatePrefixScale] <;> nlinarith
+  · exact firstBLate_lower_denominator_positive k y three_le_k k_le two_le_y
+  · exact firstBLate_upper_denominator_positive k y three_le_k k_le two_le_y
+  · exact core_zero
+
+/-- A physical zero whose body begins with `b` lies in the exact cleared outer-root window
+once the middle wait is at least six. -/
+theorem firstBZeroRootWindow_of_core_zero
+    (tail : List TagLetter) (contains_b : .b ∈ tail) (x y z : Nat) (six_le_y : 6 ≤ y)
+    (core_zero :
+      bZeroBDefectCOneCodeCore
+        ((3 : ℚ) ^ (tagEncode 3 (.b :: tail)).length)
+        (ternaryCode (tagEncode 3 (.b :: tail))) x y z = 0) :
+    FirstBLateRootWindow 0 x y := by
+  have two_le_y : 2 ≤ y := by omega
+  apply firstBLateRootWindow_of_core_zero_of_margin
+    0 tail contains_b x y z two_le_y
+  · have y_large : (6 : ℚ) ≤ y := by exact_mod_cast six_le_y
+    norm_num [firstBLatePrefixScale]
+    nlinarith
+  · have y_large : (6 : ℚ) ≤ y := by exact_mod_cast six_le_y
+    norm_num [firstBLatePrefixScale]
+    nlinarith
+  · norm_num [firstBLateRootLowerDenominator, firstBLatePrefixScale]
+    omega
+  · norm_num [firstBLateRootUpperDenominator, firstBLatePrefixScale]
+    omega
+  · simpa only [List.replicate_zero, List.nil_append] using core_zero
 
 end MatrixMortality.ParabolicBlade

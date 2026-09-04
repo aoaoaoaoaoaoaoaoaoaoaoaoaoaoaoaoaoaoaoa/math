@@ -9,11 +9,10 @@ the nonpositive correction used by the main outer-root certificate.
 
 namespace MatrixMortality.ParabolicBlade
 
-/-- Zero middle wait is strictly positive when the first body `b` follows three or four
-leading `c` letters. -/
-theorem bZeroBDefectCOneCodeCore_late_ne_zero_of_y_zero_small
-    (k : Nat) (tail : List TagLetter) (x z : Nat)
-    (three_le_k : 3 ≤ k) (k_le : k ≤ 4) :
+/-- Zero middle wait is strictly positive when the first body `b` occurs at position at
+most four. -/
+theorem bZeroBDefectCOneCodeCore_ne_zero_of_y_zero_first_b_at_most_four
+    (k : Nat) (tail : List TagLetter) (x z : Nat) (k_le : k ≤ 4) :
     bZeroBDefectCOneCodeCore
       ((3 : ℚ) ^
         (tagEncode 3 (List.replicate k .c ++ .b :: tail)).length)
@@ -85,6 +84,18 @@ theorem bZeroBDefectCOneCodeCore_late_ne_zero_of_y_zero_small
   have core_positive := bZeroBDefectCOneCodeCore_pos_of_zero_wait_large_complement
     (S : ℚ) D scale_large complement_positive complement_large x z
   exact ne_of_gt core_positive core_zero
+
+/-- Zero middle wait is strictly positive when the first body `b` follows three or four
+leading `c` letters. -/
+theorem bZeroBDefectCOneCodeCore_late_ne_zero_of_y_zero_small
+    (k : Nat) (tail : List TagLetter) (x z : Nat)
+    (_three_le_k : 3 ≤ k) (k_le : k ≤ 4) :
+    bZeroBDefectCOneCodeCore
+      ((3 : ℚ) ^
+        (tagEncode 3 (List.replicate k .c ++ .b :: tail)).length)
+      (ternaryCode (tagEncode 3 (List.replicate k .c ++ .b :: tail))) x 0 z ≠ 0 := by
+  exact bZeroBDefectCOneCodeCore_ne_zero_of_y_zero_first_b_at_most_four
+    k tail x z k_le
 
 set_option maxHeartbeats 2000000 in
 /-- At middle wait zero, only two integral outer-root chambers survive the global tail

@@ -319,6 +319,73 @@ def FirstBTwoTailNegativeCorners
     s * firstBTwoTailZNumerator a₁ d₀ x y < 0 ∧
     s * firstBTwoTailZNumerator a₁ d₁ x y < 0
 
+/-- Strict corner conditions placing the inner-wait root below `upper`. -/
+def FirstBTwoTailUpperCorners
+    (x y upper : Nat) (s a₀ a₁ d₀ d₁ : ℚ) : Prop :=
+  0 < s * firstBTwoTailZDenominator a₀ d₀ x y ∧
+    0 < s * firstBTwoTailZDenominator a₀ d₁ x y ∧
+    0 < s * firstBTwoTailZDenominator a₁ d₀ x y ∧
+    0 < s * firstBTwoTailZDenominator a₁ d₁ x y ∧
+    0 < s * (upper * firstBTwoTailZDenominator a₀ d₀ x y -
+      firstBTwoTailZNumerator a₀ d₀ x y) ∧
+    0 < s * (upper * firstBTwoTailZDenominator a₀ d₁ x y -
+      firstBTwoTailZNumerator a₀ d₁ x y) ∧
+    0 < s * (upper * firstBTwoTailZDenominator a₁ d₀ x y -
+      firstBTwoTailZNumerator a₁ d₀ x y) ∧
+    0 < s * (upper * firstBTwoTailZDenominator a₁ d₁ x y -
+      firstBTwoTailZNumerator a₁ d₁ x y)
+
+/-- The upper half of the rectangle certificate bounds a natural inner-wait root. -/
+theorem firstBTwoTailZ_lt_of_upper_corners
+    (x y upper z : Nat) (s a₀ a₁ d₀ d₁ a d : ℚ)
+    (rectangle : FirstBTwoTailRectangle a₀ a₁ d₀ d₁ a d)
+    (corners : FirstBTwoTailUpperCorners x y upper s a₀ a₁ d₀ d₁)
+    (root_eq : firstBTwoTailZDenominator a d x y * z =
+      firstBTwoTailZNumerator a d x y) :
+    z < upper := by
+  rcases corners with
+    ⟨denominator₀₀, denominator₀₁, denominator₁₀, denominator₁₁,
+      upper₀₀, upper₀₁, upper₁₀, upper₁₁⟩
+  let q₁ : ℚ := 25766986436 - 119911680 * x
+  let j₁ : ℚ := 620717828832 * y + 631601581536 * x + 422435605080
+  let q₀ : ℚ := 2408152393 - 11209824 * x
+  let j₀ : ℚ := 58005064872 * y + 59048086536 * x + 37838186340
+  have denominator_positive : 0 < s * firstBTwoTailZDenominator a d x y := by
+    have affine := firstBTwoTail_affine_rectangle_pos (s * q₁) (-s * j₁) 0
+      a₀ a₁ d₀ d₁ a d rectangle
+    have result := affine
+      (by simpa [q₁, j₁, firstBTwoTailZDenominator_affine] using denominator₀₀)
+      (by simpa [q₁, j₁, firstBTwoTailZDenominator_affine] using denominator₀₁)
+      (by simpa [q₁, j₁, firstBTwoTailZDenominator_affine] using denominator₁₀)
+      (by simpa [q₁, j₁, firstBTwoTailZDenominator_affine] using denominator₁₁)
+    simpa [q₁, j₁, firstBTwoTailZDenominator_affine] using result
+  have upper_positive :
+      0 < s * (upper * firstBTwoTailZDenominator a d x y -
+        firstBTwoTailZNumerator a d x y) := by
+    have affine := firstBTwoTail_affine_rectangle_pos
+      (s * (upper * q₁ + q₀)) (s * (-upper * j₁ - j₀)) 0
+      a₀ a₁ d₀ d₁ a d rectangle
+    have result := affine
+      (by simpa [q₀, q₁, j₀, j₁, firstBTwoTailZUpper_affine] using upper₀₀)
+      (by simpa [q₀, q₁, j₀, j₁, firstBTwoTailZUpper_affine] using upper₀₁)
+      (by simpa [q₀, q₁, j₀, j₁, firstBTwoTailZUpper_affine] using upper₁₀)
+      (by simpa [q₀, q₁, j₀, j₁, firstBTwoTailZUpper_affine] using upper₁₁)
+    simpa [q₀, q₁, j₀, j₁, firstBTwoTailZUpper_affine] using result
+  have scaled_root_eq :
+      (s * firstBTwoTailZDenominator a d x y) * z =
+        s * firstBTwoTailZNumerator a d x y := by
+    calc
+      _ = s * (firstBTwoTailZDenominator a d x y * z) := by ring
+      _ = _ := by rw [root_eq]
+  have upper_rat : (z : ℚ) < upper := by
+    have scaled_upper :
+        (s * firstBTwoTailZDenominator a d x y) * z <
+          (s * firstBTwoTailZDenominator a d x y) * upper := by
+      rw [scaled_root_eq]
+      nlinarith
+    exact lt_of_mul_lt_mul_left scaled_upper denominator_positive.le
+  exact_mod_cast upper_rat
+
 theorem firstBTwoTailZ_mem_open_interval
     (x y lower upper z : Nat) (s a₀ a₁ d₀ d₁ a d : ℚ)
     (rectangle : FirstBTwoTailRectangle a₀ a₁ d₀ d₁ a d)
