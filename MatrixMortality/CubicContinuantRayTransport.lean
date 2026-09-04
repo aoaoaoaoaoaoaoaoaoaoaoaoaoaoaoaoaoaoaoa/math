@@ -266,7 +266,7 @@ theorem falseWaitFirstHitExpandingLoop_unsafeSuffixes :
         falseWaitReturnOfState, cubicDefectState, CubicDefectState.next,
         Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
-/-- The three unsafe suffixes are all annihilated by the physical separator row. -/
+/-- The three pole-hitting suffixes are all annihilated by the physical separator row. -/
 theorem falseWaitFirstHitExpandingLoop_unsafeSuffixes_accepting :
     falseWaitSeparatorRow ⬝ᵥ
           (wordProduct falseWaitReturn [13] *ᵥ ![4, 3]) = 0 ∧

@@ -12,7 +12,7 @@ Lean:
 `AxiomAudit.lean` diff against `verification/axioms.txt`: empty.
 
 Statement: For a finite prime set `S`, the proposed potential is
-`Φ_S(n₁,…,n_k)=Σ_j Σ_{ℓ∈S}v_ℓ(det(VA^n_jU))`; appending `n` changes it by exactly `Σ_{ℓ∈S}v_ℓ(det M_n)`. It is not projective: replacing `M_n` by `c_nM_n` adds `2v_ℓ(c_n)`. More decisively, take `A=diag(1,1/3,3)`, `U=[[0,1],[1,0],[1,−1]]`, and `V=[[953/2240,−953/2240,473/2240],[−1,1,0]]`. Then `rank(UV)=2`, every `M_n=VAⁿU` lies in `GL₂(ℚ)`, and `det M_n=(473/2240)(1−3ⁿ)`.
+`Φ_S(n₁,…,n_k)=Σ_j Σ_{ℓ∈S}v_ℓ(det(VA^n_jU))`; appending `n` changes it by exactly `Σ_{ℓ∈S}v_ℓ(det M_n)`. It is not projective: replacing `M_n` by `c_nM_n` adds `2v_ℓ(c_n)`. More decisively, take `A=diag(1,1/3,3)`, `U=[[0,1],[1,0],[1,−1]]`, and `V=[[953/2240,−953/2240,473/2240],[−1,1,0]]`. Then `rank(UV)=2`, every positive-wait return `M_n=VAⁿU` (`n≥1`) lies in `GL₂(ℚ)`, and `det M_n=(473/2240)(1−3ⁿ)`.
 
 If obstructed: The exact nonterminal cycle
 `−3/14 →[1] 117/400 →[2] 27/28 →[3] −3/14`

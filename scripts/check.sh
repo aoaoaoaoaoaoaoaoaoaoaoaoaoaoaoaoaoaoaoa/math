@@ -113,6 +113,14 @@ while IFS= read -r pdf; do
   }
 done < <(rg --files references -g '*.pdf' | sort)
 
+awk '
+  /^### [A-Z0-9]+-[A-Z]+[0-9]+:/ {
+    id = $2; sub(/:$/, "", id)
+    if (seen[id]++) { print "duplicate salvage record: " id > "/dev/stderr"; failed = 1 }
+  }
+  END { exit failed }
+' SALVAGE.md
+
 lake build
 lake env lean LintAudit.lean
 lake env lean AxiomAudit.lean > "$SCRATCH/axioms.txt"
@@ -149,6 +157,7 @@ readonly PYTHON_CHECKERS=(
   tools/audit_mixed_prime_fork.py
   tools/audit_prefix_algebra.py
   tools/audit_six_state_sandwich.py
+  tools/certify_cubic_source_decoder.py
   tools/certify_mixed_prime_completion.py
   tools/certify_mixed_prime_context_cuts.py
   tools/certify_mixed_prime_pump_families.py
@@ -183,6 +192,7 @@ uv run --script tools/audit_rank_two_recompile.py
 uv run --script tools/audit_mixed_prime_fork.py self-check
 uv run --script tools/audit_mixed_prime_fork.py thin 3 100
 uv run --script tools/audit_six_state_sandwich.py
+uv run --script tools/certify_cubic_source_decoder.py
 uv run --script tools/certify_mixed_prime_completion.py
 uv run --script tools/certify_mixed_prime_context_cuts.py
 uv run --script tools/certify_mixed_prime_pump_families.py

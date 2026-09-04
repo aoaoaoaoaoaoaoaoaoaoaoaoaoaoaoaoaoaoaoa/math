@@ -1,4 +1,9 @@
-Verdict: obstructed
+Historical report. The 2026-09-04 reconciliation rejected the aggregate dimension claim as
+new mathematics: its surviving allocation hypothesis already supplies six modes. The affine
+helper also had inconsistent hypotheses. The wrapper was removed; its underlying pole and
+constant-mode obstructions remain. See [the reconciliation audit](../audits/reconciliation-2026-09-04.md).
+
+Original verdict: obstructed
 
 Cells affected: The poison-guarded two-register construction routes for `M₄(2)`, `M₄(3)`, and `M₅(3)`; no cell closes.
 

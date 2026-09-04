@@ -109,6 +109,17 @@ file owns the mathematical stock.
 | [`MM-O28`](#mm-o28-tilted-geometric-tail-rank-nine-wall) | obstruction | every exact benchmark tilted-tail realization in the injective chamber needs at least nine states, for arbitrary geometric-tail parameters | formalized | graduated |
 | [`MM-C05`](#mm-c05-tilted-separator-rank-nine-transfer) | compiler | tilted same-zero separation and singular return compression compile universal halting to two `9 × 9` integer matrices | formalized | graduated |
 | [`MM-C06`](#mm-c06-interface-compression) | compiler | arbitrary transitions with factored cuts of any rank are mortal exactly when the transitions are mortal or one bridge path vanishes | formalized | graduated |
+| [`MM-C07`](#mm-c07-free-monoid-empty-return-compression) | reduction | one cut with rank-one empty return reduces exactly to scalar incidence over nonempty transition words | formalized | graduated |
+| [`MM-C08`](#mm-c08-fixed-body-rank-two-recompilation) | construction | one body admits exact ranks 4/3/2/1 and the full paired zero language; source uniformity remains separate | formalized; computational floors | stock |
+| [`MM-C09`](#mm-c09-periodic-return-compression) | reduction | a nonzero positive-period scalar recurrence reduces the complete return alphabet to its residues | formalized | graduated |
+| [`MM-S107`](#mm-s107-four-mode-return-counterexamples) | construction | four-mode and free-monoid examples break three-mode extrapolations without supplying permanent counter poison | formalized | stock |
+| [`MM-O31`](#mm-o31-integral-pole-poison-incompatibility) | obstruction | an integral finite-pole unit-determinant reader cannot preserve the whole negative-valuation chamber | formalized | active |
+| [`MM-O32`](#mm-o32-mirrored-common-return-incompatibility) | obstruction | mirrored pole readers cannot share one nonzero empty return; zero empty return makes the cut mortal | formalized | active |
+| [`MM-O33`](#mm-o33-embedded-reader-constant-mode-rank) | obstruction | the prescribed embedded reader requires two constant modes; its exact two-reader allocation needs at least six states | formalized core; audited count | active |
+| [`MM-O34`](#mm-o34-short-period-exact-role-rank-floors) | obstruction | the audited exact-role periodic families have realization floors above eight | formalized core; computational floors | active |
+| [`N-O01`](#n-o01-unequal-tail-scaling-obstruction) | obstruction | one nonzero projective matrix cannot independently rescale two additive tails by unequal factors | formalized | active |
+| [`K-O01`](#k-o01-unbounded-aggregate-mixed-radix-carry) | obstruction | a balanced two-dilation word family forces aggregate carry to grow at least linearly | audited | active |
+| [`S-O01`](#s-o01-fixed-length-s-unit-bounds-do-not-bound-bridge-length) | obstruction to a method | fixed-arity S-unit bounds leave the number of return factors unbounded | audited | active |
 | [`MM-M01`](#mm-m01-off-diagonal-companion-interface) | partial mechanism | off-diagonal rank-two bridge has a complete fracture grammar | audited | stock |
 | [`MM-M02`](#mm-m02-bordered-toggle) | partial mechanism | one lifted toggle has a stable rank-two third power | audited | parked |
 | [`MM-M03`](#mm-m03-five-state-setter-punctuation) | partial mechanism | a mixed delimiter word is an exact internal rank-one separator | audited | closed |
@@ -9746,58 +9757,208 @@ relative-gap resonance with the current lower spelling.
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
-### MM-S25: Separated two-c periodic orbits
 
-**Kind:** structure theorem and obstruction
+### MM-C07: Free-monoid empty-return compression
+
+**Kind:** reduction
+**Evidence:** formalized
+**Disposition:** graduated
+
+For arbitrary transitions X and a cut UO over a field, set R_w = O X_w U. If
+OU = crᵀ, physical mortality is exactly transition-only mortality or
+rᵀR_w₁⋯R_wₖc = 0 for some k ≥ 0 and nonempty transition words wᵢ. Unit transitions
+on a nonempty ambient space remove the first disjunct. The returns need not be units.
+
+**Scope:** one factored cut and a rank-at-most-one empty return; no source hardness is asserted.
+**Use:** expose the precise scalar obligation for two-transition/one-cut constructions.
+**Formalization:** [FreeMonoidReturn.lean](MatrixMortality/FreeMonoidReturn.lean),
+`physical_isMortal_iff_rankOneEmptyReturn` and its transition-unit corollary.
+**Next:** supply a source-uniform scalar-language equivalence; no further wrapper is needed.
+
+### MM-C08: Fixed-body rank-two recompilation
+
+**Kind:** construction
+**Evidence:** formalized same-zero language and ranks; computational realization floors
+**Disposition:** stock
+
+At deletion width three and body `bcbcbb`, adjoining one silent coordinate to the
+persistent-guard recognizer gives four roles of ranks 4, 3, 2, 1. Every control word
+has zero coefficient exactly when the original paired coefficient vanishes.
+
+**Scope:** one fixed body. The exact checker gives geometric minimum eleven and
+period-four minimum sixteen for its tested realization architectures, not every possible
+representation. This is not a source-uniform reduction.
+**Use:** separate fixed-source rank feasibility from the uniform coding obligation.
+**Formalization:** [RankTwoRecompile.lean](MatrixMortality/RankTwoRecompile.lean),
+`coefficient_eq_zero_iff_paired`, `toggle_rank`, `dataB_rank`, `dataC_rank`,
+`separator_rank`.
+**Artifact:** [exact checker](tools/audit_rank_two_recompile.py).
+**Next:** the live question belongs to the uniform guarded two-state interface, not this benchmark.
+
+### MM-C09: Periodic return compression
+
+**Kind:** reduction
+**Evidence:** formalized
+**Disposition:** graduated
+
+Over a field, if m > 0, ν ≠ 0, and Aᵐ = νI on a nonempty finite ambient space,
+mortality of A and UO is exactly mortality of the finite return family OAʲU, 0 ≤ j < m.
+
+**Scope:** positive period and nonzero scalar recurrence; period zero does not suffice.
+**Use:** replace the infinite return alphabet by its exact residue alphabet.
+**Formalization:** [PeriodicReturn.lean](MatrixMortality/PeriodicReturn.lean),
+`pairGenerator_isMortal_iff_residue`.
+**Next:** any smaller realization must pass the applicable rank screen in MM-O34.
+
+### MM-S107: Four-mode return counterexamples
+
+**Kind:** construction and obstruction to extrapolation
+**Evidence:** formalized
+**Disposition:** stock
+
+The four-mode unary construction has return
+[[r, −r(rq)ⁿ], [0, 1−qⁿ]], carrying [rⁿ:1] to [rⁿ⁺¹:1] when qⁿ ≠ 1.
+The separate two-transition construction has returns
+diag(3^|w|−1, 4^#B(w)); its singleton returns act as increment and projective
+decrement on [2ⁿ:1], with R_A R_B = 4I.
+
+**Scope:** these break extensions of specified three-mode objections. The inverse cycle
+also repairs an illegal decrement at zero; it is not a guarded counter simulation.
+**Use:** do not infer a dimension-four obstruction from the dimension-three return family.
+**Formalization:** [FourModeArtery.lean](MatrixMortality/FourModeArtery.lean),
+`railbreakerReturn_eq`, `railbreaker_affineWait`, `railbreaker_orbit_injective`;
+[FreeMonoidReturn.lean](MatrixMortality/FreeMonoidReturn.lean),
+`ToricCycle.thrust_mul_recoil`, `ToricCycle.zero_recoil_repaired`.
+**Next:** a candidate needs a compatible test and permanent poison, not just an updater.
+
+### MM-O31: Integral-pole poison incompatibility
+
+**Kind:** obstruction
 **Evidence:** formalized
 **Disposition:** active
 
-For `n>0`, let
+A rational affine map with integral offset and unit leading and denominator
+coefficients at a prime preserves every negative valuation. In contrast, a
+prime-integral Möbius map with unit determinant and an integral finite pole cannot
+preserve the entire negative-valuation chamber.
 
-```text
-qₙ = bb c bⁿ c bⁿ,
-Iₙ = qₙ.drop 2 · b,
-Cₙ = c b^(2n+2),
-Dₙ = b^(2n+2) c bⁿ c b^(n+1).
-```
+**Scope:** the stated integrality, determinant-unit, pole, and whole-chamber conditions
+are essential. This is not an obstruction to every projective zero test.
+**Use:** reject pole readers that claim to preserve that poison chamber as an isometry.
+**Formalization:** [TwoPlaceReader.lean](MatrixMortality/TwoPlaceReader.lean),
+`integralAffine_negative_hasValue`, `integralFinitePole_breaks_negative`.
+**Next:** change the test or the poison invariant before doing mode synthesis.
 
-Use deletion width three with productions `b↦b` and `c↦qₙb`. If `n≡0` or `1 (mod 3)`,
-the coupled input `Iₙ` reaches `Cₙ`. The leading `c` then gives one exact step `Cₙ→Dₙ`.
-For `n=3(k+1)`, the return history is
+### MM-O32: Mirrored common-return incompatibility
 
-```text
-(bbb)^(2k+2), bbc, (bbb)^(k+1),
-```
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
 
-while for `n=3k+1` it is
+An x-reader on [x:y:z] with a genuine pole at x = 1 cannot equal a projectively
+scaled mirrored y-reader while the x-reader's scale is nonzero. Their (2,0) entries
+would require the same nonzero coefficient to vanish. Setting the shared empty
+return OU to zero instead makes the physical cut square (UO)² zero.
 
-```text
-(bbb)^(2k+1), bcb, (bbb)^k.
-```
+**Scope:** the specified mirror embeddings and shared empty return, in any ambient dimension.
+**Use:** reject this one-cut architecture before solving its other return equations.
+**Formalization:** [TwoRegisterPlaneNoGo.lean](MatrixMortality/TwoRegisterPlaneNoGo.lean),
+`no_common_scaled_xReader_yReader_of_xPoleAtOne`, `zero_emptyReturn_forces_mortal_cut`.
+**Next:** change the embeddings, the test, or the number of cuts.
 
-Every return stroke has head `b`. The histories therefore emit respectively `3k+4` and
-`3k+2` copies of `b`, exactly restoring `Cₙ`. Thus `Cₙ→Dₙ→Cₙ` has exact length `n+2`, and
-the coupled source does not halt. The case `n=1` has a separate one-step entry because its
-first wake is `bc`; the same return formula already covers its cycle.
+### MM-O33: Embedded-reader constant-mode rank
 
-**Scope:** this proves an infinite nonhalting family of admissible separated two-`c` bodies.
-It does not classify the residue-two diagonal, bodies with unequal outer runs, or arbitrary
-`bᵖ c bʳ c bˢ`; it supplies no width-three universality theorem.
+**Kind:** obstruction
+**Evidence:** formalized coefficient identity and rank-one obstruction; audited mode count
+**Disposition:** active
 
-**Use:** any width-three source construction must escape these exact periodic rays. Treat the
-middle separation `r>0` as genuine dynamics rather than an automatic halting condition.
+The projective-plane reader has constant coefficient
+K_x = [[0,0,−center], [0,1,0], [0,0,−1]]. Its lower-right minor is −1, so one
+outer product cannot realize it. The prescribed unscaled two-reader diagonal
+architecture with exponents d,e ≥ 2 has four distinct nonconstant modes and needs
+at least two constant coordinates: at least six ambient coordinates in that architecture.
 
-**Formalization:**
-[`MatrixMortality/SeparatedTwoCOrbit.lean`](MatrixMortality/SeparatedTwoCOrbit.lean), through
-`cycleQueue_step`, `zeroResidue_expanded_reaches_cycle`,
-`oneResidue_expanded_reaches_cycle`, `zeroResidue_cycle`, `oneResidue_cycle`, and
-`separated_not_tagHaltsFrom`.
+**Scope:** exact diagonal realization of these embedded readers. There is no exhaustive
+classification of arbitrary low-dimensional counter constructions. The retired
+`PadicTwoCounterWall` wrapper supplied no such classification.
+**Use:** reject the proposed four- and five-state modal allocations.
+**Formalization:** [TwoVertexPlaneNoGo.lean](MatrixMortality/TwoVertexPlaneNoGo.lean),
+`xReaderTransfer_eq_modes`, `xReaderConstant_ne_vecMulVec`.
+**Next:** a different architecture must evade the prescribed modal allocation, not its minor.
 
-**Artifact:**
-[`audits/m53-separated-two-c-orbits-2026-08-31.md`](audits/m53-separated-two-c-orbits-2026-08-31.md).
+### MM-O34: Short-period exact-role rank floors
 
-**Next:** decide the residue-two diagonal and then test whether unequal outer runs admit a
-finite arithmetic macro system or unbounded queue growth.
+**Kind:** obstruction
+**Evidence:** formalized component ranks; exact finite symbolic floor certificates
+**Disposition:** active
+
+For periods 4,5,6,7,8, the paired-role rank-stratum relaxation has minima
+12,14,12,19,12. For the five-role M₃(5) source at periods 5,6,7,8, the minima are
+10,9,13,10. The certified floors survive the audited injective radix-digit deformation.
+
+**Scope:** the enumerated exact-role periodic architectures and rank-stratum relaxation,
+not all periodic systems or all eight-state reductions. The numbers are relaxation minima,
+not a claim that every bound is attained by a rational DFT realization.
+**Use:** discard these exact-role routes to M₈(2).
+**Formalization:** [PeriodicRankScreen.lean](MatrixMortality/PeriodicRankScreen.lean),
+`pairedComponent_three_le_rank`, `nearyComponent_two_le_rank`.
+**Artifact:** [exact checker](tools/audit_periodic_dft_floor.py).
+**Next:** change early returns or the represented zero language.
+
+### N-O01: Unequal-tail-scaling obstruction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+If one 2 × 2 matrix realizes s ↦ t, s+x ↦ t+λx, s+2x ↦ t+2λx,
+and s+y ↦ t+μy, with x,y,λ nonzero and λ ≠ μ, then the matrix is zero.
+The four cross-multiplied constraints have determinant 2λx³y(λ−μ).
+
+**Scope:** the additive one-coordinate two-tail encoding. This excludes its local
+unequal-radix head move, not every nonlocal or redundant computational encoding.
+**Use:** reject a single projective letter that claims independently different affine
+scalings on arbitrarily remote tails.
+**Formalization:** [MixedRadixTapeNoGo.lean](MatrixMortality/MixedRadixTapeNoGo.lean),
+`MixedRadixTape.unequalTailScaling_matrix_eq_zero`.
+**Next:** change the encoding or use genuinely nonlocal dynamics.
+
+### K-O01: Unbounded aggregate mixed-radix carry
+
+**Kind:** quantitative obstruction
+**Evidence:** audited algebra, not formalized
+**Disposition:** active
+
+For A(z)=2z and B(z)=(2z−1)/3, write a word as (2ⁿz−m_w)/3ᵏ.
+Choose B exactly when k_i = max{j : 3ʲ ≤ 2ⁱ} increases. Each B contributes a
+summand between 2^(n−1)/3 and 2^(n−1) to m_w. If L is least with
+6ᴸ ≥ 2^(n−1+k_n), the aggregate carry satisfies
+floor(2^k_n m_w / 6ᴸ) ≥ floor(k_n/18), with k_n ≥ floor(n/2).
+
+**Scope:** this aggregate pointed-expansion carry is unbounded. Richer asynchronous,
+redundant, or distributed encodings are not excluded.
+**Use:** reject a decision automaton whose finite state must contain that integer carry.
+**Artifact:** [algebra and literature boundary](reports/K.md).
+**Next:** demand a completeness proof for any replacement representation.
+
+### S-O01: Fixed-length S-unit bounds do not bound bridge length
+
+**Kind:** obstruction to a proof method
+**Evidence:** audited algebra, not formalized
+**Disposition:** active
+
+A cubic spectral bridge of length k expands into up to 3ᵏ terms
+(rC_i₁⋯C_iₖc) ∏ λ_iⱼ^nⱼ. Fixed-arity S-unit finiteness bounds therefore depend
+on the unbounded bridge length. They supply no uniform bound on k. For A³ = NI,
+M_(3q+r) = N^q M_r reduces to a residue alphabet instead of bounding physical length.
+
+**Scope:** this invalidates the proposed inference from fixed-length Diophantine
+finiteness; it proves no impossibility theorem for other S-unit methods.
+**Use:** require bounded-term compression or an independent length bound first.
+**Artifact:** [spectral analysis](reports/S.md); the pure-cubic reduction is formalized in
+[CubicReturn.lean](MatrixMortality/CubicReturn.lean).
+**Next:** no additional fixed-k enumeration until a length-controlling invariant is supplied.
+
 ## Rank-Three Binary Frontier
 
 ### R32-S01: Split return normal form

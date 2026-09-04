@@ -8,9 +8,11 @@ coordinate. The reciprocal and expanding coefficients remain rank one, but the c
 coefficient has a nonzero `2 × 2` minor and therefore cannot pass through one diagonal mode.
 
 For the proposed unscaled two-reader allocation, the four nonconstant modes
-`2⁻¹, 2^(d-1), 3⁻¹, 3^(e-1)` are distinct. They each consume one ambient coordinate, while
-the shared constant eigenvalue consumes at least two. Thus the prescribed pair of embedded
-readers requires ambient dimension at least six before any cross edge is imposed.
+`2⁻¹, 2^(d-1), 3⁻¹, 3^(e-1)` are distinct when `d,e ≥ 2`. Each consumes one ambient
+coordinate; the shared constant eigenvalue consumes at least two. Thus the prescribed embedded
+readers require ambient dimension at least six before any cross edge is imposed. This modal
+count is an audited consequence; the formal statements below establish the coefficient
+decomposition and its rank-one obstruction, not a lower bound for arbitrary reader architectures.
 -/
 
 namespace MatrixMortality.TwoVertexPlaneNoGo

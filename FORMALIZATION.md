@@ -1,5 +1,19 @@
 # Formal Verification
 
+## Recovered integration, 2026-09-04
+
+`Undecidability/PackingProblems.lean` and `UniversalNeary.lean` now include explicit
+primitive-recursive M₃(5) → M₆(3), M₁₂(2) reductions and their no-decider endpoints.
+`FreeMonoidReturn`, `PeriodicReturn`, and `RankCensus` specialize interface compression
+without unnecessary split hypotheses. `SkolemReduction` proves the rational companion
+equivalence; it does not yet package a computable integer-problem endpoint.
+
+The recovered decimal, swapped, cubic, transverse, and parabolic theorem boundaries are
+recorded in [the reconciliation audit](audits/reconciliation-2026-09-04.md). The unfinished
+leading-`b` certificate checkpoint is excluded. The aggregate `PadicTwoCounterWall` wrapper
+was rejected as vacuous/assumption-packaged; its underlying independent obstructions remain.
+No theorem here identifies all open cells with projective incidence.
+
 ## Frankl abundance theorem
 
 Lean proves the following unconditional finite theorem at

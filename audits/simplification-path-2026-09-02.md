@@ -1,5 +1,9 @@
 # Simplification path across the mortality corpus
 
+Historical design audit. The [2026-09-04 reconciliation](reconciliation-2026-09-04.md)
+records the integrated specializations, completed follow-ups, and remaining scope limits.
+Task-status statements below describe the original audit date.
+
 **Date:** 2026-09-02
 **Scope:** the Lean corpus (`MatrixMortality/`, 374 modules), `SALVAGE.md`, `FRONTIER.md`,
 `FORMALIZATION.md`, and the CHHN and Bacik references.
@@ -94,8 +98,9 @@ Theorem 4 with `(d,h,k) = (3,1,2)`, `M₃(3) ≤ M₆(2)`, so an undecidability 
 | `(3,2,1)`, `(3,1,1)` | scalar edges through one rank-two vertex; `(3,1,1)` is order-three Skolem |
 | `(2,2,2)` | three planes in `ℚ³`, pairwise sharing a line: a compatible three-vertex edge graph |
 
-`(3,3,1)` shows `Z₃(2)` over units is `M₃(3)`-hard; the paired `M₃(4)` route is the same shape
-with three transitions.
+The `(3,3,1)` construction reduces unit-generated Z₃(2) incidence to that mortality profile.
+It does not reduce full M₃(3) to unit-generated incidence. The paired M₃(4) route has the
+same shape with three transitions.
 
 **`M₄(2)`.** Not discussed anywhere in the corpus, although it closes the same seven cells as
 `M₃(3)` (`M₄(2) ≤ M₄(3), M₅(2), M₅(3), M₆(2), M₇(2), M₈(2)`). Its profiles:
@@ -128,14 +133,16 @@ four over a binary free monoid realized in five dimensions, are unlisted routes;
 setter's delimiter (rank three, square of rank two, cube of rank one) is a `(5,5,3)` instance
 whose parser (`MM-S74`) re-derives the bridge factorization by hand.
 
-**`M₅(2)`, `M₆(2)`, `M₇(2)`, `M₈(2)`.** See §3: their rank-one profiles are open Skolem
-instances, so no census can be completed on the decidable side.
+**`M₅(2)`, `M₆(2)`, `M₇(2)`, `M₈(2)`.** See §3: their rank-one profiles include open Skolem
+instances. A complete decision procedure would therefore settle those instances as well.
 
 ## 3. The Skolem wall
 
 `Z_d(1)` is the order-`d` Skolem problem. Through `rankOnePair_isMortal_iff` (or §1),
 `M_d(2)` restricted to one unit and one rank-one generator is exactly `∃ n, O Aⁿ U = 0`, and
-every order-`d` rational linear recurrence is `O Aⁿ U` for a companion `A`. Hence
+every order-`d` rational linear recurrence is `O Aⁿ U` for a companion `A`. The companion is
+invertible when its oldest-term coefficient is nonzero; otherwise finite transient checks and
+order reduction are needed. With that normalization, the decision-theoretic relationship is
 
 ```text
 M_d(2)^{(d,1)} ≡ Skolem(d),   Z_d(k) ⊇ Skolem(d),   M_d(k) ⊇ Skolem(d)   (k ≥ 2).
@@ -144,16 +151,17 @@ M_d(2)^{(d,1)} ≡ Skolem(d),   Z_d(k) ⊇ Skolem(d),   M_d(k) ⊇ Skolem(d)   (
 Skolem is decidable unconditionally through order four (Bacik, already in `references/`) and
 open from order five. Consequently:
 
-- no decidability proof exists today for any of `M₅(2)`, `M₅(3)`, `M₆(2)`, `M₇(2)`, `M₈(2)`,
-  `Z₅(2)`; a proof would settle order-five Skolem. These cells are attackable only from the
-  undecidability side, which the frontier does without stating the reason;
+- a decision procedure for any of `M₅(2)`, `M₅(3)`, `M₆(2)`, `M₇(2)`, `M₈(2)`, or
+  `Z₅(2)` would also settle order-five Skolem. This is a substantial additional obligation,
+  not a theorem that only an undecidability attack can succeed;
 - for `d ≤ 4` (`M₂(k)`, `M₃(k)`, `M₄(k)`) there is no Skolem obstruction, so decidability
   remains a live outcome, consistent with the frontier's `M₂(3)` prior.
 
 This is classical (mortality with a rank-one generator is Skolem), but it appears nowhere in the
 corpus; it belongs in the DAG as an Obstruction node with `Origin = Literature` attached to all
 `d ≥ 5` frontier cells, and it should be cited in the mortality-table page's remarks. The
-reduction half is formalizable now; the companion-matrix embedding is a few lines.
+companion equivalence is now formalized in `SkolemReduction.lean`; a computable integer-
+problem endpoint is not part of that file.
 
 ## 4. The structured scalar problem is affine reachability
 

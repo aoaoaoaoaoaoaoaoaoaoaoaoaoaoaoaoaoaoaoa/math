@@ -8,6 +8,46 @@ Reusable lemmas, obstructions, certificates, and partial mechanisms from unsucce
 are indexed in [`SALVAGE.md`](SALVAGE.md). Its evidence labels are authoritative; this file
 records only their strategic consequences.
 
+## Reconciled mortality priorities, 2026-09-04
+
+The [worktree reconciliation](audits/reconciliation-2026-09-04.md) supersedes stale task-status
+claims in the historical wave reports. The undecidable antichain remains M₃(5), M₄(4),
+M₆(3), M₉(2). Explicit primitive-recursive endpoints for the packing consequences M₆(3)
+and M₁₂(2) have now joined the library. No new cell fell during reconciliation.
+
+1. **M₅(3): exact compiler-image converse.** The decimal shallow branch is normalized, both
+   two-block singleton targets are excluded, and three-block singleton-current/intervener
+   branches are closed. Stop re-proving those cuts. The target is a global invariant excluding
+   the remaining malformed histories on the fixed universal source image, or a counterexample
+   from that image. The long `cb` head is closed; long `cc` and deeper multi/multi ancestry
+   remain. Compare these equations with the swapped setter's primitive successor grammar.
+2. **M₄(3): source hardness before further matrix certificates.** The fixed-boundary free-group
+   matrix construction exists. Its missing source theorem must retain the injective,
+   mutually nonextendable binary morphism conditions. Cyclic or extendable sources do not
+   supply hardness. A successful construction also settles M₅(3) and, by packing, M₈(2).
+   Require a viable forward source reduction before extending the parabolic certificate tree.
+3. **M₈(2): change the represented series.** Jointly vary the early returns and the scalar
+   representation while preserving the zero language. Exact compression of the old geometric
+   series and the audited short-period families is exhausted. The fixed-body rank `4/3/2/1`
+   example establishes feasibility only at that body, not a uniform compiler.
+4. **M₃(4): source-uniform singular recognition.** Seek the exact contextual zero language,
+   not merely a new affine-kernel relation. A direct mortality construction can be weaker
+   than GPCP(3) hardness; keep those obligations distinct. The recovered wrapper and factor-
+   lattice no-gos rule out specified local interfaces, not every contextual representation.
+5. **M₃(3), M₄(2): bounded new-mechanism probes.** Four-mode and free-monoid returns break
+   several three-mode objections. The mirrored one-cut and prescribed two-cut readers fail,
+   but there is no universal six-state counter-machine theorem. Admit a new probe only with
+   a source/control interface and a falsifiable arbitrary-word obligation.
+
+Decision work on M₂(3) and the rank-(2,2) profile of M₃(2) carries the pointwise Collatz
+lower bound. Full M₃(2) also has the rank-(3,2) recurrence profile. Neither the one-way lower
+bound nor the failed finite-carry and valuation methods proves undecidability, equivalence of
+all cells, or futility of a different method. General order-five Skolem remains an additional
+burden for a decision proof in dimension at least five, not a logical ban on decidability.
+
+No formalization pass should expand a bounded certificate tree unless it discharges the named
+missing implication, removes an entire route, or is consumed by a checked endpoint.
+
 ## Frankl abundance frontier
 
 The current formal theorem is

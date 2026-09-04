@@ -279,9 +279,9 @@ theorem exists_term_eq_zero_iff_isMortal (recurrence : IntegerRecurrence tail) :
     recurrence.output recurrence.companion_isUnit]
   exact exists_congr fun n => recurrence.returnMatrix_eq_zero_iff n |>.symm
 
-/-- A Boolean decision procedure for two-matrix mortality in dimension `tail + 1` induces one
-for the order-`tail + 1` integer Skolem problem. No `Decidable` instance or Skolem algorithm is
-assumed. -/
+/-- Correctness of a Boolean mortality classifier transports to the Skolem classifier built
+from the explicit companion family. This statement does not assert computability of either
+classifier; the pointwise equivalence above is its mathematical content. -/
 theorem skolemDecision_of_mortalityDecision
     (mortalityDecision :
       (Option Unit → Square (Fin (tail + 1)) ℚ) → Bool)

@@ -5,8 +5,8 @@ import MatrixMortality.MixedBranchingPersistentGuard
 
 The exact `bcbcbb` guarded recognizer admits a silent fourth coordinate.  The toggle acts as the
 identity there and both data controls kill it.  This preserves the complete scalar zero language
-while giving the four-dimensional roles ranks `4,3,2`; it proves that those ranks alone cannot
-obstruct a source-uniform recompilation.
+while giving the four-dimensional roles ranks `4,3,2`. These ranks therefore do not rule out a
+fixed-body exact recognizer. A source-uniform construction remains a separate obligation.
 -/
 
 namespace MatrixMortality.RankTwoRecompile

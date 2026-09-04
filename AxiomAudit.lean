@@ -3137,6 +3137,3 @@ open MatrixMortality
 #print axioms RankCensus.finFour_rankOne_isMortal_iff
 #print axioms TwoVertexPlaneNoGo.xReaderTransfer_eq_modes
 #print axioms TwoVertexPlaneNoGo.xReaderConstant_ne_vecMulVec
-#print axioms PoleReader.affine_trapForward
-#print axioms PadicTwoCounterReader.six_le_dimension
-#print axioms PadicTwoCounterReader.no_reader_of_dimension_le_five

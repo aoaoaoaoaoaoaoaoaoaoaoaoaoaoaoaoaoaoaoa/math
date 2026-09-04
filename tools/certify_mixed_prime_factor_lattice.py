@@ -13,10 +13,9 @@ import itertools
 import json
 from dataclasses import asdict, dataclass
 
-# PEP 723 supplies SymPy only to the script runtime; standalone ty and its LSP see
-# complementary environments, so both resolution diagnostics are explicitly neutralized.
-import sympy as sp  # ty: ignore[unresolved-import, unused-ignore-comment]
-from sympy.matrices.normalforms import (  # ty: ignore[unresolved-import, unused-ignore-comment]
+# PEP 723 supplies SymPy at script runtime; standalone ty does not load that environment.
+import sympy as sp  # ty: ignore[unresolved-import]
+from sympy.matrices.normalforms import (  # ty: ignore[unresolved-import]
     hermite_normal_form,
 )
 

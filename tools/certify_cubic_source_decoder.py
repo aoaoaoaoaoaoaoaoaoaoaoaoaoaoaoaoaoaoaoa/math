@@ -1,4 +1,8 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.14"
+# ///
+
 """Exact cross-check for the cubic binary-pump separator-source decoder."""
 
 from fractions import Fraction
@@ -30,9 +34,7 @@ def source_coordinate(bits: tuple[int, ...]) -> Fraction:
 
 
 def main() -> None:
-    q0, d0, d1, target = map(
-        residue, (RATIO[0], DIGIT[0], DIGIT[1], SOURCE_OFFSET)
-    )
+    q0, d0, d1, target = map(residue, (RATIO[0], DIGIT[0], DIGIT[1], SOURCE_OFFSET))
     assert (q0, d0, d1, target) == (29, 88, 66, 109)
 
     fixed = d0 * pow((1 - q0) % PRIME, -1, PRIME) % PRIME
