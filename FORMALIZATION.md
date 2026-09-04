@@ -472,7 +472,6 @@ the six-guard series with `J₇-I₇`, checks the inverse `(1/6)J₇-I₇`, and 
 wordwise exact rational realization has at least seven states. The forced-rule specialization
 applies on every positive-width terminal yes-source. This is a no-go for the guarded changed
 series only, not for arbitrary sourcewise existence-equivalent series.
-
 The rank-three binary campaign now has a checked structural core. A split finite-rank cut beside
 a unit fractures every arbitrary binary word into its `VAⁿU` return product; a finite
 block-Hankel section lower-bounds every exact realization of that matrix-valued sequence. For
