@@ -3319,6 +3319,235 @@ phase as well. See
 [`R32-O26`](SALVAGE.md#r32-o26-projective-neutral-insertion-invisibility) and
 [`m32-projective-neutral-insertion-2026-08-31.md`](audits/m32-projective-neutral-insertion-2026-08-31.md).
 
+The positive bridge language already has a small exact boundary quotient. On the separator row,
+waits `1,5,14` are scalar identities, while `[4,6]` rewrites to `[13]` and `[3,8,1]` rewrites
+to `[12,12]`, each with a nonzero rational scale. These five identities reduce all eight hits in
+the bounded length-eight, waits-at-most-thirty census to the two formal length-seven bridge cores;
+Lean checks the indexed reductions and all resulting zeros. The census completeness remains
+computational. Deeper words already answer the two-core closure negatively. A length-nine,
+waits-at-most-thirty census found `35` hits; `27` reduce through known or three new exact row
+aliases, but eight exact Lean-checked zeros remain as new cores. The bounded geometry is sharply
+one-sided: terminal-row prefixes have tens of thousands of projective collisions, while the
+separator-column orbit has none in substantially larger exact censuses. Global column
+injectivity is nevertheless false already at length seven: the two formal cores send the source
+to nonzero scalar multiples on the accepting ray. `R32-O26` also gives a positive
+scalar-identity collision of length `1175`. The next lawful decision attack should decode the
+right/source orbit only until its first arrival at the accepting ray, modulo projective-neutral
+insertion, while quotienting the collisional left/terminal action. See
+[`R32-S62`](SALVAGE.md#r32-s62-terminal-row-bridge-aliases) and
+[`R32-S63`](SALVAGE.md#r32-s63-length-nine-cubic-bridge-novelty), with audits
+[`m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md)
+and
+[`m32-cubic-length-nine-bridges-2026-08-31.md`](audits/m32-cubic-length-nine-bridges-2026-08-31.md).
+
+The endpoint chart makes that asymmetric target exact. With
+`B=[[-79,1],[-90,0]]`, conjugation sends the separator source to `e₀`, its covector to
+`−90e₀ᵀ`, preserves every word determinant, and turns the bridge scalar into `−90(ΠT)₀₀`.
+Therefore the complete fixed family is mortal exactly when a positive endpoint word sends `e₀`
+to the nonzero `e₁` ray. The two length-seven cores already collide on that accepting ray, so
+neither raw nor equal-length projective source freeness can be the theorem. The sharp remaining
+problem is to classify source-ray stabilizer loops and every arrival at `e₁`; no prefix decoder
+may be assumed before those stabilizers are quotiented. See
+[`R32-S64`](SALVAGE.md#r32-s64-cubic-endpoint-chart) and
+[`m32-cubic-endpoint-chart-2026-09-01.md`](audits/m32-cubic-endpoint-chart-2026-09-01.md).
+
+The first stabilizer classification already destroys the residual naive decoder. Two exact
+non-scalar length-three loops fix internal rays of the two length-seven cores. Repeating them
+produces two injective all-positive bridge families of length `7+3k`, with explicit accepting
+scales and exact zeros for every `k`. For the first loop, the six-letter suffix and its
+nine-letter loop extension are distinct but projectively equal on the source, and every suffix
+state of the longer word is nonaccepting. Hence even first-hit-safe nonaccepting prefixes merge;
+the necessary quotient must include ray-specific stabilizers, not merely global scalar
+identities. This may be the decisive obstruction to a finite decoder, but no infinitude of
+irreducible quotient classes is yet proved. See
+[`R32-S65`](SALVAGE.md#r32-s65-internal-ray-bridge-pumps) and
+[`m32-cubic-internal-pumps-2026-09-01.md`](audits/m32-cubic-internal-pumps-2026-09-01.md).
+
+The ray-stabilizer congruence branches immediately. Two distinct positive length-four loops fix
+the same nonaccepting ray `(4,3)`, avoid acceptance at every internal suffix, and are individually
+non-scalar. Their fixed-block encoding is injective on arbitrary bit strings. Appending the safe
+six-letter suffix and prefixing wait `13` yields a first-hit bridge: every proper suffix is
+nonaccepting, but the full word reaches the accepting ray with an explicit nonzero scale. Width
+`n` gives exactly `2^n` distinct words of common length `7+4n`, all Lean-checked mortality
+witnesses and all projectively colliding at acceptance. This proves exponential literal
+branching, not yet an infinite matrix-semigroup quotient; the next cut is whether the full loop
+products retain or erase the bit stack transversely. See
+[`R32-S66`](SALVAGE.md#r32-s66-binary-first-hit-bridge-pump) and
+[`m32-cubic-binary-pumps-2026-09-01.md`](audits/m32-cubic-binary-pumps-2026-09-01.md).
+
+The full matrices retain the stack. In the basis with first column `(4,3)`, each loop is its
+nonzero ray eigenvalue times an upper-triangular affine contraction. Both maps preserve `[0,1]`
+and their image intervals are disjoint, so a transverse affine address decodes every bit string.
+Lean lifts this to projective freeness of the physical loop-product monoid. Simultaneously, the
+generic ray-stabilizer insertion theorem shows that after a suffix reaches `(4,3)`, inserting any
+encoded word merely scales every possible left-context incidence by a nonzero number. Thus the
+same component contains a genuine free binary memory that its source-to-zero observation cannot
+read after the suffix. The remaining compiler seam is no longer “find storage”; it is to divert
+or interrogate the transverse coordinate before the ray collapse, or prove that the fixed return
+grammar forbids such a readout. See
+[`R32-S67`](SALVAGE.md#r32-s67-transverse-free-pump-and-ray-blindness) and
+[`m32-cubic-transverse-pump-2026-09-01.md`](audits/m32-cubic-transverse-pump-2026-09-01.md).
+
+The required pre-collapse diversion is the original source itself. In the common-ray chart it is
+`(11,−123)`, and an encoded word has projective coordinate
+`sβ=(11/123−Dβ)/Qβ`. A modulo-197 orbit certificate proves that every numerator offset is a
+unit and that `v₁₉₇(sβ)=−count₁(β)`. Once the true-letter count is known, every extra false
+letter changes `Qβ` by `1/625`; Lean proves that all nonempty numerator magnitudes lie in a
+positive shell narrower than that factor, so equality recovers the false-letter count as well.
+The address injection then recovers the full word, and physical conjugacy proves projective
+injectivity on the actual separator source. The stack is therefore readable before collapse.
+The remaining compiler seam is now left-sided: realize, by positive return words or
+instance-dependent endpoint geometry, a covector which annihilates exactly the chosen encoded
+source ray, while retaining an arbitrary-raw-word converse. See
+[`R32-S68`](SALVAGE.md#r32-s68-separator-source-projective-decoder) and
+[`m32-cubic-source-decoder-2026-09-01.md`](audits/m32-cubic-source-decoder-2026-09-01.md).
+
+A fixed positive connector now transports every terminal upper-triangular loop into the
+common-ray chart. Two existing positive terminal translations become affine digits of opposite
+sign with common ratio `9/340`; positive physical syntax therefore supports signed common-ray
+arithmetic. The same connector yields the first short expanding loop, with ratio `1125/1088`,
+but each of its three terminal suffixes already reaches the accepting ray, so it cannot enter a
+first-hit bridge. The remaining local target is sharper: synthesize the exact left annihilator
+of one `R32-S68` source coordinate from safe transported loops, or prove an arithmetic exclusion
+for the reachable affine orbit. See
+[`R32-S69`](SALVAGE.md#r32-s69-common-ray-transport-and-unsafe-expansion) and
+[`m32-cubic-ray-transport-2026-09-01.md`](audits/m32-cubic-ray-transport-2026-09-01.md).
+
+The exact target-slope synthesis succeeds. A four-wait prefix followed by `6484` negative and
+`310371` positive transported terminal translations produces a finite positive left word of
+length `9,531,594`. Lean proves that its scalar incidence against an encoded binary pump source
+vanishes exactly for the address `00`; projective source injectivity supplies the converse over
+all encoded addresses. Positive left annihilation is therefore closed in the existential sense.
+The master seam has moved outward: legal computations must be compiled to the fixed selected
+address, and every zero from an arbitrary positive raw word must decode to the designated block
+grammar. See
+[`R32-S70`](SALVAGE.md#r32-s70-positive-singleton-source-selector) and
+[`m32-cubic-singleton-selector-2026-09-01.md`](audits/m32-cubic-singleton-selector-2026-09-01.md).
+
+The local streams now compose. Inserting the balanced signed-defect checker inside the singleton
+connector moves the selected row by exactly `(625/1088)δ`, so its physical incidence against
+`E(00)c` vanishes exactly when every guessed bit matches its writer. All waits are positive.
+Literal block syntax still fractures: the two opposite wrong-read blocks form a positive
+length-`3265` nonzero scalar identity, and inserting them into the punctuated singleton word
+produces a distinct malformed zero with both mandatory clocks omitted. The remaining converse
+must therefore operate modulo projective-neutral insertion, decoding such words as epsilon
+stutters, or leave the homogeneous two-dimensional return quotient for a control component that
+observes them. See
+[`R32-S71`](SALVAGE.md#r32-s71-selected-comparator-and-neutral-fracture) and
+[`m32-cubic-selected-comparator-2026-09-01.md`](audits/m32-cubic-selected-comparator-2026-09-01.md).
+
+Even quotienting scalar identities is too narrow. The positive affine word
+`H=G₀T(-11/10)` fixes the original separator source exactly but is not projectively scalar.
+Appending its length-`29,004` spelling after the selected `00` source produces a length-`29,012`
+word with the same observed source ray and a projectively different matrix product. The converse
+must therefore classify a two-sided fibre: left stabilizers of the selected target, right
+stabilizers of the source, and the raw positive-wait words between them. See
+[`R32-S72`](SALVAGE.md#r32-s72-non-scalar-source-stabilizer-collision) and
+[`m32-cubic-source-stabilizer-2026-09-01.md`](audits/m32-cubic-source-stabilizer-2026-09-01.md).
+
+The scalar kernel is nevertheless completely decidable inside the restricted four-letter radix
+writer-reader alphabet. Every segmented word has an exact affine pair `(height,shift)`, and two
+positive physical products are projectively equal exactly when both fields agree. Inverse words
+and quotient neutrality are exact. This closes scalar-stutter normalization only after lawful
+segmentation and does not cover the terminal translations or transverse pumps responsible for
+the larger two-sided fibre. See
+[`R32-S73`](SALVAGE.md#r32-s73-reader-writer-affine-quotient-normal-form) and
+[`m32-cubic-macro-normal-form-2026-09-01.md`](audits/m32-cubic-macro-normal-form-2026-09-01.md).
+
+The selected comparator now self-enforces its cleanup count. For `N` complete clock blocks and
+an arbitrary suffix of `m` true readers, the selector equation is a huge fixed multiple of
+`1-(4/25)ᴺ(4/25)⁻ᵐ`. The signed mismatch radix always has magnitude below `25/21`, so either
+nonzero exponent gap is impossible. The physical selected incidence therefore vanishes exactly
+when `m=N` and every comparison matches. Cleanup correctness is no longer an external grammar
+obligation; complete block formation and the arbitrary-word fibre remain. See
+[`R32-S74`](SALVAGE.md#r32-s74-selected-comparator-self-enforces-cleanup) and
+[`m32-cubic-selected-cleanup-2026-09-01.md`](audits/m32-cubic-selected-cleanup-2026-09-01.md).
+
+The source-fibre obstruction is now exponentially sharp. A fixed positive translation sends the
+safe transverse pump ray back to the separator source, so sandwiching every free binary pump word
+between that translation and the safe suffix gives a projectively free positive source-stabilizer
+family. Prefixing the selected `00` source yields exactly `2^n` equal-length, pairwise
+projectively distinct products in one observed source fibre at every width. Finite, scalar, and
+cyclic stabilizer quotients are dead. The binary payload must be read in a later context or given
+a lawful state-dependent epsilon semantics. See
+[`R32-S75`](SALVAGE.md#r32-s75-free-binary-source-stabilizer-fibre) and
+[`m32-cubic-free-source-stabilizer-2026-09-01.md`](audits/m32-cubic-free-source-stabilizer-2026-09-01.md).
+
+The payload is readable: one appended positive wait moves the safe source off its stabilized ray
+and exposes a projective coordinate that injectively encodes the complete binary address. Its
+`197`-adic valuation recovers the one-count, an explicit shell narrower than a factor of `625`
+recovers the zero-count, and the affine radix code recovers the order. Thus the source fibre is
+not terminally blind; it is a positive write/store/read channel. The remaining seam is to compose
+this readout with the selected mismatch-zero gate and to prove that arbitrary positive raw words
+either parse into the intended machine or cannot hit its accepting incidence. See
+[`R32-S76`](SALVAGE.md#r32-s76-one-wait-decoder-for-the-free-source-memory) and
+[`m32-cubic-free-source-probe-2026-09-01.md`](audits/m32-cubic-free-source-probe-2026-09-01.md).
+
+The direct inverse-reader route through the current fixed connector is closed. Every segmented
+terminal word built from radix writers, positive readers, and all four terminal translations has
+diagonal ratio `(25/4)^h`; after the `[1,15,8]`/`[13]` ray connector its transverse multiplier
+has `17`-adic valuation `-1`. Both required pump inverses have valuation zero. This is an all-word
+obstruction within that grammar, but it does not cover alternative connectors: several positive
+tails already remove the `17`-adic defect. The live route is a non-inverse height gate, not more
+search behind the fixed connector. See
+[`R32-S77`](SALVAGE.md#r32-s77-fixed-connector-cannot-pop-the-transverse-stack) and
+[`m32-cubic-terminal-ray-no-go-2026-09-01.md`](audits/m32-cubic-terminal-ray-no-go-2026-09-01.md).
+
+The non-inverse route succeeds. A positive height-five terminal gate lands its common-chart row
+exactly on the annihilator of the probed address `00`; source-coordinate injectivity makes this a
+singleton over every binary address. A positive inverse translation cancels the fixed source-return
+prefix, so the theorem applies to the complete readable-memory family. With the marker convention
+`00++payload`, zero incidence is equivalent to an empty payload. The explicit free source fibre is
+therefore no longer an unresolved soundness obstruction: every nonempty encoded insertion can be
+made visible and rejected. What remains is to combine this sentinel gate with the unbounded
+self-balancing mismatch schedule and then extend the converse beyond segmented words. See
+[`R32-S78`](SALVAGE.md#r32-s78-positive-singleton-gate-for-readable-source-memory) and
+[`m32-cubic-readable-source-selector-2026-09-01.md`](audits/m32-cubic-readable-source-selector-2026-09-01.md).
+
+The marker and comparator now compose without a clock or a cleanup phase. Two positive terminal
+corrections turn both orientations of a wrong reader-writer pair into the same unit translation,
+while a match becomes the identity. A schedule therefore contributes its unsigned mismatch
+count. Inside the readable height-five selector this adds a nonnegative row shift; the `00`
+marker payload contributes a second nonnegative coordinate gap. Their sum vanishes exactly when
+the payload is empty and every check matches. The complete statement is a literal positive
+physical-word biconditional with exact length. What remains is no longer arithmetic
+cancellation inside the intended blocks, but the global syntax converse for arbitrary positive
+wait words. See
+[`R32-S79`](SALVAGE.md#r32-s79-monotone-readable-memory-comparator) and
+[`m32-cubic-readable-monotone-comparator-2026-09-01.md`](audits/m32-cubic-readable-monotone-comparator-2026-09-01.md).
+
+Changing the connector reopens one inverse route. An explicit positive word of length `37681`
+realizes the exact two-sided projective inverse of the false transverse pump, so appending that
+word before the false pump gives a nonzero scalar identity and preserves every later suffix.
+This is a genuine physical pop, not merely a normalized chart calculation. Its right bridge,
+however, lands on the accepting ray at its full endpoint; only its proper suffixes are safe.
+The result therefore establishes algebraic reversibility of one stack letter while exposing the
+remaining operational obligation: bypass that premature first hit and obtain a compatible true
+pop, or encode both logical letters through reversible padded blocks. See
+[`R32-S80`](SALVAGE.md#r32-s80-positive-projective-pop-for-the-false-transverse-pump) and
+[`m32-cubic-false-pump-inverse-2026-09-01.md`](audits/m32-cubic-false-pump-inverse-2026-09-01.md).
+
+The second algebraic pop now exists. Two short certified terminal translations around seven
+false radix readers, one alternative connector, three false-pump inverses, and `187` copies of a
+positive parabolic tuner form a positive word of length `306510` whose common-ray chart is the
+exact two-sided inverse of the true pump. Thus both free binary letters have literal positive
+physical push-pop identities. The construction simultaneously proves a broader no-go: every
+connector whose right tail sends the common ray through the terminal `e₀` line is first-hit
+unsafe because the complete tail is already accepting. The live problem is no longer algebraic
+invertibility, but masking that suffix fracture and forcing the global reader/writer phase
+syntax. See
+[`R32-S81`](SALVAGE.md#r32-s81-positive-projective-pop-for-the-true-transverse-pump) and
+[`m32-cubic-true-pump-inverse-2026-09-01.md`](audits/m32-cubic-true-pump-inverse-2026-09-01.md).
+
+Algebraic word comparison is now exact at arbitrary depth. Reverse the positive inverse spelling
+of every guessed bit, place all such readers before the forward transverse writer word, and ask
+whether the complete physical product is projectively identity. Lean proves this holds exactly
+when the guessed and written bit strings agree. The converse is inherited from projective
+freeness, so no opposite mismatch or affine-group relation survives the phase restriction.
+The unresolved boundary is entirely operational: the comparator must be protected from internal
+first hits, and arbitrary raw words must be forced into the reader-then-writer phase language.
+See [`R32-S82`](SALVAGE.md#r32-s82-exact-phased-transverse-word-comparator) and
+[`m32-cubic-binary-pump-comparator-2026-09-01.md`](audits/m32-cubic-binary-pump-comparator-2026-09-01.md).
 ### ReturnSquare laboratory
 
 [`R32-S03`](SALVAGE.md#r32-s03-returnsquare-normal-form) is the first completely normalized

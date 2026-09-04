@@ -1309,6 +1309,206 @@ digit per level.
 See `R32-O26` and
 [`audits/m32-projective-neutral-insertion-2026-08-31.md`](audits/m32-projective-neutral-insertion-2026-08-31.md).
 
+The punctuation module also records the first exact quotient structure of the remaining positive
+bridge language. Three one-letter prefixes act as scalar identities on the terminal row, and two
+multi-letter prefixes have exact shorter row aliases. Lean packages the eight hits returned by a
+bounded length-eight census, proves that every one reduces projectively to one of the two
+length-seven bridge cores, and derives all eight full zeros from those core incidences. The
+bounded census is computational evidence; the row identities and indexed reductions are kernel
+checked. See `R32-S62` and
+[`audits/m32-cubic-bridge-aliases-2026-08-31.md`](audits/m32-cubic-bridge-aliases-2026-08-31.md).
+
+The two-core closure fails one level later. `CubicContinuantPunctuation` now indexes eight new
+length-nine bridge words and proves each separator incidence and full bridge product zero. Three
+additional exact terminal-row aliases explain the derived part of the same bounded census. The
+facts that the census has `35` hits, that `27` reduce, and that the eight displayed words survive
+all checked shorter aliases are computational; the eight zeros and three aliases are formal.
+This redirects the decision lane toward the much less collisional separator-column geometry,
+and away from symmetric row/column normal forms. Global column
+injectivity is already false: the two length-seven cores collide projectively on the accepting
+ray, and every correct read-write block supplies a later neutral collision. See `R32-S63` and
+[`audits/m32-cubic-length-nine-bridges-2026-08-31.md`](audits/m32-cubic-length-nine-bridges-2026-08-31.md).
+
+`CubicContinuantEndpoint` now puts the scalar bridge in its exact endpoint chart. The basis
+`[[-79,1],[-90,0]]` sends the separator source to `e₀` and its covector to `−90e₀ᵀ`; for every
+word, the conjugated product has the same determinant and the bridge scalar is `−90` times its
+upper-left entry. Since every positive product is a unit, mortality of the fixed family is
+equivalent to a positive endpoint word sending `e₀` to a nonzero multiple of `e₁`. Lean also
+checks the distinct equal-length-seven accepting collision explicitly. Thus raw source freeness
+is impossible; the live geometric target is classification of source-ray stabilizers and
+accepting-ray arrivals, without assuming unique decoding. See `R32-S64` and
+[`audits/m32-cubic-endpoint-chart-2026-09-01.md`](audits/m32-cubic-endpoint-chart-2026-09-01.md).
+
+`CubicContinuantInternalPump` then finds exact internal stabilizers, not just accepting-fibre
+collisions. Two non-scalar length-three loops preserve the rays `(4,3)` and `(1,4)` with scales
+`7776000` and `−32348160`. Inserting either loop `k` times into its length-seven bridge core gives
+an injective family of positive words of length `7+3k`, with explicit nonzero accepting scale and
+full zero product for every `k`. More sharply, the shorter suffix and its one-loop extension are
+distinct projectively equal source words, and Lean checks every source-reading suffix of the
+longer word remains nonaccepting. Thus unique first-hit decoding already fails away from the
+accepting fibre, and quotienting only scalar-identity words is insufficient. See `R32-S65` and
+[`audits/m32-cubic-internal-pumps-2026-09-01.md`](audits/m32-cubic-internal-pumps-2026-09-01.md).
+
+`CubicContinuantBinaryPump` upgrades the unary obstruction to a binary first-hit language. The
+two positive length-four blocks `[1,15,7,1]` and `[1,15,38,6]` are non-scalar and safely fix the
+same nonaccepting ray `(4,3)`, with distinct nonzero scales. Their literal concatenation code is
+injective. For every bit string `β`, Lean proves that `[13] ++ code(β) ++ S` is a positive bridge
+of length `7+4|β|`, its full product vanishes between singular returns, and every proper suffix
+remains nonaccepting. Fixed width `n` therefore gives exactly `2^n` distinct equal-length
+first-hit bridges, all projectively colliding at acceptance. This is literal bridge-language
+freeness; freeness of the loop matrices themselves is not part of `R32-S66`. See
+[`audits/m32-cubic-binary-pumps-2026-09-01.md`](audits/m32-cubic-binary-pumps-2026-09-01.md).
+
+`CubicContinuantTransversePump` proves that the hidden binary stack is algebraically genuine.
+In the common-ray basis `[[4,1],[3,1]]`, the two physical loop products become nonzero scales
+times upper-triangular affine maps. Their contractions preserve `[0,1]`, their digit chambers are
+disjoint, and the resulting affine address is injective. Lean lifts this to projective
+injectivity of arbitrary full physical loop products: distinct bit strings never give scalar
+multiples of the same matrix. Yet a generic ray-stabilizer theorem proves that after a right
+context reaches the stabilized ray, inserting any such word only multiplies every left-context
+incidence by its nonzero eigenvalue. The entire free projective stack is therefore invisible to
+zero observation after the fixed suffix. See `R32-S67` and
+[`audits/m32-cubic-transverse-pump-2026-09-01.md`](audits/m32-cubic-transverse-pump-2026-09-01.md).
+
+`CubicContinuantSourceDecoder` proves that the same pump is completely readable before the
+ray-reaching suffix. The original separator source is `(11,−123)` in the common-ray chart. Lean
+derives its rational projective coordinate, uses a period-49 modulo-197 orbit certificate to
+recover the number of true letters, and uses an exact real shell narrower than one factor of
+`625` to recover the number of false letters. The affine address then recovers the full bit
+string. Exact conjugacy lifts this to projective injectivity of the physical pump action on the
+original source. See `R32-S68` and
+[`audits/m32-cubic-source-decoder-2026-09-01.md`](audits/m32-cubic-source-decoder-2026-09-01.md).
+
+`CubicContinuantRayTransport` proves an exact connector from arbitrary upper-triangular terminal
+loops to the common-ray chart. Instantiating it with the positive and negative translation
+blocks from `CubicContinuantReader` gives two strictly positive physical words whose normalized
+affine digits have opposite signs and the common contraction ratio `9/340`. Lean also checks a
+six-wait expanding common-ray loop with ratio `1125/1088`, then proves that its three terminal
+suffixes already reach the accepting ray. Signed affine synthesis is therefore available, but
+the first expanding candidate is not a lawful first-hit pump. See `R32-S69` and
+[`audits/m32-cubic-ray-transport-2026-09-01.md`](audits/m32-cubic-ray-transport-2026-09-01.md).
+
+`CubicContinuantSingletonSelector` closes the existential left-annihilator seam. A four-wait
+prefix and exact nonnegative repetitions of the two terminal translations from
+`CubicContinuantReader` produce a positive physical word of length `9,531,594`. Its normalized
+row is `[1,s(00)]`. A generic Lean theorem proves that `[1,s(β)]` annihilates a normalized source
+image exactly when its address is `β`; exact basis pairing and nonzero projective scales then
+give the physical biconditional `rΠ(L ++ E(γ))c=0 ↔ γ=00`. This is a fixed encoded-language
+selector, not an arbitrary-word converse or a complete compiler. See `R32-S70` and
+[`audits/m32-cubic-singleton-selector-2026-09-01.md`](audits/m32-cubic-singleton-selector-2026-09-01.md).
+
+`CubicContinuantSelectedComparator` composes the balanced signed-defect clock with the singleton
+selector. Lean proves that the resulting positive physical incidence against `E(00)c` vanishes
+exactly when every guessed bit equals its writer. The same module proves the sharp syntax
+fracture: two opposite unclocked wrong reads form a positive length-`3265` nonzero scalar
+identity, so insertion into the singularly punctuated singleton zero yields a distinct malformed
+zero. The local comparator is complete, but every global converse must quotient projective
+identities as epsilon stutters or make them observable outside the homogeneous return quotient.
+See `R32-S71` and
+[`audits/m32-cubic-selected-comparator-2026-09-01.md`](audits/m32-cubic-selected-comparator-2026-09-01.md).
+
+`CubicContinuantSourceStabilizer` proves that scalar identities do not exhaust the selected
+source fibre. One explicit positive length-`29,004` word realizes the non-scalar affine map
+`[[4/25,553/750],[0,1]]`, which fixes the original separator source exactly. Appending it to the
+selected `00` encoding preserves the source ray by a nonzero scale but changes the projective
+matrix product. Lean checks the exact translation relation, realization, source fixation,
+nonscalarity, positivity, lengths, ray collision, and unit-cancellation separation. See
+`R32-S72` and
+[`audits/m32-cubic-source-stabilizer-2026-09-01.md`](audits/m32-cubic-source-stabilizer-2026-09-01.md).
+
+`CubicContinuantMacroNormalForm` gives a complete effective projective quotient for words already
+segmented over the two cubic radix writers and their two positive readers. Lean evaluates each
+word to an integer height and rational shift, proves the exact affine product formula, and proves
+that equality of these fields is equivalent to projective equality of both normalized and
+physical products. It also checks the neutral-kernel biconditional, exact inverse words, quotient
+identity, positivity, and the `R32-S71` mismatch witness. The theorem excludes the independent
+terminal translations, transverse pumps, and unsegmented raw waits. See `R32-S73` and
+[`audits/m32-cubic-macro-normal-form-2026-09-01.md`](audits/m32-cubic-macro-normal-form-2026-09-01.md).
+
+`CubicContinuantSelectedCleanup` strengthens the selected comparator to an arbitrary number of
+true-reader cleanup blocks. A uniform bound on the signed mismatch radix and the exact selector
+row offset exclude every cleanup count except the number of clocked checks. Lean proves the full
+physical biconditional: selected incidence vanishes exactly when cleanup equals check count and
+every guessed bit matches. The module also checks the terminal affine form, connector, selected
+row, positivity, incidence factorization, and exact reduction to `R32-S71` at balanced cleanup.
+See `R32-S74` and
+[`audits/m32-cubic-selected-cleanup-2026-09-01.md`](audits/m32-cubic-selected-cleanup-2026-09-01.md).
+
+`CubicContinuantTranslationLattice` packages arbitrary nonnegative counts of the four positive
+terminal translations with exact shift, physical realization, positivity, and length.
+`CubicContinuantFreeSourceStabilizer` instantiates this lattice at shift `-41/90`, which sends the
+safe transverse ray back to the separator source. Lean proves that sandwiching every transverse
+binary address produces a positive, projectively injective source-stabilizer family. After the
+selected `00` prefix, width `n` supplies exactly `2^n` equal-length, pairwise projectively distinct
+products in one observed source fibre. See `R32-S75` and
+[`audits/m32-cubic-free-source-stabilizer-2026-09-01.md`](audits/m32-cubic-free-source-stabilizer-2026-09-01.md).
+
+`CubicContinuantFreeSourceProbe` proves that this free memory remains readable after storage.
+Appending one positive wait after the safe suffix exposes the exact common-ray coordinate
+`-26658067/399826944`. A modulo-`197` unit certificate recovers the number of one-bits from its
+valuation; a positive shell narrower than the false-letter factor `625` recovers the number of
+zero-bits; affine-address injectivity then recovers their order. Lean transports the decoder back
+to the physical positive words and proves projective source injectivity for words of length
+`71,192+4|β|`. See `R32-S76` and
+[`audits/m32-cubic-free-source-probe-2026-09-01.md`](audits/m32-cubic-free-source-probe-2026-09-01.md).
+
+`CubicContinuantTerminalRayNoGo` closes the obvious pop-reader route through the fixed ray
+connector. It defines the full segmented grammar of radix writers, positive readers, and all four
+terminal translations, proves that every product has diagonal ratio `(25/4)^h`, and computes the
+transported transverse ratio as `(9/340)(25/4)^h`. Its `17`-adic valuation is always `-1`, whereas
+both transverse inverse ratios have valuation zero. Lean proves the resulting direct
+projective-inverse exclusion. The theorem is connector-specific, not a ban on alternative heads
+or tails. See `R32-S77` and
+[`audits/m32-cubic-terminal-ray-no-go-2026-09-01.md`](audits/m32-cubic-terminal-ray-no-go-2026-09-01.md).
+
+`CubicContinuantReadableSourceSelector` bypasses that inverse wall with a positive height-five
+gate. Exact terminal translations around `G₀⁵`, preceded by one translated row prefix, produce
+the annihilator of the one-wait source coordinate at address `00`. Coordinate injectivity gives a
+physical singleton biconditional over all binary addresses. A separate positive `T(41/90)` word
+cancels the fixed source-return prefix, extending the gate to the complete readable-memory words.
+Lean also proves positivity, exact length `535,731,813+4|β|`, and the marker corollary that the gate
+on `00++payload` vanishes exactly for an empty payload. See `R32-S78` and
+[`audits/m32-cubic-readable-source-selector-2026-09-01.md`](audits/m32-cubic-readable-source-selector-2026-09-01.md).
+
+`CubicReadableMonotoneComparator` removes cancellation from the composed source-memory check.
+Positive correction words make each matching reader-writer block projectively `T(0)` and each
+mismatch projectively `T(1)`, so a schedule realizes translation by its ordinary mismatch count.
+The `00` marker's source-coordinate gap and the resulting `(15/68)` mismatch row shift are both
+nonnegative and vanish independently. Lean proves the full positive physical biconditional:
+the gate vanishes exactly for an empty payload and a schedule in which every guessed bit equals
+its written bit. The module also proves exact local costs, total length, positivity, transport,
+and the normalized incidence formula. See `R32-S79` and
+[`audits/m32-cubic-readable-monotone-comparator-2026-09-01.md`](audits/m32-cubic-readable-monotone-comparator-2026-09-01.md).
+
+`CubicFalsePumpInverseConnector` shows that the fixed-connector valuation obstruction is not
+global. Two alternative positive bridges and one certified terminal translation realize
+`[[1,-1712/9],[0,625]]`, the exact two-sided inverse of the false transverse pump. Lean proves
+that the literal positive word has length `37681`, that its concatenation with the physical
+false pump is a nonzero scalar identity, and that this cancellation preserves every subsequent
+suffix. It also isolates the operational defect exactly: every proper suffix of the right bridge
+is nonaccepting, but the complete bridge reaches the accepting ray. See `R32-S80` and
+[`audits/m32-cubic-false-pump-inverse-2026-09-01.md`](audits/m32-cubic-false-pump-inverse-2026-09-01.md).
+
+`CubicTruePumpInverseConnector` completes algebraic reversibility of the transverse binary
+alphabet. An exact two-translation terminal program around seven false radix readers, transported
+by an alternative connector and preceded by three false inverses and `187` parabolic tuners,
+realizes `[[1,-857689/1773],[0,336000/197]]`. Lean verifies that this is the two-sided inverse of
+the true pump and that the literal positive word of length `306510` cancels it to nonzero scalar
+identity while preserving every later suffix. The same module proves a generic operational
+obstruction: any connector tail that lands the common ray on terminal `e₀` is itself an accepting
+suffix, so the complete architecture cannot be first-hit safe without an additional masking
+context or a different eigenline. See `R32-S81` and
+[`audits/m32-cubic-true-pump-inverse-2026-09-01.md`](audits/m32-cubic-true-pump-inverse-2026-09-01.md).
+
+`CubicBinaryPumpExactComparator` turns the two positive inverse words into an arbitrary-depth
+whole-word comparator. It reverses the guessed bits, concatenates their inverse spellings, and
+then appends the forward writer encoding. Lean proves both normalized cancellation orders and
+uses projective freeness to show that the normalized product is projectively identity exactly
+when the guessed and written lists agree. The theorem is transported to the literal physical
+word, and arbitrary positive prefixes and suffixes are proved unable to weaken its contextual
+converse. Positivity and the exact variable-rate length are also checked. This is a phased-language
+equality test; first-hit safety and raw phase enforcement remain separate. See `R32-S82` and
+[`audits/m32-cubic-binary-pump-comparator-2026-09-01.md`](audits/m32-cubic-binary-pump-comparator-2026-09-01.md).
 The rank-(2,2) graph is no longer an independent residue. `RankTwoPunctuation` proves that every
 compatible square with one rank-one loop and three units transports exactly to the existing raw
 reverse compiler [`R32-M01`](SALVAGE.md#r32-m01-generic-reverse-edge-compiler). Its intrinsic
@@ -3517,7 +3717,12 @@ fixed-rank decision problem.
 | `CubicContinuantNeutrality.lean` | contextual insertion/deletion invariance of correct projective-identity read-write blocks |
 | `CubicContinuantMismatchClock.lean` | contracting signed-error clock and exact endpoint zero test for balanced cubic radix comparisons |
 | `CubicContinuantSelfBalance.lean` | 2-adic and 5-adic rejection of every incorrect cubic-comparator cleanup count |
-| `CubicContinuantPunctuation.lean` | unique singular return and complete scalar-bridge reduction of the fixed cubic language |
+| `CubicContinuantPunctuation.lean` | unique singular return, scalar-bridge reduction, and exact terminal-row aliases and bounded bridge cores of the fixed cubic language |
+| `CubicContinuantEndpoint.lean` | separator-adapted endpoint chart and exact reduction of the fixed cubic bridge language to accepting-ray reachability |
+| `CubicContinuantInternalPump.lean` | infinite internal-ray bridge pumps and a nonaccepting source-merge obstruction to naive endpoint decoding |
+| `CubicContinuantBinaryPump.lean` | free literal binary first-hit bridge language on two safe non-scalar stabilizer loops |
+| `CubicContinuantTransversePump.lean` | projectively free transverse binary loop monoid and generic ray-stabilizer zero-observation congruence |
+| `CubicContinuantSourceDecoder.lean` | modulo-197 and real-shell decoder for the binary pump action on the original separator source |
 | `EdgeCompression.lean` | exact adjacent-edge compression for split finite-rank families |
 | `TwoPlaneEdges.lean` | compatible two-plane realization of a `2 × 2` edge square and exact rank-two certificates |
 | `ReverseEdge.lean` | generic projective-incidence reverse compiler, basis adaptation, and all-path converse |
