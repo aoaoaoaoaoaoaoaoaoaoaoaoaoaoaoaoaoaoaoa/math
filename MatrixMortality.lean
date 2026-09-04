@@ -9,6 +9,12 @@ import MatrixMortality.FinitePositiveImage
 
 /- Finite-rank repair. -/
 import MatrixMortality.InterfaceCompression
+import MatrixMortality.PrefixPacking
+import MatrixMortality.CHHNPrefixPacking
+import MatrixMortality.FreeMonoidReturn
+import MatrixMortality.TwoPlaceReader
+import MatrixMortality.FourModeArtery
+import MatrixMortality.AlternatingReaderPoison
 import MatrixMortality.InternalSandwich
 import MatrixMortality.ReturnFamily
 import MatrixMortality.CubicReturn
@@ -26,6 +32,7 @@ import MatrixMortality.TwoPlaneEdges
 import MatrixMortality.ReverseEdge
 import MatrixMortality.ProjectiveIncidence
 import MatrixMortality.ProjectiveCollatz
+import MatrixMortality.MixedRadixTapeNoGo
 import MatrixMortality.MixedPrimeKernel
 import MatrixMortality.MixedPrimeNormalization
 import MatrixMortality.PeriodicShell
@@ -79,6 +86,9 @@ import MatrixMortality.InverseOrbitRecurrence
 import MatrixMortality.AffineGroupOrbit
 import MatrixMortality.PadicValuation
 import MatrixMortality.ReturnGuard
+import MatrixMortality.TwoRegisterPlaneNoGo
+import MatrixMortality.TwoVertexPlaneNoGo
+import MatrixMortality.PadicTwoCounterWall
 import MatrixMortality.ReturnGuardDynamics
 import MatrixMortality.ReturnGuardShift
 import MatrixMortality.ReturnGuardGauss
@@ -127,6 +137,7 @@ import MatrixMortality.NearyEncoding
 
 /- Computable endpoint reductions. -/
 import MatrixMortality.Undecidability.ChangedSeparatorProblems
+import MatrixMortality.Undecidability.PackingProblems
 import MatrixMortality.Undecidability.UniversalNeary
 
 /- Source-specific obstructions and finite certificates. -/
@@ -206,6 +217,8 @@ import MatrixMortality.ChangedSeparatorEffectivity
 import MatrixMortality.EffectiveRational
 import MatrixMortality.RationalClearing
 import MatrixMortality.SingularReturnFamily
+import MatrixMortality.SkolemReduction
+import MatrixMortality.RankCensus
 import MatrixMortality.PairedBinaryFullAlgebra
 import MatrixMortality.PrefixFullAlgebra
 import MatrixMortality.ScheduledBinaryRank

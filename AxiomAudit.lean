@@ -150,8 +150,32 @@ open MatrixMortality
 #print axioms ChangedSeparatorRealization.moment_three
 #print axioms ChangedSeparatorRealization.moment_add_three
 #print axioms ReturnFamily.pairGenerator_isMortal_iff_returnFamily
+#print axioms ReturnFamily.rankOnePair_isMortal_iff
 #print axioms InterfaceCompression.isMortal_iff
 #print axioms InterfaceCompression.isMortal_rankOne_iff
+#print axioms FreeMonoidReturn.physical_isMortal_iff_returnFamily
+#print axioms FreeMonoidReturn.returnFamily_isMortal_iff_rankOneEmptyReturn
+#print axioms FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn
+#print axioms FreeMonoidReturn.physical_isMortal_iff_rankOneEmptyReturn_of_transitionUnits
+#print axioms FreeMonoidReturn.ToricCycle.empty_return
+#print axioms FreeMonoidReturn.ToricCycle.positiveReturn_isUnit
+#print axioms FreeMonoidReturn.ToricCycle.thrust
+#print axioms FreeMonoidReturn.ToricCycle.recoil
+#print axioms FreeMonoidReturn.ToricCycle.thrust_mul_recoil
+#print axioms FreeMonoidReturn.ToricCycle.zero_recoil_repaired
+#print axioms TwoPlaceReader.integralAffine_negative_hasValue
+#print axioms TwoPlaceReader.integralAffine_negative_forward
+#print axioms TwoPlaceReader.unitLower_breaks_negative
+#print axioms TwoPlaceReader.finiteIntegralPole_determinant_not_unit
+#print axioms TwoPlaceReader.integralFinitePole_breaks_negative
+#print axioms FourModeArtery.fourModePair_isMortal_iff_returnFamily
+#print axioms FourModeArtery.railbreakerCut_rank
+#print axioms FourModeArtery.railbreakerAmbient_isUnit
+#print axioms FourModeArtery.railbreakerReturn_eq
+#print axioms FourModeArtery.railbreaker_affineWait
+#print axioms FourModeArtery.railbreaker_orbit_injective
+#print axioms AlternatingReaderPoison.integralAffine_negative_hasValue
+#print axioms AlternatingReaderPoison.integralAffine_negative_forward
 #print axioms ChangedSeparatorRealization.integralGenerator_mortal_iff_tagHaltsFrom
 #print axioms ChangedSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom
 #print axioms Undecidability.nearyMortality92_mortal_iff_tagHaltsFrom
@@ -1344,6 +1368,7 @@ open MatrixMortality
 #print axioms ProjectiveCollatz.predecessorState_reaches_or_negative
 #print axioms ProjectiveCollatz.normalizedScalars
 #print axioms ProjectiveCollatz.exists_normalizedIncidence_zero_iff
+#print axioms MixedRadixTape.unequalTailScaling_matrix_eq_zero
 #print axioms FinitePositiveImage.Submonoid.inv_mem_of_finite
 #print axioms FinitePositiveImage.mclosure_eq_top_of_group_closure_eq_top
 #print axioms CongruenceBlindOrbit.bridgeMatrix_one_mulVec_source
@@ -2002,6 +2027,9 @@ open MatrixMortality
 #print axioms ReturnConvert.example_nonresonant
 #print axioms ProjectiveLine.targetOne_word_iff
 #print axioms ReturnGuard.cut_rank
+#print axioms TwoRegisterPlaneNoGo.no_common_scaled_xReader_yReader_of_xPoleAtOne
+#print axioms TwoRegisterPlaneNoGo.cut_sq_eq_zero_of_emptyReturn_eq_zero
+#print axioms TwoRegisterPlaneNoGo.zero_emptyReturn_forces_mortal_cut
 #print axioms ReturnGuard.physical_isMortal_iff_positiveBridge
 #print axioms ReturnGuard.trap_forward
 #print axioms ReturnGuard.live_step_forces_ready
@@ -2316,3 +2344,36 @@ open MatrixMortality
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_x211_ne_zero
 #print axioms ParabolicBlade.bZeroBDefectCOneCodeCore_cb_x211_ne_zero_of_even_b_count
 #print axioms ParabolicBlade.bridge_bZero_bTwo_cOne_det_ne_zero_of_cb_x211_even_b_count
+
+#print axioms ReturnFamily.pairGenerator_isMortal_iff_ambient_or_returnFamily
+#print axioms ReturnSquare.physical_isMortal_iff_returnProduct
+
+#print axioms PrefixPacking.CompleteCode.machine_isMortal_iff_source
+#print axioms CHHNPrefixPacking.ternaryPack_isMortal_iff
+#print axioms CHHNPrefixPacking.binaryPack_isMortal_iff
+#print axioms restrictedPrefixGenerator_mortal_iff_normalized
+#print axioms Undecidability.mortality63Pack_primrec
+#print axioms Undecidability.mortality122Pack_primrec
+#print axioms Undecidability.mortality63Pack_mortal_iff
+#print axioms Undecidability.mortality122Pack_mortal_iff
+#print axioms Undecidability.mortality35To63
+#print axioms Undecidability.mortality35To122
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality63
+#print axioms Undecidability.UniversalNeary.mortality63_not_computable
+#print axioms Undecidability.UniversalNeary.codeHalts_reduces_mortality122
+#print axioms Undecidability.UniversalNeary.mortality122_not_computable
+
+#print axioms SkolemReduction.IntegerRecurrence.companion_isUnit
+#print axioms SkolemReduction.IntegerRecurrence.observer_dot_companion_pow_initial
+#print axioms SkolemReduction.IntegerRecurrence.exists_term_eq_zero_iff_isMortal
+#print axioms SkolemReduction.IntegerRecurrence.skolemDecision_of_mortalityDecision
+
+#print axioms RankCensus.finTwo_allUnit_immortal
+#print axioms RankCensus.finTwo_rankOne_isMortal_iff
+#print axioms RankCensus.finFour_rankTwo_isMortal_iff
+#print axioms RankCensus.finFour_rankOne_isMortal_iff
+#print axioms TwoVertexPlaneNoGo.xReaderTransfer_eq_modes
+#print axioms TwoVertexPlaneNoGo.xReaderConstant_ne_vecMulVec
+#print axioms PoleReader.affine_trapForward
+#print axioms PadicTwoCounterReader.six_le_dimension
+#print axioms PadicTwoCounterReader.no_reader_of_dimension_le_five

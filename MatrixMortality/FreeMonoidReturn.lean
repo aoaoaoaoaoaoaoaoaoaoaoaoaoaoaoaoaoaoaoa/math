@@ -1,0 +1,278 @@
+import MatrixMortality.InterfaceCompression
+import MatrixMortality.TerminalTile
+
+/-!
+# Free-monoid returns with a rank-one empty return
+
+Two arbitrary transition matrices and one rank-two cut compress to a matrix-valued return
+family indexed by the transition free monoid. If its empty return is rank one, adjoining that
+return to the nonempty returns reduces mortality to one scalar bridge. The nonempty returns may
+be singular; unit transitions are needed only to exclude a zero word containing no cut.
+-/
+
+namespace MatrixMortality.FreeMonoidReturn
+
+open scoped Matrix
+
+variable {α Large Small K : Type*} [Field K]
+  [Fintype Large] [DecidableEq Large] [Fintype Small] [DecidableEq Small]
+
+/-- Canonical spelling of a nonempty word by its head and tail. -/
+def positiveWord (word : α × List α) : List α :=
+  word.1 :: word.2
+
+/-- The return across an arbitrary transition word. -/
+def returnMatrix (transitions : α → Square Large K) (input : Matrix Large Small K)
+    (output : Matrix Small Large K) (word : List α) : Square Small K :=
+  output * wordProduct transitions word * input
+
+/-- The return across a nonempty transition word. -/
+def positiveReturn (transitions : α → Square Large K) (input : Matrix Large Small K)
+    (output : Matrix Small Large K) (word : α × List α) : Square Small K :=
+  returnMatrix transitions input output (positiveWord word)
+
+/-- The empty word and the head-tail spellings partition the transition free monoid. -/
+def optionPositiveWordEquiv : Option (α × List α) ≃ List α where
+  toFun
+    | none => []
+    | some word => positiveWord word
+  invFun
+    | [] => none
+    | head :: tail => some (head, tail)
+  left_inv word := by cases word <;> rfl
+  right_inv word := by cases word <;> rfl
+
+theorem pathProduct_eq_wordProduct
+    (transitions : α → Square Large K) (input : Matrix Large Small K)
+    (output : Matrix Small Large K) (steps : List (List α × Unit)) :
+    InterfaceCompression.pathProduct transitions (fun _ : Unit => input)
+        (fun _ : Unit => output) () steps =
+      wordProduct (returnMatrix transitions input output) (steps.map Prod.fst) := by
+  induction steps with
+  | nil => rfl
+  | cons step steps induction =>
+      obtain ⟨word, target⟩ := step
+      cases target
+      simp only [InterfaceCompression.pathProduct, List.map_cons, wordProduct_cons]
+      rw [induction]
+      rfl
+
+/-- One cut compresses exactly to the complete return family. No splitting hypothesis is
+needed; transition-only mortality remains as an explicit disjunct. -/
+theorem physical_isMortal_iff_returnFamily
+    (transitions : α → Square Large K) (input : Matrix Large Small K)
+    (output : Matrix Small Large K) :
+    IsMortal
+        (InterfaceCompression.generator transitions (fun _ : Unit => input)
+          (fun _ : Unit => output)) ↔
+      IsMortal transitions ∨ IsMortal (returnMatrix transitions input output) := by
+  rw [InterfaceCompression.isMortal_iff]
+  apply or_congr_right
+  constructor
+  · rintro ⟨start, steps, steps_nonempty, product_zero⟩
+    cases start
+    refine ⟨steps.map Prod.fst, by simpa using steps_nonempty, ?_⟩
+    rw [← pathProduct_eq_wordProduct]
+    exact product_zero
+  · rintro ⟨words, words_nonempty, product_zero⟩
+    let steps : List (List α × Unit) := words.map (·, ())
+    refine ⟨(), steps, by simpa [steps] using words_nonempty, ?_⟩
+    rw [pathProduct_eq_wordProduct]
+    have step_words : steps.map Prod.fst = words := by
+      change (words.map fun word => (word, ())).map Prod.fst = words
+      rw [List.map_map]
+      change words.map id = words
+      simp
+    rw [step_words]
+    exact product_zero
+
+theorem returnFamily_isMortal_iff_rankOneEmptyReturn
+    (transitions : α → Square Large K) (input : Matrix Large Small K)
+    (output : Matrix Small Large K) (column row : Small → K)
+    (empty_return : output * input = Matrix.vecMulVec column row) :
+    IsMortal (returnMatrix transitions input output) ↔
+      ∃ words : List (α × List α),
+        bridgeScalar column row
+          (wordProduct (positiveReturn transitions input output) words) = 0 := by
+  have separated_returns :
+      returnMatrix transitions input output ∘ optionPositiveWordEquiv =
+        separatedGenerator (Matrix.vecMulVec column row)
+          (positiveReturn transitions input output) := by
+    funext word
+    cases word with
+    | none =>
+        change returnMatrix transitions input output [] = Matrix.vecMulVec column row
+        simpa [returnMatrix] using empty_return
+    | some word => rfl
+  rw [← isMortal_comp_equiv
+    (returnMatrix transitions input output) optionPositiveWordEquiv]
+  rw [separated_returns]
+  exact mortal_adjoin_outer_iff (positiveReturn transitions input output) column row
+
+/-- Free-monoid rank-one-empty-return reduction. It remains exact when any nonempty return is
+singular or zero; such a return already supplies a scalar-zero bridge. -/
+theorem physical_isMortal_iff_rankOneEmptyReturn
+    (transitions : α → Square Large K) (input : Matrix Large Small K)
+    (output : Matrix Small Large K) (column row : Small → K)
+    (empty_return : output * input = Matrix.vecMulVec column row) :
+    IsMortal
+        (InterfaceCompression.generator transitions (fun _ : Unit => input)
+          (fun _ : Unit => output)) ↔
+      IsMortal transitions ∨
+        ∃ words : List (α × List α),
+          bridgeScalar column row
+            (wordProduct (positiveReturn transitions input output) words) = 0 := by
+  exact (physical_isMortal_iff_returnFamily transitions input output).trans
+    (or_congr Iff.rfl
+      (returnFamily_isMortal_iff_rankOneEmptyReturn transitions input output column row
+        empty_return))
+
+/-- For unit transitions, physical mortality is exactly scalar incidence under a finite list of
+nonempty word-indexed returns. No unit hypothesis on those returns is required. -/
+theorem physical_isMortal_iff_rankOneEmptyReturn_of_transitionUnits
+    [Nonempty Large]
+    (transitions : α → Square Large K) (input : Matrix Large Small K)
+    (output : Matrix Small Large K) (column row : Small → K)
+    (transition_unit : ∀ label, IsUnit (transitions label))
+    (empty_return : output * input = Matrix.vecMulVec column row) :
+    IsMortal
+        (InterfaceCompression.generator transitions (fun _ : Unit => input)
+          (fun _ : Unit => output)) ↔
+      ∃ words : List (α × List α),
+        bridgeScalar column row
+          (wordProduct (positiveReturn transitions input output) words) = 0 := by
+  rw [physical_isMortal_iff_rankOneEmptyReturn transitions input output column row
+    empty_return]
+  exact or_iff_right (not_isMortal_of_forall_isUnit transitions transition_unit)
+
+end MatrixMortality.FreeMonoidReturn
+
+namespace MatrixMortality.FreeMonoidReturn.ToricCycle
+
+open scoped Matrix
+
+/-- Number of recoil letters in a transition word. -/
+def recoilCount : List Bool → Nat
+  | [] => 0
+  | false :: word => recoilCount word
+  | true :: word => recoilCount word + 1
+
+/-- Two distinct prime-power diagonal transitions. The fourth mode is a spectator making the
+counterexample live in the first dimension targeted by the proposed extension. -/
+def transition : Bool → Square (Fin 4) ℚ
+  | false => Matrix.diagonal ![3, 1, 1, 1]
+  | true => Matrix.diagonal ![3, 4, 1, 1]
+
+/-- Rank-two return input. -/
+def input : Matrix (Fin 4) (Fin 2) ℚ :=
+  !![1, 0;
+     0, 1;
+     -1, 0;
+     0, 0]
+
+/-- Rank-two return output. -/
+def output : Matrix (Fin 2) (Fin 4) ℚ :=
+  !![1, 0, 1, 0;
+     0, 1, 0, 0]
+
+/-- Projective register ray with counter stored in its two-adic valuation. -/
+def register (counter : Nat) : Fin 2 → ℚ :=
+  ![(2 : ℚ) ^ counter, 1]
+
+theorem wordProduct_transition (word : List Bool) :
+    wordProduct transition word =
+      Matrix.diagonal
+        ![(3 : ℚ) ^ word.length, 4 ^ recoilCount word, 1, 1] := by
+  induction word with
+  | nil =>
+      ext i j
+      fin_cases i <;> fin_cases j <;>
+        simp [wordProduct, recoilCount]
+  | cons label word induction =>
+      rw [wordProduct_cons, induction]
+      cases label <;>
+        ext i j <;> fin_cases i <;> fin_cases j <;>
+          simp [transition, recoilCount, pow_succ']
+
+/-- Every return has two diagonal characters; the empty determinant vanishes in exactly the
+first character. -/
+theorem returnMatrix_eq (word : List Bool) :
+    returnMatrix transition input output word =
+      !![(3 : ℚ) ^ word.length - 1, 0;
+         0, 4 ^ recoilCount word] := by
+  rw [returnMatrix, wordProduct_transition]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [input, output, Matrix.mul_apply, Matrix.vecMul, dotProduct,
+      Matrix.diagonal_apply, Fin.sum_univ_succ]
+  all_goals ring
+
+/-- The empty return is rank one. -/
+theorem empty_return :
+    returnMatrix transition input output [] =
+      Matrix.vecMulVec ![(0 : ℚ), 1] ![(0 : ℚ), 1] := by
+  rw [returnMatrix_eq]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [recoilCount, Matrix.vecMulVec_apply]
+
+/-- Every nonempty word-indexed return is a unit. -/
+theorem positiveReturn_isUnit (word : Bool × List Bool) :
+    IsUnit (positiveReturn transition input output word) := by
+  apply (positiveReturn transition input output word).isUnit_iff_isUnit_det.mpr
+  rw [positiveReturn, returnMatrix_eq, Matrix.det_fin_two]
+  apply isUnit_iff_ne_zero.mpr
+  change
+    ((3 : ℚ) ^ (positiveWord word).length - 1) *
+        4 ^ recoilCount (positiveWord word) - 0 * 0 ≠ 0
+  norm_num only [mul_zero, sub_zero]
+  apply mul_ne_zero
+  · have power_gt_one :
+        (1 : ℚ) < 3 ^ (positiveWord word).length :=
+      one_lt_pow₀ (by norm_num) (by simp [positiveWord])
+    linarith
+  · positivity
+
+/-- The thrust letter increments the register. -/
+theorem thrust (counter : Nat) :
+    positiveReturn transition input output (false, []) *ᵥ register counter =
+      register (counter + 1) := by
+  rw [positiveReturn, returnMatrix_eq]
+  ext i
+  fin_cases i <;>
+    norm_num [positiveWord, recoilCount, register, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ, pow_succ']
+
+/-- The recoil letter decrements every positive register, up to projective scale. -/
+theorem recoil (counter : Nat) :
+    positiveReturn transition input output (true, []) *ᵥ register (counter + 1) =
+      (4 : ℚ) • register counter := by
+  rw [positiveReturn, returnMatrix_eq]
+  ext i
+  fin_cases i <;>
+    norm_num [positiveWord, recoilCount, register, Matrix.mulVec, dotProduct,
+      Fin.sum_univ_succ, pow_succ', Pi.smul_apply]
+  all_goals ring
+
+/-- Thrust after recoil is a nonzero scalar identity. This repeatable projective control cycle
+is impossible in the one-parameter guard class of `R32-O15`. -/
+theorem thrust_mul_recoil :
+    positiveReturn transition input output (false, []) *
+        positiveReturn transition input output (true, []) =
+      (4 : ℚ) • (1 : Square (Fin 2) ℚ) := by
+  rw [positiveReturn, positiveReturn, returnMatrix_eq, returnMatrix_eq]
+  ext i j
+  fin_cases i <;> fin_cases j <;>
+    norm_num [positiveWord, recoilCount, Matrix.mul_apply, Matrix.one_apply,
+      Matrix.smul_apply, Fin.sum_univ_succ]
+
+/-- The same cycle repairs recoil at counter zero, so this decrement gadget does not provide
+the permanent poison required by a two-counter compiler. -/
+theorem zero_recoil_repaired :
+    positiveReturn transition input output (false, []) *ᵥ
+        (positiveReturn transition input output (true, []) *ᵥ register 0) =
+      (4 : ℚ) • register 0 := by
+  rw [Matrix.mulVec_mulVec, thrust_mul_recoil, Matrix.smul_mulVec,
+    Matrix.one_mulVec]
+
+end MatrixMortality.FreeMonoidReturn.ToricCycle

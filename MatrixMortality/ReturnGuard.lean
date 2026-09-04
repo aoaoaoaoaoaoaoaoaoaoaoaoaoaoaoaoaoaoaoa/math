@@ -249,8 +249,7 @@ theorem positiveTransfer_isUnit
 /-- Complete arbitrary-word normal form for the physical amalgamated pair. -/
 theorem physical_isMortal_iff_positiveBridge
     (prime : ℕ) (depth : Nat) (center reset : ℚ)
-    (prime_ne_zero : prime ≠ 0)
-    (drift_ne_zero : drift center reset ≠ 0) :
+    (prime_ne_zero : prime ≠ 0) :
     IsMortal
         (ReturnFamily.pairGenerator
           (ambient (prime : ℚ) depth) (cut center reset)) ↔
@@ -267,11 +266,8 @@ theorem physical_isMortal_iff_positiveBridge
             waits) = 0
   exact ReturnFamily.pairGenerator_isMortal_iff_positiveBridge
       (ambient (prime : ℚ) depth) input (output center reset)
-      inputLeftInverse (outputRightInverse center reset)
       ![reset, 1] ![1, -1]
       (ambient_isUnit (prime : ℚ) depth (by exact_mod_cast prime_ne_zero))
-      inputLeftInverse_mul_input
-      (output_mul_outputRightInverse center reset drift_ne_zero)
       (by
         change returnAt (prime : ℚ) depth center reset 0 =
           Matrix.vecMulVec ![reset, 1] ![1, -1]
