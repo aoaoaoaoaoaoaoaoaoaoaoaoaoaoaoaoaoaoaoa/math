@@ -1,4 +1,5 @@
 import MatrixMortality.ChangedSeparatorTransitionPowers
+import MatrixMortality.PairedReturnRoles
 
 /-!
 # Rank-nine second-moment certificate
@@ -151,17 +152,6 @@ theorem chain_moment_two (ρ V K : ℚ) (regular : RegularChart ρ V K) :
   · exact congrFun (chain_moment_two_row_two ρ V K regular) j
   · exact congrFun (chain_moment_two_row_three ρ V K regular) j
 
-/-- The chart's closed `c` role is the paired Neary generator. -/
-theorem chainDataC_eq_pairedDataMatrix (β : Nat) (body : List TagLetter) :
-    chainDataC (ChangedSeparatorTail.lowerCCode β body)
-        (ChangedSeparatorTail.lowerCScale β body) =
-      pairedDataMatrix ℚ β body .c := by
-  rw [pairedDataMatrix_eq_explicit]
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [chainDataC, ChangedSeparatorTail.lowerCCode,
-      ChangedSeparatorTail.lowerCScale, nearySideLowerC,
-      nearySideLowerCScale, nearyUpper, nearyLower, tagCode, ternaryDigit]
 
 /-- Every positive-width encoded body containing `b` realizes its `c` role at time two. -/
 theorem moment_two (β : Nat) (β_pos : 0 < β) (body : List TagLetter)

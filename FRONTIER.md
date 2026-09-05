@@ -11,16 +11,18 @@ records only their strategic consequences.
 ## Reconciled mortality priorities, 2026-09-04
 
 **5 September override:** [`MM-C10`](SALVAGE.md#mm-c10-asymmetric-eight-state-return) supplies
-an independently reconstructed complete on-paper M₈(2) reduction. Its source prefix, fixed
-`3+3+1+1` chart, complete return sequence, and source-parameter regularity are kernel-checked.
-Finish the unrestricted semantic converse and effective endpoint in Lean before
-resuming construction search. No public table entry changes before that verification.
+an unconditional, Lean-checked M₈(2) undecidability reduction. Its source prefix, fixed
+`3+3+1+1` chart, complete return sequence, unrestricted scalar converse, and
+primitive-recursive integer endpoint are composed in `UniversalMortality82.lean`.
+Finish publication before resuming construction search. The two-generator frontier is now
+dimension eight; M₇(2) is the next unresolved dimension.
 The older M₈(2) instruction below is superseded: preserve existence of a zero, not every
 accepting word. The new construction intentionally breaks accepting toggle pairs.
 
 The [worktree reconciliation](audits/reconciliation-2026-09-04.md) supersedes stale task-status
 claims in the historical wave reports. The undecidable antichain remains M₃(5), M₄(4),
-M₆(3), M₉(2). Explicit primitive-recursive endpoints for the packing consequences M₆(3)
+M₆(3), M₈(2), after the subsequent asymmetric construction. Explicit primitive-recursive
+endpoints for the packing consequences M₆(3)
 and M₁₂(2) have now joined the library. No new cell fell during reconciliation.
 
 1. **M₅(3): exact compiler-image converse.** The decimal shallow branch is normalized, both

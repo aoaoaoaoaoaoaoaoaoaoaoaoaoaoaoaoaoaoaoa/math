@@ -85,20 +85,6 @@ theorem chainTailRow_eq_separatorScale_smul (β : Nat) (body : List TagLetter) :
       ChangedSeparatorTail.uniformTailRow, ChangedSeparatorTail.nearyTailRatio]
     field_simp [gap_ne]
 
-/-- The realized tail column is the paired boundary after absorbing one trailing toggle. -/
-theorem chainTailColumn_eq_pairedTrailingToggleColumn (β : Nat) :
-    chainTailColumn (widthScale β) = pairedTrailingToggleColumn ℚ β := by
-  rw [pairedTrailingToggleColumn, pairedColumn]
-  change
-    chainTailColumn (widthScale β) =
-      pairedToggleMatrix ℚ *ᵥ phaseVector ℚ .rule (nearySideColumn β)
-  rw [nearySideColumn_eq_native]
-  funext i
-  fin_cases i <;>
-    simp [chainTailColumn, widthScale, pairedToggleMatrix_eq_explicit,
-      nearySideNativeColumn, nearySideMarkerValue_eq, nearySideMarkerScale_eq,
-      phaseVector, controllerVector, pairControllerEquiv,
-      Matrix.mulVec, dotProduct, Fin.sum_univ_succ]
 
 /-- Rank-one changed separator normalized to its same-zero row. -/
 def tiltedSeparator (β : Nat) (body : List TagLetter) : Square (Fin 4) ℚ :=
@@ -115,28 +101,6 @@ theorem separator_eq_separatorScale_smul (β : Nat) (body : List TagLetter) :
   simp [tiltedSeparator, Matrix.vecMulVec]
   ring
 
-/-- Finite paired role represented by one return time. -/
-def returnLabel : Nat → Option PairedControl
-  | 0 => some .toggle
-  | 1 => some (.data .b)
-  | 2 => some (.data .c)
-  | Nat.succ (Nat.succ (Nat.succ _)) => none
-
-/-- Canonical return time realizing each finite paired role. -/
-def returnIndex : Option PairedControl → Nat
-  | none => 3
-  | some .toggle => 0
-  | some (.data .b) => 1
-  | some (.data .c) => 2
-
-theorem returnLabel_returnIndex (label : Option PairedControl) :
-    returnLabel (returnIndex label) = label := by
-  cases label with
-  | none => rfl
-  | some control =>
-      cases control with
-      | toggle => rfl
-      | data letter => cases letter <;> rfl
 
 /-- Normalized four-generator interface family carried by the return sequence. -/
 def tiltedFamily (β : Nat) (body : List TagLetter) :

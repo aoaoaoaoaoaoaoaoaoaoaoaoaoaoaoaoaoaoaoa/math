@@ -1,6 +1,20 @@
 # Formal Verification
 
-## Asymmetric return chart, 2026-09-05
+## M₈(2) undecidability, 2026-09-05
+
+`Undecidability.UniversalNeary.mortality82Reduction` is a primitive-recursive reduction
+from `CodeHalts` to mortality of two `8 × 8` integer matrices. Its converse covers every
+nonempty physical word. `mortality82_not_computable` proves the standard decision predicate
+noncomputable; `mortality8Plus_not_computable` covers every dimension `8 + extra`.
+`Verification.M82` pins the exact endpoint types; `scripts/check.sh m82` runs its strict gate.
+
+The asymmetric row preserves existence of a scalar zero, not the pointwise zero language.
+`AsymmetricSeparatorRealization.wrongPhase_ne` excludes all wrong-phase zeros by
+coprime-denominator suffix decoding and finite word commutation. `AsymmetricSeparatorCoefficients`
+recovers every original witness with a leading toggle and absorbs the trailing toggle.
+`AsymmetricSeparatorMortality` composes unrestricted return compression and the rank-one
+interface. `AsymmetricSeparatorEffectivity` evaluates the same chart in effective fractions
+and clears denominators; no rank test or basis choice enters the primitive-recursive map.
 
 `ThreeStepRealization` verifies the `3+3+1+1` construction over commutative semirings,
 including all return times and the nonzero transition eigenline. The asymmetric chart's
@@ -9,17 +23,15 @@ three uniform residual factorizations are now checked in `AsymmetricSeparatorRea
 prove regularity on the source slope range, the exact returns, and specialization to the
 inherited paired data parameters. `TernaryPeriodic` proves that equality of periodic ternary
 fractions is equivalent to finite block commutation, together with terminal-residue decoding.
-The complete wrong-phase exclusion and the primitive-recursive M₈(2) endpoint remain open
-formalization obligations. None of these declarations alone closes the public table entry.
+The modules above compose these chart facts with the complete scalar converse and source.
 
 ## Asymmetric source prefix, 2026-09-05
 
 `Undecidability.NearyCompiler.body_take_three` in `AsymmetricSeparatorSource.lean` proves
 that every universal compiler body begins `bcb`. This supplies the source restriction in
 the [eight-state asymmetric-return audit](audits/m82-asymmetric-return-2026-09-05.md).
-The chart was subsequently formalized as recorded above. The unrestricted scalar converse
-and M₈(2) computability endpoint still have written evidence only; they must not be confused
-with the completed nine-state formal endpoint.
+The source prefix, unrestricted scalar converse, and integer endpoint are all consumed by
+the completed eight-state reduction above.
 
 ## Recovered integration, 2026-09-04
 

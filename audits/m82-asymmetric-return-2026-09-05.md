@@ -4,10 +4,9 @@
 
 **Authorship:** GPT-5.6 Sol; elicited by @eternalism_4eva.
 
-**Status:** independently reconstructed pen-and-paper reduction; Lean-checked compiler prefix,
-fixed chart, complete return sequence, and source-parameter regularity. The complete M₈(2)
-endpoint is **not yet formalized**. The public
-table remains unchanged until that endpoint and its verification gate exist.
+**Status:** complete Lean-checked primitive-recursive reduction from `CodeHalts` to standard
+M₈(2), followed by noncomputability and dimension-padding endpoints. The complete transitive
+axioms of the endpoint are `propext`, `Classical.choice`, and `Quot.sound`.
 
 ## Verdict
 
@@ -19,7 +18,7 @@ prefix needed to exclude its unwanted phase.
 The complete mathematical chain is present: universal source, unrestricted scalar converse,
 eight-dimensional realization, unrestricted physical products, effective integerization.
 No new source-hardness conjecture or bounded-word assumption is needed. The outstanding work
-is to reconstruct that chain in Lean, not to find another mathematical mechanism.
+was to reconstruct that chain in Lean; the composed endpoint now exists.
 
 The local audit did not use the discovery report's attached programs. The retained checker
 reconstructs the roles, verifies the rational identities, and emits a different, fixed-basis
@@ -120,7 +119,8 @@ The formalization has a shorter finite replacement: cross-multiplying the period
 is exactly equality of the codes of WZ and ZW. `periodicTernaryCode_eq_iff_commute` proves this
 equivalence for nonempty blocks. The five cases can therefore compare these concatenations
 directly instead of constructing the repetitions in (2). This arithmetic-to-word step is
-checked; the complete five-case exclusion is not yet a Lean theorem.
+checked. `no_asymmetric_period` verifies all five cases, and `wrongPhase_ne` composes them
+with the suffix and periodic-fraction arguments.
 
 The suffix after the initial `10` in W starts `0^(β−1)1110^β1`. The word p⁺ is a prefix of
 that periodic suffix and ends in 1. There are five exhaustive cases.
@@ -255,11 +255,10 @@ interiors contribute ru≠0. With (3), this proves mortality iff the inherited s
 The fixed chart consists of powers, word codes, and rational arithmetic on fixed-size arrays.
 These operations are primitive recursive in the repository's coding. Independent nonzero
 denominator clearing for A and C preserves and reflects zero products. Composing with the
-existing primitive-recursive universal source gives the proposed standard M₈(2) endpoint.
-This paragraph is an effective mathematical construction, **not a claim that its composed
-`Primrec` theorem already exists in Lean**.
+existing primitive-recursive universal source gives the standard M₈(2) endpoint.
+`UniversalNeary.mortality82Reduction` now packages this exact composition in Lean.
 
-## Evidence and next boundary
+## Verification
 
 `tools/audit_m82_asymmetric_return.py` checks the 15 Schur identities, the fixed chart (4),
 the first four moments, and the exact recurrence `A⁴=ξ⁻¹A³`, symbolically in ρ,q,K. It then
@@ -289,8 +288,15 @@ uniformly. `AsymmetricSeparatorRegularity` proves the denominator and role-scale
 checks the source slope, its code identity, and source-parameter regularity. Their reviewed
 transitive dependencies are only `propext`, `Classical.choice`, and `Quot.sound`.
 
-The remaining formalization has two consumers: the finite wrong-phase exclusion and the
-composed primitive-recursive integer endpoint through `SingularReturnFamily` and the existing
-source. Do not rebuild generic
-Hankel minimization or continue the old uniform-row search. No publication claim, theorem
-table cell, or external priority assertion is changed by this audit.
+`AsymmetricSeparatorRealization.wrongPhase_ne` closes the finite semantic converse.
+`AsymmetricSeparatorCoefficients` proves exact existential transport, including the empty
+coefficient. `AsymmetricSeparatorMortality` composes this with `SingularReturnFamily`.
+`AsymmetricSeparatorEvaluation` proves that the operation-only chart commutes with effective
+fraction evaluation; `EffectiveMatrix` clears each matrix independently.
+`Undecidability.UniversalNeary.mortality82_not_computable` is the final standard integer
+decision endpoint. `mortality8Plus_not_computable` gives its fully composed padding corollary.
+The named gate is `scripts/check.sh m82`. The combined `proofs m82 m92` gate passed all
+3,871 jobs; the canonical `all` gate passed all 3,875 jobs, including the symbolic audit
+(581 seconds), references, HTML, paper, and ledger. The axiom inventory adds 42 reviewed
+declarations for the semantic converse, effectivity, and endpoints. The next unresolved
+two-generator dimension is seven.

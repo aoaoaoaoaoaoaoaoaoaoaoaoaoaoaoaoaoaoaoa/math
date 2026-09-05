@@ -5,13 +5,13 @@ parallel scheduling, and the content-addressed artifact cache. Named gates also 
 source-policy scans, environment lint, and transitive-axioms verification.
 
 ```sh
-scripts/check.sh m92          # Only the M₉(2) proof closure and its verification
+scripts/check.sh m82          # Only the M₈(2) proof closure and its verification
 scripts/check.sh m35 m44      # Multiple targets share dependency jobs
 scripts/check.sh publication  # Published proofs, HTML, and reproducible paper
 scripts/check.sh all          # Full corpus, auxiliary certificates, references, HTML, paper
 ```
 
-`m35`, `m44`, and `m92` pin the types of their primitive-recursive reductions, many-one
+`m35`, `m44`, `m82`, and `m92` pin the types of their primitive-recursive reductions, many-one
 reductions, and noncomputability endpoints. `source`, `binary`, `packing`, `foundations`,
 `mortality`, and `frankl` select other proof closures. `proofs` checks the whole corpus.
 `html`, `symbolic`, `references`, `paper`, and `ledger` select non-Lean stages.

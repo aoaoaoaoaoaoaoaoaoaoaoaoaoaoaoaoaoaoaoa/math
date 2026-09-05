@@ -134,6 +134,9 @@ def action (pkg : Package) (label : String) (inputs : Array FilePath)
 
 end Gate
 
+target m82 pkg : FilePath :=
+  Gate.proof pkg "m82" #[`Verification.M82]
+
 target m92 pkg : FilePath :=
   Gate.proof pkg "m92" #[`Verification.M92]
 

@@ -13,6 +13,7 @@ import MatrixMortality.Undecidability.UniversalNeary
 import Verification.M35
 import Verification.M44
 import Verification.M92
+import Verification.M82
 
 /-!
 # Published mathematics

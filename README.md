@@ -19,6 +19,11 @@ tilted separator preserves the paired scalar zero language, a `3+3+2+1` return r
 its returns, and primitive-recursive denominator clearing constructs two `9 × 9` integer matrices.
 Zero-block padding preserves mortality in every dimension at least nine.
 
+An asymmetric separator improves the mortality dimension to eight. It preserves existence
+of a zero, rather than each word's zero status; a leading toggle recovers discarded witnesses.
+The `3+3+1+1` realization, unrestricted converse, primitive-recursive integer construction,
+and M₈(2) undecidability endpoint are formalized, including padding to every larger dimension.
+
 The complete undecidability chain, from an explicit universal machine through the restricted
 tag source and matrix compilers, is machine-checked in Lean 4.
 
@@ -57,7 +62,7 @@ The repository pins Lean and mathlib to `v4.33.1`. Run:
 ./scripts/check.sh
 ```
 
-Use `./scripts/check.sh m92` for only the M₉(2) proof closure, or
+Use `./scripts/check.sh m82` for only the M₈(2) proof closure, or
 `./scripts/check.sh publication` for the release gate. Compiled artifacts and successful
 verification receipts are cached across worktrees. See [Verification Targets](BUILDING.md)
 for target names, cache placement, invalidation, and independent reproduction.

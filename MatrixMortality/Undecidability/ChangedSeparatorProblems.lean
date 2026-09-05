@@ -1,5 +1,6 @@
 import MatrixMortality.ChangedSeparatorEffectivity
 import MatrixMortality.Undecidability.NearyProblems
+import MatrixMortality.Undecidability.PairAlphabet
 
 /-!
 # Canonical two-matrix nine-dimensional mortality instances
@@ -11,33 +12,6 @@ alphabet to `Fin 2`, the transparent carrier of the encoded `M₉(2)` decision p
 namespace MatrixMortality
 namespace Undecidability
 
-/-- Canonical enumeration of the cut and ambient-transition generators. -/
-def changedSeparatorLabelOfFin : Fin 2 → Option Unit
-  | ⟨0, _⟩ => none
-  | ⟨1, _⟩ => some ()
-
-/-- Inverse of `changedSeparatorLabelOfFin`. -/
-def finOfChangedSeparatorLabel : Option Unit → Fin 2
-  | none => 0
-  | some _ => 1
-
-theorem changedSeparatorLabelOfFin_finOfChangedSeparatorLabel
-    (label : Option Unit) :
-    changedSeparatorLabelOfFin (finOfChangedSeparatorLabel label) = label := by
-  cases label with
-  | none => rfl
-  | some value => cases value; rfl
-
-theorem finOfChangedSeparatorLabel_changedSeparatorLabelOfFin (label : Fin 2) :
-    finOfChangedSeparatorLabel (changedSeparatorLabelOfFin label) = label := by
-  fin_cases label <;> rfl
-
-/-- Fixed relabelling from the encoded binary alphabet to the semantic pair alphabet. -/
-def changedSeparatorFinEquiv : Fin 2 ≃ Option Unit where
-  toFun := changedSeparatorLabelOfFin
-  invFun := finOfChangedSeparatorLabel
-  left_inv := finOfChangedSeparatorLabel_changedSeparatorLabelOfFin
-  right_inv := changedSeparatorLabelOfFin_finOfChangedSeparatorLabel
 
 /-- The two effective `9 × 9` integer matrices emitted by one restricted tag source. -/
 noncomputable def nearyMortality92 (β : Nat) (body : List TagLetter) : Mortality92 :=

@@ -7792,3 +7792,111 @@
 'MatrixMortality.AsymmetricSeparatorRealization.regularChart_of_b_mem' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.lowerTile_zero_or_110' depends on axioms: [propext]
+'MatrixMortality.AsymmetricSeparatorRealization.lowerWord_first_one' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.lowerWord_no_10' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.lowerWord_no_111' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.no_asymmetric_period' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.asymmetric_suffix_comparable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.tiltedTernaryCode_append' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.tiltedTernaryCode_lt_neg_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.asymmetric_period_of_equation' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.wrongPhase_ne' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.pairedScalar_eq_zero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.pairedScalar_hasNonemptyZero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.trailingScalar_eq_append' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.trailingScalar_hasNonemptyZero_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.trailingScalar_nil_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.chartGenerator_eq_pair' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.returnScale_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.returnMatrix_eq_scaled_interface' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.interfaceFamily_mortal_iff_paired_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.generator_mortal_iff_paired_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.generator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.chartGenerator_value' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.effectiveFractionGenerator_value' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.effectiveIntegralGenerator_entry_primrec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.effectiveIntegralGenerator_mortal_iff_generator' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.effectiveIntegralGenerator_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.EffectiveMatrix.integral_entry_primrec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.EffectiveMatrix.cast_integral' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.EffectiveMatrix.integral_mortal_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.MortalityProblem.pad_primrec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.MortalityProblem.pad_mortal_iff' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.nearyMortality82_primrec' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.Undecidability.nearyMortality82_mortal_iff_tagHaltsFrom' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.source_body_take_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality82Instance_primrec' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality82Instance_mortal_iff_codeHalts' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.codeHalts_reduces_mortality82' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality82_not_computable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.codeHalts_reduces_mortality8Plus' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality8Plus_not_computable' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality82Reduction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.Undecidability.UniversalNeary.mortality8PlusReduction' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

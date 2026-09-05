@@ -1,4 +1,4 @@
-import MatrixMortality.ChangedSeparatorRealization
+import MatrixMortality.PairedReturnRoles
 
 /-!
 # Rank-nine first-moment certificate
@@ -135,27 +135,6 @@ theorem chain_moment_one (ρ V K : ℚ) (regular : RegularChart ρ V K) :
   · exact congrFun (chain_moment_one_row_two ρ V K regular) j
   · exact congrFun (chain_moment_one_row_three ρ V K regular) j
 
-/-- The chart's closed `b` role is the paired Neary generator. -/
-theorem chainDataB_eq_pairedDataMatrix (β : Nat) (body : List TagLetter) :
-    chainDataB (widthScale β) = pairedDataMatrix ℚ β body .b := by
-  have upper_b :
-      (ternaryCode (nearyUpper β (.rule .b)) : ℚ) =
-        (15 * (3 : ℚ) ^ β + 1) / 2 := by
-    simpa [nearyUpper, nearySideUpperB] using nearySideUpperB_eq β
-  have upper_b_scale :
-      ((3 : ℚ) ^ (nearyUpper β (.rule .b)).length) = 9 * (3 : ℚ) ^ β := by
-    simpa [nearyUpper, nearySideUpperBScale] using nearySideUpperBScale_eq β
-  have lower_b_scale :
-      ((3 : ℚ) ^ (nearyLower β body (.rule .b)).length) = 27 := by
-    norm_num [nearyLower]
-  have erase_scale :
-      ((3 : ℚ) ^ (nearyLower β body (.erase .b)).length) = 3 := by
-    norm_num [nearyLower]
-  rw [pairedDataMatrix_eq_explicit]
-  ext i j
-  fin_cases i <;> fin_cases j <;>
-    simp [chainDataB, widthScale, upper_b, upper_b_scale, lower_b_scale,
-      erase_scale]
 
 /-- Every positive-width encoded body containing `b` realizes its `b` role at time one. -/
 theorem moment_one (β : Nat) (β_pos : 0 < β) (body : List TagLetter)

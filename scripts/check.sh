@@ -14,7 +14,7 @@ export LAKE_CACHE_DIR="${LAKE_CACHE_DIR-$cache_home/lake}"
 if [[ "${1:-}" == --help ]]; then
   printf '%s\n' \
     'Usage: scripts/check.sh [TARGET ...]' \
-    'Proofs: m35 m44 m92 source binary packing mortality frankl proofs' \
+    'Proofs: m35 m44 m82 m92 source binary packing mortality frankl proofs' \
     'Release: publication (published proofs, HTML, paper)' \
     'Other: html symbolic references paper ledger all (default)' \
     'Lake options: lake build -v TARGET; lake build --no-build TARGET'

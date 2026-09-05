@@ -3,6 +3,7 @@ import MatrixMortality.Undecidability.UniversalPacking
 import MatrixMortality.Undecidability.UniversalMortality44
 import MatrixMortality.Undecidability.UniversalBinary
 import MatrixMortality.Undecidability.UniversalMortality92
+import MatrixMortality.Undecidability.UniversalMortality82
 
 /-!
 # Universal Neary endpoints
