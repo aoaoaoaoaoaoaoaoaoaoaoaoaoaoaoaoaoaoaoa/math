@@ -194,21 +194,21 @@ def transition (β : Nat) (body : List TagLetter) : Square (Fin 9) ℚ :=
     (ChangedSeparatorTail.lowerCScale β body)
 
 /-- The paired `b` data role in chart coordinates. -/
-def chainDataB (ρ : ℚ) : Square (Fin 4) ℚ :=
+def chainDataB {R : Type*} [FractionArithmetic R] (ρ : R) : Square (Fin 4) R :=
   !![1, 25, (15 * ρ + 1) / 2, 1;
      0, 0, 0, 0;
      0, 0, 9 * ρ, 0;
      0, 27, 0, 3]
 
 /-- The paired `c` data role in chart coordinates. -/
-def chainDataC (V K : ℚ) : Square (Fin 4) ℚ :=
+def chainDataC {R : Type*} [FractionArithmetic R] (V K : R) : Square (Fin 4) R :=
   !![1, V, 2, 1;
      0, 0, 0, 0;
      0, 0, 3, 0;
      0, K, 0, 3]
 
 /-- Observable column of the surviving geometric tail. -/
-def chainTailColumn (ρ : ℚ) : Fin 4 → ℚ :=
+def chainTailColumn {R : Type*} [FractionArithmetic R] (ρ : R) : Fin 4 → R :=
   ![(5 * ρ - 1) / 2, 0, 3 * ρ, -1]
 
 /-- Body-dependent row of the surviving geometric tail. -/

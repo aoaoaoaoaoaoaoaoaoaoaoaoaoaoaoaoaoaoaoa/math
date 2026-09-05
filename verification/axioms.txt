@@ -7755,3 +7755,40 @@
 'MatrixMortality.Undecidability.NearyCompiler.body_take_three' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.ThreeStepRealization.moment_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ThreeStepRealization.moment_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ThreeStepRealization.moment_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ThreeStepRealization.moment_add_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ThreeStepRealization.transition_pow_ne_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ThreeStepRealization.physical_mortality_iff' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.factor_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.factor_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.factor_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.regularChart' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.moment_zero' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.moment_one' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.moment_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.moment_add_three' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.tail_scalar_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.transition_pow_ne_zero' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.periodicTernaryCode_eq_iff_commute' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.ternaryCode_drop_mod' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.isSuffix_of_ternaryCode_mod' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.bodySlope_gt_neg_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.bodySlope_lt_neg_three_halves' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.lowerCode_bodySlope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.AsymmetricSeparatorRealization.regularChart_of_b_mem' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

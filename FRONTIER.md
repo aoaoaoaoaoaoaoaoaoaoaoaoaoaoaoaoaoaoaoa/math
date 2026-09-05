@@ -11,9 +11,9 @@ records only their strategic consequences.
 ## Reconciled mortality priorities, 2026-09-04
 
 **5 September override:** [`MM-C10`](SALVAGE.md#mm-c10-asymmetric-eight-state-return) supplies
-an independently reconstructed complete on-paper M₈(2) reduction. Its source-prefix lemma
-is kernel-checked; its fixed `3+3+1+1` chart has uniform exact symbolic certificates. Finish
-the unrestricted semantic converse, return chart, and effective endpoint in Lean before
+an independently reconstructed complete on-paper M₈(2) reduction. Its source prefix, fixed
+`3+3+1+1` chart, complete return sequence, and source-parameter regularity are kernel-checked.
+Finish the unrestricted semantic converse and effective endpoint in Lean before
 resuming construction search. No public table entry changes before that verification.
 The older M₈(2) instruction below is superseded: preserve existence of a zero, not every
 accepting word. The new construction intentionally breaks accepting toggle pairs.

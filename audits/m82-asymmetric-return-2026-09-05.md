@@ -4,8 +4,9 @@
 
 **Authorship:** GPT-5.6 Sol; elicited by @eternalism_4eva.
 
-**Status:** independently reconstructed pen-and-paper reduction; uniform exact symbolic chart;
-Lean-checked compiler prefix. The complete M₈(2) endpoint is **not yet formalized**. The public
+**Status:** independently reconstructed pen-and-paper reduction; Lean-checked compiler prefix,
+fixed chart, complete return sequence, and source-parameter regularity. The complete M₈(2)
+endpoint is **not yet formalized**. The public
 table remains unchanged until that endpoint and its verification gate exist.
 
 ## Verdict
@@ -114,6 +115,12 @@ W^(k+2)=Z^L.                                    (2)
 
 This avoids an appeal to uniqueness of infinite radix expansions, including its endpoint
 ambiguity. The common word in (2) is long enough for every comparison below.
+
+The formalization has a shorter finite replacement: cross-multiplying the periodic fractions
+is exactly equality of the codes of WZ and ZW. `periodicTernaryCode_eq_iff_commute` proves this
+equivalence for nonempty blocks. The five cases can therefore compare these concatenations
+directly instead of constructing the repetitions in (2). This arithmetic-to-word step is
+checked; the complete five-case exclusion is not yet a Lean theorem.
 
 The suffix after the initial `10` in W starts `0^(β−1)1110^β1`. The word p⁺ is a prefix of
 that periodic suffix and ends in 1. There are five exhaustive cases.
@@ -274,8 +281,16 @@ zeroth moment and later returns. A nonuniform row at dimension eight must annihi
 toggle pair. The new row obeys these algebraic constraints and deliberately retains only the
 erase-phase member. Thus the two reports are complementary, not contradictory.
 
-The remaining formalization has three consumers: the finite wrong-phase exclusion, the fixed
-chart's return identities and regularity, and the composed primitive-recursive integer
-endpoint through `SingularReturnFamily` and the existing source. Do not rebuild generic
+The chart's remaining obligations have now been discharged. `ThreeStepRealization` checks
+the generic eight-state transition, every return moment, and the nonzero eigenline.
+`AsymmetricSeparatorRealization.factor_two`, `factor_one`, and `factor_zero` check (4)
+uniformly. `AsymmetricSeparatorRegularity` proves the denominator and role-scale estimates;
+`AsymmetricSeparatorMoments` assembles the exact return sequence; `AsymmetricSeparatorTail`
+checks the source slope, its code identity, and source-parameter regularity. Their reviewed
+transitive dependencies are only `propext`, `Classical.choice`, and `Quot.sound`.
+
+The remaining formalization has two consumers: the finite wrong-phase exclusion and the
+composed primitive-recursive integer endpoint through `SingularReturnFamily` and the existing
+source. Do not rebuild generic
 Hankel minimization or continue the old uniform-row search. No publication claim, theorem
 table cell, or external priority assertion is changed by this audit.

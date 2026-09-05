@@ -1,13 +1,25 @@
 # Formal Verification
 
+## Asymmetric return chart, 2026-09-05
+
+`ThreeStepRealization` verifies the `3+3+1+1` construction over commutative semirings,
+including all return times and the nonzero transition eigenline. The asymmetric chart's
+three uniform residual factorizations are now checked in `AsymmetricSeparatorRealization`.
+`AsymmetricSeparatorRegularity`, `AsymmetricSeparatorMoments`, and `AsymmetricSeparatorTail`
+prove regularity on the source slope range, the exact returns, and specialization to the
+inherited paired data parameters. `TernaryPeriodic` proves that equality of periodic ternary
+fractions is equivalent to finite block commutation, together with terminal-residue decoding.
+The complete wrong-phase exclusion and the primitive-recursive M₈(2) endpoint remain open
+formalization obligations. None of these declarations alone closes the public table entry.
+
 ## Asymmetric source prefix, 2026-09-05
 
 `Undecidability.NearyCompiler.body_take_three` in `AsymmetricSeparatorSource.lean` proves
 that every universal compiler body begins `bcb`. This supplies the source restriction in
 the [eight-state asymmetric-return audit](audits/m82-asymmetric-return-2026-09-05.md).
-The new chart, its unrestricted scalar converse, and the M₈(2) computability endpoint are
-not yet Lean declarations. Their written and symbolic evidence must not be confused with
-the completed nine-state formal endpoint.
+The chart was subsequently formalized as recorded above. The unrestricted scalar converse
+and M₈(2) computability endpoint still have written evidence only; they must not be confused
+with the completed nine-state formal endpoint.
 
 ## Recovered integration, 2026-09-04
 
