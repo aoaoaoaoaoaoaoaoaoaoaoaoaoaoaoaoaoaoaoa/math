@@ -26,6 +26,12 @@
 'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_compilerClassifier' depends on axioms: [propext,
  Classical.choice,
  Quot.sound]
+'MatrixMortality.DecimalSetterCarry.code_difference_fiveDepth_le_twoDepth_add_two' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_allEraseBlock_targetB_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.nearyPCP_solvable_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyPCP_primitive_terminal' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyGPCP_solvable_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]

@@ -22,8 +22,10 @@ and M₁₂(2) have now joined the library. No new cell fell during reconciliati
    from that image. `MM-S108` now uses the compiler's body-length congruence to exclude the
    positive equal-depth peeled-word language and the long `R_c`-rooted three-block branch,
    including `cc`. The three-block singleton residue is a deep root with a two-`c` intervener,
-   or a short all-`c` current over `R_c`; arbitrary deeper histories remain. The new route is
-   to connect generalized rational residuals to the source word charge.
+   or a short all-`c` current over `R_c`; arbitrary deeper histories remain. `MM-S109` also
+   excludes the pure all-erasure current of length `β+2` before `D_b`: its required valuation
+   gap exceeds the bound for every difference of decimal code words. The new route is to
+   connect generalized rational residuals to these word constraints.
 2. **M₄(3): source hardness before further matrix certificates.** The fixed-boundary free-group
    matrix construction exists. Its missing source theorem must retain the injective,
    mutually nonextendable binary morphism conditions. Cyclic or extendable sources do not
@@ -1562,6 +1564,22 @@ and the complete long three-source singleton branch. The three-block singleton c
 has only the deep-root/two-`c`-intervener arm and the short all-`c` current over `R_c`.
 Arbitrary-depth rational residuals are not encoded words; transporting this charge to their
 actual ancestry remains the global obligation.
+
+[`MM-S109`](SALVAGE.md#mm-s109-decimal-code-difference-valuation-gap) supplies a second
+word-level obstruction: every difference of decimal `5/7` codes satisfies `ν₅δ≤ν₂δ+2`.
+The exceptional pure all-erasure current of width `β+2`, followed by target `D_b`, requires
+the intervening discrepancy shell `(k−4,k−1)` for `β≥4`, or `(k−6,k−1)` at `β=3`.
+Both are impossible, without any body hypothesis or bound on the intervening word. Other
+short all-`c` currents and arbitrary-depth histories remain; the bound is not asserted for
+general rational residuals.
+
+One unformalized composition is now worth reconstructing at the remaining width-`β+2`,
+target-`D_b` boundary. Its integral coefficient factor `2^(β+4)`, combined with `MM-S109`,
+should force the exact discrepancy shell `(k−3,k−1)`. Suffix exhaustion would then leave a
+`β+4`-digit upper head of five-depth two. The proposed grammar argument makes that head three
+complete encoded letters. Its pulse charge would force `β−1` to divide one or three,
+impossible at compiler widths. The suffix/head reconstruction and the incoming-bit correction
+are still proof obligations; this is a candidate consumer, not another checked exclusion.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the

@@ -2906,8 +2906,9 @@ Record [`MM-S97`](SALVAGE.md#mm-s97-short-all-c-three-block-shell-grammar) fixes
 mixed-prime discrepancy grammar for all-`c` currents through width `β+2`. Widths at most `β`
 have shell `(k+β+1−n,k+β−n)`; width `β+1` has `(k,k−1)`. At width `β+2`, the five-depth is
 always `k−1`, and target `D_c` has the full reversed shell `(k−2,k−1)`. The unique unresolved
-short seam is target `D_b` at width `β+2`: its coefficient has a checked factor
-`2^(β+4)`, but the remaining phase-sensitive two-adic residual is not yet classified.
+coefficient seam is target `D_b` at width `β+2`: its coefficient has a checked factor
+`2^(β+4)`, but the general phase-sensitive two-adic residual is not yet classified.
+`MM-S109` now excludes the pure all-erasure slice at every intervening length.
 
 Record [`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) removes the clean
 branch from every long `R_c` survivor, not merely the uniform counterfamily. Exact suffix
@@ -2954,6 +2955,14 @@ shell exclusion, the two-source multi-target pole exclusion above `R_c`, both si
 targets on the long three-source branch, and the refined compiler-image classifier. The
 remaining three-block singleton arms are deep-root/two-`c`-intervener and short all-`c` current
 over `R_c`. No arbitrary-depth ancestry theorem or M₅(3) endpoint is claimed.
+
+Record [`MM-S109`](SALVAGE.md#mm-s109-decimal-code-difference-valuation-gap) proves
+`ν₅(P−V)≤ν₂(P−V)+2` for any two decimal `5/7` code words. Equal final digits add one to both
+valuations; unequal final digits make the difference a five-adic unit; if one word ends,
+the remaining code is not divisible by 125. The exceptional pure all-erasure current of
+length `β+2` before `D_b` would require a gap of three (`β≥4`) or five (`β=3`), so the entire
+slice is impossible. This also brings the previously separate
+`DecimalSetterThreeBlockAllEraseCurrent.lean` coefficient calculation into the root build.
 
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
@@ -3165,6 +3174,7 @@ The `M₅(3)` delimiter attack has the following foundational records:
 | [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) | exact smaller-gap head identity, `q_β∣Vq_s` support law, common-divisor decimal-period equivalence, and exceptional-prime grammar |
 | [`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) | terminal-head calibrations, exact collapse to the two-block singleton equation, and complete long-`cb` chamber extinction |
 | [`MM-S108`](SALVAGE.md#mm-s108-compiler-pulse-charge-extinction) | source pulse-charge congruence, positive equal-depth raw-peel extinction, two-source multi-target exclusion above `R_c`, and complete long-`R_c` three-source singleton extinction |
+| [`MM-S109`](SALVAGE.md#mm-s109-decimal-code-difference-valuation-gap) | universal mixed-prime bound for decimal code differences and complete exceptional pure-erasure `D_b` pole exclusion |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -3940,6 +3950,7 @@ fixed-rank decision problem.
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
 | `NearyPulseCharge.lean` | source body-length congruence as a bitwise pulse charge and the shifted one-pulse match obstruction |
 | `DecimalSetterPulseCharge.lean` | compiler-image raw-peel extinction, pole consumers, and the refined three-block singleton classifier |
+| `DecimalSetterCodeShell.lean` | mixed-prime code-difference bound and exceptional all-erasure three-block singleton exclusion |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |

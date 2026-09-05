@@ -213,6 +213,7 @@ file owns the mathematical stock.
 | [`MM-S102`](#mm-s102-long-double-c-relative-gap-resonance) | structure theorem and obstruction | every long `cc` pole forces `q_β∣Vq_s` for one `1≤s≤β−1`; every absent ambient prime is confined to a smaller-gap decimal-period resonance | formalized | active |
 | [`MM-S103`](#mm-s103-long-terminal-head-collapse-extinction) | obstruction | the support-saturated long `cb` three-block equation collapses exactly to the already-impossible two-block singleton equation, so the entire chamber is empty | formalized | active |
 | [`MM-S108`](#mm-s108-compiler-pulse-charge-extinction) | obstruction | the compiler's body-length congruence excludes positive equal-depth raw peels and the entire long `R_c` three-block singleton branch | formalized | active |
+| [`MM-S109`](#mm-s109-decimal-code-difference-valuation-gap) | obstruction | decimal code differences have five-adic excess at most two, excluding the exceptional pure-erasure `D_b` branch at every intervening length | formalized | active |
 | [`MM-O29`](#mm-o29-uniform-empty-front-local-rays) | obstruction | every empty-front erasure target admits an exact local `D_b;D_c;D_c` backward ray with the required shells and predecessor cylinder | formalized | active |
 | [`MM-S104`](#mm-s104-exact-deletion-c-contraction-chamber) | structure theorem and obstruction | singleton `D_c` contracts Farey height exactly in one primitive gcd channel with a sharp gap inequality | formalized | active |
 | [`MM-S87`](#mm-s87-empty-front-backward-chamber-cut) | structure theorem and obstruction | no `b`-leading physical block can pull an empty-front seed into the deletion-contraction chamber; the canonical `R_c;D_b` branch has a sharp near-diagonal gap | formalized | active |
@@ -9492,8 +9493,8 @@ through `singletonPole_threeBlock_ruleCRoot_shortAllC_discrepancyGrammar`,
 **Artifact:**
 [`audits/m53-short-all-c-three-block-shells-2026-09-01.md`](audits/m53-short-all-c-three-block-shells-2026-09-01.md).
 
-**Next:** determine the normalized two-adic residual `C` for lawful `D_b` phases, beginning with
-the pure all-erasure slice.
+**Next:** only rule-bearing phases of this coefficient seam remain after `MM-S109`; the
+pure all-erasure slice is impossible. Other necessary-shell arms still require a pole exclusion.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -9800,6 +9801,49 @@ The principal consumers are `multiPole_twoBlock_ruleCRoot_impossible`,
 
 **Next:** exclude or normalize the remaining parser histories. The charge
 argument does not yet cross a generalized rational-residual step. M₅(3) remains open.
+
+**Issue:** [#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
+
+### MM-S109: Decimal code-difference valuation gap
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For any two binary words u,v encoded in radix ten with digits `1↦5`, `0↦7`,
+
+```text
+ν₅(code(u)−code(v)) ≤ ν₂(code(u)−code(v)) + 2.
+```
+
+Removing equal final digits adds one to both valuations. Unequal final digits
+leave a five-adic unit. If one word is exhausted, the remaining nonempty code
+is not divisible by 125. The bound is sharp: `757−7=750` has valuations `(1,3)`.
+
+For a three-source singleton pole rooted at `R_c`, the pure all-erasure current
+`D_c^(β+2)` before target `D_b` requires discrepancy shell `(k−4,k−1)` when
+`β≥4`, or `(k−6,k−1)` at `β=3`. Both exceed the bound. No intervening word,
+of any length, can realize the pole.
+
+**Scope:** the word-difference theorem has no source, grammar, sign, or nonzero
+premise; zero satisfies the inequality under Lean's valuation convention.
+The pole theorem assumes only `β≥3`, with arbitrary body and intervening word.
+Neither result constrains an arbitrary rational product residual.
+
+**Use:** reject impossible mixed-prime raw-word shells before treating them as
+ancestry candidates. Stop the exceptional pure-erasure `D_b` branch entirely.
+
+**Formalization:** `DecimalSetterCodeShell.lean`, through
+`code_difference_fiveDepth_le_twoDepth_add_two` and
+`singletonPole_threeBlock_ruleCRoot_allEraseBlock_targetB_impossible`.
+The latter consumes `DecimalSetterThreeBlockAllEraseCurrent.lean`'s coefficient
+and discrepancy-shell calculations, now included in the root build.
+
+**Artifact:**
+[`audits/m53-code-shell-exclusion-2026-09-04.md`](audits/m53-code-shell-exclusion-2026-09-04.md).
+
+**Next:** obtain a global ancestry or shortening argument. The remaining short
+all-`c` currents, deep-root histories, and arbitrary-depth converse remain open.
 
 **Issue:** [#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
