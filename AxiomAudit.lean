@@ -11,6 +11,16 @@ open MatrixMortality
 #print axioms unionClosed_exists_abundant_coordinate
 
 #print axioms terminal_match_iff_tagHaltsFrom
+#print axioms pulseCharge_tagEncode
+#print axioms pulseCharge_lower_modEq
+#print axioms shifted_neary_match_onePulse_length
+#print axioms shifted_neary_match_onePulse_impossible
+#print axioms DecimalSetterCarry.suffix_exhaustion_of_hasDecimalShell
+#print axioms DecimalSetterBridgeRay.peeledSuffix_compilerCongruence_impossible
+#print axioms DecimalSetterBridgeRay.positiveDiscrepancy_equalDepth_impossible
+#print axioms DecimalSetterBridgeRay.multiPole_twoBlock_ruleCRoot_impossible
+#print axioms DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_impossible
+#print axioms DecimalSetterBridgeRay.singletonPole_threeBlock_compilerClassifier
 #print axioms nearyPCP_solvable_iff_tagHaltsFrom
 #print axioms nearyPCP_primitive_terminal
 #print axioms nearyGPCP_solvable_iff_tagHaltsFrom

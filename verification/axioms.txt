@@ -4,6 +4,28 @@
 'Frankl.unionClosed_not_coordinateMeansLE' depends on axioms: [propext, Classical.choice, Quot.sound]
 'Frankl.unionClosed_exists_abundant_coordinate' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.terminal_match_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.pulseCharge_tagEncode' depends on axioms: [propext, Quot.sound]
+'MatrixMortality.pulseCharge_lower_modEq' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.shifted_neary_match_onePulse_length' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.shifted_neary_match_onePulse_impossible' depends on axioms: [propext, Classical.choice, Quot.sound]
+'MatrixMortality.DecimalSetterCarry.suffix_exhaustion_of_hasDecimalShell' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.peeledSuffix_compilerCongruence_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.positiveDiscrepancy_equalDepth_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.multiPole_twoBlock_ruleCRoot_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_ruleCRoot_long_impossible' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+'MatrixMortality.DecimalSetterBridgeRay.singletonPole_threeBlock_compilerClassifier' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
 'MatrixMortality.nearyPCP_solvable_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyPCP_primitive_terminal' depends on axioms: [propext, Classical.choice, Quot.sound]
 'MatrixMortality.nearyGPCP_solvable_iff_tagHaltsFrom' depends on axioms: [propext, Classical.choice, Quot.sound]

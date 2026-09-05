@@ -616,8 +616,6 @@ theorem singletonPole_threeBlock_ruleCRoot_long_suffix
       β_large body targetLetter current_ends pole
     change (V : ℚ) < P at rational
     exact_mod_cast rational
-  have difference_cast : (((P - V : Nat) : ℚ)) = (P : ℚ) - V := by
-    rw [Nat.cast_sub discrepancy_pos.le]
   have discrepancy_shell :
       HasDecimalShell ((P : ℚ) - V) width width := by
     have raw :=
@@ -626,63 +624,11 @@ theorem singletonPole_threeBlock_ruleCRoot_long_suffix
     have width_cast : (width : ℤ) = (k : ℤ) - 1 := by omega
     simpa only [P, V, upperWord, lowerWord, upperBoundaryCode, lowerBoundaryCode,
       k, width, width_cast] using raw
-  have difference_two_value : padicValNat 2 (P - V) = width := by
-    have valuation := discrepancy_shell.1.2
-    rw [← difference_cast, padicValRat.of_nat] at valuation
-    exact_mod_cast valuation
-  have difference_five_value : padicValNat 5 (P - V) = width := by
-    have valuation := discrepancy_shell.2.2
-    rw [← difference_cast, padicValRat.of_nat] at valuation
-    exact_mod_cast valuation
-  have two_power_dvd : 2 ^ width ∣ P - V := by
-    apply (padicValNat_dvd_iff (p := 2) width (P - V)).mpr
-    exact Or.inr (by rw [difference_two_value])
-  have five_power_dvd : 5 ^ width ∣ P - V := by
-    apply (padicValNat_dvd_iff (p := 5) width (P - V)).mpr
-    exact Or.inr (by rw [difference_five_value])
-  have ten_power_dvd : 10 ^ width ∣ P - V := by
-    rw [show 10 ^ width = 2 ^ width * 5 ^ width by
-      rw [show 10 = 2 * 5 by norm_num, mul_pow]]
-    exact Nat.Coprime.mul_dvd_of_dvd_of_dvd
-      ((by norm_num : Nat.Coprime 2 5).pow width width) two_power_dvd five_power_dvd
-  have next_two_not_dvd : ¬2 ^ (width + 1) ∣ P - V := by
-    intro next_dvd
-    have valuation_bound :=
-      (padicValNat_dvd_iff (p := 2) (width + 1) (P - V)).mp next_dvd
-    rcases valuation_bound with difference_zero | valuation_bound
-    · omega
-    · rw [difference_two_value] at valuation_bound
-      omega
-  have two_power_exact : ¬2 * 10 ^ width ∣ P - V := by
-    intro forbidden
-    apply next_two_not_dvd
-    apply dvd_trans _ forbidden
-    refine ⟨5 ^ width, ?_⟩
-    rw [pow_succ, show 10 ^ width = (2 * 5) ^ width by norm_num, mul_pow]
-    ring
   have upper_length : upperWord.length = k + β + 1 := by
     simp [upperWord, k, nearyMarker]
     omega
-  have width_lt_upper : width < upperWord.length := by omega
-  obtain ⟨lower_length, suffix_eq, difference_front⟩ :=
-    suffix_exhaustion_factorization upperWord lowerWord width width_pos width_lt_upper
-      discrepancy_pos ten_power_dvd two_power_exact
-  have difference_front_rat :
-      (P : ℚ) - V = code (front width upperWord) * (10 : ℚ) ^ width := by
-    rw [← difference_cast, difference_front]
-    norm_num
-  have scale_shell : HasDecimalShell ((10 : ℚ) ^ width) width width := by
-    simpa using ten_hasDecimalShell.pow width
-  have head_eq :
-      (code (front width upperWord) : ℚ) =
-        ((P : ℚ) - V) / (10 : ℚ) ^ width := by
-    apply (eq_div_iff (pow_ne_zero width (by norm_num))).2
-    simpa only [mul_comm] using difference_front_rat.symm
-  have head_unit : HasDecimalShell (code (front width upperWord) : ℚ) 0 0 := by
-    rw [head_eq]
-    exact ⟨by simpa using div_hasValue discrepancy_shell.1 scale_shell.1,
-      by simpa using div_hasValue discrepancy_shell.2 scale_shell.2⟩
-  exact ⟨lower_length, suffix_eq, difference_front, head_unit⟩
+  exact suffix_exhaustion_of_hasDecimalShell upperWord lowerWord width width_pos
+    (by omega) discrepancy_pos discrepancy_shell
 
 /-- The unmatched prefix at depth `k-1` is the canonical `β+2`-digit peeled head. -/
 theorem front_punctuatedUpper_eq_peeledHeadWord

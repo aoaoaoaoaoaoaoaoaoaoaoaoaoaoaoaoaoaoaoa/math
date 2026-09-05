@@ -707,6 +707,65 @@ theorem suffix_exhaustion_factorization
   rw [punctuated_code]
   exact Nat.add_sub_cancel_right _ _
 
+/-- An equal-depth positive discrepancy exhausts the lower spelling and leaves
+a decimal-unit upper head. -/
+theorem suffix_exhaustion_of_hasDecimalShell
+    (upper lower : List Bool) (width : Nat) (width_pos : 0 < width)
+    (width_lt_upper : width < upper.length) (difference_pos : code lower < code upper)
+    (difference_shell :
+      HasDecimalShell ((code upper : ℚ) - code lower) width width) :
+    lower.length = width ∧ back width upper = lower ∧
+      code upper - code lower = code (front width upper) * 10 ^ width ∧
+        HasDecimalShell (code (front width upper) : ℚ) 0 0 := by
+  let difference := code upper - code lower
+  have difference_cast : (difference : ℚ) = (code upper : ℚ) - code lower := by
+    exact Nat.cast_sub difference_pos.le
+  have two_value : padicValNat 2 difference = width := by
+    have valuation := difference_shell.1.2
+    rw [← difference_cast, padicValRat.of_nat] at valuation
+    exact_mod_cast valuation
+  have five_value : padicValNat 5 difference = width := by
+    have valuation := difference_shell.2.2
+    rw [← difference_cast, padicValRat.of_nat] at valuation
+    exact_mod_cast valuation
+  have two_dvd : 2 ^ width ∣ difference :=
+    (padicValNat_dvd_iff (p := 2) width difference).mpr (Or.inr (by rw [two_value]))
+  have five_dvd : 5 ^ width ∣ difference :=
+    (padicValNat_dvd_iff (p := 5) width difference).mpr (Or.inr (by rw [five_value]))
+  have power_factor : 10 ^ width = 2 ^ width * 5 ^ width := by
+    rw [show (10 : Nat) = 2 * 5 by norm_num, mul_pow]
+  have ten_dvd : 10 ^ width ∣ difference := by
+    rw [power_factor]
+    exact Nat.Coprime.mul_dvd_of_dvd_of_dvd
+      ((by norm_num : Nat.Coprime 2 5).pow width width) two_dvd five_dvd
+  have two_exact : ¬2 * 10 ^ width ∣ difference := by
+    intro divides
+    have next_dvd : 2 ^ (width + 1) ∣ difference := by
+      refine dvd_trans ?_ divides
+      refine ⟨5 ^ width, ?_⟩
+      rw [pow_succ, power_factor]
+      ring
+    have depth := (padicValNat_dvd_iff (p := 2) (width + 1) difference).mp next_dvd
+    have difference_ne : difference ≠ 0 := by dsimp [difference]; omega
+    have depth_le := depth.resolve_left difference_ne
+    omega
+  obtain ⟨length_eq, suffix_eq, factorization⟩ :=
+    suffix_exhaustion_factorization upper lower width width_pos width_lt_upper
+      difference_pos ten_dvd two_exact
+  have head_eq : (code (front width upper) : ℚ) =
+      ((code upper : ℚ) - code lower) / (10 : ℚ) ^ width := by
+    rw [← difference_cast]
+    have factor_cast : (difference : ℚ) = code (front width upper) * (10 : ℚ) ^ width := by
+      exact_mod_cast factorization
+    rw [factor_cast]
+    field_simp
+  have power_shell : HasDecimalShell ((10 : ℚ) ^ width) width width := by
+    simpa using ten_hasDecimalShell.pow width
+  refine ⟨length_eq, suffix_eq, factorization, ?_⟩
+  rw [head_eq]
+  exact ⟨by simpa using div_hasValue difference_shell.1 power_shell.1,
+    by simpa using div_hasValue difference_shell.2 power_shell.2⟩
+
 /-! ## Prefix intervals -/
 
 /-- Decimal marker value `(52ρ-7)/9`. -/

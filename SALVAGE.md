@@ -212,6 +212,7 @@ file owns the mathematical stock.
 | [`MM-S101`](#mm-s101-long-r_c-peeled-head-support-gate) | structure theorem and obstruction | every long `R_c` pole forces gap support through `H−10μ`; the `cb` head is exactly saturated, while the `cc` head exposes the fringe residue `18F−35` | formalized | active |
 | [`MM-S102`](#mm-s102-long-double-c-relative-gap-resonance) | structure theorem and obstruction | every long `cc` pole forces `q_β∣Vq_s` for one `1≤s≤β−1`; every absent ambient prime is confined to a smaller-gap decimal-period resonance | formalized | active |
 | [`MM-S103`](#mm-s103-long-terminal-head-collapse-extinction) | obstruction | the support-saturated long `cb` three-block equation collapses exactly to the already-impossible two-block singleton equation, so the entire chamber is empty | formalized | active |
+| [`MM-S108`](#mm-s108-compiler-pulse-charge-extinction) | obstruction | the compiler's body-length congruence excludes positive equal-depth raw peels and the entire long `R_c` three-block singleton branch | formalized | active |
 | [`MM-O29`](#mm-o29-uniform-empty-front-local-rays) | obstruction | every empty-front erasure target admits an exact local `D_b;D_c;D_c` backward ray with the required shells and predecessor cylinder | formalized | active |
 | [`MM-S104`](#mm-s104-exact-deletion-c-contraction-chamber) | structure theorem and obstruction | singleton `D_c` contracts Farey height exactly in one primitive gcd channel with a sharp gap inequality | formalized | active |
 | [`MM-S87`](#mm-s87-empty-front-backward-chamber-cut) | structure theorem and obstruction | no `b`-leading physical block can pull an empty-front seed into the deletion-contraction chamber; the canonical `R_c;D_b` branch has a sharp near-diagonal gap | formalized | active |
@@ -9545,9 +9546,8 @@ through `singletonPole_threeBlock_ruleCRoot_long_normalizedQuotient_eq`,
 **Artifact:**
 [`audits/m53-long-rule-c-gap-clean-extinction-2026-09-01.md`](audits/m53-long-rule-c-gap-clean-extinction-2026-09-01.md).
 
-**Next:** generalize the factorwise pole product law from the uniform contaminated tail to an
-arbitrary peeled `cb/cc` head, then intersect forced gap support with the exact lower suffix
-language.
+**Next:** no further compiler-image long-head work is needed: `MM-S108` excludes that
+entire branch. Retain the arbitrary-body normalization obstruction as reusable mathematics.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -9634,11 +9634,11 @@ residue.
 
 **Scope:** the pole product assumes `β≥3`, multi-role current and intervening blocks, the long
 current inequality, root `R_c`, and an actual singleton pole. Equations (2) and (3) are
-unconditional code identities. No theorem excludes the saturated `cb` branch or guarantees
-coprimality of every `cc` fringe residue.
+unconditional code identities. This result alone excludes neither branch; `MM-S103` later
+excludes `cb`, and `MM-S108` excludes both branches on the compiler's body-length class.
 
-**Use:** split future long-head attacks immediately. The `cb` chamber requires information
-beyond first-pole gap support, such as a predecessor cylinder or exact coefficient size. On the
+**Use:** outside the compiler's body-length class, separate the two support laws. The `cb`
+identity shows why first-pole gap support alone cannot exclude that chamber. On the
 `cc` chamber, classify `gcd(q,18F−35)` over the lawful fringe language and force every absent
 factor into the current lower spelling.
 
@@ -9653,9 +9653,8 @@ through `singletonPole_threeBlock_ruleCRoot_long_forces_headSupportProduct`,
 **Artifact:**
 [`audits/m53-long-rule-c-peeled-head-support-gate-2026-09-01.md`](audits/m53-long-rule-c-peeled-head-support-gate-2026-09-01.md).
 
-**Next:** classify the lawful `cc` fringe residues against the factors of `q`; attack the
-support-saturated `cb` chamber through a second predecessor or an exact archimedean coefficient
-bound.
+**Next:** no further compiler-image prime-support classification is needed after `MM-S108`.
+Retain these identities for bodies outside that congruence class.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -9704,8 +9703,8 @@ through `peeledDoubleCHead_unit_gapRelation`,
 **Artifact:**
 [`audits/m53-long-double-c-gap-resonance-2026-09-01.md`](audits/m53-long-double-c-gap-resonance-2026-09-01.md).
 
-**Next:** intersect the finite relative-position resonance with the current lower spelling; the
-support-saturated `cb` branch still requires a second predecessor or coefficient-size attack.
+**Next:** `MM-S108` excludes the entire compiler-image long branch by pulse charge. The
+relative-gap identities remain available outside the compiler's body-length class.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
@@ -9751,12 +9750,58 @@ through `singletonPole_threeBlock_ruleCRoot_long_cb_forces_twoBlockPole` and
 **Artifact:**
 [`audits/m53-long-terminal-head-collapse-2026-09-01.md`](audits/m53-long-terminal-head-collapse-2026-09-01.md).
 
-**Next:** the long `R_c` head grammar now contains only `cc`; intersect its `MM-S102`
-relative-gap resonance with the current lower spelling.
+**Next:** `MM-S108` excludes the remaining long `cc` branch on the compiler's
+body-length congruence class. This theorem retains its stronger arbitrary-body `cb` scope.
 
 **Issue:** [#6, Formalize the five-state setter candidate and decide projective
 avoidance](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
+
+### MM-S108: Compiler pulse-charge extinction
+
+**Kind:** obstruction
+**Evidence:** formalized
+**Disposition:** active
+
+For `β>2` and `(β−1)∣|body|`, charge each binary bit by one except that a
+zero-to-one transition contributes `−β`. An upper role spelling has charge equal
+to its role length from an incoming one; the lower spelling has the same charge
+modulo `β−1` from an incoming zero. Consequently
+
+```text
+upper(w) · marker = 1ᵃ0ˢ · lower(w), s>0
+  ⇒ a+s ≡ β+1  (mod β−1).
+```
+
+A decimal-unit peeled head has length `β+2` and the required one-pulse form;
+the alternative leading-`b` head is not a unit. Thus no physical role word with
+upper length `k≥2` and positive discrepancy `P−V` has shell `(k−1,k−1)`.
+This excludes multi-target poles after a multi-digit block above `R_c` and the
+entire long `R_c`-rooted three-source singleton branch, including the `cc`
+resonance left by `MM-S103`.
+
+**Scope:** arbitrary finite role words and every body in the stated congruence
+class. No halting, leading-`b`, gap-coprimality, or bounded-word premise is used.
+The remaining three-block singleton arms are a deep root with a two-`c`
+intervener and a long current, or `R_c` with a short all-`c` current. General
+rational parser residuals are not asserted to be encoded words.
+
+**Use:** stop the long-head prime-support campaign on compiler bodies; retain
+the source's word charge when formulating an arbitrary-history ancestry invariant.
+
+**Formalization:** `NearyPulseCharge.lean`, `DecimalSetterPulseCharge.lean`, and
+the extracted `DecimalSetterCarry.suffix_exhaustion_of_hasDecimalShell`.
+The principal consumers are `multiPole_twoBlock_ruleCRoot_impossible`,
+`singletonPole_threeBlock_ruleCRoot_long_impossible`, and
+`singletonPole_threeBlock_compilerClassifier`.
+
+**Artifact:**
+[`audits/m53-pulse-charge-extinction-2026-09-04.md`](audits/m53-pulse-charge-extinction-2026-09-04.md).
+
+**Next:** exclude or normalize the remaining parser histories. The charge
+argument does not yet cross a generalized rational-residual step. M₅(3) remains open.
+
+**Issue:** [#6](https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/issues/6).
 
 ### MM-C07: Free-monoid empty-return compression
 

@@ -2913,9 +2913,9 @@ Record [`MM-S98`](SALVAGE.md#mm-s98-long-r_c-gap-clean-ancestry-extinction) remo
 branch from every long `R_c` survivor, not merely the uniform counterfamily. Exact suffix
 exhaustion writes its discrepancy as `H·10^(k−1)`, so the normalized older quotient is exactly
 `μ/H`. Its reduced numerator divides the marker and is therefore coprime to the primitive gap.
-The exact criterion in `MM-S91` then forbids every gap-clean integral descended carrier. The
-pole itself remains hypothetical; all further attacks on this arm must retain factorwise gap
-support.
+The exact criterion in `MM-S91` then forbids every gap-clean integral descended carrier.
+`MM-S108` subsequently excludes the pole on the compiler's body-length congruence class without
+a prime-support argument; the arbitrary-body normalization obstruction remains valid.
 
 Record [`MM-S100`](SALVAGE.md#mm-s100-complete-three-block-singleton-next-extinction) closes the
 last cardinality seam in the three-block source. A `D_b` intervening singleton contradicts the
@@ -2943,6 +2943,17 @@ support-saturated `cb` chamber without coprimality. The terminal head satisfies 
 `H−10μ=−q`; with `E=9q`, the exact three-block equation factors by nonzero `Gq` and becomes
 `S(P−V)=7μGA`. This is precisely the `R_c`-rooted two-block singleton equation excluded by
 `MM-S89`. Hence every long `cb` three-block pole is impossible, for either singleton target.
+
+Record [`MM-S108`](SALVAGE.md#mm-s108-compiler-pulse-charge-extinction) excludes the entire
+long `R_c` branch on the compiler's body-length congruence class. The bitwise pulse charge
+counts one per bit and subtracts `β+1` at every zero-to-one transition. Both role spellings
+have the same charge modulo `β−1`, with the appropriate incoming bit, whenever
+`(β−1)∣|body|`. A one-pulse shifted head must have length congruent to `β+1`; a unit peeled
+head of length `β+2` is therefore impossible. Lean checks the resulting positive-discrepancy
+shell exclusion, the two-source multi-target pole exclusion above `R_c`, both singleton
+targets on the long three-source branch, and the refined compiler-image classifier. The
+remaining three-block singleton arms are deep-root/two-`c`-intervener and short all-`c` current
+over `R_c`. No arbitrary-depth ancestry theorem or M₅(3) endpoint is claimed.
 
 Record [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) separates the
 ternary and decimal first-multi-transfer fronts. The single theorem
@@ -3153,6 +3164,7 @@ The `M₅(3)` delimiter attack has the following foundational records:
 | [`MM-S101`](SALVAGE.md#mm-s101-long-r_c-peeled-head-support-gate) | full long-head support product, exact `cb` saturation identity, `cc` fringe-residue gate, and arbitrary-divisor transfer into the current lower code |
 | [`MM-S102`](SALVAGE.md#mm-s102-long-double-c-relative-gap-resonance) | exact smaller-gap head identity, `q_β∣Vq_s` support law, common-divisor decimal-period equivalence, and exceptional-prime grammar |
 | [`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) | terminal-head calibrations, exact collapse to the two-block singleton equation, and complete long-`cb` chamber extinction |
+| [`MM-S108`](SALVAGE.md#mm-s108-compiler-pulse-charge-extinction) | source pulse-charge congruence, positive equal-depth raw-peel extinction, two-source multi-target exclusion above `R_c`, and complete long-`R_c` three-source singleton extinction |
 | [`MM-S01`](SALVAGE.md#mm-s01-square-run-projective-normal-form) | invariant square-run plane, invertible `2 × 2` transfer, Möbius normalization, rank-one fracture grammar, and equivalence with pole avoidance |
 | [`MM-S02`](SALVAGE.md#mm-s02-reset-zero-projective-peeling) | scaled transfer identity, exact two-shell classification of all poles, and reset-zero one-transfer avoidance |
 | [`MM-O16`](SALVAGE.md#mm-o16-exact-delimiter-pair-obstruction) | generic ignored-pair immortality is formalized; paired common-kernel and cubic companion specializations are audited |
@@ -3926,6 +3938,8 @@ fixed-rank decision problem.
 | `DecimalSetterInteger.lean` | explicit three-label integer `M₅(3)` family and forward Neary compiler |
 | `DecimalSetterArithmetic.lean` | decimal setter centered carry, reciprocal recurrence, coupled `2`/`5` target shells, and successive-pole valuation balance |
 | `DecimalSetterCarry.lean` | two-reset successive-pole identities, joint depth constraints, exact decimal suffix exhaustion, first-transfer prefix separation, and the ordinary depth-two A/B shell forest |
+| `NearyPulseCharge.lean` | source body-length congruence as a bitwise pulse charge and the shifted one-pulse match obstruction |
+| `DecimalSetterPulseCharge.lean` | compiler-image raw-peel extinction, pole consumers, and the refined three-block singleton classifier |
 | `DecimalSetterChamber.lean` | exact decimal pole chambers, both ordinary A-to-A length-two extinctions, and the emitted-body grammar certificate |
 | `DecimalSetterResonance.lean` | complete ordinary depth-two A-to-B and B-to-A extinction, phase-word exhaustion, and compiler-envelope specialization |
 | `DecimalSetterDepth.lean` | recursive two-unit carrier; length-two and singleton-current extinction; exact all-`D_c` raw-head extinction; sharp `m≥β+3` abstract multi-to-singleton classification; initial raw-head exclusion; compatible last-digit two-cycle obstruction |

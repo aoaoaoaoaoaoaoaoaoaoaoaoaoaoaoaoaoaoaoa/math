@@ -19,8 +19,11 @@ and M₁₂(2) have now joined the library. No new cell fell during reconciliati
    two-block singleton targets are excluded, and three-block singleton-current/intervener
    branches are closed. Stop re-proving those cuts. The target is a global invariant excluding
    the remaining malformed histories on the fixed universal source image, or a counterexample
-   from that image. The long `cb` head is closed; long `cc` and deeper multi/multi ancestry
-   remain. Compare these equations with the swapped setter's primitive successor grammar.
+   from that image. `MM-S108` now uses the compiler's body-length congruence to exclude the
+   positive equal-depth peeled-word language and the long `R_c`-rooted three-block branch,
+   including `cc`. The three-block singleton residue is a deep root with a two-`c` intervener,
+   or a short all-`c` current over `R_c`; arbitrary deeper histories remain. The new route is
+   to connect generalized rational residuals to the source word charge.
 2. **M₄(3): source hardness before further matrix certificates.** The fixed-boundary free-group
    matrix construction exists. Its missing source theorem must retain the injective,
    mutually nonextendable binary morphism conditions. Cyclic or extendable sources do not
@@ -1546,8 +1549,19 @@ boundary.
 [`MM-S103`](SALVAGE.md#mm-s103-long-terminal-head-collapse-extinction) kills that apparently
 saturated `cb` task by retaining the full equation. The terminal head is exactly the calibrated
 `R_c` code, so `9H=G`, `H−10μ=−q`, and `E=9q` collapse the three-block pole to the already-empty
-two-block singleton equation. The long `R_c` head frontier is now only `cc`, under the finite
-relative-gap resonance of `MM-S102`.
+two-block singleton equation. Without the body congruence, the long `R_c` head frontier retains
+`cc`, under the finite relative-gap resonance of `MM-S102`.
+
+[`MM-S108`](SALVAGE.md#mm-s108-compiler-pulse-charge-extinction) now removes that remaining
+long branch on the compiler image. Charge each binary bit by one, except that a zero-to-one
+transition contributes `−β`. Upper and lower role spellings have equal charge modulo `β−1`
+when `(β−1)∣|body|`. An exhausted upper head `1ᵃ0ˢ`, `s>0`, must therefore have length congruent
+to `β+1`; the peeled head has length `β+2`, a contradiction. This excludes every positive raw
+discrepancy of shell `(k−1,k−1)`, the corresponding two-source multi-target poles above `R_c`,
+and the complete long three-source singleton branch. The three-block singleton classifier now
+has only the deep-root/two-`c`-intervener arm and the short all-`c` current over `R_c`.
+Arbitrary-depth rational residuals are not encoded words; transporting this charge to their
+actual ancestry remains the global obligation.
 
 The ternary and decimal branches now separate at their first multi-transfer front.
 [`MM-S37`](SALVAGE.md#mm-s37-decimal-three-shape-frontier-extinction) substitutes each of the
