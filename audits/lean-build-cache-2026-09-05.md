@@ -41,12 +41,17 @@ A disposable `.worktrees/cache-audit` checkout exercised these boundaries:
 | Remove `Classical.choice` from one expected transitive set | Gate rejected the changed snapshot and printed the expected/actual difference |
 | Warm `m92`, `--no-build` | Passed in 1.73 s |
 | Overlapping `proofs m92 publication`, `--no-build` | Passed in 3.15 s after the graph-construction fix below |
+| Cold `m92` in a second worktree, `--no-build` | Passed in 4.11 s; 2,514 jobs reused the pool, including the gate receipt |
+| Direct `lake env lean Verification/M92.lean` after restoration | Passed in 2.48 s |
+| Invalid unrelated Frankl source and changed HTML, `m92 --no-build` | Passed in 1.83 s; neither entered the proof closure |
+| Change `pp.unicode.fun` | No-build check rejected stale compiled modules |
+| Complete snapshot against an incomplete import closure | Rejected the first absent reviewed declaration after the parser fix below |
 
 Times are single wall-clock observations during other bulk work, not benchmark medians.
 The foundational compilation graph shrank from 8,706 jobs to 1,711 after removing blanket
 mathlib imports. The final `m92` verification graph has 2,514 jobs, normally cache hits.
 
-The tests caught three implementation defects before release. Custom Lake actions need an
+The tests caught four implementation defects before release. Custom Lake actions need an
 explicit current-package scope to enter the shared artifact cache; otherwise their receipts
 remain local. Mathlib's hash-command linter also reports prohibited audit commands as info
 when warnings are errors. The audit now uses named non-hash commands, preserves all enabled
@@ -59,6 +64,12 @@ terminated; bounded reruns reproduced the failure. Graph construction now remain
 only execution runs asynchronously. The overlapping build then passed in 28.91 s and its
 no-build replay in 3.15 s, without diagnostics. No compiler binary, dependency, or lint option
 was changed to obtain that result.
+
+The complete-mode negative test exposed an incorrectly inspected parser wrapper: the helper
+treated `complete` as `present`. The full gate's separate byte comparison still rejected a
+shortened report, but the direct audit command did not. Modes now parse as validated identifiers;
+the incomplete-environment probe exits with an error naming the first absent declaration.
+The full snapshot and all published proof closures passed again after this repair.
 
 ## Trust And Limits
 

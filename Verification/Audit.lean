@@ -31,7 +31,11 @@ def snapshotEntries (text : String) : Except String (Array (Name × String)) := 
 
 /-- Check the reviewed reports against the declarations imported by this target. -/
 elab (name := verifyAxiomsCommand)
-    "verify_axioms " path:str mode:("complete" <|> "present") : command => do
+    "verify_axioms " path:str mode:ident : command => do
+  let complete ← match mode.getId with
+    | `complete => pure true
+    | `present => pure false
+    | _ => throwErrorAt mode "expected complete or present"
   let entries ← match snapshotEntries (← IO.FS.readFile path.getString) with
     | .ok entries => pure entries
     | .error message => throwError "{message}"
@@ -51,7 +55,7 @@ elab (name := verifyAxiomsCommand)
         throwError "transitive axioms changed:\nexpected: {expected}\nactual:   {actual}"
       checked := checked + 1
       logInfo message
-    else if mode.raw.getAtomVal == "complete" then
+    else if complete then
       throwError "reviewed declaration absent: {name}"
   if checked == 0 then throwError "target imports no reviewed declarations"
 
