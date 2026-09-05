@@ -1,5 +1,14 @@
 # Formal Verification
 
+## Asymmetric source prefix, 2026-09-05
+
+`Undecidability.NearyCompiler.body_take_three` in `AsymmetricSeparatorSource.lean` proves
+that every universal compiler body begins `bcb`. This supplies the source restriction in
+the [eight-state asymmetric-return audit](audits/m82-asymmetric-return-2026-09-05.md).
+The new chart, its unrestricted scalar converse, and the M₈(2) computability endpoint are
+not yet Lean declarations. Their written and symbolic evidence must not be confused with
+the completed nine-state formal endpoint.
+
 ## Recovered integration, 2026-09-04
 
 `Undecidability/PackingProblems.lean` and `UniversalNeary.lean` now include explicit

@@ -112,6 +112,7 @@ file owns the mathematical stock.
 | [`MM-C07`](#mm-c07-free-monoid-empty-return-compression) | reduction | one cut with rank-one empty return reduces exactly to scalar incidence over nonempty transition words | formalized | graduated |
 | [`MM-C08`](#mm-c08-fixed-body-rank-two-recompilation) | construction | one body admits exact ranks 4/3/2/1 and the full paired zero language; source uniformity remains separate | formalized; computational floors | stock |
 | [`MM-C09`](#mm-c09-periodic-return-compression) | reduction | a nonzero positive-period scalar recurrence reduces the complete return alphabet to its residues | formalized | graduated |
+| [`MM-C10`](#mm-c10-asymmetric-eight-state-return) | compiler | an asymmetric separator and rescaled toggle give an eight-state source-uniform mortality construction | audited and symbolic; compiler prefix formalized | active |
 | [`MM-S107`](#mm-s107-four-mode-return-counterexamples) | construction | four-mode and free-monoid examples break three-mode extrapolations without supplying permanent counter poison | formalized | stock |
 | [`MM-O31`](#mm-o31-integral-pole-poison-incompatibility) | obstruction | an integral finite-pole unit-determinant reader cannot preserve the whole negative-valuation chamber | formalized | active |
 | [`MM-O32`](#mm-o32-mirrored-common-return-incompatibility) | obstruction | mirrored pole readers cannot share one nonzero empty return; zero empty return makes the cut mortal | formalized | active |
@@ -2672,6 +2673,37 @@ normalization.
 **Artifact:**
 [`audits/m92-changed-separator-transfer-2026-08-31.md`](audits/m92-changed-separator-transfer-2026-08-31.md).
 
+
+### MM-C10: Asymmetric eight-state return
+
+**Kind:** compiler.
+
+**Evidence:** independently reconstructed pen-and-paper reduction, uniform rational identities,
+and an exact integer witness; the universal compiler's `bcb` prefix is Lean-checked. The full
+M₈(2) endpoint is not yet formalized.
+
+**Disposition:** active; direct master-closure candidate, ahead of further construction search.
+
+**Scope:** β≥3 and body beginning `bcb`, with the inherited length and divisibility hypotheses
+when connecting to tag halting. These hold on the fixed universal compiler image. For
+`W=Hβ(body)`, set `q=−1−σ(W)/(3^|W|−1)` and `r=(1,16+9q,q,q)`. The row accepts exactly
+the erase-phase word equalities; its wrong phase never vanishes. A leading toggle transports
+every old zero to this phase, so existence is preserved although the pointwise language is not.
+Rescaling the toggle and changing the tail give a `3+3+1+1` rational realization. Singular
+return compression covers every physical binary word, and denominator clearing preserves
+mortality. The audit gives an explicit fixed chart with no rank-testing basis selection.
+
+**Use:** formalize M₈(2) through the existing universal source and return-family endpoint.
+The earlier common-uniform-row and accepting-toggle-pair obstructions remain valid; neither
+applies to an existential phase selector.
+
+**Next promotion:** prove the finite wrong-phase exclusion, the fixed chart's moments and
+regularity, and the primitive-recursive integer endpoint in Lean. Do not mark the cell solved
+in the public graph on the strength of this audit alone.
+
+**Artifacts:** [`AsymmetricSeparatorSource.lean`](MatrixMortality/AsymmetricSeparatorSource.lean),
+[`audit_m82_asymmetric_return.py`](tools/audit_m82_asymmetric_return.py),
+[`audit`](audits/m82-asymmetric-return-2026-09-05.md).
 
 ### MM-C06: Interface compression
 
