@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="author" content="GPT-5.6 Sol; elicited by @eternalism_4eva">
+  <meta property="og:title" content="M₈(2): Two 8 × 8 Integer Matrices">
+  <meta property="og:type" content="article">
+  <title>M₈(2): Two 8 × 8 Integer Matrices | Matrix Mortality</title>
+</head>
+<body>
+  <a class="skip-link" href="#article">Skip to the exposition</a>
+  <header class="masthead"><div class="masthead-inner">
+    <h1>M₈(2): Mortality of Two 8 × 8 Integer Matrices</h1>
+    <p class="byline">GPT-5.6 Sol · elicited by <a href="https://x.com/eternalism_4eva">@eternalism_4eva</a></p>
+  </div></header>
+  <div class="shell">
+    <section class="abstract" aria-label="Abstract">
+      <p><strong>Matrix mortality for two 8 × 8 integer matrices is undecidable.</strong> A primitive-recursive map sends each program to an integer pair with a nonempty zero product exactly when the program halts.</p>
+      <p>The construction replaces the preceding nine-dimensional separator by one that accepts only one of the two paired phases. A leading toggle recovers every discarded witness. This weaker, existential equivalence permits an eight-dimensional return realization. The proof covers unrestricted products, integer effectivity, and padding to every larger dimension. M₇(2) remains unresolved.</p>
+    </section>
+    <nav class="contents" aria-label="Contents"><ol>
+      <li><a href="#known-stuff">Known Stuff</a><ol>
+        <li><a href="#problem">Matrix mortality</a></li>
+        <li><a href="#paired-source">The paired source</a></li>
+        <li><a href="#return-interface">From returns to two matrices</a></li>
+      </ol></li>
+      <li><a href="#new-stuff">New Stuff</a><ol>
+        <li><a href="#result">Result</a></li>
+        <li><a href="#asymmetric-separator">The asymmetric separator</a></li>
+        <li><a href="#periodic-prefix">The wrong-phase exclusion</a></li>
+        <li><a href="#existential-transport">Recovering every witness</a></li>
+        <li><a href="#eight-state-realization">The eight-dimensional realization</a></li>
+        <li><a href="#fixed-factorization">A fixed residual factorization</a></li>
+        <li><a href="#physical-products">Unrestricted physical products</a></li>
+        <li><a href="#integer-reduction">Integer effectivity and padding</a></li>
+      </ol></li>
+      <li><a href="#bookkeeping">Bookkeeping</a><ol>
+        <li><a href="#verification">Verification</a></li>
+        <li><a href="#scope">Scope and provenance</a></li>
+      </ol></li>
+    </ol></nav>
+    <main id="article"><article>
+      <nav class="module-context" aria-label="Module relations">
+        <p><b>Requires</b> the <a href="/math/matrix_mortality/paired_scalar_series/#result">paired scalar source</a>, <a href="/math/matrix_mortality/m9_2/#tilted-code">tilted-code injectivity</a>, and <a href="/math/matrix_mortality/interface_compression/#single-cut">singular-return compression</a>.</p>
+        <p><b>Establishes</b> an existential phase selector, an eight-dimensional return realization, and M₈(2). The <a href="/math/matrix_mortality/m9_2/#result">nine-dimensional theorem</a> remains valid and is now subsumed.</p>
+      </nav>
+      <details class="major-section">
+        <summary><h2 id="known-stuff">Known Stuff<a class="fragment-link" href="#known-stuff" aria-label="Link to this section">#</a></h2></summary>
+        <section class="fragment-section">
+          <h3 id="problem">Matrix mortality<a class="fragment-link" href="#problem" aria-label="Link to this section">#</a></h3>
+          <p>A finite family of integer matrices is <a class="glossary-term" href="/math/matrix_mortality/glossary/#matrix-mortality" title="Some nonempty product of the supplied matrices is the zero matrix.">mortal</a> if some nonempty product is the zero matrix. The problem M<sub><var>d</var></sub>(<var>k</var>) fixes the dimension and permits at most <var>k</var> generators. Our formal encoding supplies exactly two named matrices; smaller nonempty families can repeat a generator.</p>
+          <p>There is no prescribed word grammar. A vanishing scalar coefficient is an intermediate problem, not the mortality conclusion.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="paired-source">The paired source<a class="fragment-link" href="#paired-source" aria-label="Link to this section">#</a></h3>
+          <p>The <a href="/math/matrix_mortality/paired_scalar_series/#result">inherited source theorem</a> represents restricted binary-tag halting by a four-dimensional scalar series. Its body is a word <var>B</var> over b and c, and its fixed deletion width is <var>β</var> &gt; 2. The source satisfies the length and divisibility conditions stated there. Its binary encoding and parameters are</p>
+          <div class="formula plain"><math display="block"><mtable columnalign="left">
+            <mtr><mtd><mi>H</mi><mo>(</mo><mi mathvariant="normal">b</mi><mo>)</mo><mo>=</mo><mn>1</mn><msup><mn>0</mn><mi>β</mi></msup><mn>1</mn><mo>,</mo><mspace width="1em"/><mi>H</mi><mo>(</mo><mi mathvariant="normal">c</mi><mo>)</mo><mo>=</mo><mn>1</mn><mo>,</mo><mspace width="1em"/><mi>W</mi><mo>=</mo><mi>H</mi><mo>(</mo><mi>B</mi><mo>)</mo><mo>,</mo><mspace width="1em"/><mi>L</mi><mo>=</mo><mo>|</mo><mi>W</mi><mo>|</mo><mo>,</mo></mtd></mtr>
+            <mtr><mtd><mi>ρ</mi><mo>=</mo><msup><mn>3</mn><mi>β</mi></msup><mo>,</mo><mspace width="1em"/><mi>K</mi><mo>=</mo><msup><mn>3</mn><mrow><mi>L</mi><mo>+</mo><mn>3</mn></mrow></msup><mo>,</mo><mspace width="1em"/><mi>V</mi><mo>=</mo><mi>σ</mi><mo>(</mo><mn>1</mn><mi>W</mi><mn>10</mn><mo>)</mo><mo>.</mo></mtd></mtr>
+          </mtable></math></div>
+          <p>Juxtaposition inside words means concatenation; a word exponent repeats a symbol or block. The <a class="glossary-term" href="/math/matrix_mortality/glossary/#ternary-value" title="Read binary symbols 0 and 1 as ternary digits 1 and 2, respectively.">ternary value</a> σ uses digits 1 and 2, so finite words have unique codes.</p>
+          <p>Write the three paired controls as <var>T</var>, <var>D</var><sub>b</sub>, <var>D</var><sub>c</sub>. Their <a href="/math/matrix_mortality/m4_4/#explicit-system">coordinate matrices</a> fix the convention used here. The toggle <var>T</var> exchanges coordinates two and four and fixes the other two. Each data control leaves the vector in the erase phase. With one trailing toggle absorbed, the boundary column is</p>
+          <div class="formula plain"><math display="block"><mrow><mi>u</mi><mo>=</mo><msup><mrow><mo>(</mo><mfrac><mrow><mn>5</mn><mi>ρ</mi><mo>−</mo><mn>1</mn></mrow><mn>2</mn></mfrac><mo>,</mo><mn>0</mn><mo>,</mo><mn>3</mn><mi>ρ</mi><mo>,</mo><mo>−</mo><mn>1</mn><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup><mo>.</mo></mrow></math></div>
+          <p>For a raw control word <var>w</var>, let <var>P</var><sub><var>w</var></sub> denote its matrix product. The <a href="/math/matrix_mortality/paired_scalar_series/#decoder">paired decoder</a> supplies words <var>X</var>, <var>Y</var> and one of the following forms for <var>P</var> = <var>P</var><sub><var>w</var></sub>. No computational legality is assumed.</p>
+          <div class="formula plain"><math display="block"><mrow><mi>P</mi><mi>u</mi><mo>=</mo><mo>{</mo><mtable columnalign="left left">
+            <mtr><mtd><msup><mrow><mo>(</mo><mi>σ</mi><mo>(</mo><mi>X</mi><mo>)</mo><mo>−</mo><mi>σ</mi><mo>(</mo><mi>Y</mi><mo>)</mo><mo>,</mo><mn>0</mn><mo>,</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>X</mi><mo>|</mo></mrow></msup><mo>,</mo><mo>−</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>Y</mi><mo>|</mo></mrow></msup><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup></mtd><mtd><mtext>erase phase,</mtext></mtd></mtr>
+            <mtr><mtd><msup><mrow><mo>(</mo><mi>σ</mi><mo>(</mo><mi>X</mi><mo>)</mo><mo>−</mo><mi>σ</mi><mo>(</mo><mi>Y</mi><mo>)</mo><mo>,</mo><mo>−</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>Y</mi><mo>|</mo></mrow></msup><mo>,</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>X</mi><mo>|</mo></mrow></msup><mo>,</mo><mn>0</mn><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup></mtd><mtd><mtext>rule phase.</mtext></mtd></mtr>
+          </mtable></mrow></math></div>
+          <p>The upper word includes the nonempty terminal marker. The lower word is a concatenation of the tiles 0, 110, and 1W10. The original row reads the first coordinate, which vanishes exactly when <var>X</var> = <var>Y</var>. Existence of such a nonempty control word is equivalent to source halting.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="return-interface">From returns to two matrices<a class="fragment-link" href="#return-interface" aria-label="Link to this section">#</a></h3>
+          <p>We seek a transition <var>A</var> on a smaller physical space and maps <var>U</var> into it and <var>O</var> back to the four-dimensional interface. The second supplied matrix is the <a class="glossary-term" href="/math/matrix_mortality/glossary/#cut-matrix" title="An actual generator designated as a boundary between transition runs.">cut</a> <var>C</var> = <var>UO</var>. Its occurrences expose the return matrices <math><mrow><msub><mi>M</mi><mi>n</mi></msub><mo>=</mo><mi>O</mi><msup><mi>A</mi><mi>n</mi></msup><mi>U</mi></mrow></math>.</p>
+          <p><a href="/math/matrix_mortality/interface_compression/#single-cut">Singular-return compression</a> says that the physical pair is mortal exactly when the return family is mortal, provided no pure power of <var>A</var> vanishes. This reduces the construction to realizing a suitable interface sequence in eight dimensions.</p>
+        </section>
+      </details>
+      <details class="major-section">
+        <summary><h2 id="new-stuff">New Stuff<a class="fragment-link" href="#new-stuff" aria-label="Link to this section">#</a></h2></summary>
+        <section class="fragment-section">
+          <h3 id="result">Result<a class="fragment-link" href="#result" aria-label="Link to this section">#</a></h3>
+          <div class="theorem"><p><strong>Eight-dimensional mortality theorem.</strong> There is a primitive-recursive map from program codes to pairs of 8 × 8 integer matrices whose mortality is equivalent to halting. Consequently M₈(2) is undecidable.</p></div>
+          <p>The preceding nine-dimensional construction preserved the zero coefficient of every word. That is more than a decision reduction needs. Here some witnesses disappear, but a computable word transformation replaces each of them. This distinction permits one fewer dimension without contradicting the <a href="/math/matrix_mortality/m9_2/#consequences">nine-state lower bound for the previous return family</a>.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="asymmetric-separator">The asymmetric separator<a class="fragment-link" href="#asymmetric-separator" aria-label="Link to this section">#</a></h3>
+          <p>The universal compiler gives more than a leading b: every emitted body begins bcb. The first three compiler tracks are constant b, c, b, and the final-letter deletion removes none of them. This is proved uniformly in <code>source_body_take_three</code>.</p>
+          <p>The changed row must fit the residual factorization below. Write it as <math><mrow><mi>r</mi><mo>=</mo><mo>(</mo><mn>1</mn><mo>,</mo><mi>a</mi><mo>,</mo><mi>q</mi><mo>,</mo><mi>q</mi><mo>)</mo></mrow></math>. We impose that it annihilate the two columns</p>
+          <div class="formula plain"><math display="block"><mrow>
+            <mi>κ</mi><mo>=</mo><msup><mrow><mo>(</mo><mi>K</mi><mo>−</mo><mn>3</mn><mi>V</mi><mo>,</mo><mn>3</mn><mo>,</mo><mn>0</mn><mo>,</mo><mo>−</mo><mi>K</mi><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup><mo>,</mo><mspace width="1em"/>
+            <mi>η</mi><mo>=</mo><msup><mrow><mo>(</mo><mi>K</mi><mo>−</mo><mn>3</mn><mi>V</mi><mo>+</mo><mn>48</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>27</mn><mo>−</mo><mi>K</mi><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup><mo>.</mo>
+          </mrow></math></div>
+          <p>Solving these two linear equations fixes both slopes:</p>
+          <div class="formula plain"><math display="block"><mrow>
+            <mi>θ</mi><mo>=</mo><mfrac><mrow><mi>σ</mi><mo>(</mo><mi>W</mi><mo>)</mo></mrow><mrow><msup><mn>3</mn><mi>L</mi></msup><mo>−</mo><mn>1</mn></mrow></mfrac><mo>,</mo><mspace width="0.8em"/>
+            <mi>q</mi><mo>=</mo><mfrac><mrow><mi>K</mi><mo>−</mo><mn>3</mn><mi>V</mi><mo>+</mo><mn>48</mn></mrow><mrow><mi>K</mi><mo>−</mo><mn>27</mn></mrow></mfrac><mo>=</mo><mo>−</mo><mn>1</mn><mo>−</mo><mi>θ</mi><mo>,</mo><mspace width="0.8em"/>
+            <mi>a</mi><mo>=</mo><mn>16</mn><mo>+</mo><mn>9</mn><mi>q</mi><mo>=</mo><mn>7</mn><mo>−</mo><mn>9</mn><mi>θ</mi><mo>.</mo>
+          </mrow></math></div>
+          <p>Because <var>W</var> begins with 1 and contains 0, its <a class="glossary-term" href="/math/matrix_mortality/glossary/#periodic-ternary-value" title="The code of a nonempty block divided by three to its length minus one.">periodic ternary value</a> satisfies <math><mrow><mfrac><mn>1</mn><mn>2</mn></mfrac><mo>&lt;</mo><mi>θ</mi><mo>&lt;</mo><mn>1</mn></mrow></math>. Hence <math><mrow><mo>−</mo><mn>2</mn><mo>&lt;</mo><mi>q</mi><mo>&lt;</mo><mo>−</mo><mfrac><mn>3</mn><mn>2</mn></mfrac></mrow></math>. For the <a href="/math/matrix_mortality/m9_2/#tilted-code">tilted code</a></p>
+          <div class="formula plain"><math display="block"><mrow><msub><mi>F</mi><mi>s</mi></msub><mo>(</mo><mi>X</mi><mo>)</mo><mo>=</mo><mi>σ</mi><mo>(</mo><mi>X</mi><mo>)</mo><mo>+</mo><mi>s</mi><msup><mn>3</mn><mrow><mo>|</mo><mi>X</mi><mo>|</mo></mrow></msup><mo>,</mo></mrow></math></div>
+          <p>the erase-phase coefficient is <math><mrow><msub><mi>F</mi><mi>q</mi></msub><mo>(</mo><mi>X</mi><mo>)</mo><mo>−</mo><msub><mi>F</mi><mi>q</mi></msub><mo>(</mo><mi>Y</mi><mo>)</mo></mrow></math>. Injectivity makes its zeros exactly the word equalities. The rule-phase coefficient instead compares slopes <var>q</var> and <var>a</var>. Its possible new zeros are the main soundness obligation.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="periodic-prefix">The wrong-phase exclusion<a class="fragment-link" href="#periodic-prefix" aria-label="Link to this section">#</a></h3>
+          <p>Suppose <math><mrow><msub><mi>F</mi><mi>q</mi></msub><mo>(</mo><mi>X</mi><mo>)</mo><mo>=</mo><msub><mi>F</mi><mi>a</mi></msub><mo>(</mo><mi>Y</mi><mo>)</mo></mrow></math>. The common denominator <math><mrow><msup><mn>3</mn><mi>L</mi></msup><mo>−</mo><mn>1</mn></mrow></math> is coprime to three. Clear it and reduce modulo the power of three determined by the shorter word. The length-scale terms disappear; cancellation of the denominator leaves equal terminal code digits. Thus the shorter word is a suffix of the longer.</p>
+          <p>Equal lengths give <var>X</var> = <var>Y</var> and <var>q</var> = <var>a</var>, which would force <var>q</var> = −2. If <var>X</var> = <var>pY</var> with nonempty <var>p</var>, suffix cancellation gives <math><mrow><msub><mi>F</mi><mi>q</mi></msub><mo>(</mo><mi>p</mi><mo>)</mo><mo>=</mo><mi>a</mi></mrow></math>. But the left side is below −2, while <var>a</var> &gt; −2. Therefore only <var>Y</var> = <var>pX</var>, with nonempty <var>p</var>, remains. Writing <var>k</var> = |<var>p</var>|, cancellation gives</p>
+          <div class="formula plain"><math display="block"><mrow><mi>q</mi><mo>=</mo><mi>σ</mi><mo>(</mo><mi>p</mi><mo>)</mo><mo>+</mo><mi>a</mi><msup><mn>3</mn><mi>k</mi></msup><mo>,</mo><mspace width="1em"/><mi>θ</mi><mo>=</mo><mfrac><mrow><mi>σ</mi><mo>(</mo><mn>10</mn><mi>p</mi><mo>)</mo><mo>+</mo><mn>1</mn></mrow><mrow><msup><mn>3</mn><mrow><mi>k</mi><mo>+</mo><mn>2</mn></mrow></msup><mo>−</mo><mn>1</mn></mrow></mfrac><mo>.</mo></mrow></math></div>
+          <p>The body encoding ends in 1. Reducing the last equation modulo three after clearing denominators forces <var>p</var> to end in 0. Replace that last symbol by 1, obtaining <var>p</var><sup>+</sup>, and set <var>Z</var> = 10<var>p</var><sup>+</sup>. Its code is the numerator above. Equality of the two periodic fractions is exactly the finite <a class="glossary-term" href="/math/matrix_mortality/glossary/#word-commutation" title="Concatenating two words gives the same result in either order.">commutation</a> identity</p>
+          <div class="formula plain"><math display="block"><mrow><mi>W</mi><mi>Z</mi><mo>=</mo><mi>Z</mi><mi>W</mi><mo>.</mo></mrow></math></div>
+          <p>Indeed, cross multiplication is equality of the codes of these two concatenations. Finite-word injectivity proves the identity without an appeal to infinite radix expansions.</p>
+          <p>The prefix bcb now excludes every possible length of <var>p</var>. Every nonzero lower tile begins 110, so the first 1 in a lower word must be followed by 10.</p>
+          <ol>
+            <li>If <var>k</var> ≤ <var>β</var> − 1, commutation puts the final symbol of <var>p</var><sup>+</sup> inside the initial zero run of <var>W</var>, contradicting that it is 1.</li>
+            <li>If <var>k</var> = <var>β</var>, the proposed period is H(b). The source continues 11 after this block, whereas the period restarts with 10.</li>
+            <li>If <var>k</var> = <var>β</var> + 1, the lower word begins <math><mrow><msup><mn>0</mn><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></msup><mn>10</mn></mrow></math>, contradicting its first nonzero tile.</li>
+            <li>If <var>k</var> = <var>β</var> + 2, the proposed period is H(bcc). Its next repetition starts with 1, but the source's next symbol is the first zero in its third letter b.</li>
+            <li>If <var>k</var> ≥ <var>β</var> + 3, the lower word begins <math><mrow><msup><mn>0</mn><mrow><mi>β</mi><mo>−</mo><mn>1</mn></mrow></msup><mn>111</mn></mrow></math>, again contradicting its first nonzero tile.</li>
+          </ol>
+          <p>Thus the rule-phase coefficient never vanishes. The argument covers all lower-tile words and all upper words, a stronger statement than is required on decoded computations.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="existential-transport">Recovering every witness<a class="fragment-link" href="#existential-transport" aria-label="Link to this section">#</a></h3>
+          <p>The changed row accepts precisely the erase-phase word equalities. An original rule-phase witness becomes an erase-phase witness after prepending <var>T</var>: this swaps phase without changing the first coordinate or the decoded words. Conversely, every changed-row zero is already an original zero.</p>
+          <p>Absorbing a trailing toggle also preserves existence: append one toggle to move between the two boundary conventions, and use <math><mrow><msup><mi>T</mi><mn>2</mn></msup><mo>=</mo><mi>I</mi></mrow></math> for the reverse direction. The empty coefficient is nonzero because its upper word is the marker and its lower word is empty. Consequently</p>
+          <div class="formula plain"><math display="block"><mrow><mo>∃</mo><mi>w</mi><mo>≠</mo><mi>ε</mi><mo>:</mo><mi>r</mi><msub><mi>P</mi><mi>w</mi></msub><mi>u</mi><mo>=</mo><mn>0</mn><mo>⇔</mo><mtext>the restricted-tag source halts.</mtext></mrow></math></div>
+          <p>This is <a class="glossary-term" href="/math/matrix_mortality/glossary/#existential-zero-transport" title="Preserve whether any nonempty zero word exists, allowing a witness to be replaced by a different word.">existential zero transport</a>, not pointwise zero-language equivalence.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="eight-state-realization">The eight-dimensional realization<a class="fragment-link" href="#eight-state-realization" aria-label="Link to this section">#</a></h3>
+          <p>Keep the two data roles, rescale the toggle, and use the asymmetric rank-one separator. Define</p>
+          <div class="formula plain"><math display="block"><mtable columnalign="left">
+            <mtr><mtd><mi>t</mi><mo>=</mo><mn>2</mn><mi>q</mi><mo>+</mo><mn>1</mn><mo>,</mo><mspace width="1em"/><mi>h</mi><mo>=</mo><mfrac><mn>6</mn><mrow><mi>t</mi><mo>(</mo><mn>3</mn><mi>ρ</mi><mo>−</mo><mn>1</mn><mo>)</mo></mrow></mfrac><mo>,</mo><mspace width="1em"/><mi>ξ</mi><mo>=</mo><mn>3</mn><mi>ρ</mi><mo>+</mo><mn>1</mn><mo>+</mo><mi>ρ</mi><mi>h</mi><mo>,</mo><mspace width="1em"/><mi>R</mi><mo>=</mo><mi>h</mi><mi>u</mi><mi>r</mi><mo>,</mo></mtd></mtr>
+            <mtr><mtd><mi>Δ</mi><mo>=</mo><mi>K</mi><mo>(</mo><mo>(</mo><mi>t</mi><mo>−</mo><mn>2</mn><mo>)</mo><mi>ρ</mi><mo>−</mo><mi>t</mi><mo>)</mo><mo>+</mo><mn>26</mn><mi>t</mi><mo>+</mo><mn>72</mn><mo>,</mo></mtd></mtr>
+            <mtr><mtd><mi>γ</mi><mo>=</mo><mfrac><mrow><mi>K</mi><mo>(</mo><mi>t</mi><mo>(</mo><mn>27</mn><msup><mi>ρ</mi><mn>3</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mn>18</mn><msup><mi>ρ</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>ρ</mi><mo>)</mo></mrow><mi>Δ</mi></mfrac><mo>.</mo></mtd></mtr>
+          </mtable></math></div>
+          <p>Here <var>t</var> &lt; −2, <var>ρ</var> ≥ 27, and <var>K</var> &gt; 27. Consequently <var>ρh</var> &gt; −2 and <var>ξ</var> &gt; 0. The denominator and the bracket in the numerator of <var>γ</var> satisfy</p>
+          <div class="formula plain"><math display="block"><mtable columnalign="left">
+            <mtr><mtd><mi>Δ</mi><mo>&lt;</mo><mi>K</mi><mo>(</mo><mn>2</mn><mo>−</mo><mn>4</mn><mi>ρ</mi><mo>)</mo><mo>+</mo><mn>20</mn><mo>&lt;</mo><mn>0</mn><mo>,</mo></mtd></mtr>
+            <mtr><mtd><mi>t</mi><mo>(</mo><mn>27</mn><msup><mi>ρ</mi><mn>3</mn></msup><mo>−</mo><mn>1</mn><mo>)</mo><mo>+</mo><mn>18</mn><msup><mi>ρ</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>ρ</mi><mo>&lt;</mo><mo>−</mo><mn>54</mn><msup><mi>ρ</mi><mn>3</mn></msup><mo>+</mo><mn>18</mn><msup><mi>ρ</mi><mn>2</mn></msup><mo>+</mo><mn>6</mn><mi>ρ</mi><mo>+</mo><mn>2</mn><mo>&lt;</mo><mn>0</mn><mo>.</mo></mtd></mtr>
+          </mtable></math></div>
+          <p>Thus <var>γ</var> &gt; 0; also <var>h</var> ≠ 0. No role scaling or denominator vanishes. The desired returns are</p>
+          <div class="formula plain"><math display="block"><mrow><mi>O</mi><msup><mi>A</mi><mi>n</mi></msup><mi>U</mi><mo>=</mo><mo>{</mo><mtable columnalign="left left">
+            <mtr><mtd><mi>γ</mi><mi>T</mi></mtd><mtd><mi>n</mi><mo>=</mo><mn>0</mn><mo>,</mo></mtd></mtr>
+            <mtr><mtd><msub><mi>D</mi><mi mathvariant="normal">b</mi></msub></mtd><mtd><mi>n</mi><mo>=</mo><mn>1</mn><mo>,</mo></mtd></mtr>
+            <mtr><mtd><msub><mi>D</mi><mi mathvariant="normal">c</mi></msub></mtd><mtd><mi>n</mi><mo>=</mo><mn>2</mn><mo>,</mo></mtd></mtr>
+            <mtr><mtd><msup><mi>ξ</mi><mrow><mn>2</mn><mo>−</mo><mi>n</mi></mrow></msup><mi>R</mi></mtd><mtd><mi>n</mi><mo>≥</mo><mn>3</mn><mo>.</mo></mtd></mtr>
+          </mtable></mrow></math></div>
+          <p>Subtract the geometric tail extrapolated to times zero, one, and two:</p>
+          <div class="formula plain"><math display="block"><mrow><msub><mi>F</mi><mn>0</mn></msub><mo>=</mo><mi>γ</mi><mi>T</mi><mo>−</mo><msup><mi>ξ</mi><mn>2</mn></msup><mi>R</mi><mo>,</mo><mspace width="1em"/><msub><mi>F</mi><mn>1</mn></msub><mo>=</mo><msub><mi>D</mi><mi mathvariant="normal">b</mi></msub><mo>−</mo><mi>ξ</mi><mi>R</mi><mo>,</mo><mspace width="1em"/><msub><mi>F</mi><mn>2</mn></msub><mo>=</mo><msub><mi>D</mi><mi mathvariant="normal">c</mi></msub><mo>−</mo><mi>R</mi><mo>.</mo></mrow></math></div>
+          <p>These residuals fit two length-three nilpotent chains and one static coordinate. One further coordinate carries the geometric tail. The dimension count is therefore 3 + 3 + 1 + 1 = 8. The next section supplies the factors rather than selecting a basis by a rank test.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="fixed-factorization">A fixed residual factorization<a class="fragment-link" href="#fixed-factorization" aria-label="Link to this section">#</a></h3>
+          <p>Index the four interface coordinates from zero. Let <var>E</var> have columns <var>e</var><sub>0</sub> and <var>e</var><sub>2</sub>, and put <math><mrow><msub><mi>L</mi><mi>i</mi></msub><mo>=</mo><msub><mi>F</mi><mi>i</mi></msub><mi>E</mi></mrow></math>. Define</p>
+          <div class="formula plain"><math display="block"><mrow><mi>G</mi><mo>=</mo><mo>[</mo><mtable>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mo>−</mo><mi>q</mi><mo>/</mo><mn>3</mn></mtd><mtd><mo>(</mo><mn>3</mn><mi>ρ</mi><mo>−</mo><mi>t</mi><mo>)</mo><mo>/</mo><mn>6</mn></mtd></mtr>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mn>0</mn></mtd><mtd><mn>1</mn><mo>/</mo><mn>3</mn></mtd><mtd><mi>ρ</mi></mtd></mtr>
+          </mtable><mo>]</mo><mo>,</mo><mspace width="1em"/><msub><mi>Q</mi><mn>2</mn></msub><mo>=</mo><mo>[</mo><mtable>
+            <mtr><mtd><mn>1</mn></mtd><mtd><mi>a</mi><mo>+</mo><mi>K</mi><mo>(</mo><mn>3</mn><mi>ρ</mi><mo>−</mo><mi>t</mi><mo>)</mo><mo>/</mo><mn>6</mn></mtd><mtd><mn>0</mn></mtd><mtd><mo>(</mo><mn>3</mn><mi>ρ</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>/</mo><mn>2</mn></mtd></mtr>
+            <mtr><mtd><mn>0</mn></mtd><mtd><mi>ρ</mi><mi>K</mi></mtd><mtd><mn>1</mn></mtd><mtd><mn>3</mn><mi>ρ</mi></mtd></mtr>
+          </mtable><mo>]</mo><mo>.</mo></mrow></math></div>
+          <p>The remaining factors are successive residual corrections:</p>
+          <div class="formula plain"><math display="block"><mtable columnalign="left">
+            <mtr><mtd><msub><mi>Q</mi><mn>1</mn></msub><mo>=</mo><mi>G</mi><mo>(</mo><msub><mi>F</mi><mn>1</mn></msub><mo>−</mo><msub><mi>L</mi><mn>1</mn></msub><msub><mi>Q</mi><mn>2</mn></msub><mo>)</mo><mo>,</mo></mtd></mtr>
+            <mtr><mtd><msub><mi>Z</mi><mn>0</mn></msub><mo>=</mo><msub><mi>F</mi><mn>0</mn></msub><mo>−</mo><msub><mi>L</mi><mn>0</mn></msub><msub><mi>Q</mi><mn>2</mn></msub><mo>−</mo><msub><mi>L</mi><mn>1</mn></msub><msub><mi>Q</mi><mn>1</mn></msub><mo>,</mo></mtd></mtr>
+            <mtr><mtd><mi>z</mi><mo>=</mo><msup><mrow><mo>(</mo><mo>(</mo><mn>3</mn><mi>ρ</mi><mo>−</mo><mn>1</mn><mo>)</mo><mo>/</mo><mn>6</mn><mo>,</mo><mn>0</mn><mo>,</mo><mi>ρ</mi><mo>,</mo><mo>−</mo><mn>1</mn><mo>/</mo><mn>3</mn><mo>)</mo></mrow><mi mathvariant="normal">T</mi></msup><mo>,</mo><mspace width="1em"/><mi>f</mi><mo>=</mo><mo>(</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mn>0</mn><mo>,</mo><mi>γ</mi><mo>)</mo><mo>,</mo></mtd></mtr>
+            <mtr><mtd><mi>j</mi><mo>=</mo><mo>−</mo><mn>3</mn><msub><mi>Z</mi><mn>0</mn></msub><mi>z</mi><mo>/</mo><mi>γ</mi><mo>,</mo><mspace width="1em"/><msub><mi>Q</mi><mn>0</mn></msub><mo>=</mo><mi>G</mi><mo>(</mo><msub><mi>Z</mi><mn>0</mn></msub><mo>−</mo><mi>j</mi><mi>f</mi><mo>)</mo><mo>.</mo></mtd></mtr>
+          </mtable></math></div>
+          <p>Substitution gives the three identities checked uniformly by <code>factor_two</code>, <code>factor_one</code>, and <code>factor_zero</code>:</p>
+          <div class="formula plain"><math display="block"><mtable columnalign="left">
+            <mtr><mtd><msub><mi>F</mi><mn>2</mn></msub><mo>=</mo><msub><mi>L</mi><mn>2</mn></msub><msub><mi>Q</mi><mn>2</mn></msub><mo>,</mo></mtd></mtr>
+            <mtr><mtd><msub><mi>F</mi><mn>1</mn></msub><mo>=</mo><msub><mi>L</mi><mn>1</mn></msub><msub><mi>Q</mi><mn>2</mn></msub><mo>+</mo><msub><mi>L</mi><mn>2</mn></msub><msub><mi>Q</mi><mn>1</mn></msub><mo>,</mo></mtd></mtr>
+            <mtr><mtd><msub><mi>F</mi><mn>0</mn></msub><mo>=</mo><msub><mi>L</mi><mn>0</mn></msub><msub><mi>Q</mi><mn>2</mn></msub><mo>+</mo><msub><mi>L</mi><mn>1</mn></msub><msub><mi>Q</mi><mn>1</mn></msub><mo>+</mo><msub><mi>L</mi><mn>2</mn></msub><msub><mi>Q</mi><mn>0</mn></msub><mo>+</mo><mi>j</mi><mi>f</mi><mo>.</mo></mtd></mtr>
+          </mtable></math></div>
+          <p>Use physical coordinates of sizes 2, 2, 2, 1, 1. On a vector with those five components, set</p>
+          <div class="formula plain"><math display="block"><mtable columnalign="left">
+            <mtr><mtd><mi>A</mi><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi>s</mi><mo>,</mo><mi>g</mi><mo>)</mo><mo>=</mo><mo>(</mo><mn>0</mn><mo>,</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><mn>0</mn><mo>,</mo><msup><mi>ξ</mi><mrow><mo>−</mo><mn>1</mn></mrow></msup><mi>g</mi><mo>)</mo><mo>,</mo></mtd></mtr>
+            <mtr><mtd><mi>U</mi><mi>v</mi><mo>=</mo><mo>(</mo><msub><mi>Q</mi><mn>2</mn></msub><mi>v</mi><mo>,</mo><msub><mi>Q</mi><mn>1</mn></msub><mi>v</mi><mo>,</mo><msub><mi>Q</mi><mn>0</mn></msub><mi>v</mi><mo>,</mo><mi>f</mi><mi>v</mi><mo>,</mo><msup><mi>ξ</mi><mn>2</mn></msup><mi>h</mi><mi>r</mi><mi>v</mi><mo>)</mo><mo>,</mo></mtd></mtr>
+            <mtr><mtd><mi>O</mi><mo>(</mo><msub><mi>x</mi><mn>0</mn></msub><mo>,</mo><msub><mi>x</mi><mn>1</mn></msub><mo>,</mo><msub><mi>x</mi><mn>2</mn></msub><mo>,</mo><mi>s</mi><mo>,</mo><mi>g</mi><mo>)</mo><mo>=</mo><msub><mi>L</mi><mn>0</mn></msub><msub><mi>x</mi><mn>0</mn></msub><mo>+</mo><msub><mi>L</mi><mn>1</mn></msub><msub><mi>x</mi><mn>1</mn></msub><mo>+</mo><msub><mi>L</mi><mn>2</mn></msub><msub><mi>x</mi><mn>2</mn></msub><mo>+</mo><mi>j</mi><mi>s</mi><mo>+</mo><mi>u</mi><mi>g</mi><mo>.</mo></mtd></mtr>
+          </mtable></math></div>
+          <p>The factor identities give the first three returns. After three steps, both nilpotent chains and the static coordinate vanish, leaving exactly the required geometric tail. Its nonzero eigenvalue also proves that no power of <var>A</var> is zero.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="physical-products">Unrestricted physical products<a class="fragment-link" href="#physical-products" aria-label="Link to this section">#</a></h3>
+          <p>Take the two physical matrices <var>A</var> and <var>C</var> = <var>UO</var>. A zero word containing a cut may have arbitrary initial and final transition runs. Multiplication by <var>O</var> on the left and <var>U</var> on the right retains those runs as returns:</p>
+          <div class="formula plain"><math display="block"><mrow><msup><mi>A</mi><msub><mi>p</mi><mn>0</mn></msub></msup><mi>C</mi><mo>⋯</mo><mi>C</mi><msup><mi>A</mi><msub><mi>p</mi><mi>r</mi></msub></msup><mo>=</mo><mn>0</mn><mo>⇒</mo><msub><mi>M</mi><msub><mi>p</mi><mn>0</mn></msub></msub><mo>⋯</mo><msub><mi>M</mi><msub><mi>p</mi><mi>r</mi></msub></msub><mo>=</mo><mn>0</mn><mo>.</mo></mrow></math></div>
+          <p>Conversely, a zero return product gives an actual physical word by adding exterior cuts:</p>
+          <div class="formula plain"><math display="block"><mrow><mi>C</mi><msup><mi>A</mi><msub><mi>p</mi><mn>0</mn></msub></msup><mi>C</mi><mo>⋯</mo><msup><mi>A</mi><msub><mi>p</mi><mi>r</mi></msub></msup><mi>C</mi><mo>=</mo><mi>U</mi><mo>(</mo><msub><mi>M</mi><msub><mi>p</mi><mn>0</mn></msub></msub><mo>⋯</mo><msub><mi>M</mi><msub><mi>p</mi><mi>r</mi></msub></msub><mo>)</mo><mi>O</mi><mo>=</mo><mn>0</mn><mo>.</mo></mrow></math></div>
+          <p>Cut-free words are nonzero by the eigenline. Every return is a nonzero multiple of one of <var>T</var>, <var>D</var><sub>b</sub>, <var>D</var><sub>c</sub>, <var>ur</var>, and times 0, 1, 2, 3 supply all four roles. Relabelling and discarding these nonzero scalars preserve mortality in both directions.</p>
+          <p>The <a href="/math/matrix_mortality/m3_5/#separator-construction">rank-one separator theorem</a> makes mortality of this four-role family equivalent to existence of an interior coefficient <var>rPu</var> = 0. The empty coefficient cannot vanish. The preceding existential transport then identifies mortality of the physical pair with source halting.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="integer-reduction">Integer effectivity and padding<a class="fragment-link" href="#integer-reduction" aria-label="Link to this section">#</a></h3>
+          <p>The chart uses only fixed-size arrays, word codes, length powers, and rational arithmetic. Its formulas are evaluated in certified unreduced fractions whose numerators and denominators are primitive recursive. Each physical generator is multiplied by one nonzero common denominator. Every product is therefore multiplied by a nonzero scalar, preserving and reflecting zero.</p>
+          <p>The same operation-only definitions supply the rational chart and its effective interpreter. No numerical rank test, chosen pivot, or search for a basis is hidden in the reduction. Composing the primitive-recursive integer family with the universal source gives <code>mortality82Reduction</code>.</p>
+          <p>Adjoining a zero block is itself primitive recursive and preserves nonempty mortality. The composed theorem <code>mortality8Plus_not_computable</code> proves M<sub>8+<var>n</var></sub>(2) undecidable for every <var>n</var> ≥ 0.</p>
+        </section>
+      </details>
+      <details class="major-section">
+        <summary><h2 id="bookkeeping">Bookkeeping<a class="fragment-link" href="#bookkeeping" aria-label="Link to this section">#</a></h2></summary>
+        <section class="fragment-section">
+          <h3 id="verification">Verification<a class="fragment-link" href="#verification" aria-label="Link to this section">#</a></h3>
+          <p>The reviewed artifact is commit <code>6f8ae3a858daf28401732cecd043ed209ec4c17c</code>. The complete endpoint and padding corollaries compile with Lean and mathlib v4.33.1. The named target runs source-policy scans, every default environment linter in its proof closure, exact transitive-axiom comparisons, and probes pinning the final theorem types:</p>
+          <pre><code>scripts/check.sh m82</code></pre>
+          <ul class="artifact-list">
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/MatrixMortality/Undecidability/UniversalMortality82.lean">Universal endpoint</a>: the primitive-recursive reduction, many-one theorem, noncomputability, and padding.</li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/MatrixMortality/AsymmetricSeparatorWrongPhase.lean">Wrong-phase exclusion</a> and <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/MatrixMortality/AsymmetricSeparatorCoefficients.lean">existential zero transport</a>.</li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/MatrixMortality/AsymmetricSeparatorRealization.lean">Fixed chart and uniform factorizations</a>, <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/MatrixMortality/AsymmetricSeparatorMoments.lean">all return moments</a>, and <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/MatrixMortality/AsymmetricSeparatorMortality.lean">unrestricted mortality assembly</a>.</li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/MatrixMortality/AsymmetricSeparatorEffectivity.lean">Primitive-recursive integer construction</a> and <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/verification/axioms.txt">reviewed axiom manifest</a>.</li>
+            <li><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/audits/m82-asymmetric-return-2026-09-05.md">Mathematical audit</a> and <a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math/blob/6f8ae3a858daf28401732cecd043ed209ec4c17c/tools/audit_m82_asymmetric_return.py">separate exact symbolic cross-check</a>.</li>
+          </ul>
+          <p>The final declarations depend only on <code>propext</code>, <code>Classical.choice</code>, and <code>Quot.sound</code>. The symbolic program checks the uniform chart independently of Lean's expression evaluation; its bounded word enumeration is auxiliary and is not a premise of the universal proof.</p>
+        </section>
+        <section class="fragment-section">
+          <h3 id="scope">Scope and provenance<a class="fragment-link" href="#scope" aria-label="Link to this section">#</a></h3>
+          <p>This is the standard nonempty-product problem for two integer matrices. The source compiler, wrong-phase converse, all return times, arbitrary exterior transition runs, effectivity, and dimension padding are formalized. The pointwise zero languages are deliberately different.</p>
+          <p>The construction improves this series' preceding bound from nine dimensions to eight. Its source theorem and historical literature are documented in the <a href="/math/matrix_mortality/m3_5/#sources">five-matrix source article</a>; the intervening pointwise-preserving construction is documented in the <a href="/math/matrix_mortality/m9_2/#sources">nine-dimensional article</a>. The present result is dated 5 September 2026. Machine checking is not external peer review, and no priority conclusion follows from the Lean theorem alone.</p>
+          <p>M₇(2) remains unresolved. The earlier exact-realization obstructions retain their stated scope; this construction escapes them by changing both the return sequence and which individual words witness a zero.</p>
+        </section>
+      </details>
+    </article></main>
+  </div>
+  <footer><div>
+    <p>GPT-5.6 Sol · elicited by @eternalism_4eva · 5 September 2026</p>
+    <p><a href="https://github.com/aoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoaoa/math">Source repository</a></p>
+  </div></footer>
+</body>
+</html>

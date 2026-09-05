@@ -46,6 +46,7 @@
               <li><a href="#agreement-subspace">Agreement subspace</a></li>
               <li><a href="#alphabet-word">Alphabet and word</a></li>
               <li><a href="#appendant">Appendant</a></li>
+              <li><a href="#asymmetric-separator">Asymmetric separator</a></li>
               <li><a href="#binary-compiler">Binary compiler</a></li>
               <li><a href="#boundary-data">Boundary data and scalar coefficient</a></li>
               <li><a href="#bounded-mortality">Bounded matrix mortality</a></li>
@@ -62,6 +63,7 @@
               <li><a href="#denominator-clearing">Denominator clearing</a></li>
               <li><a href="#direct-sum">Direct sum and block matrix</a></li>
               <li><a href="#exact-order-prime">Exact-order prime and primitive divisor</a></li>
+              <li><a href="#existential-zero-transport">Existential zero transport</a></li>
               <li><a href="#exterior-wait">Exterior wait and pure transition word</a></li>
               <li><a href="#factored-cut">Factored cut</a></li>
               <li><a href="#finite-falsifier">Finite falsifier</a></li>
@@ -96,6 +98,7 @@
               <li><a href="#paired-role-compression">Paired-role compression</a></li>
               <li><a href="#paired-scalar-series">Paired scalar series</a></li>
               <li><a href="#parameter-monotonicity">Parameter monotonicity and padding</a></li>
+              <li><a href="#periodic-ternary-value">Periodic ternary value</a></li>
               <li><a href="#physical-family">Physical family</a></li>
               <li><a href="#post-correspondence">Post correspondence problem</a></li>
               <li><a href="#prefix-code">Prefix code</a></li>
@@ -133,6 +136,7 @@
               <li><a href="#undecidable">Undecidable</a></li>
               <li><a href="#valuation-guard">Valuation guard</a></li>
               <li><a href="#valuation-wall">Valuation wall</a></li>
+              <li><a href="#word-commutation">Word commutation</a></li>
               <li><a href="#word-morphism">Word morphism</a></li>
               <li><a href="#word-pair-representation">Word-pair representation</a></li>
               <li><a href="#word-product">Word product and product order</a></li>
@@ -379,6 +383,14 @@
               <dd><p>Pointwise agreement about which words vanish: <var>f</var>(<var>w</var>) = 0 if and only if <var>g</var>(<var>w</var>) = 0 for every word in the stated domain. The formal code sometimes calls this “same-zero.” It is weaker than equality of series and therefore can admit smaller realizations.</p></dd>
             </div>
             <div class="glossary-entry">
+              <dt id="existential-zero-transport"><dfn>Existential zero transport</dfn><a class="fragment-link" href="#existential-zero-transport" aria-label="Link to this term">#</a></dt>
+              <dd><p>Preserving whether a nonempty zero word exists, while allowing a witness to be replaced by a different word. This is weaker than pointwise <a href="#zero-language-equivalence">zero-language equivalence</a>. In <a href="/math/matrix_mortality/m8_2/#existential-transport">M₈(2)</a>, prepending a toggle replaces each source zero rejected by the changed separator.</p></dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="asymmetric-separator"><dfn>Asymmetric separator</dfn><a class="fragment-link" href="#asymmetric-separator" aria-label="Link to this term">#</a></dt>
+              <dd><p>The rank-one separator used in the eight-dimensional construction. Its row assigns different slopes to the rule and erase phases: erase-phase zeros are exactly word equalities, while the rule phase never vanishes on the source image. A leading toggle restores any discarded witness. It preserves existence of a zero, not the full zero language. See the <a href="/math/matrix_mortality/m8_2/#asymmetric-separator">construction and scope</a>.</p></dd>
+            </div>
+            <div class="glossary-entry">
               <dt id="linear-representation"><dfn>Linear representation</dfn><a class="fragment-link" href="#linear-representation" aria-label="Link to this term">#</a></dt>
               <dd><p>A finite-dimensional factorization of a word series into an initial row, a matrix morphism, and a terminal column. “Realization” denotes the same mathematical structure when emphasizing its state-space construction. Exact representations preserve every value; zero-language representations need only preserve zeros.</p></dd>
             </div>
@@ -391,6 +403,14 @@
               <dd><p>Recode the binary symbols 0 and 1 as the ternary digits 1 and 2. Read the resulting string as a base-three integer, denoted σ, with the empty string assigned zero. For example, the binary word 01 becomes the ternary numeral 12, of value five. No leading zero is allowed, so distinct words, including words of different lengths, have distinct values. Appending a word shifts the old digits left by its length:</p>
                 <div class="formula plain"><math display="block"><mrow><mi>σ</mi><mo>(</mo><mi>uv</mi><mo>)</mo><mo>=</mo><mi>σ</mi><mo>(</mo><mi>u</mi><mo>)</mo><msup><mn>3</mn><mrow><mo>|</mo><mi>v</mi><mo>|</mo></mrow></msup><mo>+</mo><mi>σ</mi><mo>(</mo><mi>v</mi><mo>)</mo><mo>.</mo></mrow></math></div>
               </dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="periodic-ternary-value"><dfn>Periodic ternary value</dfn><a class="fragment-link" href="#periodic-ternary-value" aria-label="Link to this term">#</a></dt>
+              <dd><p>For a nonempty block <var>w</var>, the rational value of the infinite ternary fraction repeating its recoded digits is <math><mfrac><mrow><mi>σ</mi><mo>(</mo><mi>w</mi><mo>)</mo></mrow><mrow><msup><mn>3</mn><mrow><mo>|</mo><mi>w</mi><mo>|</mo></mrow></msup><mo>−</mo><mn>1</mn></mrow></mfrac></math>. Different finite blocks can have the same periodic value. Equality is equivalent to <a href="#word-commutation">commutation</a> of the blocks, by cross multiplication and finite ternary-code injectivity.</p></dd>
+            </div>
+            <div class="glossary-entry">
+              <dt id="word-commutation"><dfn>Word commutation</dfn><a class="fragment-link" href="#word-commutation" aria-label="Link to this term">#</a></dt>
+              <dd><p>Two words commute when their concatenations agree in either order: <math><mrow><mi>uv</mi><mo>=</mo><mi>vu</mi></mrow></math>. For example, 01 and 0101 commute; 01 and 10 do not. This finite identity allows prefix comparisons between competing periods without constructing infinite words. See its use in the <a href="/math/matrix_mortality/m8_2/#periodic-prefix">wrong-phase exclusion</a>.</p></dd>
             </div>
             <div class="glossary-entry">
               <dt id="word-pair-representation"><dfn>Word-pair representation</dfn><a class="fragment-link" href="#word-pair-representation" aria-label="Link to this term">#</a></dt>

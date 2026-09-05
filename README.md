@@ -39,6 +39,7 @@ tag source and matrix compilers, is machine-checked in Lean 4.
 - [Paired-Role Compression](m4_4.html): `Z₄(3)` and `M₄(4)`
 - [Binary Compilers](binary_compilers.html): `Z₆(2)` and `M₁₀(2)`
 - [Singular Return Compression](m9_2.html): `M₉(2)`
+- [Asymmetric Return Compression](m8_2.html): `M₈(2)`
 - [`M₃(5)` technical manuscript](paper/main.pdf)
 
 ## Supporting Material
@@ -106,3 +107,5 @@ To our knowledge, after searches through 24 July 2026, no prior proof establishe
 are prior art; the qualified technique claims are stated in [Binary Compilers](binary_compilers.html).
 The changed-separator compiler strengthens the last bound to `M₉(2)`; any earlier `M₉(2)` result
 would also have implied `M₁₀(2)` by zero-block padding.
+The asymmetric construction further proves `M₈(2)`; its machine-checked statement is
+independent of any assertion about priority.

@@ -109,6 +109,10 @@ check_semantic_source() {
   xmllint --html --noout "$publication"
   [[ "$(rg -o --fixed-strings '</head>' "$publication" | wc -l)" == 1 ]]
   [[ "$(rg -o '<footer>' "$publication" | wc -l)" == 1 ]]
+  if [[ "$(xmllint --html --xpath 'count(/html/body/footer/div)' "$publication" 2>/dev/null)" != 1 ]]; then
+    printf '%s: publication footer must own one div for the site importer\n' "$publication" >&2
+    exit 1
+  fi
   [[ "$(rg -o 'property="og:url"' "$publication" | wc -l)" == 0 ]]
 
   if rg --line-number -i 'MathJax|KaTeX|<script([[:space:]>])' "$publication"; then
@@ -301,9 +305,9 @@ check_collection() {
   assert_xpath_count 1 \
     "$article/section[h2[@id='frontier']]//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]"
   local table_stars="$article//table[contains(concat(' ', normalize-space(@class), ' '), ' status-table ')]//strong[contains(concat(' ', normalize-space(@class), ' '), ' new-result ') and normalize-space()='U★']"
-  assert_xpath_count 7 "$table_stars"
-  assert_xpath_count 7 "$table_stars/parent::a"
-  assert_xpath_count 4 \
+  assert_xpath_count 9 "$table_stars"
+  assert_xpath_count 9 "$table_stars/parent::a"
+  assert_xpath_count 5 \
     "$table_stars/parent::a[@href='/math/matrix_mortality/m3_5/#result']"
   assert_xpath_count 1 \
     "$table_stars/parent::a[@href='/math/matrix_mortality/m4_4/#result']"
@@ -311,6 +315,8 @@ check_collection() {
     "$table_stars/parent::a[@href='/math/matrix_mortality/binary_compilers/#mortality-ten']"
   assert_xpath_count 1 \
     "$table_stars/parent::a[@href='/math/matrix_mortality/m9_2/#result']"
+  assert_xpath_count 1 \
+    "$table_stars/parent::a[@href='/math/matrix_mortality/m8_2/#result']"
 
   local formulas='//div[contains(concat(" ", normalize-space(@class), " "), " formula ")]'
   local formula_count
@@ -373,6 +379,7 @@ check_publication m3_5.html 3
 check_publication m4_4.html 0
 check_publication binary_compilers.html 0
 check_publication m9_2.html 0
+check_publication m8_2.html 0
 check_publication m3_2_return_guard.html 0
 check_publication paired_scalar_series.html 0
 check_publication interface_compression.html 0

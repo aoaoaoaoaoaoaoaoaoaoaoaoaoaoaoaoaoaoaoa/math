@@ -472,13 +472,84 @@
       "assurance": "formalized",
       "status": "established",
       "title": "M₁₂(2) is undecidable",
-      "summary": "Applying generator packing to M₃(5) gives M₁₂(2). The bound is now subsumed by M₉(2).",
+      "summary": "Applying generator packing to M₃(5) gives M₁₂(2). The bound is now subsumed by M₈(2).",
       "href": "/math/matrix_mortality/m3_5/#result",
       "requires": [
         "mm/m3-5",
         "mm/prefix-transducer-packing"
       ],
       "relations": []
+    },
+    {
+      "id": "mm/periodic-prefix-obstruction",
+      "kind": "lemma",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Periodic-prefix exclusion",
+      "summary": "The compiler's bcb prefix and lower-tile grammar exclude every competing capped period, ruling out all asymmetric wrong-phase zeros.",
+      "href": "/math/matrix_mortality/m8_2/#periodic-prefix",
+      "requires": [
+        "mm/paired-scalar-series"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/asymmetric-separator",
+      "kind": "construction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Asymmetric separator",
+      "summary": "Only erase-phase equalities remain zero; a leading toggle recovers every discarded witness. Existence is preserved, not the pointwise zero language.",
+      "href": "/math/matrix_mortality/m8_2/#asymmetric-separator",
+      "requires": [
+        "mm/paired-scalar-series",
+        "mm/tilted-separator",
+        "mm/periodic-prefix-obstruction"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/eight-dimensional-return-realization",
+      "kind": "construction",
+      "prominence": "load-bearing",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "Eight-dimensional return realization",
+      "summary": "Two length-three nilpotent chains, one static coordinate, and one eigenline realize a rescaled toggle, two data roles, and the asymmetric separator tail.",
+      "href": "/math/matrix_mortality/m8_2/#eight-state-realization",
+      "requires": [
+        "mm/asymmetric-separator"
+      ],
+      "relations": []
+    },
+    {
+      "id": "mm/m8-2",
+      "kind": "theorem",
+      "prominence": "endpoint",
+      "origin": "project",
+      "assurance": "formalized",
+      "status": "established",
+      "title": "M₈(2) is undecidable",
+      "summary": "Existential phase selection and an eight-dimensional return realization give a primitive-recursive pair of integer matrices, mortal exactly when its source program halts.",
+      "href": "/math/matrix_mortality/m8_2/#result",
+      "requires": [
+        "mm/paired-scalar-series",
+        "mm/asymmetric-separator",
+        "mm/eight-dimensional-return-realization",
+        "mm/singular-return-compression",
+        "mm/denominator-clearing"
+      ],
+      "relations": [
+        {
+          "kind": "strengthens",
+          "target": "mm/m9-2"
+        }
+      ]
     }
   ],
   "views": [
@@ -525,7 +596,10 @@
         "mm/binary-prefix-decoder",
         "mm/tilted-separator",
         "mm/nine-dimensional-return-realization",
-        "mm/valuation-guard"
+        "mm/valuation-guard",
+        "mm/periodic-prefix-obstruction",
+        "mm/asymmetric-separator",
+        "mm/eight-dimensional-return-realization"
       ]
     },
     {
@@ -553,7 +627,7 @@
       "nodes": [
         "mm/m3-5",
         "mm/m4-4",
-        "mm/m9-2",
+        "mm/m8-2",
         "mm/z6-2"
       ]
     },
@@ -562,6 +636,7 @@
       "title": "Subsumed Constructions",
       "summary": "Mortality constructions whose endpoint now follows from a sharper frontier theorem, retained for their distinct mechanisms.",
       "nodes": [
+        "mm/m9-2",
         "mm/m10-2"
       ]
     },
