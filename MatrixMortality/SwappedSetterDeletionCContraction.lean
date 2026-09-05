@@ -1,3 +1,5 @@
+import Mathlib.Data.Nat.Dist
+import Mathlib.Tactic.NormNum.Parity
 import MatrixMortality.SwappedSetterEmptyFrontRay
 
 set_option autoImplicit false

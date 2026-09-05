@@ -1,3 +1,5 @@
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.ModEq
 import MatrixMortality.SwappedSetterCompiler
 import MatrixMortality.PadicValuation
 

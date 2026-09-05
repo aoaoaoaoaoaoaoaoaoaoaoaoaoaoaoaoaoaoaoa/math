@@ -1,3 +1,5 @@
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Data.Int.Interval
 import MatrixMortality.SwappedSetterHistory
 
 /-!

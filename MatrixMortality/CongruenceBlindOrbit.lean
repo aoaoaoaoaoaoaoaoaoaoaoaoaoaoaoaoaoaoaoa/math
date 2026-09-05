@@ -1,3 +1,6 @@
+import Mathlib.Algebra.Order.Field.Basic
+import Mathlib.Tactic.LinearCombination
+import Mathlib.LinearAlgebra.Matrix.GeneralLinearGroup.Basic
 import Mathlib.Data.Nat.Factorization.Basic
 import Mathlib.Data.ZMod.Units
 import Mathlib.GroupTheory.CoprodI

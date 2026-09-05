@@ -1,3 +1,4 @@
+import Mathlib.Logic.Equiv.Bool
 import MatrixMortality.SwappedSetterResidual
 
 /-!

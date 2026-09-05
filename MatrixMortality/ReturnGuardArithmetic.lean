@@ -1,3 +1,4 @@
+import Mathlib.Tactic.LinearCombination
 import MatrixMortality.ReturnGuardGauss
 import Mathlib.RingTheory.Coprime.Lemmas
 

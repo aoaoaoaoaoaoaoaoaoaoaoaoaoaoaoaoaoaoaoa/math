@@ -1,4 +1,5 @@
-import Mathlib
+import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+import Mathlib.LinearAlgebra.Matrix.Reindex
 
 /-!
 # Matrix-semigroup foundations

@@ -1,3 +1,4 @@
+import Mathlib.RingTheory.EuclideanDomain
 import MatrixMortality.SwappedSetterTargetResidue
 
 set_option autoImplicit false

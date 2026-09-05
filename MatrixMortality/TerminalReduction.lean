@@ -1,3 +1,4 @@
+import Mathlib.LinearAlgebra.Matrix.Rank
 import MatrixMortality.PCPEncoding
 import MatrixMortality.TerminalTile
 import MatrixMortality.WordMorphism

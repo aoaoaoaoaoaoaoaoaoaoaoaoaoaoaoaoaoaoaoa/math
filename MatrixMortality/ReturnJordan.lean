@@ -1,3 +1,5 @@
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.Tactic.NormNum.Prime
 import MatrixMortality.ReturnFamily
 
 /-!

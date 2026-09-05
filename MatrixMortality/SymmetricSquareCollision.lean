@@ -1,3 +1,7 @@
+import Mathlib.LinearAlgebra.Matrix.Rank
+import Mathlib.LinearAlgebra.Matrix.Notation
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.Ring
 import MatrixMortality.MatrixSemigroup
 
 /-!

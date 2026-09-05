@@ -1,3 +1,5 @@
+import Mathlib.Algebra.Order.Field.Basic
+import Mathlib.LinearAlgebra.Matrix.Rank
 import MatrixMortality.ReturnFamily
 import MatrixMortality.TerminalTile
 import Mathlib.Algebra.QuadraticDiscriminant

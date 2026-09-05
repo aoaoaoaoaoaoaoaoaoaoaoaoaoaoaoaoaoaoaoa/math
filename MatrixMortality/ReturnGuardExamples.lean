@@ -1,3 +1,4 @@
+import Mathlib.Tactic.NormNum.Prime
 import MatrixMortality.IndexedExecution
 import MatrixMortality.ReturnGuardAddress
 import MatrixMortality.ReturnGuardCumulative

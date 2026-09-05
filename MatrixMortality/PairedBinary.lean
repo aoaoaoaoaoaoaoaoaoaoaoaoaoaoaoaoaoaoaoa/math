@@ -1,3 +1,4 @@
+import Mathlib.Tactic.Cases
 import MatrixMortality.MatrixSemigroup
 import MatrixMortality.PairedCompression
 

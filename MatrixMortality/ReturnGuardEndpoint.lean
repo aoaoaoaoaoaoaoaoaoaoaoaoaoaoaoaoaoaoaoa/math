@@ -605,7 +605,7 @@ theorem endpointTerminalWord_of_residualRun_eq_terminal
           ![centerNumerator + driftNumerator - scale, 1]) 0) = 0 := by
     rw [RingHom.map_mulVec]
     rw [endpointProduct_map]
-    simpa [cast] using rational_zero
+    simpa [cast, Matrix.mulVec, dotProduct, Fin.sum_univ_two] using rational_zero
   change
     (((endpointProduct (parameters.prime : ℤ) parameters.depth
         centerNumerator driftNumerator scale waits *ᵥ

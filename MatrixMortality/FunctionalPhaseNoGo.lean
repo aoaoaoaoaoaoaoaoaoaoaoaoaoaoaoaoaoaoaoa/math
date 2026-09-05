@@ -1,4 +1,9 @@
-import Mathlib
+import Mathlib.Data.Fin.VecNotation
+import Mathlib.Algebra.BigOperators.Ring.Finset
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.Ring
 import MatrixMortality.EndpointPrefixCompiler
 
 /-!

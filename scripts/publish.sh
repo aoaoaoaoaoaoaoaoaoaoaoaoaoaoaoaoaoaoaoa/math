@@ -36,7 +36,7 @@ require_release_head "$site" eternalist
 git -C "$site" fetch --quiet
 require_upstream_head "$site" eternalist
 
-"$root/scripts/check.sh"
+"$root/scripts/check.sh" publication
 ETERNALIST_MATH_SOURCE="$root" "$site/scripts/check"
 
 git -C "$root" push

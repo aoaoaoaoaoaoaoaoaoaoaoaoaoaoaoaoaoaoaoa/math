@@ -1,4 +1,4 @@
-import Mathlib
+import Mathlib.Algebra.Group.Int.Defs
 
 /-!
 # Priority-affine residual macros

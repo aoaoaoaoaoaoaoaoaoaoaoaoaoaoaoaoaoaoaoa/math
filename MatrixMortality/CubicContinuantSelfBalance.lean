@@ -1,3 +1,4 @@
+import Mathlib.Tactic.NormNum.Prime
 import MatrixMortality.CubicContinuantMismatchClock
 import Mathlib.NumberTheory.Padics.PadicVal.Basic
 

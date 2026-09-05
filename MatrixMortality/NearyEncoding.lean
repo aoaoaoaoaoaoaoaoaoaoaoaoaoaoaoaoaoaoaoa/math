@@ -1,3 +1,4 @@
+import Mathlib.Tactic.DeriveFintype
 import MatrixMortality.Computability
 import MatrixMortality.MarkedTerminal
 import MatrixMortality.TagQueue

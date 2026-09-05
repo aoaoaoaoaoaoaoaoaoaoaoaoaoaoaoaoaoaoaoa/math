@@ -1,3 +1,4 @@
+import Mathlib.Tactic.NormNum.Prime
 import MatrixMortality.ReturnGuardSmith
 
 /-!
@@ -548,7 +549,7 @@ def periodicShadowSmithSplit : SmithRubanSplit (-80) 2 (-4) 40 where
   complement_eq := by norm_num
   fixed_eq := by norm_num
   shift_eq := by norm_num
-  u_coprime_theta := by norm_num [IsCoprime]
+  u_coprime_theta := isCoprime_one_left
 
 /-- The Smith decoder output is exactly four times the displayed primitive quotient. -/
 private theorem periodicShadowSmith_raw_eq (shadowDepth index : Nat) :

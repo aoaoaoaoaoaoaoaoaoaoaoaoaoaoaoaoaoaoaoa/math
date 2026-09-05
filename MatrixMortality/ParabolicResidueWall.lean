@@ -1,3 +1,5 @@
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Algebra.Field.ZMod
 import MatrixMortality.ParabolicBlade
 
 /-!

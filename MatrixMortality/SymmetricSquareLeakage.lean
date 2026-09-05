@@ -73,8 +73,7 @@ theorem twist_eigenvector_forward_of_anticommute {K : Type*} [Field K]
       rw [Matrix.neg_mulVec, ← Matrix.mulVec_mulVec]
     _ = -(matrix *ᵥ (root • vector)) := by rw [eigenvector]
     _ = (-root) • (matrix *ᵥ vector) := by
-      ext i
-      fin_cases i <;> simp <;> ring
+      rw [Matrix.mulVec_smul, neg_smul]
 
 /-- Covariant symmetric square is matrix congruence on symmetric tensors. -/
 theorem tensorMatrix_symmetricSquare_mulVec {R : Type*} [CommRing R]

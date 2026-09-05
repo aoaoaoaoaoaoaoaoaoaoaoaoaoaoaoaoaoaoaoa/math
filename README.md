@@ -57,10 +57,15 @@ The repository pins Lean and mathlib to `v4.33.1`. Run:
 ./scripts/check.sh
 ```
 
+Use `./scripts/check.sh m92` for only the M₉(2) proof closure, or
+`./scripts/check.sh publication` for the release gate. Compiled artifacts and successful
+verification receipts are cached across worktrees. See [Verification Targets](BUILDING.md)
+for target names, cache placement, invalidation, and independent reproduction.
+
 Required host commands are `lake`, `uv`/`uvx`, `rustc`, `rustfmt`, `tectonic`, `xmllint`, `rg`,
 `diff`, and GNU `sha256sum`. The script checks the reference corpus; builds and lints Lean;
 compares the exact transitive-axiom snapshot; rejects proof escapes and linter suppressions; runs
-the independent finite certificates; validates the HTML expositions; and reproduces the
+the auxiliary finite certificates; validates the HTML expositions; and reproduces the
 committed PDF byte-for-byte. PDF reproduction requires Tectonic 0.17.0, bundle v33, and
 `SOURCE_DATE_EPOCH=1784606400`; the script fixes the latter two and rejects another Tectonic
 version.

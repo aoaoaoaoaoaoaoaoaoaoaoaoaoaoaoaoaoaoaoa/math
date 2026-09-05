@@ -1,3 +1,4 @@
+import Mathlib.Data.Int.NatAbs
 import MatrixMortality.PrimitiveDivisor
 import MatrixMortality.ReturnGuardValuation
 

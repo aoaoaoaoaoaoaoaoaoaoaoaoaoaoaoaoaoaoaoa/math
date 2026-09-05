@@ -1,3 +1,7 @@
+import Mathlib.Algebra.Order.Group.Nat
+import Mathlib.Data.Fin.Basic
+import Mathlib.Algebra.Order.BigOperators.Group.List
+import Mathlib.Algebra.Ring.Int.Defs
 import MatrixMortality.PriorityAffineResidual
 
 /-!

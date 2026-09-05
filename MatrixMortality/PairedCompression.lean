@@ -1,3 +1,4 @@
+import Mathlib.LinearAlgebra.Matrix.Permutation
 import MatrixMortality.TwoStatePushout
 
 /-!

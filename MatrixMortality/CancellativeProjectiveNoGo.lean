@@ -1,3 +1,4 @@
+import Mathlib.GroupTheory.FreeGroup.Reduce
 import Mathlib.GroupTheory.FreeGroup.Basic
 import MatrixMortality.ExpandingHistoryNoGo
 

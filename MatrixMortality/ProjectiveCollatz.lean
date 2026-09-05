@@ -1,3 +1,4 @@
+import Mathlib.Tactic.NormNum.Prime
 import MatrixMortality.PadicValuation
 import MatrixMortality.ProjectiveIncidence
 

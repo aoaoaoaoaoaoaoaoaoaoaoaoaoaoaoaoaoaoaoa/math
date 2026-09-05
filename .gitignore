@@ -1,5 +1,6 @@
 /.lake
 /.worktrees/
+/tmp_*.txt
 /references/*.pdf
 /.ruff_cache/
 __pycache__/

@@ -1,4 +1,5 @@
-import Mathlib
+import Mathlib.Data.Nat.Digits.Defs
+import Mathlib.Tactic.NormNum
 import MatrixMortality.Computability
 
 /-!

@@ -1,3 +1,6 @@
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Algebra.Field.ZMod
+import Mathlib.Algebra.Order.Field.Basic
 import MatrixMortality.CubicContinuantTransversePump
 import Mathlib.Data.ZMod.Basic
 import Mathlib.NumberTheory.Padics.PadicVal.Basic

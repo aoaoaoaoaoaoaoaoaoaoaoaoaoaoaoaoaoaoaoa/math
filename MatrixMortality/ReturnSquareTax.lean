@@ -1,3 +1,4 @@
+import Mathlib.LinearAlgebra.Matrix.SchurComplement
 import MatrixMortality.ReturnSquare
 
 /-!

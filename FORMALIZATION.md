@@ -4065,7 +4065,8 @@ fixed-rank decision problem.
 | `Undecidability/NearyExecution.lean` | literal initialization, first-firing extraction, and the complete post-seed halting cascade |
 | `Undecidability/NearySource.lean` | compositional Cook–Neary compiler and leading-`b` membership for verified restricted-tag sources |
 | `Undecidability/UniversalTwoTag.lean` | fixed universal finite two-tag system and primitive-recursive source queue |
-| `Undecidability/UniversalNeary.lean` | complete computable reductions to binary `GPCP(4)`, `M₃(5)`, `M₄(4)`, `Z₆(2)`, `M₉₊ₙ(2)`, and `M₁₀(2)` |
+| `Undecidability/UniversalNearySource.lean` | fixed universal restricted-tag source, independent of the target matrix construction |
+| `Undecidability/UniversalMortality35.lean`, `UniversalMortality44.lean`, `UniversalMortality92.lean`, `UniversalBinary.lean`, `UniversalPacking.lean` | individual primitive-recursive endpoint reductions; `UniversalNeary.lean` remains their aggregate |
 | `Undecidability/NearyProblems.lean` | canonical `Fin 4` and `Fin 5` target instances |
 | `MacroIrreducibility.lean` | exact nonerasing Neary role-macro lower bound |
 | `TernaryClosedBlockNoGo.lean` | paired-Parikh independence, exact erasing macro lower bound, block semantics, and closed-return arithmetic |
@@ -5253,6 +5254,13 @@ locally. This is a search result, not a claim that no unpublished or unindexed d
 ```sh
 ./scripts/check.sh
 ```
+
+Named targets select proof closures without compiling unrelated mathematics. For example,
+`./scripts/check.sh m92` checks the dimension-nine endpoint, while
+`./scripts/check.sh publication` checks only published proof roots, HTML, and the paper.
+The default full gate discovers every library module, including files absent from root
+aggregates. Lake shares compiled artifacts and successful audit receipts across worktrees;
+see [Verification Targets](BUILDING.md) for the cache contract and clean reproduction.
 
 The build treats warnings as errors, disables automatic implicit variables, enables mathlib's
 strict syntax profile, runs every default environment linter, compares

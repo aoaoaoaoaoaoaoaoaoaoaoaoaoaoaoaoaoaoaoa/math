@@ -1,3 +1,4 @@
+import Mathlib.Data.Matrix.ColumnRowPartitioned
 import MatrixMortality.MixedBranchingPersistentGuard
 
 /-!

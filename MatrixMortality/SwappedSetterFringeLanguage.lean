@@ -1,3 +1,4 @@
+import Mathlib.Data.List.DropRight
 import MatrixMortality.NearyEncoding
 
 /-!

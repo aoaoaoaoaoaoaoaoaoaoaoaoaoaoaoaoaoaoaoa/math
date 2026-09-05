@@ -1,3 +1,5 @@
+import Mathlib.Tactic.NormNum.IsCoprime
+import Mathlib.Analysis.SpecificLimits.Basic
 import Mathlib.Order.Filter.AtTopBot.Basic
 import MatrixMortality.InverseOrbitRecurrence
 

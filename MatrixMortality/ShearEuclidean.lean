@@ -546,7 +546,7 @@ theorem finite_search_bounds_of_projective_hit
     2 ^ reducedSyllableCount word ≤ pairHeight target ∧
       ReducedExponentsBounded word (pairHeight target) := by
   have source_coprime : IsCoprime sourcePair.1 sourcePair.2 := by
-    norm_num [sourcePair]
+    exact isCoprime_one_left
   have image_coprime :=
     reducedPairAction_isCoprime word sourcePair source_coprime
   have image_eq := coprime_pairs_eq_or_neg_of_cross_eq

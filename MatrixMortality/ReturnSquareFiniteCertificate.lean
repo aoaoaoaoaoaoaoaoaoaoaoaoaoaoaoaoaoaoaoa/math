@@ -1,3 +1,4 @@
+import Mathlib.RingTheory.Localization.Rat
 import MatrixMortality.ReturnSquarePureDenominatorDescent
 
 /-!

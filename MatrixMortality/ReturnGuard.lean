@@ -1,3 +1,4 @@
+import Mathlib.LinearAlgebra.Matrix.Rank
 import MatrixMortality.ProjectiveLine
 import MatrixMortality.ReturnFamily
 

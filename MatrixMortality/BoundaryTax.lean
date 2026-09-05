@@ -1,3 +1,4 @@
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import MatrixMortality.LinearRepresentation
 
 /-!
